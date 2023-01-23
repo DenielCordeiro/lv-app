@@ -1,14 +1,17 @@
 <section id="news">
   <h1>novidades</h1>
 
-  <div class="card" style="width: 18rem;">
-    <!-- <img src="..." class="card-img-top" alt="..."> -->
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+  <a routerLink="/product{{id}}">
+    <div class="card" style="width: 18rem;">
+      <!-- <img src="..." class="card-img-top" alt="..."> -->
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
     </div>
-  </div>
+  </a>
+
 </section>
 
 <section id="comments">
@@ -16,16 +19,8 @@
 
   <ul class="list-group">
     <li class="list-group-item d-flex justify-content-between align-items-center">
-      A list item
-      <span class="badge bg-primary rounded-pill">14</span>
-    </li>
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      A second list item
-      <span class="badge bg-primary rounded-pill">2</span>
-    </li>
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      A third list item
-      <span class="badge bg-primary rounded-pill">1</span>
+      {{ this.comment }}
+      <span class="badge bg-primary rounded-pill"></span>
     </li>
   </ul>
 
@@ -34,6 +29,8 @@
 <section id="usersNumber">
 
   <h1>número de usuários</h1>
+
+  <h3>{{ counter }}</h3>
 
   <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
     <div class="progress-bar" style="width: 25%">25%</div>
