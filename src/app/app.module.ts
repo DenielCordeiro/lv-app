@@ -7,6 +7,7 @@ import { NewsletterComponent } from './newsletter/newsletter.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderNewsletterComponent } from './newsletter/header-newsletter/header-newsletter.component';
 import { LoginComponent } from './newsletter/header-newsletter/login/login.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,9 @@ import { LoginComponent } from './newsletter/header-newsletter/login/login.compo
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
