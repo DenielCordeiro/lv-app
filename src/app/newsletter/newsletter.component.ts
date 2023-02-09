@@ -16,7 +16,6 @@ export class NewsletterComponent implements OnInit {
   comment: string = "";
 
   ngOnInit(): void {
-    this.readingComments();
   }
 
   onCounter(): void {
