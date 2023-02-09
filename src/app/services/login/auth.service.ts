@@ -7,8 +7,7 @@ import { UserModel } from 'src/app/models/user.model';
   providedIn: 'root'
 })
 export class AuthService {
-
-  private authedUser: boolean = false;
+  public authedUser: boolean = false;
 
   constructor(
     private modalService: NgbModal,

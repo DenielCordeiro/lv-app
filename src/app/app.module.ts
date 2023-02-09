@@ -14,6 +14,7 @@ import { LoginComponent } from './newsletter/header-newsletter/login/login.compo
 import { ProductsComponent } from './products/products.component';
 import { AuthGuard } from './guards/auth-guards';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HeaderProductsComponent } from './products/header-products/header-products.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NewsletterComponent,
     HeaderNewsletterComponent,
     LoginComponent,
-    ProductsComponent
+    ProductsComponent,
+    HeaderProductsComponent,
   ],
   imports: [
     BrowserModule,
