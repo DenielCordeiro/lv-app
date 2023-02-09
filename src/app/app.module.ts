@@ -13,6 +13,7 @@ import { LoginComponent } from './newsletter/header-newsletter/login/login.compo
 
 import { ProductsComponent } from './products/products.component';
 import { AuthGuard } from './guards/auth-guards';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { AuthGuard } from './guards/auth-guards';
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [
     AuthService,

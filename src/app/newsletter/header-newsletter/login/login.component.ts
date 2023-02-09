@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from './../../../services/login/auth.service';
 
 @Component({
@@ -16,12 +17,16 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private authService: AuthService
-  ) {}
+    private authService: AuthService,
+    config: NgbModalConfig,
+    private modalService: NgbModal
+  ) {
+    config.backdrop = 'static';
+		config.keyboard = false;
+  }
 
   ngOnInit(): void {
     this.buildingForm();
-    // console.log(this.loginForm); // para ter retorno dos dados do formulário
   }
 
   buildingForm(): void {
@@ -35,12 +40,15 @@ export class LoginComponent implements OnInit {
     try{
       if (this.loginForm.valid) {
         await
-          // this.authService.authUser(this.loginForm);
-          this.router.navigate(["/products"]);
+          this.authService.authUser(this.loginForm.value)
+          this.loginForm.reset();
       }
     } catch (error) {
-      alert('E-mail ou Senha está incorreto! [Insira Novamente]');
       console.error(error);
     }
   }
+
+  openModal(loginModal: any): void {
+		this.modalService.open(loginModal);
+	}
 }
