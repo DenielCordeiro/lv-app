@@ -14,6 +14,8 @@ import { LoginComponent } from './newsletter/header-newsletter/login/login.compo
 import { ProductsComponent } from './products/products.component';
 import { AuthGuard } from './guards/auth-guards';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HeaderProductsComponent } from './products/header-products/header-products.component';
+import { ProductComponent } from './product/product.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
@@ -23,6 +25,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     HeaderNewsletterComponent,
     LoginComponent,
     ProductsComponent,
+    HeaderProductsComponent,
+    ProductComponent,
     DashboardComponent
   ],
   imports: [

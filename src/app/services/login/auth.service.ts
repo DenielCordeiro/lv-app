@@ -7,8 +7,7 @@ import { UserModel } from 'src/app/models/user.model';
   providedIn: 'root'
 })
 export class AuthService {
-
-  private authedUser: boolean = false;
+  public authedUser: boolean = false;
 
   constructor(
     private modalService: NgbModal,
@@ -19,7 +18,7 @@ export class AuthService {
     if(user.email === "dcordeiro962@gmail.com" && user.password === "123") {
       this.authedUser = true;
       this.router.navigate(["/products"]);
-    } else if (user.email === "daniel-mtz11@outlook.com" && user.password === "123") {
+    } else if (user.email === "camila.luzvioleta@gmail.com" && user.password === "123") {
       this.authedUser = true;
       this.router.navigate(["/products"]);
     } else {
