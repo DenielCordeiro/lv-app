@@ -14,7 +14,6 @@ import { LoginComponent } from './newsletter/header-newsletter/login/login.compo
 import { ProductsComponent } from './products/products.component';
 import { AuthGuard } from './guards/auth-guards';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { RegisterComponent } from './newsletter/header-newsletter/register/register.component';
 
 @NgModule({
   declarations: [
@@ -22,8 +21,7 @@ import { RegisterComponent } from './newsletter/header-newsletter/register/regis
     NewsletterComponent,
     HeaderNewsletterComponent,
     LoginComponent,
-    ProductsComponent,
-    RegisterComponent
+    ProductsComponent
   ],
   imports: [
     BrowserModule,
