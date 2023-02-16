@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private authService: AuthService,
+    private loginService: AuthService,
     config: NgbModalConfig,
     private modalService: NgbModal
   ) {
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
     try{
       if (this.loginForm.valid) {
         await
-          this.authService.authUser(this.loginForm.value)
+          this.loginService.authUser(this.loginForm.value)
           this.loginForm.reset();
       }
     } catch (error) {
