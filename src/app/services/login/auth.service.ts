@@ -31,6 +31,11 @@ export class AuthService {
     }
   }
 
+  createUser(user: UserModel): void {
+    alert("em teste")
+    //post
+  }
+
   authedUserWithSuccess(): boolean {
     return this.authedUser;
   }
