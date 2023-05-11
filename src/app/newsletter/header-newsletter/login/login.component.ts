@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from './../../../services/login/auth.service';
 
@@ -10,14 +9,11 @@ import { AuthService } from './../../../services/login/auth.service';
   styleUrls: ['./login.component.sass']
 })
 export class LoginComponent implements OnInit {
-  email: string = ""
-  password: string = ""
   loginForm!: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router,
-    private authService: AuthService,
+    private loginService: AuthService,
     config: NgbModalConfig,
     private modalService: NgbModal
   ) {
@@ -40,7 +36,7 @@ export class LoginComponent implements OnInit {
     try{
       if (this.loginForm.valid) {
         await
-          this.authService.authUser(this.loginForm.value)
+          this.loginService.authUser(this.loginForm.value)
           this.loginForm.reset();
       }
     } catch (error) {
@@ -51,4 +47,8 @@ export class LoginComponent implements OnInit {
   openModal(loginModal: any): void {
 		this.modalService.open(loginModal);
 	}
+
+  closeModal(loginModal: any): void {
+    this.modalService.dismissAll(loginModal)
+  }
 }

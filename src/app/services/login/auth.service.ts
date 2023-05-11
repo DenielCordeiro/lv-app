@@ -31,6 +31,13 @@ export class AuthService {
     }
   }
 
+  createUser(user: UserModel): void {
+    alert("em teste")
+    //post
+    console.log("usurio sendo passado para o service: ", user);
+
+  }
+
   authedUserWithSuccess(): boolean {
     return this.authedUser;
   }
