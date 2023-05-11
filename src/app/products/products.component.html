@@ -1,10 +1,19 @@
-<section id="top-menu">
+<section id="pageTitle">
+  <h1>Produtos</h1>
+</section>
+
+<section id="topMenu">
   <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-    valor
+    filtrar por ...
   </button>
   <div class="collapse" id="collapseExample">
-    <div class="card card-body">
-      Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+    <div class="filters-buttons my-2">
+      <button type="button" class="btn btn-primary mx-2">valor</button>
+      <button type="button" class="btn btn-secondary mx-2">coleção nova</button>
+      <button type="button" class="btn btn-success mx-2">coleção antiga</button>
+      <button type="button" class="btn btn-danger mx-2">Pulseiras</button>
+      <button type="button" class="btn btn-warning mx-2">colares</button>
+      <button type="button" class="btn btn-dark mx-2">gargantilhas</button>
     </div>
   </div>
 </section>
@@ -16,53 +25,23 @@
         <div class="card" style="width: 100%;">
           <img src="../../assets/img/products/rukiapng.png" class="card-img-top" alt="...">
           <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-3">
-        <div class="card" style="width: 100%;">
-          <img src="../../assets/img/products/rukiapng.png" class="card-img-top" alt="...">
-          <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-3">
-        <div class="card" style="width: 100%;">
-          <img src="../../assets/img/products/rukiapng.png" class="card-img-top" alt="...">
-          <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-3">
-        <div class="card" style="width: 100%;">
-          <img src="../../assets/img/products/rukiapng.png" class="card-img-top" alt="...">
-          <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <h3 class="itemTItle">Gargantilhas</h3>
+            <p class="itemValor">55 R$</p>
+            <span class="itemdescription">Descrição do colar</span>
           </div>
         </div>
       </div>
     </div>
+
     <div class="row mb-5">
       <div class="col-6">
         <a routerLink="/product">
           <div class="card" style="width: 100%;">
             <img src="../../assets/img/products/sherk.png" class="card-img-top" alt="...">
             <div class="card-body">
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-          </div>
-        </a>
-      </div>
-
-      <div class="col-6">
-        <a routerLink="/product">
-          <div class="card" style="width: 100%;">
-            <img src="../../assets/img/products/sherk.png" class="card-img-top" alt="...">
-            <div class="card-body">
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <h3 class="itemTItle">Colar</h3>
+              <p class="itemValor">55 R$</p>
+              <span class="itemdescription">Descrição do colar</span>
             </div>
           </div>
         </a>
@@ -74,10 +53,12 @@
 <section id="side-menu">
   <h2>filtrar por ...</h2>
 
-  <button type="button" class="btn btn-primary">valor</button>
-  <button type="button" class="btn btn-secondary">coleção nova</button>
-  <button type="button" class="btn btn-success">coleção antiga</button>
-  <button type="button" class="btn btn-danger">Pulseiras</button>
-  <button type="button" class="btn btn-warning">colares</button>
-  <button type="button" class="btn btn-dark">gargantilhas</button>
+  <div class="card card-body">
+    <button type="button" class="btn btn-primary mb-2">valor</button>
+    <button type="button" class="btn btn-secondary mb-2">coleção nova</button>
+    <button type="button" class="btn btn-success mb-2">coleção antiga</button>
+    <button type="button" class="btn btn-danger mb-2">Pulseiras</button>
+    <button type="button" class="btn btn-warning mb-2">colares</button>
+    <button type="button" class="btn btn-dark">gargantilhas</button>
+  </div>
 </section>
