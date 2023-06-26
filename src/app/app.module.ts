@@ -22,6 +22,7 @@ import { HeaderProductsComponent } from './products/header-products/header-produ
 import { ProductsComponent } from './products/products.component';
 import { ProductComponent } from './product/product.component';
 import { BuyComponent } from './product/buy/buy.component';
+import { AboutComponent } from './about/about.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { VerticalChartComponent } from './dashboard/charts/vertical-chart/vertical-chart.component';
@@ -40,6 +41,7 @@ import { VerticalChartComponent } from './dashboard/charts/vertical-chart/vertic
     BuyComponent,
     NavbarComponent,
     VerticalChartComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
