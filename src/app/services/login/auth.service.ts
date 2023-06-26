@@ -20,7 +20,7 @@ export class AuthService {
       this.router.navigate(["/products"]);
     } else if (user.email === "camila.luzvioleta@gmail.com" && user.password === "123") {
       this.authedUser = true;
-      this.router.navigate(["/products"]);
+      this.router.navigate(["/dashboard"]);
     } else {
       this.authedUser = false;
       alert('E-mail ou Senha está incorreto! [Insira Novamente]');
@@ -35,7 +35,6 @@ export class AuthService {
     alert("em teste")
     //post
     console.log("usurio sendo passado para o service: ", user);
-
   }
 
   authedUserWithSuccess(): boolean {

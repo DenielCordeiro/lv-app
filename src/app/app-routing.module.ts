@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth-guards';
 import { NewsletterComponent } from './newsletter/newsletter.component';
@@ -14,6 +14,10 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: "navbar",
+    component: DashboardComponent,
+  },
+  {
     path: "newsletter",
     component: NewsletterComponent,
   },
@@ -24,17 +28,17 @@ const routes: Routes = [
   {
     path: "dashboard",
     component: DashboardComponent,
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
   {
     path: "products",
     component: ProductsComponent,
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
   {
     path: "product",
     component: ProductComponent,
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
   {
     path: '**',
