@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/login/auth.service';
 
 @Component({
@@ -11,8 +11,8 @@ export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
 
   constructor(
-    private registerService: AuthService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private registerService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -23,12 +23,20 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       "id": [null],
       "name": [null, Validators.required],
-      "email": [null, Validators.required, Validators.email],
+      "email": [null, [Validators.required, Validators.email]],
       "password": [null, Validators.required]
     });
   }
 
-  // async makeRegister(): void {
-  //   try {} catch {}
-  // }
+  async makeRegister() {
+    try {
+      if(this.registerForm.valid) {
+        await
+          this.registerService.createUser(this.registerForm.value);
+          this.registerForm.reset();
+      }
+    } catch(error) {
+      console.error(error);
+    }
+  }
 }

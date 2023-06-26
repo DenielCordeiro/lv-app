@@ -1,4 +1,4 @@
-<button class="btn btn-lg btn-outline-primary" (click)="openModal(loginModal)">Launch demo modal</button>
+<button class="btn btn-lg btn-outline-primary" (click)="openModal(loginModal)">Entrar</button>
 
 <form [formGroup]="loginForm">
 
@@ -25,10 +25,9 @@
     </div>
 
     <div class="modal-footer">
-      <button type="button" class="btn btn-dark" routerLink="/register">Cadastre-se</button>
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">fechar</button>
-      <button type="submit" class="btn btn-primary"  [disabled]="loginForm.invalid" (click)="makeLogin()">Entrar</button>
-      <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
+      <button type="button" class="btn btn-dark" routerLink="/register" (click)="closeModal(loginModal)">Cadastre-se</button>
+      <button type="button" class="btn btn-secondary" (click)="closeModal(loginModal)">fechar</button>
+      <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid" (click)="makeLogin()">Entrar</button>
     </div>
   </ng-template>
 

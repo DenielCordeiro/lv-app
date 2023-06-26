@@ -1,35 +1,40 @@
-<!-- <button class="btn btn-lg btn-outline-primary" (click)="openModal(registerModal)">Launch demo modal</button> -->
+<section id="form">
 
-<!-- <form [formGroup]="registerForm"> -->
-<form>
+  <form [formGroup]="registerForm">
 
-  <ng-template #loginModal let-c="close" let-d="dismiss">
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Hi there!</h4>
-      <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+    <div class="header-form">
+      <h2>Área de Cadastro</h2>
+      <h4>Preencha seus dados com cuidado, aqui salvamos seu e-mail para comunicação após a compra de qualquer produto!</h4>
     </div>
 
-    <div class="modal-body row">
+    <div class="body-form row">
       <div class="mb-3 row">
-        <label for="email" class="col-sm-2 col-form-label">E-mail:</label>
+        <label for="name" class="col-sm-2 ">Nome:</label>
         <div class="col-sm-10">
-          <input type="email" class="form-control" id="email" value="example@example.com" formControlName="email">
+          <input type="name" class="form-control" id="name" formControlName="name">
         </div>
       </div>
 
       <div class="mb-3 row">
-        <label for="password" class="col-sm-2 col-form-label">Senha:</label>
+        <label for="email" class="col-sm-2 ">E-mail:</label>
+        <div class="col-sm-10">
+          <input type="email" class="form-control" id="email" placeholder="example@example.com" formControlName="email">
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label for="password" class="col-sm-2 ">Senha:</label>
         <div class="col-sm-10">
           <input type="password" class="form-control" id="password" formControlName="password">
         </div>
       </div>
     </div>
 
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">fechar</button>
-      <!-- <button type="submit" class="btn btn-primary"  [disabled]="loginForm.invalid" (click)="makeLogin()">Entrar</button> -->
+    <div class="footer-form">
+      <button type="button" class="btn btn-secondary mx-2">fechar</button>
+      <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid" (click)="makeRegister()">Cadastre-se</button>
     </div>
-  </ng-template>
+  </form>
 
-</form>
+</section>
 

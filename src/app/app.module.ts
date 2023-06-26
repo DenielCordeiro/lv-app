@@ -14,6 +14,12 @@ import { LoginComponent } from './newsletter/header-newsletter/login/login.compo
 import { ProductsComponent } from './products/products.component';
 import { AuthGuard } from './guards/auth-guards';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RegisterComponent } from './newsletter/header-newsletter/register/register.component';
+import { HeaderProductsComponent } from './products/header-products/header-products.component';
+import { ProductComponent } from './product/product.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { BuyComponent } from './product/buy/buy.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +27,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NewsletterComponent,
     HeaderNewsletterComponent,
     LoginComponent,
-    ProductsComponent
+    ProductsComponent,
+    RegisterComponent,
+    HeaderProductsComponent,
+    ProductComponent,
+    DashboardComponent,
+    BuyComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
