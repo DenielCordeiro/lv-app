@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
 
+sales: number = 20;
+product: string = "colar";
+highestSellingProduct: number = 14;
+
 }
