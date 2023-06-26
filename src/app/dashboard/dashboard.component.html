@@ -1,17 +1,48 @@
-<h1>Dashboard</h1>
-
-<section id="charts">
-  <span>Ter gráfico de acesso, ngx-charts</span>
+<section id="pageTitle">
+  <h1 class="titles">Dashboard</h1>
 </section>
 
 <section id="salesHistory">
-  <span>Ter histórico das vendas, mat-table</span>
+
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-6">
+        <div class="row">
+          <div class="col-2"></div>
+
+          <div class="col-9">
+            <div class="card cardSales">
+              <p>Quantidade de Vendas: <span>{{ sales }}</span> </p>
+            </div>
+          </div>
+
+          <div class="col-1"></div>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="row">
+          <div class="col-1"></div>
+
+          <div class="col-9">
+            <div class="card cardSales">
+              <p>Produto mais vendido: <span>{{ product }}, </span> <span>com {{ highestSellingProduct }} Vendas</span></p>
+            </div>
+          </div>
+
+          <div class="col-2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="mb-2">
 </section>
 
-<section id="balanceOfExpent">
-  <span>Ter balanço de gastos, cards</span>
+<section id="charts">
+  <div class="VerticalChart mt-4">
+    <h2>Número de Clientes Registrados</h2>
+    <app-vertical-chart></app-vertical-chart>
+  </div>
 </section>
 
-<section id="numberOfDeliveries">
-  <span>Número de entregas ou vendas</span>
-</section>
