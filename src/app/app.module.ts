@@ -19,6 +19,7 @@ import { HeaderProductsComponent } from './products/header-products/header-produ
 import { ProductComponent } from './product/product.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BuyComponent } from './product/buy/buy.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { BuyComponent } from './product/buy/buy.component';
     HeaderProductsComponent,
     ProductComponent,
     DashboardComponent,
-    BuyComponent
+    BuyComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
