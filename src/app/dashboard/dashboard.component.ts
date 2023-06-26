@@ -6,9 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.sass']
 })
 export class DashboardComponent {
-
-sales: number = 20;
-product: string = "colar";
-highestSellingProduct: number = 14;
-
+  sales: number = 20;
+  product: string = "colar";
+  highestSellingProduct: number = 14;
 }
