@@ -15,7 +15,7 @@ export class ProductsComponent {
   items: ProductModel[] = [
     {
       "id": 1,
-      "name": "Colar azul",
+      "name": "",
       "description": "test",
       "valor": 25.5,
       "type": "colar",
@@ -28,7 +28,7 @@ export class ProductsComponent {
       "valor": 53.5,
       "type": "Pulseiras",
       "group": "Zodiaco"
-    },
+    }
   ];
 
   constructor(public productsService: ProductsService) {

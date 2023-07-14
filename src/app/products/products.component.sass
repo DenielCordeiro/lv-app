@@ -14,7 +14,6 @@
   @include mobile.display
     display: inline
 
-
 .container
   max-width: 100%
 
@@ -28,14 +27,19 @@
       width: 32vw
 
       @include mobile.display
-        width: 40vw
+        width: 45vw
+        // width: 80vw
 
       .card
+        min-height: 50vh
+
         @include mobile.display
           min-height: 40vh
+          // min-height: 65vh
 
       img
         height: 40vh
 
         @include mobile.display
           height: 20vh
+          // height: 40vh

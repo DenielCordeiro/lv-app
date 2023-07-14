@@ -53,7 +53,7 @@
 </section>
 
 <section id="cards">
-  <div class="container text-center my-3">
+  <div class="container text-center my-5">
     <div class="row products">
       <div class="col-6 mb-3 product" *ngFor="let item of items">
         <input type="checkbox" id="productChecked" class="check" (click)="productSelected(item?.id, $event)">
@@ -62,9 +62,8 @@
           <div class="card">
             <img src="../../assets/img/products/rukia.png" alt="...">
             <div class="card-body">
-              <h3 class="itemTItle">{{ item.name }}</h3>
-              <p class="itemValor">{{ item.valor }}R$</p>
-              <span class="itemdescription">{{ item.description }}</span>
+              <h5 class="itemTitle">{{ item?.name }}</h5>
+              <p class="itemValor">{{ item?.valor }} R$</p>
             </div>
           </div>
         </a>

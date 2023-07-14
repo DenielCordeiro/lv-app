@@ -12,18 +12,18 @@ export class ProductsService {
   }
 
   getProduct(id: number) {
-    console.log("trazendo um unico produto selecionado! ", id);
+    console.log("aqui está o id do produto meu nobre: ", id);
   }
 
   createProduct(product: ProductModel) {
-    console.log("você criou o produto: ", product);
+    console.log("você criou um produto chefe: ", product);
   }
 
   updateProduct(id: number, product: ProductModel) {
-    console.log("você atualizou o id: ", id, "para: ", product);
+    console.log("ai sim guerreiro, você atualizou o id: ", id, "para: ", product);
   }
 
   deleteProduct(id: number) {
-    console.log("Você excluiu o id: ", id);
+    console.log("Vishhh!, você excluiu um produto com o seguite o id: ", id);
   }
 }
