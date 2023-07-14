@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ProductsService } from '../services/products/products.service';
 import { ProductModel } from '../models/product.model';
+import { asyncScheduler } from 'rxjs';
 
 @Component({
   selector: 'app-products',
@@ -18,7 +19,7 @@ export class ProductsComponent {
       "description": "test",
       "valor": 25.5,
       "type": "colar",
-      "collection": "Fim de ano"
+      "group": "Fim de ano"
     },
     {
       "id": 2,
@@ -26,7 +27,7 @@ export class ProductsComponent {
       "description": "test",
       "valor": 53.5,
       "type": "Pulseiras",
-      "collection": "Zodiaco"
+      "group": "Zodiaco"
     },
   ];
 
@@ -36,6 +37,7 @@ export class ProductsComponent {
 
   getingProducts() {
     this.productsService.getProducts();
+    // this.items = this.productsService.getProducts();
   }
 
   productSelected(id: number | undefined, event: Event) {
@@ -53,17 +55,39 @@ export class ProductsComponent {
     console.log("está selecionado? ", this.productChecked);
   }
 
-  updatingProduct(id: number | undefined) {
+  modalCreate() {
+    console.log("abrir modal de criação");
+  }
+
+  modalUpdate(id: number | undefined) {
     if (id !== undefined) {
-      console.log("id selecionado", id);
+      const data = this.productsService.getProduct(id);
     } else {
       alert("[Erro]: você não selecionou o produto");
     }
   }
 
+  /* functions of send for modals
+  async creatingProduct(product: ProductModel) {
+    try {
+      await this.productsService.createProduct(product);
+    } catch {
+      console.log("error");
+    }
+  }
+
+  async updatingProduct(id: number, product: ProductModel) {
+    try {
+      await this.productsService.updateProduct(id, product);
+    } catch {
+      console.log("error");
+    }
+  }
+  */
+
   deletingProduct(id: number | undefined) {
     if (id !== undefined) {
-      console.log("id selecionado", id);
+      const data = this.productsService.deleteProduct(id);
     } else {
       alert("[Erro]: você não selecionou o produto");
     }

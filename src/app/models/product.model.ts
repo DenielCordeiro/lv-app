@@ -6,6 +6,6 @@ export class ProductModel {
     public description?: string,
     public valor?: number,
     public type?: string,
-    public collection?: string
+    public group?: string
   ) {}
 }

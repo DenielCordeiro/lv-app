@@ -6,10 +6,25 @@
   <h1 class="titles">Produtos</h1>
 </section>
 
-<section id="topMenu">
-  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#filter" aria-expanded="false" aria-controls="filter">
-    filtrar por ...
-  </button>
+<section id="top-menu">
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#filter" aria-expanded="false" aria-controls="filter">
+          filtrar por ...
+        </button>
+      </div>
+
+      <div class="col-6">
+        <div class="col-6 buttons-crud">
+          <button (click)="modalCreate()">Adicionar</button>
+          <button class="mx-3" (click)="modalUpdate(this.productId)">Editar</button>
+          <button (click)="deletingProduct(this.productId)">Excluir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="collapse" id="filter">
     <div class="filters-buttons my-2">
       <button type="button" class="btn btn-primary mx-2">valor</button>
@@ -23,21 +38,9 @@
 </section>
 
 <section id="side-menu">
-  <div class="container">
-    <div class="row">
-      <div class="col-6">
-        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#filterMobile" aria-expanded="false" aria-controls="filterMobile">
-          filtrar por ...
-        </button>
-      </div>
-
-      <div class="col-6 buttons-crud">
-        <button>Adicionar</button>
-        <button class="mx-3" (click)="updatingProduct(this.productId)">Editar</button>
-        <button (click)="updatingProduct(this.productId)">Excluir</button>
-      </div>
-    </div>
-  </div>
+  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#filterMobile" aria-expanded="false" aria-controls="filterMobile">
+    filtrar por ...
+  </button>
 
   <div class="card card-body collapse" id="filterMobile">
     <button type="button" class="btn btn-primary mb-2">valor</button>
@@ -51,13 +54,13 @@
 
 <section id="cards">
   <div class="container text-center my-3">
-    <div class="row">
-      <div class="col-6 mb-3" *ngFor="let item of items">
+    <div class="row products">
+      <div class="col-6 mb-3 product" *ngFor="let item of items">
         <input type="checkbox" id="productChecked" class="check" (click)="productSelected(item?.id, $event)">
 
         <a routerLink="/product/{{ item.id }}">
           <div class="card">
-            <img src="../../assets/img/products/rukia.png" class="card-img-top" alt="...">
+            <img src="../../assets/img/products/rukia.png" alt="...">
             <div class="card-body">
               <h3 class="itemTItle">{{ item.name }}</h3>
               <p class="itemValor">{{ item.valor }}R$</p>
