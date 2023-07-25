@@ -1,12 +1,10 @@
 <section id="form">
+  <div class="header-form">
+    <h2>Área de Cadastro</h2>
+    <h4>Preencha seus dados com cuidado, aqui salvamos seu e-mail para comunicação após a compra de qualquer produto!</h4>
+  </div>
 
   <form [formGroup]="registerForm">
-
-    <div class="header-form">
-      <h2>Área de Cadastro</h2>
-      <h4>Preencha seus dados com cuidado, aqui salvamos seu e-mail para comunicação após a compra de qualquer produto!</h4>
-    </div>
-
     <div class="body-form row">
       <div class="mb-3 row">
         <label for="name" class="col-sm-2 ">Nome:</label>
@@ -29,12 +27,44 @@
         </div>
       </div>
     </div>
+  </form>
 
-    <div class="footer-form">
-      <button type="button" class="btn btn-secondary mx-2">fechar</button>
-      <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid" (click)="makeRegister()">Cadastre-se</button>
+  <form [formGroup]="registerAddress">
+    <div class="address-form row">
+      <div class="mb-3 row">
+        <label for="cep" class="col-sm-2 ">Cep:</label>
+        <div class="col-sm-10">
+          <input type="number" class="form-control" id="cep" formControlName="cep">
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label for="neighborhood" class="col-sm-2 ">Bairro:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="neighborhood" formControlName="neighborhood">
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label for="street" class="col-sm-2 ">Rua:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="street" formControlName="street">
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label for="houseNumber" class="col-sm-2 ">Número:</label>
+        <div class="col-sm-10">
+          <input type="number" class="form-control" id="houseNumber" formControlName="houseNumber">
+        </div>
+      </div>
     </div>
   </form>
 
+
+  <div class="footer-form">
+    <button type="button" class="btn btn-secondary mx-2">fechar</button>
+    <button type="submit" class="btn btn-primary" (click)="makeRegister()" [disabled]="registerForm.invalid">Cadastre-se</button>
+  </div>
 </section>
 

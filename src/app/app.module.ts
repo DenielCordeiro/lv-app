@@ -26,6 +26,7 @@ import { AboutComponent } from './about/about.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { VerticalChartComponent } from './dashboard/charts/vertical-chart/vertical-chart.component';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { VerticalChartComponent } from './dashboard/charts/vertical-chart/vertic
     BuyComponent,
     NavbarComponent,
     VerticalChartComponent,
-    AboutComponent
+    AboutComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
