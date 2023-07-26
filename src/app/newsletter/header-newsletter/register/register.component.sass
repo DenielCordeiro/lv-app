@@ -1,23 +1,31 @@
 @use '../../../../assets/sass/mobile'
 
-.header-form
-  max-width: 87vw
+form
+  min-height: 25vh
 
-.container
-  min-height: 30vh
+  @include mobile.display
+    min-height: 32vh
 
-  // @include mobile.display
-  //   min-height: 50vh
+.about-form
+  min-height: 10vh
 
 .arrows
-  max-width: 87vw
+  padding-right: 5vw
 
   i
     font-size: 40px
 
-  .form-advance
+  .form-return
     text-align: end
 
+  .buttons-arrows
+    background-color: #fff
+    border: none
+
 .footer-form
-  max-width: 87vw
+  padding-right: 2.2vw
   text-align: end
+
+  @include mobile.display
+    margin-top: 8vh
+    padding-right: 7vw
