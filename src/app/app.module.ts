@@ -18,7 +18,6 @@ import { HeaderNewsletterComponent } from './newsletter/header-newsletter/header
 import { LoginComponent } from './newsletter/header-newsletter/login/login.component';
 import { RegisterComponent } from './newsletter/header-newsletter/register/register.component';
 
-import { HeaderProductsComponent } from './products/header-products/header-products.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductComponent } from './product/product.component';
 import { BuyComponent } from './product/buy/buy.component';
@@ -26,6 +25,7 @@ import { AboutComponent } from './about/about.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { VerticalChartComponent } from './dashboard/charts/vertical-chart/vertical-chart.component';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
@@ -35,13 +35,13 @@ import { VerticalChartComponent } from './dashboard/charts/vertical-chart/vertic
     LoginComponent,
     ProductsComponent,
     RegisterComponent,
-    HeaderProductsComponent,
     ProductComponent,
     DashboardComponent,
     BuyComponent,
     NavbarComponent,
     VerticalChartComponent,
-    AboutComponent
+    AboutComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,

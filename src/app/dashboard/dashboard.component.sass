@@ -1,3 +1,5 @@
+@use '../../assets/sass/mobile'
+
 .container
   min-width: 100%
 
@@ -8,3 +10,6 @@
     text-align: center
     justify-content: center
 
+#charts
+  @include mobile.display
+    display: none

@@ -1,40 +1,100 @@
+<section id="pageTitle">
+  <h2 class="titles">Dashboard</h2>
+</section>
+
 <section id="form">
-
-  <form [formGroup]="registerForm">
-
-    <div class="header-form">
-      <h2>Área de Cadastro</h2>
-      <h4>Preencha seus dados com cuidado, aqui salvamos seu e-mail para comunicação após a compra de qualquer produto!</h4>
+  <div class="container">
+    <div class="about-form">
+      <h5>Preencha seus dados com cuidado.</h5>
+      <h5 [hidden]="this.formIsAdvance">Seu e-mail é salvo para comunicação após a compra de qualquer produto!</h5>
+      <h5 [hidden]="!this.formIsAdvance">Preciso de seu endereços para enviar seu produto! <i class="bi bi-emoji-smile"></i></h5>
     </div>
 
-    <div class="body-form row">
-      <div class="mb-3 row">
-        <label for="name" class="col-sm-2 ">Nome:</label>
-        <div class="col-sm-10">
-          <input type="name" class="form-control" id="name" formControlName="name">
+    <form [formGroup]="registerForm" [hidden]="this.formIsAdvance">
+      <div class="body-form row">
+        <div class="mb-3 row">
+          <label for="name" class="col-sm-2 ">Nome:</label>
+          <div class="col-sm-10">
+            <input type="name" class="form-control" id="name" formControlName="name">
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <label for="email" class="col-sm-2 ">E-mail:</label>
+          <div class="col-sm-10">
+            <input type="email" class="form-control" id="email" placeholder="example@example.com" formControlName="email">
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="password" class="col-sm-2 ">Senha:</label>
+          <div class="col-sm-10">
+            <input type="password" class="form-control" id="password" formControlName="password">
+          </div>
         </div>
       </div>
+    </form>
 
-      <div class="mb-3 row">
-        <label for="email" class="col-sm-2 ">E-mail:</label>
-        <div class="col-sm-10">
-          <input type="email" class="form-control" id="email" placeholder="example@example.com" formControlName="email">
+    <form [formGroup]="registerAddress" [hidden]="!this.formIsAdvance">
+      <div class="address-form row">
+        <div class="mb-3 row">
+          <label for="cep" class="col-sm-2 ">Cep:</label>
+          <div class="col-sm-10">
+            <input type="number" class="form-control" id="cep" formControlName="cep">
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <label for="neighborhood" class="col-sm-2 ">Bairro:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="neighborhood" formControlName="neighborhood">
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <label for="street" class="col-sm-2 ">Rua:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="street" formControlName="street">
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="houseNumber" class="col-sm-2 ">Número:</label>
+          <div class="col-sm-10">
+            <input type="number" class="form-control" id="houseNumber" formControlName="houseNumber">
+          </div>
         </div>
       </div>
+    </form>
 
-      <div class="mb-3 row">
-        <label for="password" class="col-sm-2 ">Senha:</label>
-        <div class="col-sm-10">
-          <input type="password" class="form-control" id="password" formControlName="password">
+    <div class="arrows mt-4 mb-4">
+      <div class="row">
+        <div class="col-6 form-return">
+          <button class="buttons-arrows" type="button" (click)="formAdvance()" [disabled]="!this.formIsAdvance">
+            <i class="bi bi-arrow-left-circle"></i>
+            <span class="mx-2">Anterior</span>
+          </button>
+        </div>
+
+        <div class="col-6">
+          <button class="buttons-arrows" type="button" (click)="formAdvance()" [disabled]="this.formIsAdvance">
+            <span class="mx-2">Próximo</span>
+            <i class="bi bi-arrow-right-circle"></i>
+          </button>
         </div>
       </div>
     </div>
 
     <div class="footer-form">
-      <button type="button" class="btn btn-secondary mx-2">fechar</button>
-      <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid" (click)="makeRegister()">Cadastre-se</button>
-    </div>
-  </form>
+      <button type="button" class="btn btn-secondary mx-2" routerLink="/newsletter">Fechar</button>
 
+      <button type="submit" class="btn btn-primary" disabled
+      *ngIf="registerForm.invalid && registerAddress.invalid ||
+       registerForm.valid && registerAddress.invalid ||
+       registerForm.invalid && registerAddress.valid">Cadastre-se</button>
+
+      <button type="submit" class="btn btn-primary" (click)="makeRegister()" *ngIf="registerForm.valid && registerAddress.valid">Cadastre-se</button>
+    </div>
+  </div>
 </section>
 

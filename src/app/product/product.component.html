@@ -1,20 +1,40 @@
-<section id="">
-  <h1>Pulseira AZUL</h1>
-  <h2>detalhes sobre</h2>
-  <h3>Bem-Vindo á Coleção de Inverno</h3>
+<section id="icons">
+  <div class="icons">
+    <a href="#" class="mx-2" (click)="updateModal()">icone de editar</a>
+    <a href="#" (click)="deleteModal()">icone de deletar</a>
+  </div>
 </section>
 
-<section id="">
-  <img src="../../assets/img/products/sherk.png" alt="#">
-  <h2>Valor</h2>
+<section id="product">
+  <div class="product">
+    <h1>Pulseira AZUL</h1>
+    <h2>detalhes sobre</h2>
+    <h3>Bem-Vindo á Coleção de Inverno</h3>
+
+    <img src="../../assets/img/products/rukia.png" class="image my-2" alt="#">
+    <h2>Valor</h2>
+  </div>
+
 </section>
 
-<section id="">
-  <div class="ratio ratio-4x3">
-    <!-- <iframe src="https://www.youtube.com/embed/4Ea5zDLwKJw" title="YouTube video" allowfullscreen></iframe> -->
+<section id="freight">
+  <div class="freight my-2">
+    <h4> <strong>Calcular Frete</strong> </h4>
+    <label>Digite o CEP:</label> <input type="text" class="mx-2">
+    <span>icone de avião</span>
   </div>
 </section>
 
 <section id="purchaseModal">
   <app-buy></app-buy>
 </section>
+
+<section id="return">
+  <a href="#" routerLink="/products">voltar para produtos</a>
+</section>
+
+<!-- <section id="possivel video">
+  <div class="ratio ratio-4x3">
+    <iframe src="https://www.youtube.com/embed/4Ea5zDLwKJw" title="YouTube video"></iframe>
+  </div>
+</section> -->
