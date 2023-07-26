@@ -12,6 +12,7 @@ export class RegisterComponent implements OnInit {
   registerAddress!: FormGroup;
   convertedAddress: string | undefined;
   groupInfosAddress: string[] = [];
+  formIsAdvance: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -61,9 +62,14 @@ export class RegisterComponent implements OnInit {
         await
           this.registerService.createUser(this.registerForm.value);
           this.registerForm.reset();
+          this.registerAddress.reset();
       }
     } catch(error) {
       console.error(error);
     }
+  }
+
+  formAdvance(): boolean {
+    return this.formIsAdvance = !this.formIsAdvance;
   }
 }
