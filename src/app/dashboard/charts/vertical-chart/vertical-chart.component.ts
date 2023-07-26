@@ -23,7 +23,7 @@ export class VerticalChartComponent {
 
   constructor(private chartsService: ChartsService) {}
 
-  get single() {
+  get single(): Object[] {
     return this.chartsService.registeredCustomers;
   }
 }

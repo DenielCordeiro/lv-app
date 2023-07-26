@@ -1,0 +1,45 @@
+@use '../../assets/sass/mobile'
+@use '../../assets/sass/colors'
+
+#top-menu
+  display: inline
+
+  @include mobile.display
+    display: none
+
+
+#side-menu
+  display: none
+
+  @include mobile.display
+    display: inline
+
+.container
+  max-width: 100%
+
+  .products
+    justify-content: center
+
+    .buttons-crud
+      text-align: end
+
+    .product
+      width: 32vw
+
+      @include mobile.display
+        width: 45vw
+        // width: 80vw
+
+      .card
+        min-height: 50vh
+
+        @include mobile.display
+          min-height: 40vh
+          // min-height: 65vh
+
+      img
+        height: 40vh
+
+        @include mobile.display
+          height: 20vh
+          // height: 40vh

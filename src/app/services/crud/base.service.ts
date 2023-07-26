@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { BaseModel } from "../models/base-model";
 import { lastValueFrom } from "rxjs";
+import { BaseModel } from "src/app/models/base-model";
 
 interface LvApi<T extends BaseModel> {
   success: boolean,
