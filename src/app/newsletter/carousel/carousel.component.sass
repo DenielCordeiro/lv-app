@@ -1,1 +1,50 @@
 @use '../../../assets/sass/mobile'
+@use '../../../assets/sass/colors'
+
+*
+  margin: 0px
+  padding: 0px
+
+.content
+  padding: 7vh 0px 0px 0px
+  width: 100%
+  margin: 0 auto
+
+  .carousel-images::-webkit-scrollbar
+    display: none
+
+  .carousel-images
+    overflow-x: auto
+    -ms-overflow-style: none
+    scrollbar-width: none
+
+    .images
+      display: flex
+      flex-flow: row nowrap
+      gap: 15px
+
+      .item
+        width: 26vw
+        height: 50vh
+        flex-shrink: 0
+        opacity: 0.6
+        border-radius: 40px
+        transition: all 600ms ease-in-out
+
+      .current-item
+        opacity: 1
+
+  .arrow-left, .arrow-right
+    cursor: pointer
+    opacity: 0.2
+    font-size: 60px
+    padding: 25vh 15vw
+    transition: all 600ms ease-in-out
+    border: none
+
+    &:hover
+      opacity: 1
+
+  .arrow-right
+    text-align: end
+

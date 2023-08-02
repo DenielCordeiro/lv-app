@@ -28,6 +28,7 @@ import { VerticalChartComponent } from './dashboard/charts/vertical-chart/vertic
 import { UsersComponent } from './users/users.component';
 import { NewsComponent } from './newsletter/news/news.component';
 import { CarouselComponent } from './newsletter/carousel/carousel.component';
+import { CollectionsComponent } from './newsletter/collections/collections.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { CarouselComponent } from './newsletter/carousel/carousel.component';
     AboutComponent,
     UsersComponent,
     NewsComponent,
-    CarouselComponent
+    CarouselComponent,
+    CollectionsComponent
   ],
   imports: [
     BrowserModule,
