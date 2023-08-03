@@ -6,9 +6,13 @@
   padding: 0px
 
 .content
-  padding: 7vh 0px 0px 0px
+  padding-top: 10vh
   width: 100%
   margin: 0 auto
+
+  @include mobile.display
+    padding-top: 10vh
+    width: 100%
 
   .carousel-images::-webkit-scrollbar
     display: none
@@ -17,19 +21,32 @@
     overflow-x: auto
     -ms-overflow-style: none
     scrollbar-width: none
+    max-width: 50vw
+
+    @include mobile.display
+      max-width: 70vw
+      margin-left: 1vw
 
     .images
       display: flex
       flex-flow: row nowrap
       gap: 15px
 
+      @include mobile.display
+        gap: 5px
+
       .item
-        width: 26vw
+        width: 22vw
         height: 50vh
         flex-shrink: 0
         opacity: 0.6
         border-radius: 40px
         transition: all 600ms ease-in-out
+
+        @include mobile.display
+          border-radius: 10px
+          width: 35vw
+          height: 30vh
 
       .current-item
         opacity: 1
@@ -38,13 +55,22 @@
     cursor: pointer
     opacity: 0.2
     font-size: 60px
-    padding: 25vh 15vw
     transition: all 600ms ease-in-out
     border: none
+    padding-top: 25vh
+
+    @include mobile.display
+      font-size: 35px
+      padding-top: 13vh
 
     &:hover
       opacity: 1
 
-  .arrow-right
+  .arrow-left
     text-align: end
 
+  .button-left
+    margin-right: 2vw
+
+  .button-right
+    margin-left: 2vw

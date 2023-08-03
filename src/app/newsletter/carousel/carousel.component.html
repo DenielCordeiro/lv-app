@@ -1,27 +1,24 @@
 <section id="carousel">
+  <div class="content">
+    <div class="row desktop">
+      <div class="col-3 arrow-left">
+        <a type="button" class="button-left" (click)="moveImage(false)"><i class="bi bi-caret-left-fill"></i></a>
+      </div>
 
-</section>
-
-<div class="content">
-  <div class="row">
-    <div class="col-4 arrow-left">
-      <a type="button" (click)="moveImage(false)"><i class="bi bi-caret-left-fill"></i></a>
-    </div>
-
-    <div class="col-4">
-      <div class="carousel-images">
-        <div class="images" id="images">
-          <img class="item current-item" src="http://source.unsplash.com/random/250x250/?street" alt="street">
-          <img class="item" src="http://source.unsplash.com/random/250x250/?animal" alt="animal">
-          <img class="item" src="http://source.unsplash.com/random/250x250/?poker" alt="poker">
-          <img class="item" src="http://source.unsplash.com/random/250x250/?skate" alt="skate">
+      <div class="col-6">
+        <div class="carousel-images">
+          <div class="images" id="images">
+            <img class="item current-item" src="http://source.unsplash.com/random/250x250/?street" alt="street">
+            <img class="item" src="http://source.unsplash.com/random/250x250/?animal" alt="animal">
+            <img class="item" src="http://source.unsplash.com/random/250x250/?poker" alt="poker">
+            <img class="item" src="http://source.unsplash.com/random/250x250/?skate" alt="skate">
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="col-4 arrow-right">
-      <a type="button" (click)="moveImage(true)"><i class="bi bi-caret-right-fill"></i></a>
+      <div class="col-3 arrow-right">
+        <a type="button" class="button-right" (click)="moveImage(true)"><i class="bi bi-caret-right-fill"></i></a>
+      </div>
     </div>
   </div>
-</div>
-
+</section>
