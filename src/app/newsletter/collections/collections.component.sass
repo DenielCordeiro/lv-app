@@ -15,6 +15,11 @@
   gap: 13px
   padding-top: 10vh
 
+  @include mobile.display
+    padding-top: 4vh
+    height: 46vh
+    gap: 15px
+
   > div
     flex: 0 0 13vw
     border-radius: 0.5rem
@@ -24,21 +29,32 @@
     background-color: colors.$pourple
     overflow: hidden
 
-    // &:nth-of-type(1)
+    @include mobile.display
+      flex: 0 0 40vw
+
+    &:nth-of-type(1)
       // background: url(collections.$image1)
       // background-size: 100% 100%
 
-    // &:nth-of-type(2)
+    &:nth-of-type(2)
       // background: url(collections.$image2)
       // background-size: 100% 100%
 
-    // &:nth-of-type(3)
+    &:nth-of-type(3)
       // background: url(collections.$image3)
       // background-size: 100% 100%
+      display: inline
 
-    // &:nth-of-type(4)
-    //   background: url(collections.$image4)
-    //   background-size: 100% 100%
+      @include mobile.display
+        display: none
+
+    &:nth-of-type(4)
+      // background: url(collections.$image4)
+      // background-size: 100% 100%
+      display: inline
+
+      @include mobile.display
+        display: none
 
     .content
       font-size: 1.5rem
@@ -59,6 +75,9 @@
         max-width: 11vw
         border-radius: 10px
 
+        @include mobile.display
+          max-width: 35vw
+
       span
         display: block
         font-size: 1.2rem
@@ -67,6 +86,10 @@
       flex: 0 0 13vw
       box-shadow: 1px 3px 15px #7645d8
       transform: translatey(-20px)
+
+      @include mobile.display
+        flex: 0 0 40vw
+        transform: translatey(-10px)
 
     &:hover .content
       opacity: 1
