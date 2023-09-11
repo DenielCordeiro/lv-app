@@ -29,6 +29,7 @@ import { UsersComponent } from './users/users.component';
 import { NewsComponent } from './newsletter/news/news.component';
 import { CarouselComponent } from './newsletter/carousel/carousel.component';
 import { CollectionsComponent } from './newsletter/collections/collections.component';
+import { BodyNewsletterComponent } from './newsletter/body-newsletter/body-newsletter.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { CollectionsComponent } from './newsletter/collections/collections.compo
     UsersComponent,
     NewsComponent,
     CarouselComponent,
-    CollectionsComponent
+    CollectionsComponent,
+    BodyNewsletterComponent
   ],
   imports: [
     BrowserModule,
