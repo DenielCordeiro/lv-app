@@ -1,14 +1,39 @@
-*
-  margin: 0
-  padding: 0
+@use '../../../assets/sass/colors'
+
 *
   margin: 0
   padding: 0
 
+#body
+  background-color: colors.$pourple
+  padding: 3vh 2vw 0.5vh 2vw
+
+.assessments
+  background-color: colors.$white
+  border: 1px solid colors.$white
+  border-radius: 10px
+  width: 95vw
+
 .content
-  background-color: #7b9cb622
-  border: #000 solid 1px
+  padding-top: 2vh
+  color: colors.$white
 
 .signature
   text-align: end
-  margin-right: 2vw
+  margin-top: 2vh
+
+  .creatorName
+    color: colors.$white
+
+  .companyName
+    padding: 4px
+    border-radius: 5px
+    background-color: colors.$white
+    color: colors.$pourple
+    font-weight: 600
+
+  i
+    // position: absolute
+    // left: 98vw
+    color: colors.$white
+    font-size: 58px
