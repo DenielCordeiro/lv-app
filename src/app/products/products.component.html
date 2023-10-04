@@ -2,57 +2,76 @@
 </section>
 
 <section id="pageTitle">
-  <h2 class="titles">Produtos</h2>
+  <h2 class="titles">{{ title }}</h2>
 </section>
 
 <section id="top-menu">
-  <div class="container">
-    <div class="row">
-      <div class="col-6">
-        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#filter" aria-expanded="false" aria-controls="filter">
-          filtrar por ...
-        </button>
-      </div>
+  <div class="menu">
+    <div class="container">
+      <div class="row">
+        <div class="col-6 button-filter-desktop">
+          <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#filter" aria-expanded="false" aria-controls="filter">
+            filtrar por ...
+          </button>
+        </div>
 
-      <div class="col-6">
-        <div class="col-6 buttons-crud">
-          <button (click)="modalCreate()">Adicionar</button>
-          <button class="mx-3" (click)="modalUpdate(this.productId)">Editar</button>
-          <button (click)="deletingProduct(this.productId)">Excluir</button>
+        <div class="col-6">
+          <div class="col-6 buttons-crud">
+            <button (click)="modalCreate()">Adicionar</button>
+            <button class="mx-3" (click)="modalUpdate(this.productId)">Editar</button>
+            <button (click)="deletingProduct(this.productId)">Excluir</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="collapse" id="filter">
-    <div class="filters-buttons my-2">
-      <button type="button" class="btn btn-primary mx-2">valor</button>
-      <button type="button" class="btn btn-secondary mx-2">coleção nova</button>
-      <button type="button" class="btn btn-success mx-2">coleção antiga</button>
-      <button type="button" class="btn btn-danger mx-2">Pulseiras</button>
-      <button type="button" class="btn btn-warning mx-2">colares</button>
-      <button type="button" class="btn btn-dark mx-2">gargantilhas</button>
+    <div class="collapse" id="filter">
+      <div class="filters-buttons mt-3">
+        <button type="button" class="btn btn-primary">Valor</button>
+        <button type="button" class="btn btn-secondary mx-2" (click)="filter('Coleção nova')">Coleção nova</button>
+        <button type="button" class="btn btn-success mx-2" (click)="filter('Coleção antiga')">Coleção antiga</button>
+        <button type="button" class="btn btn-danger mx-2" (click)="filter('Pulseiras')">Pulseiras</button>
+        <button type="button" class="btn btn-warning mx-2" (click)="filter('Colares')">Colares</button>
+        <button type="button" class="btn btn-dark mx-2" (click)="filter('Gargantilhas')">Gargantilhas</button>
+      </div>
     </div>
   </div>
 </section>
 
 <section id="side-menu">
-  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#filterMobile" aria-expanded="false" aria-controls="filterMobile">
-    filtrar por ...
-  </button>
+  <div class="menu">
+    <div>
+      <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#filterMobile" aria-expanded="false" aria-controls="filterMobile">
+        filtrar por ...
+      </button>
+    </div>
 
-  <div class="card card-body collapse" id="filterMobile">
-    <button type="button" class="btn btn-primary mb-2">valor</button>
-    <button type="button" class="btn btn-secondary mb-2">coleção nova</button>
-    <button type="button" class="btn btn-success mb-2">coleção antiga</button>
-    <button type="button" class="btn btn-danger mb-2">Pulseiras</button>
-    <button type="button" class="btn btn-warning mb-2">colares</button>
-    <button type="button" class="btn btn-dark">gargantilhas</button>
+    <div class="collapse" id="filterMobile">
+      <div class="row mx-3">
+        <button type="button" class="btn btn-primary my-2">Valor</button>
+      </div>
+      <div class="row mx-3">
+        <button type="button" class="btn btn-secondary mb-2" (click)="filter('Coleção nova')">Coleção nova</button>
+      </div>
+      <div class="row mx-3">
+        <button type="button" class="btn btn-success mb-2" (click)="filter('Coleção antiga')">Coleção antiga</button>
+      </div>
+      <div class="row mx-3">
+        <button type="button" class="btn btn-danger mb-2" (click)="filter('Pulseiras')">Pulseiras</button>
+      </div>
+      <div class="row mx-3">
+        <button type="button" class="btn btn-warning mb-2" (click)="filter('Colares')">Colares</button>
+      </div>
+      <div class="row mx-3">
+        <button type="button" class="btn btn-dark mb-2" (click)="filter('Gargantilhas')">Gargantilhas</button>
+      </div>
+    </div>
   </div>
+
 </section>
 
 <section id="cards">
-  <div class="container text-center my-5">
+  <div class="container text-center">
     <div class="row products">
       <div class="col-6 mb-3 product" *ngFor="let item of items">
         <input type="checkbox" id="productChecked" class="check" (click)="productSelected(item?.id, $event)">

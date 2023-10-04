@@ -7,12 +7,29 @@
   @include mobile.display
     display: none
 
+  .menu
+    margin-bottom: 7vh
+
+  .button-filter-desktop, .filters-buttons
+    padding-left: 4.7%
 
 #side-menu
   display: none
 
   @include mobile.display
     display: inline
+    text-align: end
+
+  .menu
+    margin-bottom: 5vh
+
+  button
+    font-size: 12px
+    margin-right: 22px
+    border: none
+    border-bottom: 1px solid
+    border-radius: none
+
 
 .container
   max-width: 100%
@@ -24,16 +41,17 @@
       text-align: end
 
     .product
-      width: 32vw
+      width: 23vw
 
       @include mobile.display
-        width: 45vw
+        width: 47vw
         // width: 80vw
 
       .card
         min-height: 50vh
 
         @include mobile.display
+          margin-top: 1vh
           min-height: 40vh
           // min-height: 65vh
 
@@ -43,3 +61,9 @@
         @include mobile.display
           height: 20vh
           // height: 40vh
+
+      input
+        display: inline
+
+        @include mobile.display
+          display: none

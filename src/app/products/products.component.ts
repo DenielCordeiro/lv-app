@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ProductsService } from '../services/products/products.service';
 import { ProductModel } from '../models/product.model';
-import { asyncScheduler } from 'rxjs';
 
 @Component({
   selector: 'app-products',
@@ -11,6 +10,7 @@ import { asyncScheduler } from 'rxjs';
 export class ProductsComponent {
   productChecked: boolean = false;
   productId: number | undefined;
+  title: string = 'Trabalhos disponíveis';
 
   items: ProductModel[] = [
     {
@@ -28,7 +28,23 @@ export class ProductsComponent {
       "valor": 53.5,
       "type": "Pulseiras",
       "group": "Zodiaco"
-    }
+    },
+    {
+      "id": 2,
+      "name": "Pulseira Signo Câncer",
+      "description": "test",
+      "valor": 53.5,
+      "type": "Pulseiras",
+      "group": "Zodiaco"
+    },
+    {
+      "id": 2,
+      "name": "Pulseira Signo Câncer",
+      "description": "test",
+      "valor": 53.5,
+      "type": "Pulseiras",
+      "group": "Zodiaco"
+    },
   ];
 
   constructor(public productsService: ProductsService) {
@@ -92,4 +108,10 @@ export class ProductsComponent {
       alert("[Erro]: você não selecionou o produto");
     }
   }
+
+  filter(newTitle: string): void {
+    this.title = newTitle;
+  }
+
+  filterValor(): void {}
 }
