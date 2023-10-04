@@ -1,0 +1,68 @@
+@use '../../../assets/sass/mobile'
+@use '../../../assets/sass/colors'
+
+*
+  margin: 0px
+  padding: 0px
+
+#carousel-desktop
+  display: inline
+
+  @include mobile.display
+    display: none
+
+#carousel-mobile
+  display: none
+
+  @include mobile.display
+    display: inline
+
+.content
+  padding-top: 10vh
+  width: 100%
+  margin: 0 auto
+
+  .carousel-images::-webkit-scrollbar
+    display: none
+
+  .carousel-images
+    overflow-x: auto
+    -ms-overflow-style: none
+    scrollbar-width: none
+    max-width: 50vw
+
+    .images
+      display: flex
+      flex-flow: row nowrap
+      gap: 15px
+
+      .item
+        width: 22vw
+        height: 50vh
+        flex-shrink: 0
+        opacity: 0.6
+        border-radius: 40px
+        transition: all 600ms ease-in-out
+
+      .current-item
+        opacity: 1
+
+  .arrow-left, .arrow-right
+    cursor: pointer
+    opacity: 0.2
+    font-size: 60px
+    transition: all 600ms ease-in-out
+    border: none
+    padding-top: 25vh
+
+    &:hover
+      opacity: 1
+
+  .arrow-left
+    text-align: end
+
+  .button-left
+    margin-right: 2vw
+
+  .button-right
+    margin-left: 2vw

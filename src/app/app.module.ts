@@ -26,6 +26,10 @@ import { AboutComponent } from './about/about.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { VerticalChartComponent } from './dashboard/charts/vertical-chart/vertical-chart.component';
 import { UsersComponent } from './users/users.component';
+import { NewsComponent } from './newsletter/news/news.component';
+import { CarouselComponent } from './newsletter/carousel/carousel.component';
+import { CollectionsComponent } from './newsletter/collections/collections.component';
+import { BodyNewsletterComponent } from './newsletter/body-newsletter/body-newsletter.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +45,11 @@ import { UsersComponent } from './users/users.component';
     NavbarComponent,
     VerticalChartComponent,
     AboutComponent,
-    UsersComponent
+    UsersComponent,
+    NewsComponent,
+    CarouselComponent,
+    CollectionsComponent,
+    BodyNewsletterComponent
   ],
   imports: [
     BrowserModule,
