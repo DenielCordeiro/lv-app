@@ -30,6 +30,9 @@ import { NewsComponent } from './newsletter/news/news.component';
 import { CarouselComponent } from './newsletter/carousel/carousel.component';
 import { CollectionsComponent } from './newsletter/collections/collections.component';
 import { BodyNewsletterComponent } from './newsletter/body-newsletter/body-newsletter.component';
+import { AddComponent } from './products/add/add.component';
+import { UpdateComponent } from './products/update/update.component';
+import { DeleteComponent } from './products/delete/delete.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,10 @@ import { BodyNewsletterComponent } from './newsletter/body-newsletter/body-newsl
     NewsComponent,
     CarouselComponent,
     CollectionsComponent,
-    BodyNewsletterComponent
+    BodyNewsletterComponent,
+    AddComponent,
+    UpdateComponent,
+    DeleteComponent
   ],
   imports: [
     BrowserModule,

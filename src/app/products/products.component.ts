@@ -75,12 +75,12 @@ export class ProductsComponent {
     console.log("abrir modal de criação");
   }
 
-  modalUpdate(id: number | undefined) {
-    if (id !== undefined) {
-      const data = this.productsService.getProduct(id);
-    } else {
-      alert("[Erro]: você não selecionou o produto");
-    }
+  modalUpdate() {
+    // if (id !== undefined) {
+    //   const data = this.productsService.getProduct(id);
+    // } else {
+    //   alert("[Erro]: você não selecionou o produto");
+    // }
   }
 
   /* functions of send for modals
@@ -101,12 +101,12 @@ export class ProductsComponent {
   }
   */
 
-  deletingProduct(id: number | undefined) {
-    if (id !== undefined) {
-      const data = this.productsService.deleteProduct(id);
-    } else {
-      alert("[Erro]: você não selecionou o produto");
-    }
+  deletingProduct() {
+    // if (id !== undefined) {
+    //   const data = this.productsService.deleteProduct(id);
+    // } else {
+    //   alert("[Erro]: você não selecionou o produto");
+    // }
   }
 
   filter(newTitle: string): void {

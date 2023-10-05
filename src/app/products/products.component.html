@@ -18,8 +18,13 @@
         <div class="col-6">
           <div class="col-6 buttons-crud">
             <button (click)="modalCreate()">Adicionar</button>
-            <button class="mx-3" (click)="modalUpdate(this.productId)">Editar</button>
-            <button (click)="deletingProduct(this.productId)">Excluir</button>
+            <dialog id="projectModal"></dialog>
+
+            <button class="mx-3" (click)="modalUpdate()">Editar</button>
+            <dialog id="projectModal"></dialog>
+
+            <button (click)="deletingProduct()">Excluir</button>
+            <dialog id="projectModal"></dialog>
           </div>
         </div>
       </div>
