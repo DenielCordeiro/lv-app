@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ProductsService } from '../services/products/products.service';
 import { ProductModel } from '../models/product.model';
+import { AddComponent } from './add/add.component';
+import { UpdateComponent } from './update/update.component';
 
 @Component({
   selector: 'app-products',
@@ -9,6 +12,7 @@ import { ProductModel } from '../models/product.model';
 })
 export class ProductsComponent {
   productChecked: boolean = false;
+  modalOpen: boolean = false;
   productId: number | undefined;
   title: string = 'Trabalhos disponíveis';
 
@@ -47,7 +51,9 @@ export class ProductsComponent {
     },
   ];
 
-  constructor(public productsService: ProductsService) {
+  constructor(
+    public productsService: ProductsService,
+    public dialog: MatDialog,) {
     this.getingProducts();
   }
 
@@ -72,15 +78,18 @@ export class ProductsComponent {
   }
 
   modalCreate() {
-    console.log("abrir modal de criação");
+    this.dialog.open<AddComponent>(AddComponent, {
+      width: '70%'
+    });
   }
 
-  modalUpdate() {
-    // if (id !== undefined) {
-    //   const data = this.productsService.getProduct(id);
-    // } else {
-    //   alert("[Erro]: você não selecionou o produto");
-    // }
+  modalUpdate(id: string | number | null) {
+    if (id !== null) {
+      this.dialog.open<UpdateComponent, number | string>(UpdateComponent, {
+        width: '70%',
+        data: id
+      });
+    }
   }
 
   /* functions of send for modals
@@ -114,4 +123,5 @@ export class ProductsComponent {
   }
 
   filterValor(): void {}
+
 }

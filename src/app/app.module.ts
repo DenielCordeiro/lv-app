@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import * as d3 from 'd3';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './services/login/auth.service';
@@ -65,6 +66,7 @@ import { DeleteComponent } from './products/delete/delete.component';
     FormsModule,
     NgbModule,
     NgxChartsModule,
+    MatDialogModule
   ],
   providers: [
     AuthService,
