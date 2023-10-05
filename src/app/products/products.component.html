@@ -1,8 +1,5 @@
-<section id="header">
-</section>
-
 <section id="pageTitle">
-  <h2 class="titles">{{ title }}</h2>
+  <span class="titles">{{ title }}</span>
 </section>
 
 <section id="top-menu">
@@ -18,8 +15,6 @@
         <div class="col-6">
           <div class="col-6 buttons-crud">
             <button (click)="modalCreate()">Adicionar</button>
-            <button class="mx-3" (click)="modalUpdate(null)">Editar</button>
-            <button (click)="deletingProduct()">Excluir</button>
           </div>
         </div>
       </div>
@@ -74,7 +69,13 @@
   <div class="container text-center">
     <div class="row products">
       <div class="col-6 mb-3 product" *ngFor="let item of items">
-        <input type="checkbox" id="productChecked" class="check" (click)="productSelected(item?.id, $event)">
+
+        <div class="row">
+          <div class="col-6"><input type="checkbox" id="productChecked" class="check" (click)="productSelected(item?.id, $event)"></div>
+          <div class="col-6">Editar</div>
+          <div class="col-6">Excluir</div>
+        </div>
+
 
         <a routerLink="/product/{{ item.id }}">
           <div class="card">

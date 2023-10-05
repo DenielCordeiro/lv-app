@@ -92,6 +92,15 @@ export class ProductsComponent {
     }
   }
 
+  modalDelete(id: string | number | null) {
+    if (id !== null) {
+      this.dialog.open<UpdateComponent, number | string>(UpdateComponent, {
+        width: '70%',
+        data: id
+      });
+    }
+  }
+
   /* functions of send for modals
   async creatingProduct(product: ProductModel) {
     try {
