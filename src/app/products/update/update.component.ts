@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class UpdateComponent {
 
+  // async updatingProduct(id: number, product: ProductModel) {
+  //   try {
+  //     await this.productsService.updateProduct(id, product);
+  //   } catch {
+  //     console.log("error");
+  //   }
+  // }
 }

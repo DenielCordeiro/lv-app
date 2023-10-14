@@ -101,32 +101,6 @@ export class ProductsComponent {
     }
   }
 
-  /* functions of send for modals
-  async creatingProduct(product: ProductModel) {
-    try {
-      await this.productsService.createProduct(product);
-    } catch {
-      console.log("error");
-    }
-  }
-
-  async updatingProduct(id: number, product: ProductModel) {
-    try {
-      await this.productsService.updateProduct(id, product);
-    } catch {
-      console.log("error");
-    }
-  }
-  */
-
-  deletingProduct() {
-    // if (id !== undefined) {
-    //   const data = this.productsService.deleteProduct(id);
-    // } else {
-    //   alert("[Erro]: você não selecionou o produto");
-    // }
-  }
-
   filter(newTitle: string): void {
     this.title = newTitle;
   }

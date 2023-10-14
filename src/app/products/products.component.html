@@ -7,15 +7,13 @@
     <div class="container">
       <div class="row">
         <div class="col-6 button-filter-desktop">
-          <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#filter" aria-expanded="false" aria-controls="filter">
+          <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#filter" aria-expanded="false" aria-controls="filter">
             filtrar por ...
           </button>
         </div>
 
-        <div class="col-6">
-          <div class="col-6 buttons-crud">
-            <button (click)="modalCreate()">Adicionar</button>
-          </div>
+        <div class="col-6 button-add">
+          <button (click)="modalCreate()">Adicionar</button>
         </div>
       </div>
     </div>
@@ -70,10 +68,15 @@
     <div class="row products">
       <div class="col-6 mb-3 product" *ngFor="let item of items">
 
-        <div class="row">
-          <div class="col-6"><input type="checkbox" id="productChecked" class="check" (click)="productSelected(item?.id, $event)"></div>
-          <div class="col-6">Editar</div>
-          <div class="col-6">Excluir</div>
+        <div class="row change-product">
+          <div class="col select-product">
+            <i class="bi bi-toggle-off icon"></i>
+            <i class="bi bi-toggle-on icon"></i>
+          </div>
+          <div class="col update-product">
+            <div>Editar</div>
+          </div>
+          <div class="col delete-product">Excluir</div>
         </div>
 
 

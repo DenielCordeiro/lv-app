@@ -1,1 +1,36 @@
-<p>add works!</p>
+<section id="form">
+  <div class="container">
+    <form class="row" [formGroup]="form">
+      <div class="col-6 my-2">
+        <label for="productName" class="form-label">Nome:</label>
+        <input type="text" class="form-control" id="productName">
+      </div>
+
+      <div class="col-6 my-2">
+        <label for="productDescription" class="form-label">Descrição:</label>
+        <input type="text" class="form-control" id="productDescription">
+      </div>
+
+      <div class="col-4 my-2">
+        <label for="productValor" class="form-label">Valor:</label>
+        <input type="number" class="form-control" id="productValor">
+      </div>
+
+      <div class="col-4 my-2">
+        <label class="form-label">Categorias:</label>
+        <select class="form-select" aria-label="Default select example">
+          <option selected>Colares</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+
+      <div class="col-4 my-2">
+        <label for="productCollection" class="form-label">Coleção:</label>
+        <input type="text" class="form-control" id="productCollection">
+      </div>
+
+    </form>
+  </div>
+</section>
