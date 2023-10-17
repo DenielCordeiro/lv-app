@@ -1,11 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import * as d3 from 'd3';
+import { NgxWebstorageModule } from "ngx-webstorage";
+
 import { MatDialogModule } from '@angular/material/dialog';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './services/login/auth.service';
@@ -35,6 +39,7 @@ import { AddComponent } from './products/add/add.component';
 import { UpdateComponent } from './products/update/update.component';
 import { DeleteComponent } from './products/delete/delete.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,11 +67,13 @@ import { DeleteComponent } from './products/delete/delete.component';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
     NgbModule,
     NgxChartsModule,
-    MatDialogModule
+    MatDialogModule,
+    NgxWebstorageModule.forRoot(),
   ],
   providers: [
     AuthService,

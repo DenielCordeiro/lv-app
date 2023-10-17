@@ -32,7 +32,7 @@ export abstract class BaseService<T extends BaseModel> {
     return headers;
   }
 
-  getProducts(): Promise<T>{
+  public getProducts(): Promise<T>{
     let header = this.buildHeader();
 
     return lastValueFrom(this.http.get<LvApi<T>>(this.route, { headers: header }))
@@ -41,7 +41,7 @@ export abstract class BaseService<T extends BaseModel> {
       });
   }
 
-  createProduct(model: BaseModel): Promise<T> {
+  public createProduct(model: BaseModel): Promise<T> {
     return lastValueFrom(this.http.post<LvApi<T>>(this.route, model))
      .then(result => {
       return this.handleResponse(result) as T;

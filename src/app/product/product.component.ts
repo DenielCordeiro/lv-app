@@ -28,7 +28,7 @@ export class ProductComponent implements OnInit {
   }
 
   getProductSelected(id: number) {
-    this.productsService.getProduct(id);
+    // this.productsService.getProduct(id);
     // this.items = this.productsService.getProducts(id);
   }
 
