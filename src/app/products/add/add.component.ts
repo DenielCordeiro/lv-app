@@ -11,6 +11,8 @@ import { ProductsService } from 'src/app/services/products/products.service';
 })
 export class AddComponent {
   form!: FormGroup;
+  newOrOldCollection: string = "Nova";
+  newOrOldCategory: string = "Nova";
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
@@ -18,6 +20,22 @@ export class AddComponent {
     private formBuilder: FormBuilder,
     public productService: ProductsService
   ) {}
+
+  changeCollectionSelect(): void {
+    if (this.newOrOldCollection == "Nova") {
+      this.newOrOldCollection = "Existente";
+    } else {
+      this.newOrOldCollection = "Nova"
+    }
+  }
+
+  changeCategorySelect(): void {
+    if (this.newOrOldCategory == "Nova") {
+      this.newOrOldCategory = "Existente";
+    } else {
+      this.newOrOldCategory = "Nova"
+    }
+  }
 
   creatingProduct(): void {
     let product: ProductModel =  Object.assign(new ProductModel(), this.form.value);

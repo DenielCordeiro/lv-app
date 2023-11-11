@@ -17,19 +17,35 @@
       </div>
 
       <div class="col-4 my-2">
-        <label class="form-label">Categorias:</label>
-        <select class="form-select" aria-label="Default select example">
+        <label for="productCategory" class="form-label">Categorias:</label>
+
+        <button class="btn btn-primary" (click)="changeCategorySelect()">{{ newOrOldCategory }}</button>
+
+        <input type="text" *ngIf="newOrOldCategory == 'Existente'" class="form-control" id="productCategory">
+        <select  id="productCategory" *ngIf="newOrOldCategory == 'Nova'" class="form-select" aria-label="Default select example">
           <option selected>Colares</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option value="1">Pulseiras</option>
+          <option value="2">Gargantilhas</option>
+          <option value="3">Braceletes</option>
+          <option value="3">Aneis</option>
         </select>
       </div>
 
       <div class="col-4 my-2">
         <label for="productCollection" class="form-label">Coleção:</label>
-        <input type="text" class="form-control" id="productCollection">
+
+        <button class="btn btn-primary" (click)="changeCollectionSelect()">{{ newOrOldCollection }}</button>
+
+        <input type="text" *ngIf="newOrOldCollection == 'Existente'" class="form-control" id="productCollection">
+        <select *ngIf="newOrOldCollection == 'Nova'" id="productCollection" class="form-select" aria-label="Default select example">
+          <option selected>Primareva</option>
+          <option value="1">Verão</option>
+          <option value="2">Outono</option>
+          <option value="3">Inverno</option>
+        </select>
       </div>
+
+
 
     </form>
   </div>
