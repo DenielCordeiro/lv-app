@@ -19,7 +19,7 @@
       <div class="col-4 my-2">
         <label for="productCategory" class="form-label">Categorias:</label>
 
-        <button class="btn btn-primary" (click)="changeCategorySelect()">{{ newOrOldCategory }}</button>
+        <button class="button-change-select" (click)="changeCategorySelect()">{{ newOrOldCategory }}</button>
 
         <input type="text" *ngIf="newOrOldCategory == 'Existente'" class="form-control" id="productCategory">
         <select  id="productCategory" *ngIf="newOrOldCategory == 'Nova'" class="form-select" aria-label="Default select example">
@@ -34,7 +34,7 @@
       <div class="col-4 my-2">
         <label for="productCollection" class="form-label">Coleção:</label>
 
-        <button class="btn btn-primary" (click)="changeCollectionSelect()">{{ newOrOldCollection }}</button>
+        <button class="button-change-select" (click)="changeCollectionSelect()">{{ newOrOldCollection }}</button>
 
         <input type="text" *ngIf="newOrOldCollection == 'Existente'" class="form-control" id="productCollection">
         <select *ngIf="newOrOldCollection == 'Nova'" id="productCollection" class="form-select" aria-label="Default select example">
