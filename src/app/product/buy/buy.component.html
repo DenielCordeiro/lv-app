@@ -1,6 +1,41 @@
 <button class="btn btn-lg btn-outline-primary" (click)="openModal(purchaseModal)">Comprar</button>
 
 <ng-template #purchaseModal>
-  <h1>teste</h1>
+
+  <div class="content-header">
+    <div class="row">
+      <div class="title col-11">
+        <span>titulo</span>
+      </div>
+
+      <div class="close-window col-1">
+        <a (click)="closeModal()">X</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="content-body">
+    <div class="image">imagem</div>
+
+    <div class="valor">R$ 55.00</div>
+    <div class="address">Endereço: </div>
+
+    <div class="payment">
+      <label for="payment">Formas de pagamento: </label>
+      <Select>
+        <option value="1">Cartão de Crédito</option>
+        <option value="2">Cartão de Débito</option>
+        <option value="3">Boleto á Vista</option>
+        <option value="4">Pix</option>
+      </Select>
+    </div>
+  </div>
+
+  <div class="contetn-footer">
+    <button (click)="closeModal()">Cancelar pagamento</button>
+    <button (click)="closeModal()">Realizar pagamento</button>
+  </div>
+
 </ng-template>
 

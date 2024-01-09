@@ -19,4 +19,8 @@ export class BuyComponent {
   openModal(purchaseModal: any): void {
     this.modalService.open(purchaseModal);
   }
+
+  closeModal(): void {
+    this.modalService.dismissAll();
+  }
 }

@@ -7,5 +7,8 @@ export class UserModel {
     public cellphone: string,
     public password: string,
     public address: string,
+    public products: {
+      product_id: number
+    }
   ) {}
 }
