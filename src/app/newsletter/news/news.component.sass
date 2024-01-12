@@ -1,0 +1,38 @@
+@use '../../../assets/sass/colors'
+@use '../../../assets/sass/mobile'
+
+.news-card
+  width: 50vw
+  height: 45vh
+  position: absolute
+  left: 21vw
+  margin-top: 6vh
+  border-radius: 10px
+
+  @include mobile.display
+    width: 60vw
+    height: 25vh
+    left: 15vw
+    margin-top: 10vh
+
+.card-front
+  background-color: colors.$white
+  color: colors.$black
+  z-index: 1
+
+  &:hover
+    z-index: 3
+
+.card-behind
+  background-color: colors.$pourple
+  color: colors.$white
+  z-index: 0
+  margin-left: 6vw
+  margin-top: 17vh
+
+  @include mobile.display
+    margin-left: 10vw
+    margin-top: 15vh
+
+  &:hover
+    z-index: 2

@@ -1,37 +1,53 @@
-<section id="icons">
-  <div class="icons">
-    <a href="#" class="mx-2" (click)="updateModal()">icone de editar</a>
-    <a href="#" (click)="deleteModal()">icone de deletar</a>
-  </div>
-</section>
-
 <section id="product">
-  <div class="product">
-    <h1>Pulseira AZUL</h1>
-    <h2>detalhes sobre</h2>
-    <h3>Bem-Vindo á Coleção de Inverno</h3>
+  <div class="content">
+    <div class="icons-edit-or-delete">
+      <i class="bi bi-pencil-fill" (click)="updateModal()"></i>
+      <i class="bi bi-trash3-fill" (click)="deleteModal()"></i>
+    </div>
 
-    <img src="../../assets/img/products/rukia.png" class="image my-2" alt="#">
-    <h2>Valor</h2>
+    <div class="product-card">
+      <div class="titles">
+        <h1>Pulseira AZUL</h1>
+        <h2>detalhes sobre</h2>
+        <h3>Bem-Vindo á Coleção de Inverno</h3>
+      </div>
+
+      <div class="carousel">
+        <img src="../../assets/img/products/rukia.png" class="image my-2" alt="#">
+      </div>
+
+      <div class="valor">
+        R$ 89,99
+      </div>
+    </div>
+
+    <form [formGroup]="form">
+      <div class="freight my-2">
+        <h4> <strong>Calcular Frete</strong> </h4>
+        <label>Digite o CEP:</label> <input type="text" class="mx-2">
+        <span><i class="bi bi-airplane-engines"></i></span>
+      </div>
+    </form>
+
+    <ng-template>
+      <h1>dados de endereço</h1>
+    </ng-template>
+
+    <div class="purchaseModal">
+      <app-buy></app-buy>
+      <h2>adicionar ao carrinho</h2>
+    </div>
+
+    <div class="return py-4">
+      <div class="button-return" routerLink="/products">
+        <span>voltar para produtos</span>
+        <i class="bi bi-arrow-return-left"></i>
+        <i class="bi bi-arrow-left"></i>
+      </div>
+    </div>
   </div>
-
 </section>
 
-<section id="freight">
-  <div class="freight my-2">
-    <h4> <strong>Calcular Frete</strong> </h4>
-    <label>Digite o CEP:</label> <input type="text" class="mx-2">
-    <span>icone de avião</span>
-  </div>
-</section>
-
-<section id="purchaseModal">
-  <app-buy></app-buy>
-</section>
-
-<section id="return">
-  <a href="#" routerLink="/products">voltar para produtos</a>
-</section>
 
 <!-- <section id="possivel video">
   <div class="ratio ratio-4x3">

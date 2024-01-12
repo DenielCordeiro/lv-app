@@ -1,0 +1,66 @@
+<section id="form">
+  <div class="container">
+    <div class="content-header">
+      <div class="row">
+        <div class="title col-11">
+          <span>titulo</span>
+        </div>
+
+        <div mat-dialog-actions class="close-window col-1">
+          <button mat-button (click)="closeModal()">X</button>
+        </div>
+      </div>
+    </div>
+
+    <form class="row" [formGroup]="form">
+      <div class="col-6 my-2">
+        <label for="productName" class="form-label">Nome:</label>
+        <input type="text" class="form-control" id="productName">
+      </div>
+
+      <div class="col-6 my-2">
+        <label for="productDescription" class="form-label">Descrição:</label>
+        <input type="text" class="form-control" id="productDescription">
+      </div>
+
+      <div class="col-4 my-2">
+        <label for="productValor" class="form-label">Valor:</label>
+        <input type="number" class="form-control" id="productValor">
+      </div>
+
+      <div class="col-4 my-2">
+        <label for="productCategory" class="form-label">Categorias:</label>
+
+        <button class="button-change-select" (click)="changeCategorySelect()">{{ newOrOldCategory }}</button>
+
+        <input type="text" *ngIf="newOrOldCategory == 'Existente'" class="form-control" id="productCategory">
+        <select  id="productCategory" *ngIf="newOrOldCategory == 'Nova'" class="form-select" aria-label="Default select example">
+          <option selected>Colares</option>
+          <option value="1">Pulseiras</option>
+          <option value="2">Gargantilhas</option>
+          <option value="3">Braceletes</option>
+          <option value="3">Aneis</option>
+        </select>
+      </div>
+
+      <div class="col-4 my-2">
+        <label for="productCollection" class="form-label">Coleção:</label>
+
+        <button class="button-change-select" (click)="changeCollectionSelect()">{{ newOrOldCollection }}</button>
+
+        <input type="text" *ngIf="newOrOldCollection == 'Existente'" class="form-control" id="productCollection">
+        <select *ngIf="newOrOldCollection == 'Nova'" id="productCollection" class="form-select" aria-label="Default select example">
+          <option selected>Primareva</option>
+          <option value="1">Verão</option>
+          <option value="2">Outono</option>
+          <option value="3">Inverno</option>
+        </select>
+      </div>
+
+      <div class="button-add" >
+        <button class="btn btn-primary" (click)="addProduct()">adicionar produto</button>
+      </div>
+
+    </form>
+  </div>
+</section>

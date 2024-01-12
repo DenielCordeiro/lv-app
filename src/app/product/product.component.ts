@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FormGroup } from '@angular/forms';
 import { ProductsService } from './../services/products/products.service';
 import { ProductModel } from '../models/product.model';
 
@@ -9,6 +10,7 @@ import { ProductModel } from '../models/product.model';
   styleUrls: ['./product.component.sass']
 })
 export class ProductComponent implements OnInit {
+  form!: FormGroup;
   routeId: number | undefined = undefined;
   items!: ProductModel;
 
@@ -28,7 +30,7 @@ export class ProductComponent implements OnInit {
   }
 
   getProductSelected(id: number) {
-    this.productsService.getProduct(id);
+    // this.productsService.getProduct(id);
     // this.items = this.productsService.getProducts(id);
   }
 

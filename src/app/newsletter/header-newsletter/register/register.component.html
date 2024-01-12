@@ -1,5 +1,5 @@
 <section id="pageTitle">
-  <h2 class="titles">Dashboard</h2>
+  <h2 class="titles">Área de Cadastro</h2>
 </section>
 
 <section id="form">
@@ -13,21 +13,28 @@
     <form [formGroup]="registerForm" [hidden]="this.formIsAdvance">
       <div class="body-form row">
         <div class="mb-3 row">
-          <label for="name" class="col-sm-2 ">Nome:</label>
+          <label for="name" class="col-sm-2 mb-1">Nome:</label>
           <div class="col-sm-10">
             <input type="name" class="form-control" id="name" formControlName="name">
           </div>
         </div>
 
         <div class="mb-3 row">
-          <label for="email" class="col-sm-2 ">E-mail:</label>
+          <label for="email" class="col-sm-2 mb-1">E-mail:</label>
           <div class="col-sm-10">
-            <input type="email" class="form-control" id="email" placeholder="example@example.com" formControlName="email">
+            <input type="email" class="form-control" id="email" placeholder="exemplo@gmail.com" formControlName="email">
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <label for="cellphone" class="col-sm-2 mb-1">Celular ( WhatsApp ):</label>
+          <div class="col-sm-10">
+            <input type="tel" class="form-control" id="cellphone" maxlength="11" formControlName="cellphone">
           </div>
         </div>
 
         <div class="row">
-          <label for="password" class="col-sm-2 ">Senha:</label>
+          <label for="password" class="col-sm-2 mb-1">Senha:</label>
           <div class="col-sm-10">
             <input type="password" class="form-control" id="password" formControlName="password">
           </div>
@@ -38,28 +45,28 @@
     <form [formGroup]="registerAddress" [hidden]="!this.formIsAdvance">
       <div class="address-form row">
         <div class="mb-3 row">
-          <label for="cep" class="col-sm-2 ">Cep:</label>
+          <label for="cep" class="col-sm-2 mb-1">Cep:</label>
           <div class="col-sm-10">
             <input type="number" class="form-control" id="cep" formControlName="cep">
           </div>
         </div>
 
         <div class="mb-3 row">
-          <label for="neighborhood" class="col-sm-2 ">Bairro:</label>
+          <label for="neighborhood" class="col-sm-2 mb-1">Bairro:</label>
           <div class="col-sm-10">
             <input type="text" class="form-control" id="neighborhood" formControlName="neighborhood">
           </div>
         </div>
 
         <div class="mb-3 row">
-          <label for="street" class="col-sm-2 ">Rua:</label>
+          <label for="street" class="col-sm-2 mb-1">Rua:</label>
           <div class="col-sm-10">
             <input type="text" class="form-control" id="street" formControlName="street">
           </div>
         </div>
 
         <div class="row">
-          <label for="houseNumber" class="col-sm-2 ">Número:</label>
+          <label for="houseNumber" class="col-sm-2 mb-1">Número:</label>
           <div class="col-sm-10">
             <input type="number" class="form-control" id="houseNumber" formControlName="houseNumber">
           </div>
@@ -67,7 +74,7 @@
       </div>
     </form>
 
-    <div class="arrows mt-4 mb-4">
+    <div class="arrows my-4">
       <div class="row">
         <div class="col-6 form-return">
           <button class="buttons-arrows" type="button" (click)="formAdvance()" [disabled]="!this.formIsAdvance">

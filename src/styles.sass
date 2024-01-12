@@ -3,11 +3,21 @@
 /* Importing Bootstrap SCSS file. */
 // @import 'bootstrap/scss/bootstrap'
 @use './assets/sass/mobile'
-@import 'assets/sass/colors'
+@use 'assets/sass/colors'
 
 *
   font-family: Arial, Helvetica, sans-serif !important
 
-.titles
-  font-weight: 600
-  font-size: 155px
+#pageTitle
+  padding: 2vh 0px 5vh 5vw
+  background-color: colors.$black
+
+  @include mobile.display
+    padding: 2vh 0px 3vh 3vw
+
+  .titles
+    font-weight: 600
+    font-size: 35px
+    color: colors.$white
+
+
