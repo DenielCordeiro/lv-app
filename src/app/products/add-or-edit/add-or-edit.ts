@@ -1,22 +1,22 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ProductModel } from 'src/app/models/product.model';
 import { ProductsService } from 'src/app/services/products/products.service';
 
 @Component({
-  selector: 'app-add',
-  templateUrl: './add.component.html',
-  styleUrls: ['./add.component.sass']
+  selector: 'app-add-or-edit',
+  templateUrl: './add-or-edit.component.html',
+  styleUrls: ['./add-or-edit.component.sass']
 })
-export class AddComponent {
+export class AddOrEditComponent {
   form!: FormGroup;
   newOrOldCollection: string = "Nova";
   newOrOldCategory: string = "Nova";
 
+
   constructor(
     @Inject(MAT_DIALOG_DATA)
-    public dialogRef: MatDialogRef<AddComponent>,
+    public dialogRef: MatDialogRef<AddOrEditComponent>,
     private formBuilder: FormBuilder,
     public productService: ProductsService
   ) {}
@@ -37,8 +37,8 @@ export class AddComponent {
     }
   }
 
-  creatingProduct(): void {
-    let product: ProductModel =  Object.assign(new ProductModel(), this.form.value);
+  addProduct(): void {
+    // let product: ProductModel =  Object.assign(new ProductModel(), this.form.value);
 
     // this.productService.createProduct(product)
     //   .then(() => {
@@ -50,5 +50,11 @@ export class AddComponent {
     //   .finally(() => {
     //     console.log('finalizou');
     //   })
+
+    console.log("function add product");
+  }
+
+  closeModal(): void {
+    this.dialogRef.close(true);
   }
 }

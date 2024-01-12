@@ -10,7 +10,6 @@ import { NgxWebstorageModule } from "ngx-webstorage";
 
 import { MatDialogModule } from '@angular/material/dialog';
 
-
 import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './services/login/auth.service';
 import { AuthGuard } from './guards/auth-guards';
@@ -25,8 +24,9 @@ import { RegisterComponent } from './newsletter/header-newsletter/register/regis
 
 import { ProductsComponent } from './products/products.component';
 import { ProductComponent } from './product/product.component';
+import { AddOrEditComponent } from './products/add-or-edit/add-or-edit';
 import { BuyComponent } from './product/buy/buy.component';
-import { AboutComponent } from './about/about.component';
+import { DeleteComponent } from './products/delete/delete.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { VerticalChartComponent } from './dashboard/charts/vertical-chart/vertical-chart.component';
@@ -35,9 +35,9 @@ import { NewsComponent } from './newsletter/news/news.component';
 import { CarouselComponent } from './newsletter/carousel/carousel.component';
 import { CollectionsComponent } from './newsletter/collections/collections.component';
 import { BodyNewsletterComponent } from './newsletter/body-newsletter/body-newsletter.component';
-import { AddComponent } from './products/add/add.component';
-import { UpdateComponent } from './products/update/update.component';
-import { DeleteComponent } from './products/delete/delete.component';
+
+import { AboutComponent } from './about/about.component';
+
 
 
 @NgModule({
@@ -59,8 +59,7 @@ import { DeleteComponent } from './products/delete/delete.component';
     CarouselComponent,
     CollectionsComponent,
     BodyNewsletterComponent,
-    AddComponent,
-    UpdateComponent,
+    AddOrEditComponent,
     DeleteComponent
   ],
   imports: [

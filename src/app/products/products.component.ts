@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductsService } from '../services/products/products.service';
 import { ProductModel } from '../models/product.model';
-import { AddComponent } from './add/add.component';
-import { UpdateComponent } from './update/update.component';
+import { AddOrEditComponent } from './add-or-edit/add-or-edit';
 
 @Component({
   selector: 'app-products',
@@ -21,7 +20,7 @@ export class ProductsComponent {
       "id": 1,
       "name": "",
       "description": "test",
-      "valor": 25.5,
+      "valor": 15.5,
       "type": "colar",
       "group": "Fim de ano"
     },
@@ -29,23 +28,23 @@ export class ProductsComponent {
       "id": 2,
       "name": "Pulseira Signo Câncer",
       "description": "test",
-      "valor": 53.5,
+      "valor": 23.5,
       "type": "Pulseiras",
       "group": "Zodiaco"
     },
     {
-      "id": 2,
+      "id": 3,
       "name": "Pulseira Signo Câncer",
       "description": "test",
-      "valor": 53.5,
+      "valor": 30.5,
       "type": "Pulseiras",
       "group": "Zodiaco"
     },
     {
-      "id": 2,
+      "id": 4,
       "name": "Pulseira Signo Câncer",
       "description": "test",
-      "valor": 53.5,
+      "valor": 43.5,
       "type": "Pulseiras",
       "group": "Zodiaco"
     },
@@ -59,7 +58,6 @@ export class ProductsComponent {
 
   getingProducts() {
     this.productsService.getProducts();
-    // this.items = this.productsService.getProducts();
   }
 
   productSelected(id: number | undefined, event: Event) {
@@ -78,26 +76,17 @@ export class ProductsComponent {
   }
 
   modalCreate() {
-    this.dialog.open<AddComponent>(AddComponent, {
-      width: '70%'
+    this.dialog.open<AddOrEditComponent>(AddOrEditComponent, {
+      width: '70%',
     });
-  }
-
-  modalUpdate(id: string | number | null) {
-    if (id !== null) {
-      this.dialog.open<UpdateComponent, number | string>(UpdateComponent, {
-        width: '70%',
-        data: id
-      });
-    }
   }
 
   modalDelete(id: string | number | null) {
     if (id !== null) {
-      this.dialog.open<UpdateComponent, number | string>(UpdateComponent, {
-        width: '70%',
-        data: id
-      });
+      // this.dialog.open<id, number | string>(id, {
+      //   width: '70%',
+      //   data: id
+      // });
     }
   }
 

@@ -1,5 +1,17 @@
 <section id="form">
   <div class="container">
+    <div class="content-header">
+      <div class="row">
+        <div class="title col-11">
+          <span>titulo</span>
+        </div>
+
+        <div mat-dialog-actions class="close-window col-1">
+          <button mat-button (click)="closeModal()">X</button>
+        </div>
+      </div>
+    </div>
+
     <form class="row" [formGroup]="form">
       <div class="col-6 my-2">
         <label for="productName" class="form-label">Nome:</label>
@@ -45,7 +57,9 @@
         </select>
       </div>
 
-
+      <div class="button-add" >
+        <button class="btn btn-primary" (click)="addProduct()">adicionar produto</button>
+      </div>
 
     </form>
   </div>

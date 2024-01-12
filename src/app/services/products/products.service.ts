@@ -14,4 +14,4 @@ export class ProductsService extends BaseService<ProductModel> {
   ) {
     super(httpClient, localStorageService, '/products');
   }
-}
+};
