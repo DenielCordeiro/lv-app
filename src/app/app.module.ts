@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import * as d3 from 'd3';
+import { NgxWebstorageModule } from "ngx-webstorage";
+
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './services/login/auth.service';
@@ -20,8 +24,9 @@ import { RegisterComponent } from './newsletter/header-newsletter/register/regis
 
 import { ProductsComponent } from './products/products.component';
 import { ProductComponent } from './product/product.component';
+import { AddOrEditComponent } from './products/add-or-edit/add-or-edit';
 import { BuyComponent } from './product/buy/buy.component';
-import { AboutComponent } from './about/about.component';
+import { DeleteComponent } from './products/delete/delete.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { VerticalChartComponent } from './dashboard/charts/vertical-chart/vertical-chart.component';
@@ -30,6 +35,10 @@ import { NewsComponent } from './newsletter/news/news.component';
 import { CarouselComponent } from './newsletter/carousel/carousel.component';
 import { CollectionsComponent } from './newsletter/collections/collections.component';
 import { BodyNewsletterComponent } from './newsletter/body-newsletter/body-newsletter.component';
+
+import { AboutComponent } from './about/about.component';
+
+
 
 @NgModule({
   declarations: [
@@ -49,16 +58,21 @@ import { BodyNewsletterComponent } from './newsletter/body-newsletter/body-newsl
     NewsComponent,
     CarouselComponent,
     CollectionsComponent,
-    BodyNewsletterComponent
+    BodyNewsletterComponent,
+    AddOrEditComponent,
+    DeleteComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
     NgbModule,
     NgxChartsModule,
+    MatDialogModule,
+    NgxWebstorageModule.forRoot(),
   ],
   providers: [
     AuthService,

@@ -8,10 +8,15 @@
     display: none
 
   .menu
-    margin-bottom: 7vh
+    height: 12vh
+    background-color: colors.$black
 
   .button-filter-desktop, .filters-buttons
     padding-left: 4.7%
+
+  .button-add
+    padding-right: 5vw
+    text-align: end
 
 #side-menu
   display: none
@@ -33,6 +38,7 @@
 
 .container
   max-width: 100%
+  background-color: colors.$black
 
   .products
     justify-content: center
@@ -45,25 +51,39 @@
 
       @include mobile.display
         width: 47vw
-        // width: 80vw
 
       .card
         min-height: 50vh
+        background-color: colors.$white
 
         @include mobile.display
           margin-top: 1vh
           min-height: 40vh
-          // min-height: 65vh
+
+      .icon
+        color: colors.$white
+        font-size: 33px
+
+      .icon-selected
+        color: colors.$pourple
 
       img
         height: 40vh
 
         @include mobile.display
           height: 20vh
-          // height: 40vh
 
-      input
-        display: inline
+      .change-product
+        padding: 0px 1vw
+
+        .select-product
+          text-align: start
+
+        .update-product
+          text-align: center
+
+        .delete-product
+          text-align: end
 
         @include mobile.display
           display: none

@@ -1,0 +1,70 @@
+@use '../../assets/sass/mobile'
+@use '../../assets/sass/colors'
+
+*
+  margin: 0
+  padding: 0
+
+#product
+  background-color: colors.$black
+  width: 100%
+  min-height: 100%
+  padding: 4vh 0px 4vh 0px
+
+.content
+  background-color: colors.$white
+  border: 1px solid colors.$white
+  margin: 0px 2vw 0px 2vw
+  padding: 8px
+  border-radius: 10px
+
+.icons-edit-or-delete
+  font-size: 22px
+  background-color: colors.$white
+  color: colors.$black
+  display: flex
+  justify-content: end
+
+  .bi-pencil-fill
+    margin-right: 5vw
+
+  i
+    margin: 2vh 2vw 0px 0px
+    cursor: pointer
+    position: absolute
+
+    &:hover
+      color: colors.$pourple
+
+.product-card
+  background-color: colors.$white
+
+.freight
+  color: colors.$black
+
+.return
+  width: 100%
+  display: flex
+  justify-content: end
+  font-size: 20px
+  color: colors.$black
+
+  .button-return
+    cursor: pointer
+
+    i
+      font-size: 28px
+      margin: 0px 1.5vw 0px 1vw
+
+    .bi-arrow-return-left
+      display: none
+
+    &:hover
+      color: colors.$pourple
+
+      .bi-arrow-return-left
+        display: inline
+
+      .bi-arrow-left
+        display: none
+

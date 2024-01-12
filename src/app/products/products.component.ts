@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ProductsService } from '../services/products/products.service';
 import { ProductModel } from '../models/product.model';
+import { AddOrEditComponent } from './add-or-edit/add-or-edit';
 
 @Component({
   selector: 'app-products',
@@ -8,7 +10,7 @@ import { ProductModel } from '../models/product.model';
   styleUrls: ['./products.component.sass']
 })
 export class ProductsComponent {
-  productChecked: boolean = false;
+  modalOpen: boolean = false;
   productId: number | undefined;
   title: string = 'Trabalhos disponíveis';
 
@@ -17,95 +19,62 @@ export class ProductsComponent {
       "id": 1,
       "name": "",
       "description": "test",
-      "valor": 25.5,
+      "valor": 15.5,
       "type": "colar",
-      "group": "Fim de ano"
+      "group": "Fim de ano",
+      "selection": false
     },
     {
       "id": 2,
       "name": "Pulseira Signo Câncer",
       "description": "test",
-      "valor": 53.5,
+      "valor": 23.5,
       "type": "Pulseiras",
-      "group": "Zodiaco"
+      "group": "Zodiaco",
+      "selection": false
     },
     {
-      "id": 2,
+      "id": 3,
       "name": "Pulseira Signo Câncer",
       "description": "test",
-      "valor": 53.5,
+      "valor": 30.5,
       "type": "Pulseiras",
-      "group": "Zodiaco"
+      "group": "Zodiaco",
+      "selection": true
     },
     {
-      "id": 2,
+      "id": 4,
       "name": "Pulseira Signo Câncer",
       "description": "test",
-      "valor": 53.5,
+      "valor": 43.5,
       "type": "Pulseiras",
-      "group": "Zodiaco"
+      "group": "Zodiaco",
+      "selection": true
     },
   ];
 
-  constructor(public productsService: ProductsService) {
+  constructor(
+    public productsService: ProductsService,
+    public dialog: MatDialog,) {
     this.getingProducts();
   }
 
   getingProducts() {
     this.productsService.getProducts();
-    // this.items = this.productsService.getProducts();
-  }
-
-  productSelected(id: number | undefined, event: Event) {
-    var eventChecked: any = event;
-
-    if (eventChecked.target?.checked === true) {
-      this.productChecked = true;
-      this.productId = id;
-    } else {
-      this.productChecked = false;
-      this.productId = undefined;
-    }
-
-    console.log("id do produto: ", this.productId);
-    console.log("está selecionado? ", this.productChecked);
   }
 
   modalCreate() {
-    console.log("abrir modal de criação");
+    this.dialog.open<AddOrEditComponent>(AddOrEditComponent, {
+      width: '70%',
+    });
   }
 
-  modalUpdate(id: number | undefined) {
-    if (id !== undefined) {
-      const data = this.productsService.getProduct(id);
-    } else {
-      alert("[Erro]: você não selecionou o produto");
-    }
-  }
-
-  /* functions of send for modals
-  async creatingProduct(product: ProductModel) {
-    try {
-      await this.productsService.createProduct(product);
-    } catch {
-      console.log("error");
-    }
-  }
-
-  async updatingProduct(id: number, product: ProductModel) {
-    try {
-      await this.productsService.updateProduct(id, product);
-    } catch {
-      console.log("error");
-    }
-  }
-  */
-
-  deletingProduct(id: number | undefined) {
-    if (id !== undefined) {
-      const data = this.productsService.deleteProduct(id);
-    } else {
-      alert("[Erro]: você não selecionou o produto");
+  modalDelete(id: string | number | null) {
+    if (id !== null) {
+      // this.dialog.open<id, number | string>(id, {
+      //   width: '70%',
+      //   data: id
+      // });
     }
   }
 
@@ -113,5 +82,7 @@ export class ProductsComponent {
     this.title = newTitle;
   }
 
-  filterValor(): void {}
+  changeProductSelection(): void {
+    console.log("function change product selection");
+  }
 }
