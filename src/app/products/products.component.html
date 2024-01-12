@@ -70,8 +70,8 @@
 
         <div class="row change-product">
           <div class="col select-product">
-            <i class="bi bi-toggle-off icon"></i>
-            <i class="bi bi-toggle-on icon"></i>
+            <i class="bi bi-toggle-off icon" (click)="changeProductSelection()" *ngIf="item.selection == false"></i>
+            <i class="bi bi-toggle-on icon icon-selected" (click)="changeProductSelection()" *ngIf="item.selection == true"></i>
           </div>
           <div class="col update-product">
             <div>Editar</div>

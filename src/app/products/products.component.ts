@@ -10,7 +10,6 @@ import { AddOrEditComponent } from './add-or-edit/add-or-edit';
   styleUrls: ['./products.component.sass']
 })
 export class ProductsComponent {
-  productChecked: boolean = false;
   modalOpen: boolean = false;
   productId: number | undefined;
   title: string = 'Trabalhos disponíveis';
@@ -22,7 +21,8 @@ export class ProductsComponent {
       "description": "test",
       "valor": 15.5,
       "type": "colar",
-      "group": "Fim de ano"
+      "group": "Fim de ano",
+      "selection": false
     },
     {
       "id": 2,
@@ -30,7 +30,8 @@ export class ProductsComponent {
       "description": "test",
       "valor": 23.5,
       "type": "Pulseiras",
-      "group": "Zodiaco"
+      "group": "Zodiaco",
+      "selection": false
     },
     {
       "id": 3,
@@ -38,7 +39,8 @@ export class ProductsComponent {
       "description": "test",
       "valor": 30.5,
       "type": "Pulseiras",
-      "group": "Zodiaco"
+      "group": "Zodiaco",
+      "selection": true
     },
     {
       "id": 4,
@@ -46,7 +48,8 @@ export class ProductsComponent {
       "description": "test",
       "valor": 43.5,
       "type": "Pulseiras",
-      "group": "Zodiaco"
+      "group": "Zodiaco",
+      "selection": true
     },
   ];
 
@@ -58,21 +61,6 @@ export class ProductsComponent {
 
   getingProducts() {
     this.productsService.getProducts();
-  }
-
-  productSelected(id: number | undefined, event: Event) {
-    var eventChecked: any = event;
-
-    if (eventChecked.target?.checked === true) {
-      this.productChecked = true;
-      this.productId = id;
-    } else {
-      this.productChecked = false;
-      this.productId = undefined;
-    }
-
-    console.log("id do produto: ", this.productId);
-    console.log("está selecionado? ", this.productChecked);
   }
 
   modalCreate() {
@@ -94,6 +82,7 @@ export class ProductsComponent {
     this.title = newTitle;
   }
 
-  filterValor(): void {}
-
+  changeProductSelection(): void {
+    console.log("function change product selection");
+  }
 }
