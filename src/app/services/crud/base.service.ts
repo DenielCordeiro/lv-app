@@ -26,7 +26,7 @@ export abstract class BaseService<T extends BaseModel> {
 
   public buildHeader(): HttpHeaders {
     let headers = new HttpHeaders({
-      'refresh': environment.refresh
+      'token': environment.token
     })
 
     return headers;
@@ -63,7 +63,7 @@ export abstract class BaseService<T extends BaseModel> {
   }
 
   public handleResponse(response: LvApi<T>) {
-    if(response.success) {
+    if(response) {
       return response.data;
     } else {
       throw new Error("Api 200, mas success falso");

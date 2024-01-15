@@ -13,54 +13,34 @@ export class ProductsComponent {
   modalOpen: boolean = false;
   productId: number | undefined;
   title: string = 'Trabalhos disponíveis';
-
-  items: ProductModel[] = [
-    {
-      "id": 1,
-      "name": "",
-      "description": "test",
-      "valor": 15.5,
-      "type": "colar",
-      "group": "Fim de ano",
-      "selection": false
-    },
-    {
-      "id": 2,
-      "name": "Pulseira Signo Câncer",
-      "description": "test",
-      "valor": 23.5,
-      "type": "Pulseiras",
-      "group": "Zodiaco",
-      "selection": false
-    },
-    {
-      "id": 3,
-      "name": "Pulseira Signo Câncer",
-      "description": "test",
-      "valor": 30.5,
-      "type": "Pulseiras",
-      "group": "Zodiaco",
-      "selection": true
-    },
-    {
-      "id": 4,
-      "name": "Pulseira Signo Câncer",
-      "description": "test",
-      "valor": 43.5,
-      "type": "Pulseiras",
-      "group": "Zodiaco",
-      "selection": true
-    },
-  ];
+  products: ProductModel[] = [];
+  product: any;
 
   constructor(
     public productsService: ProductsService,
-    public dialog: MatDialog,) {
+    public dialog: MatDialog,
+  ) {
     this.getingProducts();
   }
 
   getingProducts() {
-    this.productsService.getProducts();
+    this.productsService.getProducts()
+    .then(allProducts => {
+      if(allProducts == null || undefined) {
+        alert("[Atenção]: Não existe nenhum produto a venda!")
+      } else {
+        this.products.push(allProducts);
+
+        console.log(this.products[0]);
+
+        this.product = this.products[0];
+
+      }
+    })
+    .catch(Error => {
+      alert('ERRO: não conseguiu trazer os produtos');
+      console.log(Error);
+    })
   }
 
   modalCreate() {
