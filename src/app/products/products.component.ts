@@ -30,11 +30,9 @@ export class ProductsComponent {
         alert("[Atenção]: Não existe nenhum produto a venda!")
       } else {
         this.products.push(allProducts);
-
-        console.log(this.products[0]);
-
         this.product = this.products[0];
 
+        console.log(this.products[0]);
       }
     })
     .catch(Error => {

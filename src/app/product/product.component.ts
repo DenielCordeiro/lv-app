@@ -12,7 +12,8 @@ import { ProductModel } from '../models/product.model';
 export class ProductComponent implements OnInit {
   form!: FormGroup;
   routeId: number | undefined = undefined;
-  items!: ProductModel;
+  products: ProductModel[] = [];
+  product!: ProductModel;
 
   constructor(
     public route: ActivatedRoute,
@@ -30,8 +31,21 @@ export class ProductComponent implements OnInit {
   }
 
   getProductSelected(id: number) {
-    // this.productsService.getProduct(id);
-    // this.items = this.productsService.getProducts(id);
+    this.productsService.getProduct(id)
+      .then(data => {
+        if(data == null || undefined) {
+          alert("[Atenção]: Não existe nenhum produto a venda!")
+        } else {
+          this.products.push(data);
+          this.product = this.products[0];
+
+          console.log(this.products[0]);
+        }
+      })
+      .catch(Error => {
+        alert('ERRO: não conseguiu trazer os produtos');
+        console.log(Error);
+      })
   }
 
   updateModal() {}
