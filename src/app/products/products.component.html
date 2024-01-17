@@ -13,7 +13,7 @@
         </div>
 
         <div class="col-6 button-add">
-          <button (click)="modalCreate()">Adicionar</button>
+          <button (click)="modalCreate(null)">Adicionar</button>
         </div>
       </div>
     </div>
@@ -68,17 +68,12 @@
     <div class="row products">
       <div class="col-6 mb-3 product" *ngFor="let item of product">
 
-        <div class="row change-product">
-          <!-- <div class="col select-product">
-            <i class="bi bi-toggle-off icon" (click)="changeProductSelection()" *ngIf="item.selection == false"></i>
-            <i class="bi bi-toggle-on icon icon-selected" (click)="changeProductSelection()" *ngIf="item.selection == true"></i>
-          </div> -->
+        <div class="row change-product my-2">
           <div class="col update-product">
-            <div>Editar</div>
+            <div (click)="modalCreate(item._id)">Editar</div>
           </div>
           <div class="col delete-product">Excluir</div>
         </div>
-
 
         <a routerLink="/product/{{ item._id }}">
           <div class="card">

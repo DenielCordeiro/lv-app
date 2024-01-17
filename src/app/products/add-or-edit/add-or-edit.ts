@@ -13,28 +13,17 @@ export class AddOrEditComponent {
   newOrOldCollection: string = "Nova";
   newOrOldCategory: string = "Nova";
 
-
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public dialogRef: MatDialogRef<AddOrEditComponent>,
     private formBuilder: FormBuilder,
     public productService: ProductsService
-  ) {}
-
-  changeCollectionSelect(): void {
-    if (this.newOrOldCollection == "Nova") {
-      this.newOrOldCollection = "Existente";
-    } else {
-      this.newOrOldCollection = "Nova"
-    }
+  ) {
+    console.log("dados do dialog: ", dialogRef);
   }
 
-  changeCategorySelect(): void {
-    if (this.newOrOldCategory == "Nova") {
-      this.newOrOldCategory = "Existente";
-    } else {
-      this.newOrOldCategory = "Nova"
-    }
+  buildingForm(): void {
+    console.log('construindo formulário')
   }
 
   addProduct(): void {
@@ -52,6 +41,22 @@ export class AddOrEditComponent {
     //   })
 
     console.log("function add product");
+  }
+
+  changeCollectionSelect(): string {
+    if (this.newOrOldCollection == "Nova") {
+      return this.newOrOldCollection = "Existente";
+    } else {
+      return this.newOrOldCollection = "Nova"
+    }
+  }
+
+  changeCategorySelect(): string {
+    if (this.newOrOldCategory == "Nova") {
+      return this.newOrOldCategory = "Existente";
+    } else {
+      return this.newOrOldCategory = "Nova"
+    }
   }
 
   closeModal(): void {

@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ProductsService } from '../services/products/products.service';
 import { ProductModel } from '../models/product.model';
 import { AddOrEditComponent } from './add-or-edit/add-or-edit';
+import { DeleteComponent } from './delete/delete.component';
 
 @Component({
   selector: 'app-products',
@@ -41,26 +42,32 @@ export class ProductsComponent {
     })
   }
 
-  modalCreate() {
-    this.dialog.open<AddOrEditComponent>(AddOrEditComponent, {
-      width: '70%',
-    });
+  modalCreate(id: number | null) {
+    if(id !== null) {
+      this.productsService.getProduct(id)
+      .then(product => {
+          this.dialog.open<AddOrEditComponent>(AddOrEditComponent, {
+            width: '70%',
+            data: product
+          });
+      });
+    } else {
+      this.dialog.open<AddOrEditComponent>(AddOrEditComponent, {
+        width: '70%',
+      });
+    }
   }
 
   modalDelete(id: string | number | null) {
     if (id !== null) {
-      // this.dialog.open<id, number | string>(id, {
-      //   width: '70%',
-      //   data: id
-      // });
+      this.dialog.open<DeleteComponent>(DeleteComponent, {
+        width: '70%',
+        data: id
+      });
     }
   }
 
   filter(newTitle: string): void {
     this.title = newTitle;
-  }
-
-  changeProductSelection(): void {
-    console.log("function change product selection");
   }
 }
