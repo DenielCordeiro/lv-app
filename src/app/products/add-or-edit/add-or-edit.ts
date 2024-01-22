@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ProductsService } from 'src/app/services/products/products.service';
 import { ProductModel } from 'src/app/models/product.model';
 
@@ -19,6 +19,7 @@ export class AddOrEditComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public dialogRef: MatDialogRef<AddOrEditComponent>,
+    public dialog: MatDialog,
     private formBuilder: FormBuilder,
     public productService: ProductsService
   ) {}
@@ -43,22 +44,18 @@ export class AddOrEditComponent implements OnInit {
   }
 
   addProduct(): void {
-    console.log(this.form);
+    let product: ProductModel = Object.assign(new ProductModel(), this.form.value);
 
-    // let product: ProductModel = Object.assign(new ProductModel(), this.form.value);
-
-    // this.productService.createProduct(product)
-    //   .then(() => {
-    //     this.dialogRef.close(true);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   })
-    //   .finally(() => {
-    //     console.log('finalizou');
-    //   })
-
-    // console.log("function add product", product);
+    this.productService.createProduct(product)
+      .then(() => {
+        this.dialog.closeAll();
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        console.log('finalizou');
+      })
   }
 
   changeCollectionSelect(): string {
@@ -77,7 +74,7 @@ export class AddOrEditComponent implements OnInit {
     }
   }
 
-   closeModal(): void {
-    this.dialogRef.close();;
+  closeModal(): void {
+    this.dialog.closeAll();
   }
 }

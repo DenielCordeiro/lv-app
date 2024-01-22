@@ -38,8 +38,6 @@ export class ProductComponent implements OnInit {
         } else {
           this.products.push(data);
           this.product = this.products[0];
-
-          console.log(this.products[0]);
         }
       })
       .catch(Error => {

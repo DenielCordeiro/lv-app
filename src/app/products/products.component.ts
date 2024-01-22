@@ -32,8 +32,6 @@ export class ProductsComponent {
       } else {
         this.products.push(allProducts);
         this.product = this.products[0];
-
-        console.log(this.products[0]);
       }
     })
     .catch(Error => {
