@@ -6,9 +6,9 @@ export class UserModel {
     public email: string,
     public cellphone: string,
     public password: string,
-    public address: string,
-    public products: {
-      product_id: number
-    }
+    public postalCode: string,
+    public street: string,
+    public neighborhood: string,
+    public houseNumber: number,
   ) {}
 }
