@@ -1,4 +1,4 @@
-<section id="product">
+<section id="product" *ngFor="let item of products">
   <div class="content">
     <div class="icons-edit-or-delete">
       <i class="bi bi-pencil-fill" (click)="updateModal()"></i>
@@ -7,9 +7,9 @@
 
     <div class="product-card">
       <div class="titles">
-        <h1>Pulseira AZUL</h1>
-        <h2>detalhes sobre</h2>
-        <h3>Bem-Vindo á Coleção de Inverno</h3>
+        <h1>{{ item.name }}</h1>
+        <h2>{{ item.description }}</h2>
+        <h3>{{ item.groups }}</h3>
       </div>
 
       <div class="carousel">
@@ -17,14 +17,15 @@
       </div>
 
       <div class="valor">
-        R$ 89,99
+        R$ {{ item.valor }}
       </div>
     </div>
 
-    <form [formGroup]="form">
+    <form>
       <div class="freight my-2">
         <h4> <strong>Calcular Frete</strong> </h4>
-        <label>Digite o CEP:</label> <input type="text" class="mx-2">
+        <label>Digite o CEP:</label>
+        <input type="text" class="mx-2">
         <span><i class="bi bi-airplane-engines"></i></span>
       </div>
     </form>

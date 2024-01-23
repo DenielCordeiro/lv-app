@@ -32,6 +32,15 @@ export abstract class BaseService<T extends BaseModel> {
     return headers;
   }
 
+  public getProduct(id: number): Promise<T>{
+    let header = this.buildHeader();
+
+    return lastValueFrom(this.http.get<LvApi<T>>(`${this.route}/${id}`, { headers: header }))
+      .then(result => {
+        return this.handleResponse(result) as T;
+      });
+  }
+
   public getProducts(): Promise<T>{
     let header = this.buildHeader();
 

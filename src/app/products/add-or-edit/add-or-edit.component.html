@@ -14,33 +14,29 @@
 
     <form class="row" [formGroup]="form">
       <div class="col-6 my-2">
-        <label for="productName" class="form-label">Nome:</label>
-        <input type="text" class="form-control" id="productName">
+        <label for="name" class="form-label">Nome:</label>
+        <input type="text" formControlName="name" class="form-control" id="name">
       </div>
 
       <div class="col-6 my-2">
-        <label for="productDescription" class="form-label">Descrição:</label>
-        <input type="text" class="form-control" id="productDescription">
+        <label for="description" class="form-label">Descrição:</label>
+        <input type="text" formControlName="description" class="form-control" id="description">
       </div>
 
       <div class="col-4 my-2">
-        <label for="productValor" class="form-label">Valor:</label>
-        <input type="number" class="form-control" id="productValor">
+        <label for="valor" class="form-label">Valor:</label>
+        <input type="number" formControlName="valor" class="form-control" id="valor">
       </div>
 
       <div class="col-4 my-2">
-        <label for="productCategory" class="form-label">Categorias:</label>
+        <label for="type" class="form-label">Categorias:</label>
 
         <button class="button-change-select" (click)="changeCategorySelect()">{{ newOrOldCategory }}</button>
 
-        <input type="text" *ngIf="newOrOldCategory == 'Existente'" class="form-control" id="productCategory">
-        <select  id="productCategory" *ngIf="newOrOldCategory == 'Nova'" class="form-select" aria-label="Default select example">
-          <option selected>Colares</option>
-          <option value="1">Pulseiras</option>
-          <option value="2">Gargantilhas</option>
-          <option value="3">Braceletes</option>
-          <option value="3">Aneis</option>
-        </select>
+        <input type="text" *ngIf="newOrOldCategory == 'Existente'" formControlName="type" class="form-control" id="type">
+        <mat-select formControlName="type" *ngIf="newOrOldCategory == 'Nova'">
+          <mat-option *ngFor="let type of categories" [value]="type">{{ type }}</mat-option>
+        </mat-select>
       </div>
 
       <div class="col-4 my-2">
@@ -48,13 +44,15 @@
 
         <button class="button-change-select" (click)="changeCollectionSelect()">{{ newOrOldCollection }}</button>
 
-        <input type="text" *ngIf="newOrOldCollection == 'Existente'" class="form-control" id="productCollection">
-        <select *ngIf="newOrOldCollection == 'Nova'" id="productCollection" class="form-select" aria-label="Default select example">
-          <option selected>Primareva</option>
-          <option value="1">Verão</option>
-          <option value="2">Outono</option>
-          <option value="3">Inverno</option>
-        </select>
+        <input type="text" *ngIf="newOrOldCollection == 'Existente'" formControlName="groups" class="form-control" id="groups">
+        <mat-select formControlName="groups" *ngIf="newOrOldCollection == 'Nova'">
+          <mat-option *ngFor="let group of groups" [value]="group" selected>{{ group }}</mat-option>
+        </mat-select>
+      </div>
+
+      <div class="col-12">
+        <label for="image">Imagem:</label>
+        <input type="file" formControlName="image" class="form-control" id="image">
       </div>
 
       <div class="button-add" >

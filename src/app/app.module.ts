@@ -9,6 +9,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { NgxWebstorageModule } from "ngx-webstorage";
 
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './services/login/auth.service';
@@ -72,6 +73,7 @@ import { AboutComponent } from './about/about.component';
     NgbModule,
     NgxChartsModule,
     MatDialogModule,
+    MatSelectModule,
     NgxWebstorageModule.forRoot(),
   ],
   providers: [

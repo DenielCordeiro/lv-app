@@ -7,7 +7,8 @@ export class ProductModel {
     public description?: string,
     public valor?: number,
     public type?: string,
-    public group?: string,
+    public groups?: string,
+    public image_url?: string,
     public selection?: boolean,
   ) {}
 }
