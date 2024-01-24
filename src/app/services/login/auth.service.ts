@@ -1,7 +1,10 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { lastValueFrom } from "rxjs";
 import { UserModel } from 'src/app/models/user.model';
+import { environment } from "src/environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -10,25 +13,27 @@ export class AuthService {
   public authedUser: boolean = false;
 
   constructor(
+    public http: HttpClient,
     private modalService: NgbModal,
     private router: Router
   ) { }
 
-  authUser(user: UserModel): void {
-    if(user.email === "dcordeiro962@gmail.com" && user.password === "123") {
-      this.authedUser = true;
-      this.router.navigate(["/products"]);
-    } else if (user.email === "camila.luzvioleta@gmail.com" && user.password === "123") {
-      this.authedUser = true;
-      this.router.navigate(["/dashboard"]);
-    } else {
-      this.authedUser = false;
-      alert('E-mail ou Senha está incorreto! [Insira Novamente]');
-    }
+  public buildHeader(): HttpHeaders {
+    let headers = new HttpHeaders({
+      'token': environment.token
+    })
 
-    if(this.authedUser === true) {
-      this.modalService.dismissAll();
-    }
+    return headers;
+  }
+  // let header = this.buildHeader();
+
+  authUser(user: UserModel): Promise<UserModel> {
+    return lastValueFrom(this.http.get<UserModel>(`${environment.api}/session/${user.email}/${user.password}`))
+      .then(result => {
+        console.log(result);
+
+        return result;
+      });
   }
 
   createUser(user: UserModel): void {

@@ -40,7 +40,6 @@ import { BodyNewsletterComponent } from './newsletter/body-newsletter/body-newsl
 import { AboutComponent } from './about/about.component';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,

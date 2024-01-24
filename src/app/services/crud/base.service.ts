@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient} from "@angular/common/http";
 import { LocalStorageService } from "ngx-webstorage";
 import { lastValueFrom } from "rxjs";
 import { BaseModel } from "src/app/models/base-model";
@@ -24,27 +24,15 @@ export abstract class BaseService<T extends BaseModel> {
     this.route = environment.api + route;
   }
 
-  public buildHeader(): HttpHeaders {
-    let headers = new HttpHeaders({
-      'token': environment.token
-    })
-
-    return headers;
-  }
-
   public getProduct(id: number): Promise<T>{
-    let header = this.buildHeader();
-
-    return lastValueFrom(this.http.get<LvApi<T>>(`${this.route}/${id}`, { headers: header }))
+    return lastValueFrom(this.http.get<LvApi<T>>(`${this.route}/${id}`))
       .then(result => {
         return this.handleResponse(result) as T;
       });
   }
 
   public getProducts(): Promise<T>{
-    let header = this.buildHeader();
-
-    return lastValueFrom(this.http.get<LvApi<T>>(this.route, { headers: header }))
+    return lastValueFrom(this.http.get<LvApi<T>>(this.route))
       .then(result => {
         return this.handleResponse(result) as T;
       });

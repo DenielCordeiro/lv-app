@@ -6,6 +6,7 @@ import { RegisterComponent } from './newsletter/header-newsletter/register/regis
 import { ProductsComponent } from './products/products.component';
 import { ProductComponent } from './product/product.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,11 @@ const routes: Routes = [
     component: RegisterComponent,
   },
   {
+    path: "profile/:id",
+    component: UsersComponent,
+    // canActivate: [AuthGuard]
+  },
+  {
     path: "dashboard",
     component: DashboardComponent,
     // canActivate: [AuthGuard]
@@ -33,16 +39,14 @@ const routes: Routes = [
   {
     path: "products",
     component: ProductsComponent,
-    // canActivate: [AuthGuard]
   },
   {
     path: "product/:id",
     component: ProductComponent,
-    // canActivate: [AuthGuard]
   },
   {
     path: '**',
-    redirectTo: '/products'
+    redirectTo: '/newsletter',
   }
 ];
 
