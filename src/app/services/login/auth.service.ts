@@ -27,19 +27,22 @@ export class AuthService {
   }
   // let header = this.buildHeader();
 
-  authUser(user: UserModel): Promise<UserModel> {
+  authUser(user: UserModel, currentPage: string): Promise<UserModel> {
     return lastValueFrom(this.http.get<UserModel>(`${environment.api}/session/${user.email}/${user.password}`))
       .then(result => {
-        console.log(result);
-
+        console.log('login: ', result);
+        this.router.navigateByUrl(`${environment.api}/${currentPage}`);
         return result;
-      });
+      })
   }
 
-  createUser(user: UserModel): void {
-    alert("em teste")
-    //post
-    console.log("usurio sendo passado para o service: ", user);
+  createUser(user: UserModel, currentPage: string): Promise<UserModel> {
+    return lastValueFrom(this.http.post<UserModel>(`${environment.api}/profile`, user))
+      .then(result => {
+        console.log('usuário criado: ', result);
+        this.router.navigateByUrl(`${environment.api}/${currentPage}`);
+        return result;
+      });
   }
 
   authedUserWithSuccess(): boolean {

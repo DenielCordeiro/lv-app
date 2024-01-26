@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/login/auth.service';
 
 @Component({
@@ -9,61 +10,41 @@ import { AuthService } from 'src/app/services/login/auth.service';
 })
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
-  registerAddress!: FormGroup;
   convertedAddress: string | undefined;
   groupInfosAddress: string[] = [];
+  currentPage: string = '';
   formIsAdvance: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private registerService: AuthService,
+    public route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
-    this.buildingAddress();
     this.buildingForm();
-  }
-
-  buildingAddress(): void {
-    this.registerAddress = this.formBuilder.group({
-      "cep": [null, Validators.required],
-      "neighborhood": [null, Validators.required],
-      "street": [null, Validators.required],
-      "houseNumber": [null, Validators.required]
-    });
-  }
-
-  convertingAddress(): string {
-    const cep = String(this.registerAddress.value.cep);
-    const neighborhood = this.registerAddress.value.neighborhood;
-    const street = this.registerAddress.value.street;
-    const houseNumber = String(this.registerAddress.value.houseNumber);
-
-    this.groupInfosAddress.push(cep + ', ' + neighborhood + ', ' + street + ', ' + houseNumber);
-    this.convertedAddress = this.groupInfosAddress.join("");
-
-    return this.convertedAddress;
+    this.currentPage = this.route.snapshot.url.toString();
   }
 
   buildingForm(): void {
     this.registerForm = this.formBuilder.group({
       "name": [null, Validators.required],
       "email": [null, [Validators.required, Validators.email]],
-      "cellphone": [null, Validators.required],
       "password": [null, Validators.required],
-      "address": [null],
+      "cellphone": [null, Validators.required],
+      "postalCode": [null, Validators.required],
+      "neighborhood": [null, Validators.required],
+      "street": [null, Validators.required],
+      "houseNumber": [null, Validators.required],
     });
   }
 
   async makeRegister() {
-    this.registerForm.value.address = this.convertingAddress();
-
     try {
-      if(this.registerForm.valid && this.registerAddress.valid) {
+      if(this.registerForm.valid) {
         await
-          this.registerService.createUser(this.registerForm.value);
+          this.registerService.createUser(this.registerForm.value, this.currentPage);
           this.registerForm.reset();
-          this.registerAddress.reset();
       }
     } catch(error) {
       console.error(error);

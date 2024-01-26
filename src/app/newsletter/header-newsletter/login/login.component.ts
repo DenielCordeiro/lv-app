@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from './../../../services/login/auth.service';
 
@@ -10,12 +11,14 @@ import { AuthService } from './../../../services/login/auth.service';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
+  currentPage: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
     private loginService: AuthService,
-    config: NgbModalConfig,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    public config: NgbModalConfig,
+    public route: ActivatedRoute,
   ) {
     config.backdrop = 'static';
 		config.keyboard = false;
@@ -23,6 +26,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildingForm();
+    this.currentPage = this.route.snapshot.url.toString();
   }
 
   buildingForm(): void {
@@ -36,7 +40,7 @@ export class LoginComponent implements OnInit {
     try{
       if (this.loginForm.valid) {
         await
-          this.loginService.authUser(this.loginForm.value)
+          this.loginService.authUser(this.loginForm.value, this.currentPage)
           this.loginForm.reset();
       }
     } catch (error) {
