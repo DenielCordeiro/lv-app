@@ -29,12 +29,12 @@ const routes: Routes = [
   {
     path: "profile/:id",
     component: UsersComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: "dashboard",
     component: DashboardComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: "products",

@@ -10,5 +10,7 @@ export class UserModel {
     public street: string,
     public neighborhood: string,
     public houseNumber: number,
+    public token: string,
+    public administrator: boolean,
   ) {}
 }

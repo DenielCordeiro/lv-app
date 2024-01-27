@@ -63,7 +63,7 @@ export abstract class BaseService<T extends BaseModel> {
     if(response) {
       return response.data;
     } else {
-      throw new Error("Api 200, mas success falso");
+      throw new Error("Api 200, mas success falso!");
     }
   }
 }

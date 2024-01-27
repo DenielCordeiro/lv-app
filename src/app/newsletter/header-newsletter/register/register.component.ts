@@ -12,7 +12,6 @@ export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   convertedAddress: string | undefined;
   groupInfosAddress: string[] = [];
-  currentPage: string = '';
   formIsAdvance: boolean = false;
 
   constructor(
@@ -23,7 +22,6 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildingForm();
-    this.currentPage = this.route.snapshot.url.toString();
   }
 
   buildingForm(): void {
@@ -43,7 +41,7 @@ export class RegisterComponent implements OnInit {
     try {
       if(this.registerForm.valid) {
         await
-          this.registerService.createUser(this.registerForm.value, this.currentPage);
+          this.registerService.createUser(this.registerForm.value);
           this.registerForm.reset();
       }
     } catch(error) {
