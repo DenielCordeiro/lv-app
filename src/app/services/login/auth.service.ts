@@ -17,9 +17,16 @@ export class AuthService {
   ) { }
 
   public buildHeader(): HttpHeaders {
+    let userToken = localStorage.getItem('session');
+
+    if (userToken !== null) {
+      environment.token = userToken;
+    } else {
+      console.log('não existe token, para salver nas variaveis de ambiente!');
+    }
+
     let headers = new HttpHeaders({
       'token': environment.token,
-      'administator': environment.administrator,
     });
 
     return headers;
@@ -27,11 +34,17 @@ export class AuthService {
 
 
   authUser(user: UserModel): Promise<UserModel> {
+    let administrator;
+    let userId;
+
     return lastValueFrom(this.http.get<UserModel>(`${environment.api}/session/${user.email}/${user.password}`))
       .then(result => {
+        administrator = JSON.stringify(result.administrator);
+        userId = JSON.stringify(result.user_id);
+
         localStorage.setItem('session', result.token);
-        environment.token = result.token;
-        environment.administrator = JSON.stringify(result.administrator);
+        localStorage.setItem('administrator', administrator);
+        localStorage.setItem('user_id', userId);
 
         this.closeModal();
 
@@ -46,8 +59,6 @@ export class AuthService {
   createUser(user: UserModel): Promise<UserModel> {
     return lastValueFrom(this.http.post<UserModel>(`${environment.api}/profile`, user))
       .then(result => {
-        console.log('usuário criado: ', result);
-
         this.closeModal();
 
         return result;
@@ -59,9 +70,6 @@ export class AuthService {
 
     return lastValueFrom(this.http.get<UserModel>(`${environment.api}/profile/${id}`, { headers: header }))
       .then(result => {
-        console.log('Dados do Usuário: ', result);
-
-
         return result;
       })
       .catch( error => {
