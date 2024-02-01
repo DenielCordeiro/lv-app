@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService } from './../../../services/login/auth.service';
+import { AuthService } from '../../services/login/auth.service';
 import { environment } from "src/environments/environment";
 
 @Component({
