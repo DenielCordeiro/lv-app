@@ -2,11 +2,16 @@
 @use '../../../assets/sass/mobile'
 
 .burguer-icon
+  position: fixed
+  right: 20px
+  bottom: 20px
+  z-index: 3
+
   .line
     cursor: pointer
     width: 60px
     height: 15px
-    background-color: colors.$black
+    background-color: colors.$white
     margin: 0px 0px 5px 0px
 
     @include mobile.display
@@ -24,40 +29,52 @@
     transition: all 400ms
 
 .selected
+  .line
+    margin-top: -20px
+    background-color: colors.$black
+
   .line-one
-    position: absolute
     height: 12px
-    // margin-top: 30px
     transform: rotate(40deg)
     transition: all 400ms
 
     @include mobile.display
       height: 6px
 
-
   .line-two
     display: none
 
   .line-three
-    margin-top: 30px
+    position: absolute
+    top: 0vh
     height: 12px
     transform: rotate(-40deg)
     transition: all 400ms
 
     @include mobile.display
-      margin-top: 10px
       height: 6px
 
 .menu
   transition: all 400ms
+  position: fixed
   width: 0px
-  position: absolute
-  top: 0
-  right: 0
+  bottom: 0px
+  right: 0px
   background-color: colors.$white
   border: 0px
 
 .menu-open
+  padding-bottom: 6vh
+  z-index: 2
   transition: all 400ms
   width: 50%
   border: 2px solid colors.$black
+  border-top-left-radius: 4%
+  border-bottom-left-radius: 4%
+
+  @include mobile.display
+    border-top-left-radius: 6%
+    border-bottom-left-radius: 6%
+
+
+

@@ -5,20 +5,22 @@
 </div>
 
 <div class="menu" [ngClass]="this.isSelected == true ? 'menu-open' : ''">
-  <div class="newsletter">Newsletter</div>
 
-  <div class="products">Acessórios
-    <div class="menu-products">
+  <div class="close-menu" *ngIf="this.isSelected == true">
+    <div class="newsletter">Newsletter</div>
+
+    <div class="products" (click)="changeMenuProducts()">Acessórios</div>
+    <div class="menu-products" *ngIf="this.isOpen == true">
       <div class="all-products">Todos</div>
       <div class="colections">Coleções</div>
       <div class="bracelets">Pulseiras</div>
       <div class="necklaces">Colares</div>
       <div class="chockers">Gargantilhas</div>
     </div>
-  </div>
 
-  <div class="profile">Minha Conta</div>
-  <div class="dashboard">Dashboard</div>
-  <div class="login">Entrar</div>
-  <div class="logout">Sair</div>
+    <div class="profile">Minha Conta</div>
+    <div class="dashboard">Dashboard</div>
+    <app-login></app-login>
+    <div class="logout">Sair</div>
+  </div>
 </div>
