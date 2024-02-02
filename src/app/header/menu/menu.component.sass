@@ -1,0 +1,63 @@
+@use '../../../assets/sass/colors'
+@use '../../../assets/sass/mobile'
+
+.burguer-icon
+  .line
+    cursor: pointer
+    width: 60px
+    height: 15px
+    background-color: colors.$black
+    margin: 0px 0px 5px 0px
+
+    @include mobile.display
+      width: 30px
+      height: 8px
+      margin-bottom: 3px
+
+
+  .line-one
+    transform: rotate(0deg)
+    transition: all 400ms
+
+  .line-three
+    transform: rotate(-0deg)
+    transition: all 400ms
+
+.selected
+  .line-one
+    position: absolute
+    height: 12px
+    // margin-top: 30px
+    transform: rotate(40deg)
+    transition: all 400ms
+
+    @include mobile.display
+      height: 6px
+
+
+  .line-two
+    display: none
+
+  .line-three
+    margin-top: 30px
+    height: 12px
+    transform: rotate(-40deg)
+    transition: all 400ms
+
+    @include mobile.display
+      margin-top: 10px
+      height: 6px
+
+.menu
+  transition: all 400ms
+  width: 0px
+  position: absolute
+  top: 0
+  right: 0
+  background-color: colors.$white
+  border: 0px
+
+.menu-open
+  transition: all 400ms
+  width: 50%
+  border: 2px solid colors.$black

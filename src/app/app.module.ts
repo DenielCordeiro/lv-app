@@ -38,6 +38,7 @@ import { BodyNewsletterComponent } from './newsletter/body-newsletter/body-newsl
 import { AboutComponent } from './about/about.component';
 import { LoginComponent } from './header/login/login.component';
 import { HeaderComponent } from './header/header.component';
+import { MenuComponent } from './header/menu/menu.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { HeaderComponent } from './header/header.component';
     CollectionsComponent,
     BodyNewsletterComponent,
     AddOrEditComponent,
-    DeleteComponent
+    DeleteComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,

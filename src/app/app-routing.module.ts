@@ -1,4 +1,4 @@
-import { NgModule, Component } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth-guards';
 import { NewsletterComponent } from './newsletter/newsletter.component';
@@ -7,11 +7,12 @@ import { ProductsComponent } from './products/products.component';
 import { ProductComponent } from './product/product.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UsersComponent } from './users/users.component';
+import { MenuComponent } from './header/menu/menu.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/products',
+    redirectTo: '/newsletter',
     pathMatch: 'full',
   },
   {
@@ -43,6 +44,10 @@ const routes: Routes = [
   {
     path: "product/:id",
     component: ProductComponent,
+  },
+  {
+    path: "menu",
+    component: MenuComponent,
   },
   {
     path: '**',
