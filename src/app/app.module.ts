@@ -39,6 +39,8 @@ import { AboutComponent } from './about/about.component';
 import { LoginComponent } from './header/login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { MenuComponent } from './header/menu/menu.component';
+import { DesktopMenuComponent } from './header/menu/desktop-menu/desktop-menu.component';
+import { MobileMenuComponent } from './header/menu/mobile-menu/mobile-menu.component';
 
 
 @NgModule({
@@ -62,7 +64,9 @@ import { MenuComponent } from './header/menu/menu.component';
     BodyNewsletterComponent,
     AddOrEditComponent,
     DeleteComponent,
-    MenuComponent
+    MenuComponent,
+    DesktopMenuComponent,
+    MobileMenuComponent
   ],
   imports: [
     BrowserModule,

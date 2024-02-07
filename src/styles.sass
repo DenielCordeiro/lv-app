@@ -29,3 +29,15 @@
   &-hover
     background-color: rgba(150, 150, 150, 0.3)
     border-color: colors.$pourple
+
+.desktop
+  display: inline
+
+  @include mobile.display
+    display: none
+
+.mobile
+  display: none
+
+  @include mobile.display
+    display: inline

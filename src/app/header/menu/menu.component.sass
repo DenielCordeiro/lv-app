@@ -2,21 +2,21 @@
 @use '../../../assets/sass/mobile'
 
 .burguer-icon
-  position: fixed
-  right: 20px
-  bottom: 20px
-  z-index: 3
+  height: 5vh
+
+  @include mobile.display
+    padding-top: 0.4vh
 
   .line
     cursor: pointer
-    width: 60px
-    height: 15px
+    width: 50px
+    height: 9px
     background-color: colors.$white
-    margin: 0px 0px 5px 0px
+    margin: 0px 0px 6px 0px
 
     @include mobile.display
-      width: 30px
-      height: 8px
+      width: 35px
+      height: 7px
       margin-bottom: 3px
 
 
@@ -29,12 +29,17 @@
     transition: all 400ms
 
 .selected
+  padding-top: 1.8vh
+
+  @include mobile.display
+    padding-top: 1.8vh
+
   .line
-    margin-top: -20px
-    background-color: colors.$black
+    background-color: colors.$white
 
   .line-one
-    height: 12px
+    position: absolute
+    height: 9px
     transform: rotate(40deg)
     transition: all 400ms
 
@@ -46,8 +51,7 @@
 
   .line-three
     position: absolute
-    top: 0vh
-    height: 12px
+    height: 9px
     transform: rotate(-40deg)
     transition: all 400ms
 
@@ -55,26 +59,34 @@
       height: 6px
 
 .menu
-  transition: all 400ms
   position: fixed
-  width: 0px
-  bottom: 0px
-  right: 0px
   background-color: colors.$white
   border: 0px
+  width: 0px
+  top: 50vh
+  right: 50vw
+
+  @include mobile.display
+    transition: all 400ms
+    width: 0px
+    top: 10vh
+    right: 0px
 
 .menu-open
+  top: 40vh
+  right: 23vw
   padding-bottom: 6vh
   z-index: 2
   transition: all 400ms
   width: 50%
   border: 2px solid colors.$black
-  border-top-left-radius: 4%
-  border-bottom-left-radius: 4%
+  border-radius: 10px
 
   @include mobile.display
+    top: 15vh
+    right: 0px
+    width: 40%
     border-top-left-radius: 6%
     border-bottom-left-radius: 6%
-
-
-
+    border-top-right-radius: 0px
+    border-bottom-right-radius: 0px
