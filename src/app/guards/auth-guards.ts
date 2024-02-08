@@ -21,7 +21,6 @@ export class AuthGuard implements CanActivate {
     if (this.authService.authedUserWithSuccess()) {
       return true;
     } else {
-      this.router.navigate(['/newsletter']);
       return false;
     }
   }

@@ -1,0 +1,22 @@
+<div class="default-button newsletter">Newsletter</div>
+<div class="default-button products" (click)="changeMenuProducts()">Acessórios</div>
+
+<div class="menu-products" *ngIf="this.isOpen == true">
+  <div class="all-products">Todos</div>
+
+  <div class="colections">Coleções</div>
+
+  <div class="bracelets">Pulseiras</div>
+
+  <div class="necklaces">Colares</div>
+
+  <div class="chockers">Gargantilhas</div>
+</div>
+
+<div class="default-button profile">Minha Conta</div>
+
+<div class="default-button dashboard">Dashboard</div>
+
+<app-login></app-login>
+
+<div class="logout">Sair</div>

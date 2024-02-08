@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService } from './../../../services/login/auth.service';
+import { AuthService } from '../../services/login/auth.service';
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: 'app-login',
@@ -14,8 +16,10 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private loginService: AuthService,
-    config: NgbModalConfig,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    public config: NgbModalConfig,
+    public route: ActivatedRoute,
+    private router: Router
   ) {
     config.backdrop = 'static';
 		config.keyboard = false;

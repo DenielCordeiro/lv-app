@@ -1,0 +1,13 @@
+<div class="burguer-icon" [ngClass]="this.isSelected == true ? 'selected' : ''" (click)="changeIconBurguer()">
+  <div class="line line-one"></div>
+  <div class="line line-two"></div>
+  <div class="line line-three"></div>
+</div>
+
+<div class="menu" [ngClass]="this.isSelected == true ? 'menu-open' : ''">
+
+  <div class="close-menu" *ngIf="this.isSelected == true">
+    <app-desktop-menu class="desktop"></app-desktop-menu>
+    <app-mobile-menu class="mobile"></app-mobile-menu>
+  </div>
+</div>

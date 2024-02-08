@@ -5,5 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './newsletter.component.html',
   styleUrls: ['./newsletter.component.sass']
 })
-export class NewsletterComponent {
-}
+export class NewsletterComponent {}

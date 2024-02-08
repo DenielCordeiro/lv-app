@@ -19,9 +19,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
 import { NewsletterComponent } from './newsletter/newsletter.component';
-import { HeaderNewsletterComponent } from './newsletter/header-newsletter/header-newsletter.component';
-import { LoginComponent } from './newsletter/header-newsletter/login/login.component';
-import { RegisterComponent } from './newsletter/header-newsletter/register/register.component';
+import { RegisterComponent } from './header/register/register.component';
 
 import { ProductsComponent } from './products/products.component';
 import { ProductComponent } from './product/product.component';
@@ -38,14 +36,18 @@ import { CollectionsComponent } from './newsletter/collections/collections.compo
 import { BodyNewsletterComponent } from './newsletter/body-newsletter/body-newsletter.component';
 
 import { AboutComponent } from './about/about.component';
-
+import { LoginComponent } from './header/login/login.component';
+import { HeaderComponent } from './header/header.component';
+import { MenuComponent } from './header/menu/menu.component';
+import { DesktopMenuComponent } from './header/menu/desktop-menu/desktop-menu.component';
+import { MobileMenuComponent } from './header/menu/mobile-menu/mobile-menu.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NewsletterComponent,
-    HeaderNewsletterComponent,
+    HeaderComponent,
     LoginComponent,
     ProductsComponent,
     RegisterComponent,
@@ -61,7 +63,10 @@ import { AboutComponent } from './about/about.component';
     CollectionsComponent,
     BodyNewsletterComponent,
     AddOrEditComponent,
-    DeleteComponent
+    DeleteComponent,
+    MenuComponent,
+    DesktopMenuComponent,
+    MobileMenuComponent
   ],
   imports: [
     BrowserModule,
