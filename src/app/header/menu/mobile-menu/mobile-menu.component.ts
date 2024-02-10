@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/services/login/auth.service';
 
 @Component({
   selector: 'app-mobile-menu',
@@ -7,6 +8,13 @@ import { Component } from '@angular/core';
 })
 export class MobileMenuComponent {
   isOpen: boolean = false;
+  modalLogout: boolean = false;
+  administrator: boolean = false;
+  userId: string | null = '';
+
+  constructor(private loginService: AuthService) {
+    this.getLogin();
+  }
 
   changeMenuProducts(): void {
     if (this.isOpen == false) {
@@ -14,5 +22,23 @@ export class MobileMenuComponent {
     } else {
       this.isOpen = false;
     }
+  }
+
+  getLogin(): void {
+    this.userId = localStorage.getItem('user_id');
+    this.administrator = this.loginService.isAdministrator();
+  }
+
+  modalLogoutIsOpen(): void {
+    if (this.modalLogout == false) {
+      this.modalLogout = true;
+    } else {
+      this.modalLogout = false;
+    }
+  }
+
+  isLogout(): void {
+    this.loginService.logout();
+    location.reload();
   }
 }

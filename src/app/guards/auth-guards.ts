@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
-import { Observable } from 'rxjs';
+import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from './../services/login/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
+  authenticated: boolean = false;
 
   constructor(
     private authService: AuthService,
-    private router: Router
   ) { }
 
   canActivate(
@@ -19,6 +19,16 @@ export class AuthGuard implements CanActivate {
   ): boolean {
 
     if (this.authService.authedUserWithSuccess()) {
+
+      console.log(state.url);
+
+
+      if(state.url == '/dashboard') {
+        this.authenticated = this.authService.isAdministrator();
+
+        return this.authenticated;
+      }
+
       return true;
     } else {
       return false;

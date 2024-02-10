@@ -1,22 +1,33 @@
-<div class="default-button newsletter">Newsletter</div>
-<div class="default-button products" (click)="changeMenuProducts()">Acessórios</div>
+<section id="menu-mobile">
+  <div class="default-button newsletter" routerLink="/newsletter">Newsletter</div>
+  <div class="default-button products" (click)="changeMenuProducts()">Acessórios</div>
 
-<div class="menu-products" *ngIf="this.isOpen == true">
-  <div class="all-products">Todos</div>
+  <div class="menu-products" *ngIf="this.isOpen == true">
+    <div class="all-products" routerLink="/products">Todos</div>
 
-  <div class="colections">Coleções</div>
+    <div class="colections" routerLink="/products/filter/colections">Coleções</div>
 
-  <div class="bracelets">Pulseiras</div>
+    <div class="bracelets" routerLink="/products/filter/bracelets">Pulseiras</div>
 
-  <div class="necklaces">Colares</div>
+    <div class="necklaces" routerLink="/products/filter/necklaces">Colares</div>
 
-  <div class="chockers">Gargantilhas</div>
+    <div class="chockers" routerLink="/products/filter/chockers">Gargantilhas</div>
+  </div>
+
+  <div *ngIf="this.userId !== null" class="default-button profile" routerLink="/profile/{{ this.userId }}">Minha Conta</div>
+
+  <div *ngIf="this.administrator === true" class="default-button dashboard" routerLink="/dashboard">Dashboard</div>
+
+  <div *ngIf="this.userId == null" class="login">
+    <app-login></app-login>
+  </div>
+
+  <div *ngIf="this.userId !== null" class="logout" (click)="modalLogoutIsOpen()">Sair</div>
+</section>
+
+<div class="modal-logout" *ngIf="this.modalLogout == true">
+  <h1>Deseja sair da sua conta ?</h1>
+
+  <div class="button-logout" (click)="isLogout()">Sim</div>
+  <div class="close-modal-logout"  (click)="modalLogoutIsOpen()">Não</div>
 </div>
-
-<div class="default-button profile">Minha Conta</div>
-
-<div class="default-button dashboard">Dashboard</div>
-
-<app-login></app-login>
-
-<div class="logout">Sair</div>

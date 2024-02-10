@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/services/login/auth.service';
 
 import { Component } from '@angular/core';
 import { UserModel } from '../models/user.model';
@@ -18,26 +19,26 @@ export class UsersComponent {
     private productsService: ProductsService,
   ) {}
 
-  getMyUser(): void {};
+  getMyUser(): void {  };
 
   loadMyProducts(): void {
-    this.productsService.getProducts()
-    .then(allProducts => {
-      if(allProducts == null || undefined) {
-        alert("[Atenção]: Não existe nenhum produto a venda!")
-      } else {
-        this.products.push(allProducts);
+    // this.productsService.getMyProducts()
+    //   .then(allProducts => {
+    //     if(allProducts == null || undefined) {
+    //       alert("[Atenção]: Não existe nenhum produto a venda!")
+    //     } else {
+    //       this.products.push(allProducts);
 
-        this.products.forEach(data => {
-          if (data.user == this.user.id) {
-            this.myProducts.push(data);
-          }
-        });
-      }
-    })
-    .catch(Error => {
-      alert('ERRO: não conseguiu trazer os produtos');
-      console.log(Error);
-    })
+    //       this.products.forEach(data => {
+    //         if (data.user == this.user.id) {
+    //           this.myProducts.push(data);
+    //         }
+    //       });
+    //     }
+    //   })
+    //   .catch(Error => {
+    //     alert('ERRO: não conseguiu trazer os produtos');
+    //     console.log(Error);
+    //   })
   };
 }

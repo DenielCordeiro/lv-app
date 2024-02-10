@@ -91,4 +91,29 @@ export class AuthService {
   closeModal(): void {
     this.modalService.dismissAll();
   }
+
+  isAdministrator(): boolean {
+    let administrartor: string | null = localStorage.getItem('administrator');
+    let isAdm: boolean = false;
+
+    if (administrartor !== null) {
+
+      if (administrartor == 'true') {
+        isAdm = true;
+      } else {
+        isAdm = false;
+      }
+
+    } else {
+      isAdm = false;
+    }
+
+    return isAdm;
+  }
+
+  logout(): boolean {
+    localStorage.clear();
+
+    return true;
+  }
 }
