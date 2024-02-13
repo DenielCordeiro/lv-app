@@ -17,7 +17,7 @@ export abstract class BaseService<T extends BaseModel> {
   constructor(
     http: HttpClient,
     localStorage: LocalStorageService,
-    route: string
+    route: string,
   ) {
     this.http = http;
     this.localStorage = localStorage;

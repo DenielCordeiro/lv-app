@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Router, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from 'src/app/services/login/auth.service';
+import { MenuComponent } from '../menu.component';
 
 @Component({
   selector: 'app-mobile-menu',
@@ -12,7 +14,11 @@ export class MobileMenuComponent {
   administrator: boolean = false;
   userId: string | null = '';
 
-  constructor(private loginService: AuthService) {
+  constructor(
+    private loginService: AuthService,
+    public menu: MenuComponent,
+    public route: Router,
+  ) {
     this.getLogin();
   }
 
@@ -38,7 +44,21 @@ export class MobileMenuComponent {
   }
 
   isLogout(): void {
+    const noAction: string = 'noAction';
+
     this.loginService.logout();
-    location.reload();
+    this.closeMenu(noAction);
+  }
+
+  closeMenu(nextUrl: string): void {
+    let activeRoute = this.route.url;
+
+    if (nextUrl == 'noAction') {
+      this.menu.changeIconBurguer();
+    } else if (nextUrl == activeRoute) {
+      console.log('Você já está nesta página!');
+    } else {
+      this.menu.changeIconBurguer();
+    }
   }
 }

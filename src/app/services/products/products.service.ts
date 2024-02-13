@@ -10,8 +10,8 @@ export class ProductsService extends BaseService<ProductModel> {
 
   constructor(
     public httpClient: HttpClient,
-    public localStorageService: LocalStorageService
+    public localStorageService: LocalStorageService,
   ) {
     super(httpClient, localStorageService, '/products');
   }
-};
+}

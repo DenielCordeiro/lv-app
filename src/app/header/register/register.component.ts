@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/login/auth.service';
+import { MenuComponent } from '../menu/menu.component';
 
 @Component({
   selector: 'app-register',
@@ -18,6 +19,7 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder,
     private registerService: AuthService,
     public route: ActivatedRoute,
+    public menu: MenuComponent
   ) {}
 
   ngOnInit(): void {
@@ -43,6 +45,7 @@ export class RegisterComponent implements OnInit {
         await
           this.registerService.createUser(this.registerForm.value);
           this.registerForm.reset();
+          this.menu.changeIconBurguer();
       }
     } catch(error) {
       console.error(error);

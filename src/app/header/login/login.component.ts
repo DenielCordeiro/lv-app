@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../../services/login/auth.service';
+import { MenuComponent } from '../menu/menu.component';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit {
     private modalService: NgbModal,
     public config: NgbModalConfig,
     public route: ActivatedRoute,
+    public menu: MenuComponent,
   ) {
     config.backdrop = 'static';
 		config.keyboard = false;
@@ -40,6 +42,7 @@ export class LoginComponent implements OnInit {
         await
           this.loginService.authUser(this.loginForm.value)
           this.loginForm.reset();
+          this.menu.changeIconBurguer();
       }
     } catch (error) {
       console.error(error);

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from './../services/login/auth.service';
 import { environment } from 'src/environments/environment';
 
@@ -11,6 +11,7 @@ export class AuthGuard implements CanActivate {
 
   constructor(
     private authService: AuthService,
+    public route: Router,
   ) { }
 
   canActivate(
@@ -19,9 +20,6 @@ export class AuthGuard implements CanActivate {
   ): boolean {
 
     if (this.authService.authedUserWithSuccess()) {
-
-      console.log(state.url);
-
 
       if(state.url == '/dashboard') {
         this.authenticated = this.authService.isAdministrator();
