@@ -62,9 +62,10 @@
   position: fixed
   background-color: colors.$white
   width: 0px
-  top: 50vh
-  right: 50vw
+  top: 8vh
+  right: 0px
   border: 0px
+  transition: all 400ms
 
   @include mobile.display
     transition: all 400ms
@@ -73,19 +74,24 @@
     right: 0px
 
 .menu-open
-  top: 40vh
-  right: 23vw
-  padding-bottom: 6vh
+  top: 8vh
+  right: 0px
+  padding-bottom: 1.5vh
   z-index: 2
   transition: all 400ms
-  width: 50%
+  width: 25%
+  height: 100%
   border: 2px solid colors.$black
-  border-radius: 10px
+  border-top-left-radius: 10px
+  border-bottom-left-radius: 10px
+  border-top-right-radius: 0px
+  border-bottom-right-radius: 0px
 
   @include mobile.display
     top: 15vh
     right: 0px
     width: 40%
+    height: auto
     border-top-left-radius: 10px
     border-bottom-left-radius: 10px
     border-top-right-radius: 0px

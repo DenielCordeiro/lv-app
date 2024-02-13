@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/services/login/auth.service';
+import { MenuComponent } from '../menu.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-desktop-menu',
@@ -6,5 +9,56 @@ import { Component } from '@angular/core';
   styleUrls: ['./desktop-menu.component.sass']
 })
 export class DesktopMenuComponent {
+  isOpen: boolean = false;
+  modalLogout: boolean = false;
+  administrator: boolean = false;
+  userId: string | null = '';
 
+  constructor(
+    private loginService: AuthService,
+    public menu: MenuComponent,
+    public route: Router,
+  ) {
+    this.getLogin();
+  }
+
+  changeMenuProducts(): void {
+    if (this.isOpen == false) {
+      this.isOpen = true;
+    } else {
+      this.isOpen = false;
+    }
+  }
+
+  getLogin(): void {
+    this.userId = localStorage.getItem('user_id');
+    this.administrator = this.loginService.isAdministrator();
+  }
+
+  modalLogoutIsOpen(): void {
+    if (this.modalLogout == false) {
+      this.modalLogout = true;
+    } else {
+      this.modalLogout = false;
+    }
+  }
+
+  isLogout(): void {
+    const noAction: string = 'noAction';
+
+    this.loginService.logout();
+    this.closeMenu(noAction);
+  }
+
+  closeMenu(nextUrl: string): void {
+    let activeRoute = this.route.url;
+
+    if (nextUrl == 'noAction') {
+      this.menu.changeIconBurguer();
+    } else if (nextUrl == activeRoute) {
+      console.log('Você já está nesta página!');
+    } else {
+      this.menu.changeIconBurguer();
+    }
+  }
 }

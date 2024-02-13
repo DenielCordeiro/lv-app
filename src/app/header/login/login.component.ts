@@ -54,6 +54,7 @@ export class LoginComponent implements OnInit {
 	}
 
   closeModal(loginModal: any): void {
-    this.modalService.dismissAll(loginModal)
+    this.menu.changeIconBurguer();
+    this.modalService.dismissAll(loginModal);
   }
 }
