@@ -21,14 +21,27 @@
     color: colors.$white
 
 .button-one
-  width: 5vw
-  height: 3vh
-  background-color: colors.$white
-  border: 2px solid colors.$white
+  cursor: pointer
+  display: flex
+  justify-content: center
+  height: 3.8vh
+  width: 100px
+  padding-top: 0.8vh
+  color: colors.$white
+  background-color: colors.$pourple
+  font-size: 18px
+  border: 1px solid colors.$pourple
+  border-radius: 6px
 
-  &-hover
-    background-color: rgba(150, 150, 150, 0.3)
-    border-color: colors.$pourple
+  &:hover
+    background-color: colors.$white
+    color: colors.$pourple
+
+  @include mobile.display
+    width: 80px
+    height: 4vh
+    background-color: colors.$white
+    color: colors.$pourple
 
 .desktop
   display: inline

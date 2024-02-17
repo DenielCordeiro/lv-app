@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { lastValueFrom } from "rxjs";
 import { UserModel } from 'src/app/models/user.model';
@@ -14,6 +15,7 @@ export class AuthService {
   constructor(
     public http: HttpClient,
     private modalService: NgbModal,
+    public route: Router
   ) { }
 
   public buildHeader(): HttpHeaders {
@@ -82,7 +84,8 @@ export class AuthService {
     if(localStorage.getItem('session')) {
       this.authedUser = true;
     } else {
-      alert('Necessário Fazer Login')
+      alert('Necessário Fazer Login');
+      this.route.navigateByUrl('/newsletter');
     }
 
     return this.authedUser;
@@ -90,5 +93,31 @@ export class AuthService {
 
   closeModal(): void {
     this.modalService.dismissAll();
+  }
+
+  isAdministrator(): boolean {
+    let administrartor: string | null = localStorage.getItem('administrator');
+    let isAdm: boolean = false;
+
+    if (administrartor !== null) {
+
+      if (administrartor == 'true') {
+        isAdm = true;
+      } else {
+        isAdm = false;
+      }
+
+    } else {
+      isAdm = false;
+    }
+
+    return isAdm;
+  }
+
+  logout(): boolean {
+    localStorage.clear();
+    console.log('Você saiu de sua conta!');
+
+    return true;
   }
 }

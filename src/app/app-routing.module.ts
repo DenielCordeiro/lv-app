@@ -28,7 +28,7 @@ const routes: Routes = [
     component: RegisterComponent,
   },
   {
-    path: "profile/:id",
+    path: "profile/:user_id",
     component: UsersComponent,
     canActivate: [AuthGuard]
   },
@@ -42,7 +42,7 @@ const routes: Routes = [
     component: ProductsComponent,
   },
   {
-    path: "product/:id",
+    path: "product/:product_id",
     component: ProductComponent,
   },
   {

@@ -3,16 +3,19 @@
 
 .burguer-icon
   height: 5vh
+  cursor: pointer
 
   @include mobile.display
     padding-top: 0.4vh
 
   .line
-    cursor: pointer
     width: 50px
     height: 9px
     background-color: colors.$white
     margin: 0px 0px 6px 0px
+
+    &:hover
+      background-color: colors.$pourple
 
     @include mobile.display
       width: 35px
@@ -61,10 +64,11 @@
 .menu
   position: fixed
   background-color: colors.$white
-  border: 0px
   width: 0px
-  top: 50vh
-  right: 50vw
+  top: 8vh
+  right: 0px
+  border: 0px
+  transition: all 400ms
 
   @include mobile.display
     transition: all 400ms
@@ -73,20 +77,25 @@
     right: 0px
 
 .menu-open
-  top: 40vh
-  right: 23vw
-  padding-bottom: 6vh
+  top: 8vh
+  right: 0px
+  padding-bottom: 1.5vh
   z-index: 2
   transition: all 400ms
-  width: 50%
+  width: 25%
+  height: 100%
   border: 2px solid colors.$black
-  border-radius: 10px
+  border-top-left-radius: 10px
+  border-bottom-left-radius: 10px
+  border-top-right-radius: 0px
+  border-bottom-right-radius: 0px
 
   @include mobile.display
-    top: 15vh
+    top: 10vh
     right: 0px
-    width: 40%
-    border-top-left-radius: 6%
-    border-bottom-left-radius: 6%
+    width: 43%
+    height: auto
+    border-top-left-radius: 10px
+    border-bottom-left-radius: 10px
     border-top-right-radius: 0px
     border-bottom-right-radius: 0px

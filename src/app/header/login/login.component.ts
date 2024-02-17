@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../../services/login/auth.service';
-import { environment } from "src/environments/environment";
+import { MenuComponent } from '../menu/menu.component';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     private modalService: NgbModal,
     public config: NgbModalConfig,
     public route: ActivatedRoute,
-    private router: Router
+    public menu: MenuComponent,
   ) {
     config.backdrop = 'static';
 		config.keyboard = false;
@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit {
         await
           this.loginService.authUser(this.loginForm.value)
           this.loginForm.reset();
+          this.menu.changeIconBurguer();
       }
     } catch (error) {
       console.error(error);
@@ -53,6 +54,7 @@ export class LoginComponent implements OnInit {
 	}
 
   closeModal(loginModal: any): void {
-    this.modalService.dismissAll(loginModal)
+    this.menu.changeIconBurguer();
+    this.modalService.dismissAll(loginModal);
   }
 }

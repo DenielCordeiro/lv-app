@@ -16,7 +16,6 @@ import { AuthService } from './services/login/auth.service';
 import { AuthGuard } from './guards/auth-guards';
 
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
 
 import { NewsletterComponent } from './newsletter/newsletter.component';
 import { RegisterComponent } from './header/register/register.component';
@@ -54,7 +53,6 @@ import { MobileMenuComponent } from './header/menu/mobile-menu/mobile-menu.compo
     ProductComponent,
     DashboardComponent,
     BuyComponent,
-    NavbarComponent,
     VerticalChartComponent,
     AboutComponent,
     UsersComponent,
