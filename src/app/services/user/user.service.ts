@@ -43,10 +43,10 @@ export class UserService {
       });
   }
 
-  getProfile(id: number): Promise<UserModel> {
+  getProfile(user_id: number): Promise<UserModel> {
     let header = this.buildHeader();
 
-    return lastValueFrom(this.http.get<UserModel>(`${environment.api}/profile/${id}`, { headers: header }))
+    return lastValueFrom(this.http.get<UserModel>(`${environment.api}/profile/${user_id}`, { headers: header }))
       .then(result => {
         return result;
       })

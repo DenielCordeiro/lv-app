@@ -16,6 +16,18 @@
     color: colors.$pourple
     border-color: colors.$pourple
 
+.light
+  color: colors.$pourple-light
+  border-color: colors.$pourple-light
+
+.profile, .dashboard
+  color: colors.$green-light
+  border-color: colors.$green-light
+
+  &:hover
+    color: colors.$green
+    border-color: colors.$green
+
 .icon-accessories
   position: absolute
   top: 5.8vh
@@ -27,20 +39,38 @@
   display: flex
   justify-content: center
 
-.logout
-  position: absolute
-  bottom: 0.8vh
-  left: 10vw
-  color: colors.$red
-  font-size: 18px
-  border: 1px solid colors.$red
-  padding: 0.5vh 5vw
-  border-radius: 6px
+.content-button-logout
+  width: 100%
+  display: flex
+  justify-content: center
+
+  .logout
+    font-size: 18px
+    border: 1px solid colors.$red
+    background-color: colors.$red
+    color: colors.$white
+    border-radius: 6px
+    margin-bottom: 5vh
+
+    &:hover
+      background-color: colors.$white
+      color: colors.$red
 
 .modal-logout
+  background-color: colors.$white
   position: fixed
-  left: 20vw
-  bottom: 45%
-  width: 60vw
-  height: 15vh
+  right: 5vw
+  width: 15vw
+  font-size: 17px
+  font-weight: 600
+  padding: 1vh 0px
   border: 1px solid colors.$black
+  border-radius: 6px
+
+  .button-Cancel
+    width: 30%
+    color: colors.$black
+
+  .button-logout
+    width: 30%
+    color: colors.$red

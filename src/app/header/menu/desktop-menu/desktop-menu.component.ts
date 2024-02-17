@@ -12,7 +12,7 @@ export class DesktopMenuComponent {
   isOpen: boolean = false;
   modalLogout: boolean = false;
   administrator: boolean = false;
-  userId: string | null = '';
+  userId: number = 0;
 
   constructor(
     private loginService: AuthService,
@@ -20,6 +20,8 @@ export class DesktopMenuComponent {
     public route: Router,
   ) {
     this.getLogin();
+    console.log(this.userId);
+
   }
 
   changeMenuProducts(): void {
@@ -31,7 +33,14 @@ export class DesktopMenuComponent {
   }
 
   getLogin(): void {
-    this.userId = localStorage.getItem('user_id');
+    const id = localStorage.getItem('user_id');
+
+    if (id !== null) {
+      this.userId = JSON.parse(id);
+    } else {
+      console.log('Necessário fazer login');
+    }
+
     this.administrator = this.loginService.isAdministrator();
   }
 
