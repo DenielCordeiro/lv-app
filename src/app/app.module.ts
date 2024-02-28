@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -68,9 +68,9 @@ import { MobileMenuComponent } from './header/menu/mobile-menu/mobile-menu.compo
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
     HttpClientModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
     NgbModule,
