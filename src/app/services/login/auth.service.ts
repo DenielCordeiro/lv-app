@@ -19,16 +19,11 @@ export class AuthService {
   ) { }
 
   public buildHeader(): HttpHeaders {
-    let userToken = localStorage.getItem('session');
-
-    if (userToken !== null) {
-      environment.token = userToken;
-    } else {
-      console.log('não existe token, para salver nas variaveis de ambiente!');
-    }
+    let session = localStorage.getItem('session');
+    let userToken = JSON.stringify(session);
 
     let headers = new HttpHeaders({
-      'token': environment.token,
+      token: userToken,
     });
 
     return headers;

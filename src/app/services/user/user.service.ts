@@ -12,7 +12,6 @@ import { environment } from "src/environments/environment";
 export class UserService {
 
   constructor(
-    public httpClient: HttpClient,
     public localStorageService: LocalStorageService,
     private modalService: NgbModal,
     public http: HttpClient,
