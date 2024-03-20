@@ -13,4 +13,5 @@ Integrations: {
 
 # What is this website ?
 
-An online store, created to meet the needs of a client. the site allows the control and sale of handcrafted products
+An online store, created to meet the needs of a client, The site allows the control and sale of handcrafted products. 
+Screen that Login, Products, Payments, Dashbords and users control.
