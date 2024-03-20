@@ -24,9 +24,12 @@
     <form>
       <div class="freight my-2">
         <h4> <strong>Calcular Frete</strong> </h4>
-        <label>Digite o CEP:</label>
-        <input type="text" class="mx-2">
+        <label for="postalCode">Digite o CEP:</label>
+        <input id="postalCode" type="text" class="mx-2">
         <span><i class="bi bi-airplane-engines"></i></span>
+
+
+        <div class="search" (click)="searchShipping()">Calcular Frete</div>
       </div>
     </form>
 

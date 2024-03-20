@@ -12,27 +12,35 @@ import { UserService } from '../services/user/user.service';
 export class UsersComponent {
   products: ProductModel[] = [];
   myProducts: ProductModel[] = [];
-  userId: Number = 0;
-
+  myProfile: UserModel[] = [];
+  userId: number = 0;
 
   constructor(
-    public user: UserModel,
     public userProfile: UserService
-  ) {}
+  ) {
+    this.getMyUser();
+
+    console.log(this.myProfile);
+
+  }
 
   getMyUser(): void {
     const id = localStorage.getItem('user_id');
 
     if(id !== null) {
-      this.userId = parseInt(id)
-      console.log(this.userId);
+      this.userId = JSON.parse(id)
+
+      this.userProfile.getProfile(this.userId)
+        .then(profile => {
+          this.myProfile.push(profile);
+        })
+        .catch(error => {
+          console.log(error);
+        })
 
     } else {
-
+      console.log("[ERRO]: Não foi possível encontrar o Perfil do usuário");
     }
-
-    // this.userProfile.getProfile(this.userId)
-      // .then()
    };
 
   loadMyProducts(): void {

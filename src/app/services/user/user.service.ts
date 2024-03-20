@@ -12,23 +12,15 @@ import { environment } from "src/environments/environment";
 export class UserService {
 
   constructor(
-    public httpClient: HttpClient,
     public localStorageService: LocalStorageService,
     private modalService: NgbModal,
     public http: HttpClient,
   ) {}
 
   public buildHeader(): HttpHeaders {
-    let userToken = localStorage.getItem('session');
-
-    if (userToken !== null) {
-      environment.token = userToken;
-    } else {
-      console.log('não existe token, para salver nas variaveis de ambiente!');
-    }
-
+    let userToken = JSON.stringify(localStorage.getItem('session'));
     let headers = new HttpHeaders({
-      'token': environment.token,
+      'token': userToken,
     });
 
     return headers;
@@ -45,6 +37,8 @@ export class UserService {
 
   getProfile(user_id: number): Promise<UserModel> {
     let header = this.buildHeader();
+    console.log(header);
+
 
     return lastValueFrom(this.http.get<UserModel>(`${environment.api}/profile/${user_id}`, { headers: header }))
       .then(result => {

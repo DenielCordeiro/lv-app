@@ -20,8 +20,6 @@ export class DesktopMenuComponent {
     public route: Router,
   ) {
     this.getLogin();
-    console.log(this.userId);
-
   }
 
   changeMenuProducts(): void {

@@ -46,10 +46,6 @@ const routes: Routes = [
     component: ProductComponent,
   },
   {
-    path: "menu",
-    component: MenuComponent,
-  },
-  {
     path: '**',
     redirectTo: '/newsletter',
   }
