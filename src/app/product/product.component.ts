@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { ProductsService } from './../services/products/products.service';
 import { ProductModel } from '../models/product.model';
+import { MelhorEnvioService } from '../services/melhor-envio/melhor-envio.service';
 
 @Component({
   selector: 'app-product',
@@ -18,10 +19,11 @@ export class ProductComponent implements OnInit {
   constructor(
     public route: ActivatedRoute,
     public productsService: ProductsService,
+    public melhorEnvio: MelhorEnvioService
   ) {}
 
   ngOnInit() {
-    this.routeId = this.route.snapshot.params["id"];
+    this.routeId = this.route.snapshot.params["product_id"];
 
     if (this.routeId !== undefined) {
       this.getProductSelected(this.routeId);
@@ -30,7 +32,7 @@ export class ProductComponent implements OnInit {
     }
   }
 
-  getProductSelected(id: number) {
+  getProductSelected(id: number): void {
     this.productsService.getProduct(id)
       .then(data => {
         if(data == null || undefined) {
@@ -46,6 +48,10 @@ export class ProductComponent implements OnInit {
       })
   }
 
-  updateModal() {}
-  deleteModal() {}
+  updateModal(): void {}
+  deleteModal(): void {}
+
+  searchShipping(): void {
+    this.melhorEnvio.getShipping('13308197');
+  }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from "rxjs";
 import { environment } from "src/environments/environment";
 
@@ -7,26 +7,12 @@ import { environment } from "src/environments/environment";
   providedIn: 'root'
 })
 export class MelhorEnvioService {
+  private readonly melhorEnvioAPI = environment.api + '/melhor-envio';
+
   constructor(public http: HttpClient) {}
 
-  public buildHeader(): HttpHeaders {
-    let token = JSON.stringify(environment.tokenMelhorEnvio);
-
-    let headers = new HttpHeaders ({
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer' + token,
-      'User-Agent': 'Aplicação camila.luzvioleta@gmail.com'
-    })
-
-    return headers;
-  }
-
-  public getShipping(postalCode: string): Promise<[{}]>{
-    const url = JSON.stringify(environment.apiMelhorEnvio);
-    let header = this.buildHeader();
-
-    return lastValueFrom(this.http.post<[{}]>(url, { headers: header }))
+  public getShipping(postalCode: string): Promise<any>{
+    return lastValueFrom(this.http.post<any>(`${this.melhorEnvioAPI + '/:' + postalCode}`, null))
       .then(result => {
         console.log(result);
         return result;
