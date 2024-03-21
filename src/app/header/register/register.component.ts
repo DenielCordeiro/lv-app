@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/login/auth.service';
+import { ResidenceModel } from 'src/app/models/residence.model';
 
 @Component({
   selector: 'app-register',
@@ -13,6 +14,7 @@ export class RegisterComponent implements OnInit {
   convertedAddress: string | undefined;
   groupInfosAddress: string[] = [];
   formIsAdvance: boolean = false;
+  residenceData!: ResidenceModel;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -43,6 +45,29 @@ export class RegisterComponent implements OnInit {
         await
           this.registerService.createUser(this.registerForm.value);
           this.registerForm.reset();
+      }
+    } catch(error) {
+      console.error(error);
+    }
+  }
+
+  getResidence(): void {
+    this.searchResidence(this.registerForm.value.postalCode)
+  }
+
+  async searchResidence(postalCode: string): Promise<void> {
+    const postalCodeNumber = Number(postalCode);
+
+    try {
+      if (postalCode != null) {
+        await
+          this.registerService.searchPostalCode(postalCodeNumber)
+            .then(result => {
+              this.residenceData = result;
+              console.log(this.residenceData);
+
+              return;
+            })
       }
     } catch(error) {
       console.error(error);
