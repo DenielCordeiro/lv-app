@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   convertedAddress: string | undefined;
   groupInfosAddress: string[] = [];
-  formIsAdvance: boolean = false;
+  nextForm: boolean = false;
   residenceData!: ResidenceModel;
 
   constructor(
@@ -33,6 +33,8 @@ export class RegisterComponent implements OnInit {
       "password": [null, Validators.required],
       "cellphone": [null, Validators.required],
       "postalCode": [null, Validators.required],
+      "state": [null, Validators.required],
+      "city": [null, Validators.required],
       "neighborhood": [null, Validators.required],
       "street": [null, Validators.required],
       "houseNumber": [null, Validators.required],
@@ -52,29 +54,32 @@ export class RegisterComponent implements OnInit {
   }
 
   getResidence(): void {
-    this.searchResidence(this.registerForm.value.postalCode)
+    this.searchResidence(this.registerForm.value.postalCode);
   }
 
-  async searchResidence(postalCode: string): Promise<void> {
-    const postalCodeNumber = Number(postalCode);
+  searchResidence(postalCode: string): void {
+    let postalCodeNumber = Number(postalCode);
+    let state = document.querySelector('#state') as HTMLInputElement;
+    let city = document.querySelector('#city') as HTMLInputElement;
+    let bairro = document.querySelector('#neighborhood') as HTMLInputElement;
+    let logradouro = document.querySelector('#street') as HTMLInputElement;
 
-    try {
-      if (postalCode != null) {
-        await
-          this.registerService.searchPostalCode(postalCodeNumber)
-            .then(result => {
-              this.residenceData = result;
-              console.log(this.residenceData);
+    if (postalCode != null) {
+      this.registerService.searchPostalCode(postalCodeNumber)
+        .then(result => {
+          this.residenceData = result;
 
-              return;
-            })
-      }
-    } catch(error) {
-      console.error(error);
+          state.value = this.residenceData.uf;
+          city.value = this.residenceData.localidade;
+          bairro.value = this.residenceData.bairro;
+          logradouro.value = this.residenceData.logradouro;
+        })
+    } else {
+      alert('Você não insiriu nenhum número de CEP.')
     }
   }
 
   formAdvance(): boolean {
-    return this.formIsAdvance = !this.formIsAdvance;
+    return this.nextForm = !this.nextForm;
   }
 }

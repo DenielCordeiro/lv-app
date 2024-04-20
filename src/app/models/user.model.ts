@@ -6,6 +6,8 @@ export class UserModel {
     public cellphone: string,
     public password: string,
     public postalCode: string,
+    public state: string,
+    public city: string,
     public street: string,
     public neighborhood: string,
     public houseNumber: number,
