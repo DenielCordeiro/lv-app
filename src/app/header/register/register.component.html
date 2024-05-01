@@ -1,6 +1,6 @@
-<section id="pageTitle">
+<!-- <section id="pageTitle">
   <h2 class="titles">Área de Cadastro</h2>
-</section>
+</section> -->
 
 <section id="form">
   <div class="container">
@@ -11,7 +11,7 @@
     </div>
 
     <form [formGroup]="registerForm">
-      <div class="body-form row"  [hidden]="this.nextForm">
+      <div class="body-form row" [hidden]="this.nextForm">
         <div class="mb-3 row">
           <label for="name" class="col-sm-2 mb-1">Nome:</label>
           <div class="col-sm-10">
@@ -44,16 +44,16 @@
       <div class="address-form row" [hidden]="!this.nextForm">
         <div class="mb-3 row">
           <div class="col-7">
-            <label for="postalCode" class="col-sm-2 mb-1">CPF:</label>
+            <label for="postalCode" class="col-sm-2 mb-1">CEP:</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="postalCode" maxlength="11" minlength="10" formControlName="postalCode">
+              <input type="text" class="form-control" id="postalCode" formControlName="postalCode">
             </div>
           </div>
 
           <div class="col-3">
-            <button (click)="getResidence()">
+            <div (click)="getResidence()">
               Buscar <i class="bi bi-search-heart"></i>
-            </button>
+            </div>
           </div>
         </div>
 
@@ -110,12 +110,17 @@
       </div>
     </div>
 
-    <div class="footer-form">
-      <button type="button" class="btn btn-secondary mx-2" routerLink="/newsletter">Fechar</button>
-
+    <div class="footer-form row">
+      <div class="col-6">
+        <!--
       <button type="submit" class="btn btn-primary" disabled *ngIf="registerForm.invalid">Cadastre-se</button>
+      <button type="submit" class="btn btn-primary" (click)="makeRegister()" *ngIf="registerForm.valid">Cadastre-se</button> -->
 
-      <button type="submit" class="btn btn-primary" (click)="makeRegister()" *ngIf="registerForm.valid">Cadastre-se</button>
+        <button type="button" class="btn btn-secondary mx-2" routerLink="/newsletter">Fechar</button>
+      </div>
+      <div class="col-6">
+        <button type="submit" class="button-one" (click)="makeRegister()">Cadastre-se</button>
+      </div>
     </div>
   </div>
 </section>

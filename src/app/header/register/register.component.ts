@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/login/auth.service';
 import { ResidenceModel } from 'src/app/models/residence.model';
+import { UserModel } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-register',
@@ -41,16 +42,18 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  async makeRegister() {
-    try {
-      if(this.registerForm.valid) {
-        await
-          this.registerService.createUser(this.registerForm.value);
-          this.registerForm.reset();
-      }
-    } catch(error) {
-      console.error(error);
-    }
+  makeRegister() {
+    // if(this.registerForm.valid) {
+    //   this.registerService.createUser(this.registerForm.value);
+    //   this.registerForm.reset();
+    // } else { }
+
+    this.getResidence();
+    this.searchResidence(this.registerForm.value.postalCode)
+    console.log(this.registerForm);
+
+    // this.registerService.createUser(this.registerForm.value);
+    // this.registerForm.reset();
   }
 
   getResidence(): void {
@@ -68,6 +71,11 @@ export class RegisterComponent implements OnInit {
       this.registerService.searchPostalCode(postalCodeNumber)
         .then(result => {
           this.residenceData = result;
+
+          this.registerForm.value.state = this.residenceData.uf;
+          this.registerForm.value.city = this.residenceData.localidade;
+          this.registerForm.value.neighborhood = this.residenceData.bairro;
+          this.registerForm.value.street = this.residenceData.logradouro;
 
           state.value = this.residenceData.uf;
           city.value = this.residenceData.localidade;

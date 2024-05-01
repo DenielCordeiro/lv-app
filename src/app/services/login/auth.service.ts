@@ -57,7 +57,7 @@ export class AuthService {
   createUser(user: UserModel): Promise<UserModel> {
     return lastValueFrom(this.http.post<UserModel>(`${environment.api}/profile`, user))
       .then(result => {
-        this.closeModal();
+        this.route.navigateByUrl('/newsletter')
 
         return result;
       });
