@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { lastValueFrom } from "rxjs";
 import { UserModel } from 'src/app/models/user.model';
+import { ResidenceModel } from 'src/app/models/residence.model';
 import { environment } from "src/environments/environment";
 
 @Injectable({
@@ -56,7 +57,7 @@ export class AuthService {
   createUser(user: UserModel): Promise<UserModel> {
     return lastValueFrom(this.http.post<UserModel>(`${environment.api}/profile`, user))
       .then(result => {
-        this.closeModal();
+        this.route.navigateByUrl('/newsletter')
 
         return result;
       });
@@ -114,5 +115,16 @@ export class AuthService {
     console.log('Você saiu de sua conta!');
 
     return true;
+  }
+
+  searchPostalCode(postalCode: number): Promise<ResidenceModel> {
+    return lastValueFrom(this.http.get<ResidenceModel>(`${environment.viaCepAPI}/${postalCode}/json`))
+      .then(result => {
+        return result;
+      })
+      .catch(error => {
+        alert('[ERRO]: não foi possível dados deste CEP')
+        return error;
+      })
   }
 }
