@@ -43,17 +43,14 @@ export class RegisterComponent implements OnInit {
   }
 
   makeRegister() {
-    // if(this.registerForm.valid) {
-    //   this.registerService.createUser(this.registerForm.value);
-    //   this.registerForm.reset();
-    // } else { }
-
     this.getResidence();
-    this.searchResidence(this.registerForm.value.postalCode)
-    console.log(this.registerForm);
 
-    // this.registerService.createUser(this.registerForm.value);
-    // this.registerForm.reset();
+    if(this.registerForm.valid) {
+      this.registerService.createUser(this.registerForm.value);
+      this.registerForm.reset();
+    } else {
+      console.log(this.registerForm);
+    }
   }
 
   getResidence(): void {
