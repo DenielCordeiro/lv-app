@@ -1,13 +1,9 @@
-<!-- <section id="pageTitle">
-  <h2 class="titles">Área de Cadastro</h2>
-</section> -->
-
 <section id="form">
   <div class="container">
     <div class="about-form">
-      <h5>Preencha seus dados com cuidado.</h5>
-      <h5 [hidden]="this.nextForm">Seu e-mail é salvo para comunicação após a compra de qualquer produto!</h5>
-      <h5 [hidden]="!this.nextForm">Preciso de seu endereços para enviar seu produto! <i class="bi bi-emoji-smile"></i></h5>
+      <h4>Preencha seus dados com cuidado.</h4>
+      <h4 [hidden]="this.nextForm">Seu e-mail é salvo para comunicação após a compra de qualquer produto!</h4>
+      <h4 [hidden]="!this.nextForm">Preciso de seu endereços para enviar seu produto! <i class="bi bi-emoji-smile"></i></h4>
     </div>
 
     <form [formGroup]="registerForm">
@@ -112,14 +108,12 @@
 
     <div class="footer-form row">
       <div class="col-6">
-        <!--
-      <button type="submit" class="btn btn-primary" disabled *ngIf="registerForm.invalid">Cadastre-se</button>
-      <button type="submit" class="btn btn-primary" (click)="makeRegister()" *ngIf="registerForm.valid">Cadastre-se</button> -->
-
         <button type="button" class="btn btn-secondary mx-2" routerLink="/newsletter">Fechar</button>
       </div>
       <div class="col-6">
-        <button type="submit" class="button-one" (click)="makeRegister()">Cadastre-se</button>
+        <!-- <button type="submit" class="button-one" (click)="makeRegister()">Cadastre-se</button> -->
+        <button type="submit" class="btn btn-primary" disabled *ngIf="registerForm.invalid">Cadastre-se</button>
+        <button type="submit" class="btn btn-primary" (click)="makeRegister()" *ngIf="registerForm.valid">Cadastre-se</button>
       </div>
     </div>
   </div>
