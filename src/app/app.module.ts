@@ -22,7 +22,7 @@ import { RegisterComponent } from './header/register/register.component';
 
 import { ProductsComponent } from './products/products.component';
 import { ProductComponent } from './product/product.component';
-import { AddOrEditComponent } from './products/add-or-edit/add-or-edit';
+import { AddOrEditComponent } from './products/add-or-edit/add-or-edit.component';
 import { BuyComponent } from './product/buy/buy.component';
 import { DeleteComponent } from './products/delete/delete.component';
 

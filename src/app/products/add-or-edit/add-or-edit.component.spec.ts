@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AddOrEditComponent } from './add-or-edit';
+import { AddOrEditComponent } from './add-or-edit.component';
 
 describe('AddComponent', () => {
   let component: AddOrEditComponent;

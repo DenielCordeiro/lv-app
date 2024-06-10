@@ -21,7 +21,7 @@ export class AddOrEditComponent implements OnInit {
     public dialogRef: MatDialogRef<AddOrEditComponent>,
     public dialog: MatDialog,
     private formBuilder: FormBuilder,
-    public productService: ProductsService
+    public productService: ProductsService,
   ) {}
 
   ngOnInit(): void {
@@ -46,16 +46,30 @@ export class AddOrEditComponent implements OnInit {
   addProduct(): void {
     let product: ProductModel = Object.assign(new ProductModel(), this.form.value);
 
-    this.productService.createProduct(product)
-      .then(() => {
-        this.dialog.closeAll();
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        console.log('finalizou');
-      })
+
+    const file: File = (this.form.value.image).files[0];
+    const formData = new FormData();
+
+
+
+    formData.append('image', file)
+
+    console.log(product);
+    console.log(formData);
+
+
+
+
+    // this.productService.createProduct(product)
+    //   .then(() => {
+    //     this.dialog.closeAll();
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   })
+    //   .finally(() => {
+    //     console.log('finalizou');
+    //   })
   }
 
   changeCollectionSelect(): string {
