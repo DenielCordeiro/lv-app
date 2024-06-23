@@ -52,8 +52,8 @@
       </div>
 
       <div class="col-12">
-        <label for="image">Imagem:</label>
-        <input type="file" accept="image/*" formControlName="image" class="form-control" id="image">
+        <label for="file">Imagem:</label>
+        <input id="file" type="file" accept="image/*" class="form-control" (change)="onChangeFile($event)">
       </div>
 
       <div class="button-add" >

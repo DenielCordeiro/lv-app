@@ -15,6 +15,7 @@ export class AddOrEditComponent implements OnInit {
   newOrOldCategory: string = "Nova";
   categories: string[] = ['Colares', 'Pulseiras', 'Gargatilhas', 'Braceletes', 'Aneis'];
   groups: string[] = ['Verão', 'Outono', 'Inverno', 'Primavera'];
+  files!: Set<File>;
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
@@ -38,26 +39,29 @@ export class AddOrEditComponent implements OnInit {
         "valor": [null],
         "type": [null],
         "groups": [null],
-        "image": [null]
+        "file": [null]
       });
     }
   }
 
+  onChangeFile(event: any): void {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+
+      if (file.type == 'image/png' || file.type == 'image/jpeg') {
+        this.files = file;
+      }
+    }
+  }
+
   addProduct(): void {
+    this.form.patchValue({
+      file: this.files
+    })
+    this.form.get('file')?.updateValueAndValidity();
     let product: ProductModel = Object.assign(new ProductModel(), this.form.value);
 
-
-    const file: File = (this.form.value.image).files[0];
-    const formData = new FormData();
-
-
-
-    formData.append('image', file)
-
-    console.log(product);
-    console.log(formData);
-
-
+    console.log('produto: ', product);
 
 
     // this.productService.createProduct(product)

@@ -25,9 +25,9 @@ export abstract class BaseService<T extends BaseModel> {
   }
 
   public buildHeader(): HttpHeaders {
-    let userToken = JSON.stringify(localStorage.getItem('session'));
-    let headers = new HttpHeaders({
-      'token': userToken,
+    const token = localStorage.getItem('session');
+    const headers = new HttpHeaders({
+      token: `Bearer ${token}`,
     });
 
     return headers;
@@ -48,13 +48,13 @@ export abstract class BaseService<T extends BaseModel> {
   }
 
   public createProduct(model: BaseModel): Promise<T> {
-    let header = this.buildHeader();
+    const header = this.buildHeader();
 
     console.log('Model: ', model);
     console.log('Token: ', header);
 
 
-    return lastValueFrom(this.http.post<LvApi<T>>(this.route, model, { headers: header }))
+    return lastValueFrom(this.http.post<LvApi<T>>(this.route, model))
      .then(result => {
       return this.handleResponse(result) as T;
     });

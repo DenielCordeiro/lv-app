@@ -9,7 +9,7 @@ export class ProductModel {
     public type?: string,
     public groups?: string,
     public selection?: boolean,
-    public image?: {
+    public file?: {
       name?: string,
       size?: number,
       url?: string,
