@@ -32,10 +32,10 @@
       <div class="col-4 my-2">
         <label for="type" class="form-label">Categorias:</label>
 
-        <button class="button-change-select" (click)="changeCategorySelect()">{{ newOrOldCategory }}</button>
+        <button class="button-change-select" (click)="changeOptionCategories()">{{ newOrExistCategory }}</button>
 
-        <input type="text" *ngIf="newOrOldCategory == 'Existente'" formControlName="type" class="form-control" id="type">
-        <mat-select formControlName="type" *ngIf="newOrOldCategory == 'Nova'">
+        <input type="text" *ngIf="newOrExistCategory == 'Existente'" formControlName="type" class="form-control" id="type">
+        <mat-select formControlName="type" *ngIf="newOrExistCategory == 'Nova'">
           <mat-option *ngFor="let type of categories" [value]="type">{{ type }}</mat-option>
         </mat-select>
       </div>
@@ -43,17 +43,17 @@
       <div class="col-4 my-2">
         <label for="productCollection" class="form-label">Coleção:</label>
 
-        <button class="button-change-select" (click)="changeCollectionSelect()">{{ newOrOldCollection }}</button>
+        <button class="button-change-select" (click)="changeOptionGroups()">{{ newOrExistGroups }}</button>
 
-        <input type="text" *ngIf="newOrOldCollection == 'Existente'" formControlName="groups" class="form-control" id="groups">
-        <mat-select formControlName="groups" *ngIf="newOrOldCollection == 'Nova'">
+        <input type="text" *ngIf="newOrExistGroups == 'Existente'" formControlName="groups" class="form-control" id="groups">
+        <mat-select formControlName="groups" *ngIf="newOrExistGroups == 'Nova'">
           <mat-option *ngFor="let group of groups" [value]="group" selected>{{ group }}</mat-option>
         </mat-select>
       </div>
 
       <div class="col-12">
         <label for="file">Imagem:</label>
-        <input id="file" type="file" accept="image/*" class="form-control" (change)="onChangeFile($event)">
+        <input type="file" class="form-control" (change)="onChangeFile($event)">
       </div>
 
       <div class="button-add" >

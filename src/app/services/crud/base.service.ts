@@ -6,7 +6,7 @@ import { environment } from "src/environments/environment";
 
 interface LvApi<T extends BaseModel> {
   success: boolean,
-  data: T | T[] | boolean
+  data: T | T[] | boolean | File
 }
 
 export abstract class BaseService<T extends BaseModel> {
@@ -47,14 +47,10 @@ export abstract class BaseService<T extends BaseModel> {
       });
   }
 
-  public createProduct(model: BaseModel): Promise<T> {
+  public createProduct(model: any): Promise<T> {
     const header = this.buildHeader();
 
-    console.log('Model: ', model);
-    console.log('Token: ', header);
-
-
-    return lastValueFrom(this.http.post<LvApi<T>>(this.route, model))
+    return lastValueFrom(this.http.post<LvApi<T>>(this.route, model, { headers: header }))
      .then(result => {
       return this.handleResponse(result) as T;
     });

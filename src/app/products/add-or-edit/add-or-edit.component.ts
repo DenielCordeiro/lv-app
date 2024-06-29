@@ -1,8 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ProductsService } from 'src/app/services/products/products.service';
 import { ProductModel } from 'src/app/models/product.model';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-add-or-edit',
@@ -11,11 +12,11 @@ import { ProductModel } from 'src/app/models/product.model';
 })
 export class AddOrEditComponent implements OnInit {
   form!: FormGroup;
-  newOrOldCollection: string = "Nova";
-  newOrOldCategory: string = "Nova";
+  files!: Set<File>;
   categories: string[] = ['Colares', 'Pulseiras', 'Gargatilhas', 'Braceletes', 'Aneis'];
   groups: string[] = ['Verão', 'Outono', 'Inverno', 'Primavera'];
-  files!: Set<File>;
+  newOrExistCategory: string = 'Nova';
+  newOrExistGroups: string = 'Nova';
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
@@ -23,6 +24,7 @@ export class AddOrEditComponent implements OnInit {
     public dialog: MatDialog,
     private formBuilder: FormBuilder,
     public productService: ProductsService,
+    public userService: UserService,
   ) {}
 
   ngOnInit(): void {
@@ -45,51 +47,67 @@ export class AddOrEditComponent implements OnInit {
   }
 
   onChangeFile(event: any): void {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
+    if (event.target.files && event.target.files[0]) {
+      const selectFiles = <FileList>event.srcElement.files
+      const fileNames = [];
+      this.files = new Set();
 
-      if (file.type == 'image/png' || file.type == 'image/jpeg') {
-        this.files = file;
+      for (let i = 0; i < selectFiles.length; i++) {
+        fileNames.push(selectFiles[i].name);
+        this.files.add(selectFiles[i]);
       }
+
+      this.files.forEach(file => {
+        this.form.patchValue({
+          file: file
+        });
+      });
+
+      this.form.get('file')?.updateValueAndValidity();
     }
   }
 
   addProduct(): void {
-    this.form.patchValue({
-      file: this.files
-    })
-    this.form.get('file')?.updateValueAndValidity();
-    let product: ProductModel = Object.assign(new ProductModel(), this.form.value);
+    const formData = new FormData();
 
-    console.log('produto: ', product);
+    formData.append('type', this.form.value.type)
+    formData.append('valor', this.form.value.valor)
+    formData.append('name', this.form.value.name)
+    formData.append('description', this.form.value.description)
+    formData.append('groups', this.form.value.groups)
+    formData.append('file', this.form.value.file)
 
-
-    // this.productService.createProduct(product)
-    //   .then(() => {
-    //     this.dialog.closeAll();
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   })
-    //   .finally(() => {
-    //     console.log('finalizou');
-    //   })
+    this.productService.createProduct(formData)
+      .then(data => {
+        console.log('Resultado: ', data);
+        this.dialog.closeAll();
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        console.log('finalizou');
+      })
   }
 
-  changeCollectionSelect(): string {
-    if (this.newOrOldCollection == "Nova") {
-      return this.newOrOldCollection = "Existente";
+  changeOptionCategories(): boolean {
+    if (this.newOrExistCategory == "Nova") {
+      this.newOrExistCategory = "Existente";
     } else {
-      return this.newOrOldCollection = "Nova"
+      this.newOrExistCategory = "Nova"
     }
+
+    return true;
   }
 
-  changeCategorySelect(): string {
-    if (this.newOrOldCategory == "Nova") {
-      return this.newOrOldCategory = "Existente";
+  changeOptionGroups(): boolean {
+    if (this.newOrExistGroups == "Nova") {
+      this.newOrExistGroups = "Existente";
     } else {
-      return this.newOrOldCategory = "Nova"
+      this.newOrExistGroups = "Nova"
     }
+
+    return true;
   }
 
   closeModal(): void {

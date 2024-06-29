@@ -10,6 +10,7 @@ export class ProductModel {
     public groups?: string,
     public selection?: boolean,
     public file?: {
+      file?: File,
       name?: string,
       size?: number,
       url?: string,
@@ -18,6 +19,5 @@ export class ProductModel {
         default?: Date
       }
     }
-
   ) {}
 }
