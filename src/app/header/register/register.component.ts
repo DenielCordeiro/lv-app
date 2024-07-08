@@ -69,15 +69,17 @@ export class RegisterComponent implements OnInit {
         .then(result => {
           this.residenceData = result;
 
+
+
           this.registerForm.value.state = this.residenceData.uf;
           this.registerForm.value.city = this.residenceData.localidade;
           this.registerForm.value.neighborhood = this.residenceData.bairro;
           this.registerForm.value.street = this.residenceData.logradouro;
 
-          state.value = this.residenceData.uf;
-          city.value = this.residenceData.localidade;
-          bairro.value = this.residenceData.bairro;
-          logradouro.value = this.residenceData.logradouro;
+          state.value = this.residenceData.uf ? this.residenceData.uf : '';
+          city.value = this.residenceData.localidade ? this.residenceData.localidade : '';
+          bairro.value = this.residenceData.bairro ? this.residenceData.bairro : '';
+          logradouro.value = this.residenceData.logradouro ? this.residenceData.logradouro : '';
         })
     } else {
       alert('Você não insiriu nenhum número de CEP.')

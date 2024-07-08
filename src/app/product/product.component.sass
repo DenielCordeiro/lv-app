@@ -5,49 +5,66 @@
   margin: 0
   padding: 0
 
-#product
-  background-color: colors.$black
-  width: 100%
-  min-height: 100%
-  padding: 4vh 0px 4vh 0px
-
-.content
-  background-color: colors.$white
-  border: 1px solid colors.$white
-  margin: 0px 2vw 0px 2vw
-  padding: 8px
-  border-radius: 10px
-
 .icons-edit-or-delete
-  font-size: 22px
   background-color: colors.$white
   color: colors.$black
   display: flex
   justify-content: end
+  font-size: 22px
 
   .bi-pencil-fill
     margin-right: 5vw
 
   i
-    margin: 2vh 2vw 0px 0px
     cursor: pointer
     position: absolute
+    margin: 2vh 2vw 0px 0px
 
     &:hover
       color: colors.$pourple
 
-.product-card
-  background-color: colors.$white
+.desktop, .mobile
+  width: 100%
 
-.freight
-  color: colors.$black
+.card-product
+  background-color: colors.$black
+  height: 88vh
+  padding: 4vh 4vw
+
+
+.product
+  background-color: colors.$white
+  height: 75vh
+
+  h1, h4
+    text-align: center
+
+  .carousel
+    background-color: colors.$pourple
+    display: flex
+    justify-content: center
+    width: 100%
+
+  img
+    width: 28vw
+    height: 55vh
+    border-radius: 20px
+
+.payment
+  background-color: colors.$red
+  height: 75vh
+
+  .valor
+    font-size: 25px
 
 .return
-  width: 100%
+  background-color: colors.$black
+  color: colors.$white
   display: flex
   justify-content: end
+  width: 100%
+  height: 4vh
   font-size: 20px
-  color: colors.$black
 
   .button-return
     cursor: pointer

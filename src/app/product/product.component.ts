@@ -1,3 +1,4 @@
+import { Shipping } from './../models/shipping.interface';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup } from '@angular/forms';
@@ -15,6 +16,7 @@ export class ProductComponent implements OnInit {
   routeId: number | undefined = undefined;
   products: ProductModel[] = [];
   product!: ProductModel;
+  shippings: Shipping[] = [];
 
   constructor(
     public route: ActivatedRoute,
@@ -52,6 +54,14 @@ export class ProductComponent implements OnInit {
   deleteModal(): void {}
 
   searchShipping(): void {
-    this.melhorEnvio.getShipping('13308197');
+    this.melhorEnvio.getShipping('13308197')
+      // .then(result => {
+      //   console.log(result);
+
+      // })
+      // .catch(error => {
+      //   console.log(error);
+
+      // })
   }
 }
