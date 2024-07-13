@@ -8,7 +8,16 @@ export class ProductModel {
     public valor?: number,
     public type?: string,
     public groups?: string,
-    public image_url?: string,
     public selection?: boolean,
+    public file?: {
+      file?: File,
+      name?: string,
+      size?: number,
+      url?: string,
+      createdAt?: {
+        type?: Date,
+        default?: Date
+      }
+    }
   ) {}
 }

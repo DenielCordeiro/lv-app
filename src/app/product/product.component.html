@@ -1,23 +1,104 @@
-<section id="product" *ngFor="let item of products">
-  <div class="content">
-    <div class="icons-edit-or-delete">
-      <i class="bi bi-pencil-fill" (click)="updateModal()"></i>
-      <i class="bi bi-trash3-fill" (click)="deleteModal()"></i>
-    </div>
+<section id="product">
 
+  <div class="icons-edit-or-delete">
+    <i class="bi bi-pencil-fill" (click)="updateModal()"></i>
+    <i class="bi bi-trash3-fill" (click)="deleteModal()"></i>
+  </div>
+
+  <div class="desktop" *ngFor="let item of products">
+    <div class="card-product row">
+      <div class="product col-7">
+        <div class="titles">
+          <h1>{{ item?.name }}</h1>
+          <h4>{{ item?.description }}</h4>
+        </div>
+
+        <h4 *ngIf="item.groups !== ''">Novidade da coleção {{ item?.groups }}</h4>
+        <div class="carousel">
+          <img src="{{ item?.file?.url }}" class="image my-2" alt="#">
+        </div>
+      </div>
+
+      <div class="payment col-5">
+        <div class="price-product mx-4 my-4">
+          R$ {{ item?.valor }}
+        </div>
+
+        <div class="description mx-2 my-5">
+          <p>Este produto da luz violeta possui as seguintes medidas:</p>
+
+          <div class="list-description">
+            <div>Altura: 1 metro e 70 centimentros</div>
+            <div>Largura: 70 centimentro</div>
+            <div>Espessura: 4cm</div>
+            <div>Peso: 2kg</div>
+          </div>
+        </div>
+
+        <div class="freight my-4">
+          <h4 class="mx-4"> <strong>Calcular Frete</strong> </h4>
+
+          <div class="row mx-2">
+            <div class="col-6">
+              <label for="postalCode">Digite o CEP:</label>
+              <input id="postalCode" type="text" class="input-postal-code mx-2">
+            </div>
+
+            <div class="col-6">
+              <div class="button-one" (click)="searchShipping()">Calcular Frete <i class="bi bi-airplane-engines mx-2"></i></div>
+            </div>
+          </div>
+
+          <hr class="my-3">
+
+          <div class="cards-shippings" *ngFor="let shipping of shippings">
+            <div class="shipping row">
+              <div class="col-2">
+                <input type="radio" name="shippingCheck" id="">
+              </div>
+
+              <div class="col-5">
+                <img src="{{ shipping?.company?.picture }}" alt="">
+              </div>
+
+              <div class="col-5 price-shipping">
+                <span>R$ {{ shipping?.price }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="purchaseModal">
+          <div class="row">
+            <div class="col-6">
+              <h2>adicionar ao carrinho</h2>
+            </div>
+
+            <div class="col-6">
+              <app-buy></app-buy>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- <div class="mobile">
     <div class="product-card">
       <div class="titles">
-        <h1>{{ item.name }}</h1>
-        <h2>{{ item.description }}</h2>
-        <h3>{{ item.groups }}</h3>
+        <h1>{{ item?.name }}</h1>
+        <h2>{{ item?.description }}</h2>
+        <h3>{{ item?.groups }}</h3>
       </div>
 
       <div class="carousel">
-        <img src="../../assets/img/products/rukia.png" class="image my-2" alt="#">
+        <img src="{{ item?.file?.url }}" class="image my-2" alt="#">
       </div>
 
       <div class="valor">
-        R$ {{ item.valor }}
+        R$ {{ item?.valor }}
       </div>
     </div>
 
@@ -29,7 +110,9 @@
         <span><i class="bi bi-airplane-engines"></i></span>
 
 
-        <div class="search" (click)="searchShipping()">Calcular Frete</div>
+        <div class="search">
+          <div class="button-one" (click)="searchShipping()">Calcular Frete</div>
+        </div>
       </div>
     </form>
 
@@ -41,20 +124,16 @@
       <app-buy></app-buy>
       <h2>adicionar ao carrinho</h2>
     </div>
-
-    <div class="return py-4">
-      <div class="button-return" routerLink="/products">
-        <span>voltar para produtos</span>
-        <i class="bi bi-arrow-return-left"></i>
-        <i class="bi bi-arrow-left"></i>
-      </div>
-    </div>
   </div>
+
+   -->
 </section>
 
 
-<!-- <section id="possivel video">
-  <div class="ratio ratio-4x3">
-    <iframe src="https://www.youtube.com/embed/4Ea5zDLwKJw" title="YouTube video"></iframe>
+<div class="return">
+  <div class="button-return" routerLink="/products">
+    <span>voltar para produtos</span>
+    <i class="bi bi-arrow-return-left"></i>
+    <i class="bi bi-arrow-left"></i>
   </div>
-</section> -->
+</div>

@@ -12,14 +12,9 @@ export class MelhorEnvioService {
   constructor(public http: HttpClient) {}
 
   public getShipping(postalCode: string): Promise<any>{
-    return lastValueFrom(this.http.post<any>(`${this.melhorEnvioAPI + '/:' + postalCode}`, null))
+    return lastValueFrom(this.http.post(`${this.melhorEnvioAPI + '/:' + postalCode}`, null))
       .then(result => {
-        console.log(result);
         return result;
-      })
-      .catch(error => {
-        console.log(error);
-        return error;
-      })
+      });
   }
 }

@@ -79,9 +79,6 @@ export class AuthService {
   authedUserWithSuccess(): boolean {
     if(localStorage.getItem('session')) {
       this.authedUser = true;
-    } else {
-      alert('Necessário Fazer Login');
-      this.route.navigateByUrl('/newsletter');
     }
 
     return this.authedUser;

@@ -1,8 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Importing Bootstrap SCSS file. */
-// @import 'bootstrap/scss/bootstrap'
-@use './assets/sass/mobile'
+@use './assets/sass/display'
 @use 'assets/sass/colors'
 
 *
@@ -12,7 +11,7 @@
   padding: 2vh 0px 5vh 5vw
   background-color: colors.$black
 
-  @include mobile.display
+  @include display.mobile
     padding: 2vh 0px 3vh 3vw
 
   .titles
@@ -37,7 +36,7 @@
     background-color: colors.$white
     color: colors.$pourple
 
-  @include mobile.display
+  @include display.mobile
     height: 35px
     min-width: 70px
     background-color: colors.$white
@@ -46,11 +45,11 @@
 .desktop
   display: inline
 
-  @include mobile.display
+  @include display.mobile
     display: none
 
 .mobile
   display: none
 
-  @include mobile.display
+  @include display.mobile
     display: inline

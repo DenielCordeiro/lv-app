@@ -1,4 +1,4 @@
-import { HttpClient} from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { LocalStorageService } from "ngx-webstorage";
 import { lastValueFrom } from "rxjs";
 import { BaseModel } from "src/app/models/base-model";
@@ -6,7 +6,7 @@ import { environment } from "src/environments/environment";
 
 interface LvApi<T extends BaseModel> {
   success: boolean,
-  data: T | T[] | boolean
+  data: T | T[] | boolean | File
 }
 
 export abstract class BaseService<T extends BaseModel> {
@@ -24,6 +24,15 @@ export abstract class BaseService<T extends BaseModel> {
     this.route = environment.api + route;
   }
 
+  public buildHeader(): HttpHeaders {
+    const token = localStorage.getItem('session');
+    const headers = new HttpHeaders({
+      token: `Bearer ${token}`,
+    });
+
+    return headers;
+  }
+
   public getProduct(id: number): Promise<T>{
     return lastValueFrom(this.http.get<LvApi<T>>(`${this.route}/${id}`))
       .then(result => {
@@ -38,22 +47,28 @@ export abstract class BaseService<T extends BaseModel> {
       });
   }
 
-  public createProduct(model: BaseModel): Promise<T> {
-    return lastValueFrom(this.http.post<LvApi<T>>(this.route, model))
+  public createProduct(model: any): Promise<T> {
+    const header = this.buildHeader();
+
+    return lastValueFrom(this.http.post<LvApi<T>>(this.route, model, { headers: header }))
      .then(result => {
       return this.handleResponse(result) as T;
     });
   }
 
   public updateProduct(model: BaseModel, id: number): Promise<T> {
-    return lastValueFrom(this.http.put<LvApi<T>>(`${this.route}/${id}`, model))
+    let header = this.buildHeader();
+
+    return lastValueFrom(this.http.put<LvApi<T>>(`${this.route}/${id}`, model, { headers: header }))
       .then((result) => {
         return this.handleResponse(result) as T;
       });
   }
 
   public delete(id: number): Promise<boolean> {
-    return lastValueFrom(this.http.delete<LvApi<T>>(`${this.route}/${id}`))
+    let header = this.buildHeader();
+
+    return lastValueFrom(this.http.delete<LvApi<T>>(`${this.route}/${id}`, { headers: header }))
       .then((result) => {
         return this.handleResponse(result) as true;
       });
