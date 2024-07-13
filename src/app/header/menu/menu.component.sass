@@ -1,11 +1,11 @@
 @use '../../../assets/sass/colors'
-@use '../../../assets/sass/mobile'
+@use '../../../assets/sass/display'
 
 .burguer-icon
   height: 5vh
   cursor: pointer
 
-  @include mobile.display
+  @include display.mobile
     padding-top: 0.4vh
 
   .line
@@ -17,7 +17,7 @@
     &:hover
       background-color: colors.$pourple
 
-    @include mobile.display
+    @include display.mobile
       width: 35px
       height: 7px
       margin-bottom: 3px
@@ -34,7 +34,7 @@
 .selected
   padding-top: 1.8vh
 
-  @include mobile.display
+  @include display.mobile
     padding-top: 1.8vh
 
   .line
@@ -45,7 +45,7 @@
     transform: rotate(40deg)
     transition: all 400ms
 
-    @include mobile.display
+    @include display.mobile
       height: 6px
 
   .line-two
@@ -56,7 +56,7 @@
     transform: rotate(-40deg)
     transition: all 400ms
 
-    @include mobile.display
+    @include display.mobile
       height: 6px
 
 .menu
@@ -68,7 +68,7 @@
   border: 0px
   transition: all 400ms
 
-  @include mobile.display
+  @include display.mobile
     transition: all 400ms
     width: 0px
     top: 10vh
@@ -88,7 +88,7 @@
   border-top-right-radius: 0px
   border-bottom-right-radius: 0px
 
-  @include mobile.display
+  @include display.mobile
     top: 10vh
     right: 0px
     width: 43%

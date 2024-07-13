@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductsService } from '../services/products/products.service';
 import { ProductModel } from '../models/product.model';
-import { AddOrEditComponent } from './add-or-edit/add-or-edit';
+import { AddOrEditComponent } from './add-or-edit/add-or-edit.component';
 import { DeleteComponent } from './delete/delete.component';
 
 @Component({
@@ -32,6 +32,9 @@ export class ProductsComponent {
       } else {
         this.products.push(allProducts);
         this.product = this.products[0];
+
+        console.log(this.product);
+
       }
     })
     .catch(Error => {

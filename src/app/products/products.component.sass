@@ -1,10 +1,10 @@
-@use '../../assets/sass/mobile'
+@use '../../assets/sass/display'
 @use '../../assets/sass/colors'
 
 #top-menu
   display: inline
 
-  @include mobile.display
+  @include display.mobile
     display: none
 
   .menu
@@ -21,7 +21,7 @@
 #side-menu
   display: none
 
-  @include mobile.display
+  @include display.mobile
     display: inline
     text-align: end
 
@@ -47,16 +47,15 @@
       text-align: end
 
     .product
-      width: 23vw
+      width: 400px
 
-      @include mobile.display
+      @include display.mobile
         width: 47vw
 
       .card
-        min-height: 50vh
         background-color: colors.$white
 
-        @include mobile.display
+        @include display.mobile
           margin-top: 1vh
           min-height: 40vh
 
@@ -68,9 +67,14 @@
         color: colors.$pourple
 
       img
-        height: 40vh
+        width: 376px
+        height: 35vh
+        margin-top: -1px
+        margin-left: -1px
+        border-top-left-radius: 5px
+        border-top-right-radius: 5px
 
-        @include mobile.display
+        @include display.mobile
           height: 20vh
 
       .change-product
@@ -85,5 +89,5 @@
           text-align: end
           cursor: pointer
 
-        @include mobile.display
+        @include display.mobile
           display: none

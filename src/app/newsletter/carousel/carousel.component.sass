@@ -1,4 +1,4 @@
-@use '../../../assets/sass/mobile'
+@use '../../../assets/sass/display'
 @use '../../../assets/sass/colors'
 
 *
@@ -8,13 +8,13 @@
 #carousel-desktop
   display: inline
 
-  @include mobile.display
+  @include display.mobile
     display: none
 
 #carousel-mobile
   display: none
 
-  @include mobile.display
+  @include display.mobile
     display: inline
 
 .content
