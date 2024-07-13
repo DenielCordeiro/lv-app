@@ -1,4 +1,4 @@
-@use '../../assets/sass/mobile'
+@use '../../assets/sass/display'
 @use '../../assets/sass/colors'
 
 *
@@ -29,18 +29,22 @@
 .card-product
   background-color: colors.$black
   height: 88vh
-  padding: 4vh 4vw
-
+  padding: 4vh 8vw
 
 .product
   background-color: colors.$white
   height: 75vh
+  border: 1px solid colors.$white
+  border-right-color: colors.$black
+  border-right-style: dotted
+  border-top-left-radius:  10px
+  border-bottom-left-radius:  10px
+
 
   h1, h4
     text-align: center
 
   .carousel
-    background-color: colors.$pourple
     display: flex
     justify-content: center
     width: 100%
@@ -51,11 +55,38 @@
     border-radius: 20px
 
 .payment
-  background-color: colors.$red
+  background-color: colors.$white
   height: 75vh
 
-  .valor
+  .price-product
     font-size: 25px
+    color: colors.$red
+    font-weight: 600
+
+  .freight
+    // .search
+    //   width: 100%
+    //   display: flex
+    //   justify-content: center
+
+    //   .button-one
+    //     width: 13vw
+
+    .input-postal-code
+      // border: 1px solid colors.$black
+
+      &:active
+        outline: 1px solid colors.$pourple
+
+    .button-one
+      width: 10vw
+
+    img
+      width: 12vw
+      height: 5vh
+
+    .price-shipping
+      text-align: center
 
 .return
   background-color: colors.$black

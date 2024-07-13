@@ -1,11 +1,11 @@
-<section id="product" *ngFor="let item of products">
+<section id="product">
 
   <div class="icons-edit-or-delete">
     <i class="bi bi-pencil-fill" (click)="updateModal()"></i>
     <i class="bi bi-trash3-fill" (click)="deleteModal()"></i>
   </div>
 
-  <div class="desktop">
+  <div class="desktop" *ngFor="let item of products">
     <div class="card-product row">
       <div class="product col-7">
         <div class="titles">
@@ -20,34 +20,66 @@
       </div>
 
       <div class="payment col-5">
-        <form>
-          <div class="valor">
-            R$ {{ item?.valor }}
+        <div class="price-product mx-4 my-4">
+          R$ {{ item?.valor }}
+        </div>
+
+        <div class="description mx-2 my-5">
+          <p>Este produto da luz violeta possui as seguintes medidas:</p>
+
+          <div class="list-description">
+            <div>Altura: 1 metro e 70 centimentros</div>
+            <div>Largura: 70 centimentro</div>
+            <div>Espessura: 4cm</div>
+            <div>Peso: 2kg</div>
+          </div>
+        </div>
+
+        <div class="freight my-4">
+          <h4 class="mx-4"> <strong>Calcular Frete</strong> </h4>
+
+          <div class="row mx-2">
+            <div class="col-6">
+              <label for="postalCode">Digite o CEP:</label>
+              <input id="postalCode" type="text" class="input-postal-code mx-2">
+            </div>
+
+            <div class="col-6">
+              <div class="button-one" (click)="searchShipping()">Calcular Frete <i class="bi bi-airplane-engines mx-2"></i></div>
+            </div>
           </div>
 
-          <div class="description">
-            <p>tamanho: Este produto da luz violeta possui ajuste manual</p>
+          <hr class="my-3">
+
+          <div class="cards-shippings" *ngFor="let shipping of shippings">
+            <div class="shipping row">
+              <div class="col-2">
+                <input type="radio" name="shippingCheck" id="">
+              </div>
+
+              <div class="col-5">
+                <img src="{{ shipping?.company?.picture }}" alt="">
+              </div>
+
+              <div class="col-5 price-shipping">
+                <span>R$ {{ shipping?.price }}</span>
+              </div>
+            </div>
           </div>
-
-          <div class="freight my-2">
-            <h4> <strong>Calcular Frete</strong> </h4>
-            <label for="postalCode">Digite o CEP:</label>
-            <input id="postalCode" type="text" class="mx-2">
-            <span><i class="bi bi-airplane-engines"></i></span>
-
-
-            <div class="search" (click)="searchShipping()">Calcular Frete</div>
-          </div>
-        </form>
-
-        <ng-template>
-          <h1>dados de endereço</h1>
-        </ng-template>
+        </div>
 
         <div class="purchaseModal">
-          <app-buy></app-buy>
-          <h2>adicionar ao carrinho</h2>
+          <div class="row">
+            <div class="col-6">
+              <h2>adicionar ao carrinho</h2>
+            </div>
+
+            <div class="col-6">
+              <app-buy></app-buy>
+            </div>
+          </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -78,7 +110,9 @@
         <span><i class="bi bi-airplane-engines"></i></span>
 
 
-        <div class="search" (click)="searchShipping()">Calcular Frete</div>
+        <div class="search">
+          <div class="button-one" (click)="searchShipping()">Calcular Frete</div>
+        </div>
       </div>
     </form>
 

@@ -4,5 +4,6 @@ export interface Shipping {
     name: string,
     picture: string,
   },
-  price: number
+  name: string,
+  price: number,
 }

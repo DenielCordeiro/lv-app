@@ -1,6 +1,6 @@
 // @import url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap");
 @use '../../../assets/sass/collections'
-@use '../../../assets/sass/mobile'
+@use '../../../assets/sass/display'
 @use '../../../assets/sass/colors'
 
 *
@@ -15,7 +15,7 @@
   gap: 13px
   padding-top: 10vh
 
-  @include mobile.display
+  @include display.mobile
     padding-top: 4vh
     height: 46vh
     gap: 15px
@@ -29,7 +29,7 @@
     background-color: colors.$pourple
     overflow: hidden
 
-    @include mobile.display
+    @include display.mobile
       flex: 0 0 40vw
 
     &:nth-of-type(1)
@@ -53,7 +53,7 @@
       // background-size: 100% 100%
       display: inline
 
-      @include mobile.display
+      @include display.mobile
         display: none
 
     .content
@@ -75,7 +75,7 @@
         max-width: 11vw
         border-radius: 10px
 
-        @include mobile.display
+        @include display.mobile
           max-width: 35vw
 
       span
@@ -87,7 +87,7 @@
       box-shadow: 1px 3px 15px #7645d8
       transform: translatey(-20px)
 
-      @include mobile.display
+      @include display.mobile
         flex: 0 0 40vw
         transform: translatey(-10px)
 

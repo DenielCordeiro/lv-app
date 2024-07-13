@@ -55,13 +55,24 @@ export class ProductComponent implements OnInit {
 
   searchShipping(): void {
     this.melhorEnvio.getShipping('13308197')
-      // .then(result => {
-      //   console.log(result);
+      .then(result => {
 
-      // })
-      // .catch(error => {
-      //   console.log(error);
+        const shippings = result?.data;
 
-      // })
+        shippings.forEach((data: Shipping) => {
+
+          if (data.price != null) {
+            this.shippings.push(data)
+          } else {
+            console.log('nenhum envio encontrado!');
+          }
+
+        });
+
+        console.log(this.shippings);
+      })
+      .catch(error => {
+        console.log(error);
+      })
   }
 }
