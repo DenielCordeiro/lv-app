@@ -40,8 +40,12 @@
 
           <div class="row mx-2">
             <div class="col-6">
-              <label for="postalCode">Digite o CEP:</label>
-              <input id="postalCode" type="text" class="input-postal-code mx-2">
+              <form [formGroup]="searchForm">
+
+                <label for="postalCode">Digite o CEP:</label>
+                <input id="postalCode" type="number" class="input-postal-code mx-2" formControlName="postalCode">
+
+              </form>
             </div>
 
             <div class="col-6">

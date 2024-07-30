@@ -18,6 +18,10 @@ export class ProductModel {
         type?: Date,
         default?: Date
       }
+    },
+    public shipping?: {
+      name?: string,
+      price?: number,
     }
   ) {}
 }

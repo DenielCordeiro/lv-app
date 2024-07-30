@@ -1,7 +1,7 @@
 import { Shipping } from './../models/shipping.interface';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ProductsService } from './../services/products/products.service';
 import { ProductModel } from '../models/product.model';
 import { MelhorEnvioService } from '../services/melhor-envio/melhor-envio.service';
@@ -12,19 +12,21 @@ import { MelhorEnvioService } from '../services/melhor-envio/melhor-envio.servic
   styleUrls: ['./product.component.sass']
 })
 export class ProductComponent implements OnInit {
-  form!: FormGroup;
-  routeId: number | undefined = undefined;
+  searchForm!: FormGroup;
   products: ProductModel[] = [];
-  product!: ProductModel;
   shippings: Shipping[] = [];
+  product!: ProductModel;
+  routeId: number | undefined = undefined;
+  postalCode!: string;
 
   constructor(
     public route: ActivatedRoute,
+    private formBuilder: FormBuilder,
     public productsService: ProductsService,
     public melhorEnvio: MelhorEnvioService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.routeId = this.route.snapshot.params["product_id"];
 
     if (this.routeId !== undefined) {
@@ -32,6 +34,8 @@ export class ProductComponent implements OnInit {
     } else {
       alert("seguinte chefia, deu erro! não trouxe id pela rota");
     }
+
+    this.buildingForm();
   }
 
   getProductSelected(id: number): void {
@@ -50,29 +54,46 @@ export class ProductComponent implements OnInit {
       })
   }
 
+  buildingForm(): void {
+    this.searchForm = this.formBuilder.group({
+      "postalCode": [null],
+    });
+  }
+
   updateModal(): void {}
   deleteModal(): void {}
 
   searchShipping(): void {
-    this.melhorEnvio.getShipping('13308197')
-      .then(result => {
+    const postalCodeNumber = this.searchForm?.value;
+    this.postalCode = String(postalCodeNumber?.postalCode)
 
-        const shippings = result?.data;
+    if (this.postalCode == 'null') {
 
-        shippings.forEach((data: Shipping) => {
+      alert("[Atenção]: Precisa digitar algum número de CEP!");
 
-          if (data.price != null) {
-            this.shippings.push(data)
-          } else {
-            console.log('nenhum envio encontrado!');
-          }
+    } else {
+      this.melhorEnvio.getShipping(this.postalCode)
+        .then(result => {
+          const shippings = result?.data;
+          const prices: number[] = [];
+          let smallPrice!: number;
 
-        });
+          shippings.forEach((data: Shipping) => {
 
-        console.log(this.shippings);
-      })
-      .catch(error => {
-        console.log(error);
-      })
+            if (data.price != null && (data.company.name == "Jadlog" || data.company.name == "Correios")) {
+              prices.push(data.price)
+              smallPrice = Math.min(...prices.map(Number));
+
+              if (data.price == smallPrice) {
+                this.shippings.pop();
+                this.shippings.push(data);
+              }
+            }
+          });
+        })
+        .catch(error => {
+          console.log(error);
+        })
+    }
   }
 }
