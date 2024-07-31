@@ -87,9 +87,18 @@ export class ProductComponent implements OnInit {
               if (data.price == smallPrice) {
                 this.shippings.pop();
                 this.shippings.push(data);
+
+                this.product.shipping = {
+                  name: data.name,
+                  price: data.price,
+                  postalCode: postalCodeNumber?.postalCode,
+                }
               }
             }
           });
+
+          console.log('prosuto: ', this.product);
+
         })
         .catch(error => {
           console.log(error);

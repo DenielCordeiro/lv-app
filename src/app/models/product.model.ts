@@ -22,6 +22,7 @@ export class ProductModel {
     public shipping?: {
       name?: string,
       price?: number,
+      postalCode?: number,
     }
   ) {}
 }
