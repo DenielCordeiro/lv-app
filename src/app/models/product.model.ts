@@ -3,6 +3,7 @@ export class ProductModel {
   constructor(
     public id?: number,
     public user?: number,
+    public saleUser?: string,
     public name?: string,
     public description?: string,
     public valor?: number,
@@ -18,6 +19,11 @@ export class ProductModel {
         type?: Date,
         default?: Date
       }
+    },
+    public shipping?: {
+      name?: string,
+      price?: number,
+      postalCode?: number,
     }
   ) {}
 }

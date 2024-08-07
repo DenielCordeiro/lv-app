@@ -6,30 +6,51 @@
   padding: 0
 
 .icons-edit-or-delete
-  background-color: colors.$white
   color: colors.$black
   display: flex
   justify-content: end
   font-size: 22px
 
+  @include display.hd
+    font-size: 18px
+
   .bi-pencil-fill
-    margin-right: 5vw
+    margin-right: 12vw
+
+    &:hover
+      color: colors.$green-light
+
+    @include display.hd
+      margin-right: 14vw
+
+    @include display.mobile
+      margin-right: 18vw
 
   i
     cursor: pointer
     position: absolute
-    margin: 2vh 2vw 0px 0px
+    margin: 2vh 9vw 0px 0px
 
     &:hover
-      color: colors.$pourple
+      color: colors.$red
+
+    @include display.hd
+      margin: 2.5vh 10vw 0px 0px
+
+    @include display.mobile
+      margin: 2.5vh 8vw 0px 0px
 
 .desktop, .mobile
   width: 100%
 
 .card-product
   background-color: colors.$black
-  height: 88vh
-  padding: 4vh 8vw
+  height: 85vh
+  padding: 0px 8vw
+
+  @include display.mobile
+    background-color: colors.$green-light
+    padding: 0px
 
 .product
   background-color: colors.$white
@@ -39,7 +60,7 @@
   border-right-style: dotted
   border-top-left-radius:  10px
   border-bottom-left-radius:  10px
-
+  padding-top: 3vh
 
   h1, h4
     text-align: center
@@ -50,43 +71,62 @@
     width: 100%
 
   img
-    width: 28vw
-    height: 55vh
+    width: 26vw
+    height: 45vh
     border-radius: 20px
+
+    @include display.hd
+      width: 30vw
+      height: 36vh
 
 .payment
   background-color: colors.$white
   height: 75vh
+  border-top-right-radius:  10px
+  border-bottom-right-radius:  10px
+  padding-top: 3vh
 
   .price-product
     font-size: 25px
     color: colors.$red
     font-weight: 600
 
+    @include display.hd
+      font-size: 20px
+
   .freight
-    // .search
-    //   width: 100%
-    //   display: flex
-    //   justify-content: center
+    #postalCode
+      width: 12vw
+      height: 3vh
+      padding-left: 5px
 
-    //   .button-one
-    //     width: 13vw
+    .image-shipping
+      display: flex
+      justify-content: center
 
-    .input-postal-code
-      // border: 1px solid colors.$black
+      img
+        width: 8vw
+        height: 5vh
 
-      &:active
-        outline: 1px solid colors.$pourple
+        @include display.hd
+          width: 10vw
+          height: 4vh
 
     .button-one
       width: 10vw
+      font-size: 18px
 
-    img
-      width: 12vw
-      height: 5vh
+      @include display.hd
+        width: 12vw
+        font-size: 13px
 
     .price-shipping
-      text-align: center
+      display: flex
+      flex-direction: column-reverse
+      font-size: 20px
+
+      @include display.hd
+        font-size: 16px
 
 .return
   background-color: colors.$black
@@ -94,7 +134,7 @@
   display: flex
   justify-content: end
   width: 100%
-  height: 4vh
+  height: 5vh
   font-size: 20px
 
   .button-return

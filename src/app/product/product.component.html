@@ -1,11 +1,10 @@
 <section id="product">
-
-  <div class="icons-edit-or-delete">
-    <i class="bi bi-pencil-fill" (click)="updateModal()"></i>
-    <i class="bi bi-trash3-fill" (click)="deleteModal()"></i>
-  </div>
-
   <div class="desktop" *ngFor="let item of products">
+    <div class="icons-edit-or-delete">
+      <i class="bi bi-pencil-fill" (click)="updateModal(item?.id)"></i>
+      <i class="bi bi-trash3-fill" (click)="deleteModal(item?.id)"></i>
+    </div>
+
     <div class="card-product row">
       <div class="product col-7">
         <div class="titles">
@@ -19,12 +18,12 @@
         </div>
       </div>
 
-      <div class="payment col-5">
-        <div class="price-product mx-4 my-4">
+      <div class="payment col-5 px-3">
+        <div class="price-product mx-3">
           R$ {{ item?.valor }}
         </div>
 
-        <div class="description mx-2 my-5">
+        <div class="description my-5">
           <p>Este produto da luz violeta possui as seguintes medidas:</p>
 
           <div class="list-description">
@@ -36,12 +35,16 @@
         </div>
 
         <div class="freight my-4">
-          <h4 class="mx-4"> <strong>Calcular Frete</strong> </h4>
+          <h4 class="mx-3"> <strong>Calcular Frete</strong> </h4>
 
-          <div class="row mx-2">
+          <div class="row">
             <div class="col-6">
-              <label for="postalCode">Digite o CEP:</label>
-              <input id="postalCode" type="text" class="input-postal-code mx-2">
+              <form [formGroup]="searchForm">
+
+                <label for="postalCode">Digite o CEP:</label>
+                <input id="postalCode" type="number" class="input-lv" formControlName="postalCode">
+
+              </form>
             </div>
 
             <div class="col-6">
@@ -49,31 +52,28 @@
             </div>
           </div>
 
-          <hr class="my-3">
-
           <div class="cards-shippings" *ngFor="let shipping of shippings">
-            <div class="shipping row">
-              <div class="col-2">
-                <input type="radio" name="shippingCheck" id="">
-              </div>
+            <hr class="mt-3 mb-2">
 
-              <div class="col-5">
+            <div class="shipping row">
+              <div class="col-6 image-shipping">
                 <img src="{{ shipping?.company?.picture }}" alt="">
               </div>
 
-              <div class="col-5 price-shipping">
+              <div class="col-6 price-shipping">
                 <span>R$ {{ shipping?.price }}</span>
               </div>
             </div>
+
+            <hr class="my-3">
           </div>
         </div>
 
         <div class="purchaseModal">
-          <div class="row">
+          <div class="row px-4">
             <div class="col-6">
-              <h2>adicionar ao carrinho</h2>
+              <app-add-cart></app-add-cart>
             </div>
-
             <div class="col-6">
               <app-buy></app-buy>
             </div>
@@ -83,10 +83,16 @@
       </div>
     </div>
   </div>
+</section>
 
+<section id="product-mobile">
+  <div class="mobile" *ngFor="let item of products">
+    <div class="icons-edit-or-delete">
+      <i class="bi bi-pencil-fill" (click)="updateModal(item?.id)"></i>
+      <i class="bi bi-trash3-fill" (click)="deleteModal(item?.id)"></i>
+    </div>
 
-  <!-- <div class="mobile">
-    <div class="product-card">
+    <div class="card-product">
       <div class="titles">
         <h1>{{ item?.name }}</h1>
         <h2>{{ item?.description }}</h2>
@@ -94,39 +100,73 @@
       </div>
 
       <div class="carousel">
-        <img src="{{ item?.file?.url }}" class="image my-2" alt="#">
+        <!-- <img src="{{ item?.file?.url }}" class="image my-2" alt="#"> -->
       </div>
+    </div>
 
-      <div class="valor">
+    <div class="payment">
+      <div class="price-product">
         R$ {{ item?.valor }}
       </div>
-    </div>
 
-    <form>
-      <div class="freight my-2">
-        <h4> <strong>Calcular Frete</strong> </h4>
-        <label for="postalCode">Digite o CEP:</label>
-        <input id="postalCode" type="text" class="mx-2">
-        <span><i class="bi bi-airplane-engines"></i></span>
+      <div class="description my-5">
+        <p>Este produto da luz violeta possui as seguintes medidas:</p>
 
-
-        <div class="search">
-          <div class="button-one" (click)="searchShipping()">Calcular Frete</div>
+        <div class="list-description">
+          <div>Altura: 1 metro e 70 centimentros</div>
+          <div>Largura: 70 centimentro</div>
+          <div>Espessura: 4cm</div>
+          <div>Peso: 2kg</div>
         </div>
       </div>
-    </form>
 
-    <ng-template>
-      <h1>dados de endereço</h1>
-    </ng-template>
+      <div class="freight my-4">
+        <h4> <strong>Calcular Frete</strong> </h4>
 
-    <div class="purchaseModal">
-      <app-buy></app-buy>
-      <h2>adicionar ao carrinho</h2>
+        <div class="row">
+          <div class="col-6">
+            <form [formGroup]="searchForm">
+
+              <label for="postalCode">Digite o CEP:</label>
+              <input id="postalCode" type="number" class="input-lv" formControlName="postalCode">
+
+            </form>
+          </div>
+
+          <div class="col-6">
+            <div class="button-one" (click)="searchShipping()">Calcular Frete <i class="bi bi-airplane-engines mx-2"></i></div>
+          </div>
+        </div>
+
+        <div class="cards-shippings" *ngFor="let shipping of shippings">
+          <hr class="mt-3 mb-2">
+
+          <div class="shipping row">
+            <div class="col-6 image-shipping">
+              <img src="{{ shipping?.company?.picture }}" alt="">
+            </div>
+
+            <div class="col-6 price-shipping">
+              <span>R$ {{ shipping?.price }}</span>
+            </div>
+          </div>
+
+          <hr class="my-3">
+        </div>
+      </div>
+
+      <div class="purchaseModal">
+        <div class="row px-4">
+          <div class="col-6">
+            <app-add-cart></app-add-cart>
+          </div>
+          <div class="col-6">
+            <app-buy></app-buy>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-
-   -->
 </section>
 
 

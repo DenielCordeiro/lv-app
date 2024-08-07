@@ -40,6 +40,8 @@ import { HeaderComponent } from './header/header.component';
 import { MenuComponent } from './header/menu/menu.component';
 import { DesktopMenuComponent } from './header/menu/desktop-menu/desktop-menu.component';
 import { MobileMenuComponent } from './header/menu/mobile-menu/mobile-menu.component';
+import { CartComponent } from './header/menu/cart/cart.component';
+import { AddCartComponent } from './header/menu/cart/add-cart/add-cart.component';
 
 
 @NgModule({
@@ -64,7 +66,10 @@ import { MobileMenuComponent } from './header/menu/mobile-menu/mobile-menu.compo
     DeleteComponent,
     MenuComponent,
     DesktopMenuComponent,
-    MobileMenuComponent
+    MobileMenuComponent,
+    CartComponent,
+    AddCartComponent
+
   ],
   imports: [
     BrowserModule,
