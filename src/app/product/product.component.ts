@@ -17,7 +17,7 @@ export class ProductComponent implements OnInit {
   shippings: Shipping[] = [];
   product!: ProductModel;
   routeId: number | undefined = undefined;
-  postalCode!: string;
+  postalCode: string = '';
 
   constructor(
     public route: ActivatedRoute,

@@ -47,13 +47,13 @@
               </form>
             </div>
 
-            <div class="col-6">
+            <div class="col-6 button-freight-content">
               <div class="button-one" (click)="searchShipping()">Calcular Frete <i class="bi bi-airplane-engines mx-2"></i></div>
             </div>
           </div>
 
           <div class="cards-shippings" *ngFor="let shipping of shippings">
-            <hr class="mt-3 mb-2">
+            <hr class="mt-5 mb-2">
 
             <div class="shipping row">
               <div class="col-6 image-shipping">
@@ -69,8 +69,8 @@
           </div>
         </div>
 
-        <div class="purchaseModal">
-          <div class="row px-4">
+        <div class="purchaseModal my-5" *ngIf="postalCode != ''">
+          <div class="row">
             <div class="col-6">
               <app-add-cart></app-add-cart>
             </div>
@@ -156,7 +156,7 @@
       </div>
 
       <div class="purchaseModal">
-        <div class="row px-4">
+        <div class="row">
           <div class="col-6">
             <app-add-cart></app-add-cart>
           </div>

@@ -112,13 +112,18 @@
           width: 10vw
           height: 4vh
 
-    .button-one
-      width: 10vw
-      font-size: 18px
 
-      @include display.hd
-        width: 12vw
-        font-size: 13px
+    .button-freight-content
+      display: flex
+      flex-direction: column-reverse
+
+      .button-one
+        width: 10vw
+        font-size: 18px
+
+        @include display.hd
+          width: 12vw
+          font-size: 13px
 
     .price-shipping
       display: flex
@@ -127,6 +132,12 @@
 
       @include display.hd
         font-size: 16px
+
+  .purchaseModal
+    // width: 100%
+    // background-color: colors.$green
+
+
 
 .return
   background-color: colors.$black
