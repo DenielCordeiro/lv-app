@@ -43,15 +43,28 @@ export class ProductsComponent {
     })
   }
 
-  modalCreate(id: number | null) {
-    if(id !== null) {
-      this.productsService.getProduct(id)
-      .then(product => {
-          this.dialog.open<AddOrEditComponent>(AddOrEditComponent, {
-            width: '70%',
-            data: product
-          });
+  searchProduct(idSelected: number): any[] {
+    const product = [];
+
+    for (let i = 0; i < this.product.length; i++) {
+
+      if (this.product[i]._id == idSelected) {
+        product.push(this.product[i]);
+      }
+    }
+
+    return product
+  }
+
+  modalCreate(idSelected: number | null) {
+    if(idSelected !== null) {
+      const product = this.searchProduct(idSelected);
+
+      this.dialog.open<AddOrEditComponent>(AddOrEditComponent, {
+        width: '70%',
+        data: product
       });
+
     } else {
       this.dialog.open<AddOrEditComponent>(AddOrEditComponent, {
         width: '70%',
@@ -59,11 +72,13 @@ export class ProductsComponent {
     }
   }
 
-  modalDelete(id: string | number | null) {
+  modalDelete(id: number | null) {
     if (id !== null) {
+      const product = this.searchProduct(id);
+
       this.dialog.open<DeleteComponent>(DeleteComponent, {
         width: '70%',
-        data: id
+        data: product
       });
     }
   }
