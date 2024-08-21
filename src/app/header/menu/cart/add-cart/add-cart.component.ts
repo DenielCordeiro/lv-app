@@ -8,28 +8,28 @@ import { ProductsService } from 'src/app/services/products/products.service';
   styleUrls: ['./add-cart.component.sass']
 })
 export class AddCartComponent {
-  model!: ProductModel;
+  product!: ProductModel;
   id: number | undefined = 0;
 
   constructor(private productService: ProductsService) {}
 
   addToCart(): void {
-    if (this.model.user != undefined)
+    if (this.product.user != undefined)
     {
-      this.id = this.model.user;
-      this.productService.updateProduct(this.model, this.id)
-        .then(result => {
-          console.log(result);
+      this.id = this.product.user;
+      // this.productService.updateProduct(this.product, this.id)
+      //   .then(result => {
+      //     console.log(result);
 
-        })
-        .catch(error => {
-          console.log(error);
+      //   })
+      //   .catch(error => {
+      //     console.log(error);
 
-        })
-        .finally(() => {
-          console.log('Produto adicionado ao Carrinho');
+      //   })
+      //   .finally(() => {
+      //     console.log('Produto adicionado ao Carrinho');
 
-        })
+      //   })
     }
   }
 }

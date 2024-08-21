@@ -13,7 +13,7 @@
       </div>
     </div>
 
-    <form class="row" [formGroup]="form">
+    <form [formGroup]="form" class="row">
       <div class="col-6 my-2">
         <label for="name" class="form-label">Nome:</label>
         <input type="text" formControlName="name" class="form-control" id="name">
@@ -57,7 +57,7 @@
       </div>
 
       <div class="button-add" >
-        <button class="btn btn-primary" (click)="addProduct()">adicionar produto</button>
+        <button class="btn btn-primary" (click)="addOrEditProduct()">adicionar produto</button>
       </div>
 
     </form>

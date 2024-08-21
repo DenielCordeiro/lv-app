@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-delete',
@@ -6,6 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./delete.component.sass']
 })
 export class DeleteComponent {
+  constructor(
+    @Inject(MAT_DIALOG_DATA)
+    public dialogRef: MatDialogRef<DeleteComponent>,
+    // public dialog: MatDialog,
+  ) {
+
+  }
 
   // deletingProduct() {
   //   if (id !== undefined) {
