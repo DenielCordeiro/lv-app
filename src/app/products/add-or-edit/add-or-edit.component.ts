@@ -22,6 +22,7 @@ export class AddOrEditComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public updateData: ProductModel[],
     public dialog: MatDialog,
+    public dialogAddOrEdit: MatDialogRef<AddOrEditComponent>,
     private formBuilder: FormBuilder,
     public productService: ProductsService,
     public userService: UserService,
@@ -97,27 +98,29 @@ export class AddOrEditComponent implements OnInit {
     if (this.updateData !== null) {
       this.productService.updateProduct(formData, this.form.value.id)
         .then(data => {
-          console.log('Resultado: ', data);
-          this.dialog.closeAll();
+          this.dialogAddOrEdit.close(data);
         })
         .catch((error) => {
           console.log(error);
         })
         .finally(() => {
-          console.log('finalizou');
+          this.dialogAddOrEdit.afterClosed().subscribe(result => {
+            console.log('Finalizou, resultado: ', result);
+          });
         });
 
     } else {
       this.productService.createProduct(formData)
         .then(data => {
-          console.log('Resultado: ', data);
-          this.dialog.closeAll();
+          this.dialogAddOrEdit.close(data);
         })
         .catch((error) => {
           console.log(error);
         })
         .finally(() => {
-          console.log('finalizou');
+          this.dialogAddOrEdit.afterClosed().subscribe(result => {
+            console.log('Finalizou, resultado: ', result);
+          });
         });
     };
   }

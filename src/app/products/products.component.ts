@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductsService } from '../services/products/products.service';
 import { ProductModel } from '../models/product.model';
@@ -10,7 +10,7 @@ import { DeleteComponent } from './delete/delete.component';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.sass']
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit {
   modalOpen: boolean = false;
   productId: number | undefined;
   title: string = 'Trabalhos disponíveis';
@@ -20,7 +20,9 @@ export class ProductsComponent {
   constructor(
     public productsService: ProductsService,
     public dialog: MatDialog,
-  ) {
+  ) {}
+
+  ngOnInit(): void {
     this.getingProducts();
   }
 
@@ -69,9 +71,9 @@ export class ProductsComponent {
     }
   }
 
-  modalDelete(id: number | null) {
-    if (id !== null) {
-      const product = this.searchProduct(id);
+  modalDelete(idSelected: number | null) {
+    if (idSelected !== null) {
+      const product = this.searchProduct(idSelected);
 
       this.dialog.open<DeleteComponent>(DeleteComponent, {
         width: '70%',

@@ -56,23 +56,23 @@ export abstract class BaseService<T extends BaseModel> {
     });
   }
 
-  public updateProduct(model: FormData, idProduct: number | undefined): Promise<T> {
+  public updateProduct(model: FormData, productId: number | undefined): Promise<T> {
     const header = this.buildHeader();
 
-    console.log('token: ', header);
-    console.log('id: ', idProduct);
-
-
-    return lastValueFrom(this.http.put<LvApi<T>>(`${this.route}/${idProduct}`, model, { headers: header }))
+    return lastValueFrom(this.http.put<LvApi<T>>(`${this.route}/${productId}`, model, { headers: header }))
       .then((result) => {
+
         return this.handleResponse(result) as T;
-      });
+      })
+      .catch (error => {
+        return this.handleResponse(error) as T;
+      })
   }
 
-  public delete(id: number): Promise<boolean> {
+  public deleteProduct(productId: number): Promise<boolean> {
     let header = this.buildHeader();
 
-    return lastValueFrom(this.http.delete<LvApi<T>>(`${this.route}/${id}`, { headers: header }))
+    return lastValueFrom(this.http.delete<LvApi<T>>(`${this.route}/${productId}`, { headers: header }))
       .then((result) => {
         return this.handleResponse(result) as true;
       });
@@ -80,6 +80,10 @@ export abstract class BaseService<T extends BaseModel> {
 
   public handleResponse(response: LvApi<T>) {
     if(response) {
+
+      console.log('response: ', response);
+
+
       return response.data;
     } else {
       throw new Error("Api 200, mas success falso!");
