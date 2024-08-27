@@ -6,12 +6,16 @@
   text-align: center
   cursor: pointer
   color: colors.$green-light
-  font-size: 20px
+  font-size: 18px
 
   i
-    font-size: 24px
+    font-size: 22px
     margin-left: 12px
 
   &:hover
     color: colors.$green
     border-bottom: 2px solid colors.$green
+
+  @include display.mobile
+    color: colors.$green
+    border-bottom: 1px solid colors.$green

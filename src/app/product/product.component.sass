@@ -151,28 +151,73 @@
         width: 100%
         height: 42vh
 
+  .description
+    display: flex
+    justify-content: end
+    align-items: center
+    font-size: 15px
+
+    i
+      font-size: 18px
+      margin: 0px 2vw
+
+    .text-description
+      .modal-dialog
+        display: flex
+        justify-content: center
+
+        .card-description
+          height: 45vh
+          width: 95%
+          background-color: colors.$white
+          margin-top: 20vh
+          border-radius: 7px
+
   .payment
-    .button-freight
-      text-align: center
-      color: colors.$blue
-      font-size: 20px
-      border-bottom: 1px solid colors.$blue
+    .freight
+      font-size: 16px
+
+      .button-freight
+        text-align: center
+        color: colors.$blue
+        font-size: 18px
+        border-bottom: 1px solid colors.$blue
+
+      .input-lv
+        border: none
+        border-bottom: 1px solid colors.$blue
+        margin: 15px 5px 15px 5px
+
+      .search
+        border: none
+        background-color: colors.$white
+        color: colors.$green
+
+      .shipping
+        .image-shipping
+          img
+            width: 40vw
+            height: 6vh
+
 
 .return
+  position: fixed
+  bottom: 0px
   background-color: colors.$black
   color: colors.$white
-  display: flex
-  justify-content: end
   width: 100%
   height: 5vh
+  padding: 1vh 2vw
   font-size: 20px
+  display: flex
+  justify-content: end
+  align-items: end
 
   .button-return
     cursor: pointer
 
     i
-      font-size: 28px
-      margin: 0px 1.5vw 0px 1vw
+      margin: 0px 1.5vw 0px 2vw
 
     .bi-arrow-return-left
       display: none
@@ -185,4 +230,3 @@
 
       .bi-arrow-left
         display: none
-

@@ -111,36 +111,64 @@
       </div>
     </div>
 
+    <div class="description mb-4">
+      <div class="button-description"  data-bs-toggle="modal" data-bs-target="#descriptionModal">
+        <span>Ver Descrição</span>
+        <i class="bi bi-arrow-right"></i>
+      </div>
+
+      <div class="text-description modal fade" id="descriptionModal" tabindex="-1" aria-labelledby="descriptionModalLabel" aria-hidden="true">
+
+        <div class="modal-dialog row">
+          <div class="card-description">
+            <h4>{{ item?.description }}</h4>
+            <h4>{{ item?.groups }}</h4>
+
+            <p>Este produto da luz violeta possui as seguintes medidas:</p>
+
+            <div class="list-description">
+              <div>Altura: 1 metro e 70 centimentros</div>
+              <div>Largura: 70 centimentro</div>
+              <div>Espessura: 4cm</div>
+              <div>Peso: 2kg</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
     <div class="payment">
-      <div class="freight my-3">
-        <h4> <strong>Calcular Frete</strong> </h4>
-
+      <div class="freight">
         <form [formGroup]="searchForm">
-          <label for="postalCode">Digite o CEP:</label>
-          <input id="postalCode" type="number" class="input-lv" formControlName="postalCode">
-
-          <div class="button-freight py-2" type="submit" (click)="searchShipping()">
+          <div class="button-freight py-2" data-bs-toggle="collapse" href="#postalCoderInput" aria-expanded="false" aria-controls="postalCoderInput">
             <span>Calcular Frete</span>
             <i class="bi bi-truck mx-3"></i>
           </div>
-        </form>
 
+          <div class="collapse postalCoderInput" id="postalCoderInput">
+            <label for="postalCode">Digite o CEP:</label>
+            <input id="postalCode" type="number" class="input-lv" formControlName="postalCode">
 
-        <div class="cards-shippings" *ngFor="let shipping of shippings">
-          <hr class="mt-2 mb-2">
+            <button class="search" type="submit" (click)="searchShipping()">Buscar</button>
 
-          <div class="shipping row">
-            <div class="col-6 image-shipping">
-              <img src="{{ shipping?.company?.picture }}" alt="">
-            </div>
+            <div class="cards-shippings" *ngFor="let shipping of shippings">
+              <hr class="mt-2 mb-2">
 
-            <div class="col-6 price-shipping">
-              <span>R$ {{ shipping?.price }}</span>
+              <div class="shipping row">
+                <div class="col-6 image-shipping">
+                  <img src="{{ shipping?.company?.picture }}" alt="">
+                </div>
+
+                <div class="col-6 price-shipping">
+                  <span>R$ {{ shipping?.price }}</span>
+                </div>
+              </div>
+
+              <hr class="my-2">
             </div>
           </div>
-
-          <hr class="my-2">
-        </div>
+        </form>
       </div>
 
       <div class="purchaseModal">
@@ -153,21 +181,6 @@
         </div>
       </div>
     </div>
-
-    <div class="description my-3">
-      <h4>{{ item?.description }}</h4>
-      <h4>{{ item?.groups }}</h4>
-
-      <p>Este produto da luz violeta possui as seguintes medidas:</p>
-
-      <div class="list-description">
-        <div>Altura: 1 metro e 70 centimentros</div>
-        <div>Largura: 70 centimentro</div>
-        <div>Espessura: 4cm</div>
-        <div>Peso: 2kg</div>
-      </div>
-    </div>
-
   </div>
 </section>
 

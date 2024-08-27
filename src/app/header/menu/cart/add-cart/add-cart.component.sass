@@ -6,7 +6,7 @@
   text-align: center
   cursor: pointer
   color: colors.$pourple-light
-  font-size: 20px
+  font-size: 18px
 
   i
     margin-left: 12px
@@ -15,21 +15,16 @@
     color: colors.$pourple
     border-bottom: 2px solid colors.$pourple
 
-  .text-cart
-    display: inline
-
-    @include display.mobile
-      display: none
-
-    @include display.hd
-      display: none
+  @include display.mobile
+    color: colors.$pourple
+    border-bottom: 1px solid colors.$pourple
 
 
-  .text-cart-mobile
-    display: none
+  // .text-cart
+  //   display: inline
 
-    @include display.mobile
-      display: inline
+  //   @include display.mobile
+  //     display: none
 
-    @include display.hd
-      display: inline
+  //   @include display.hd
+  //     display: none

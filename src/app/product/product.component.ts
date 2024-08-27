@@ -90,7 +90,7 @@ export class ProductComponent implements OnInit {
 
                 this.product.shipping = {
                   name: data.name,
-                  price: data.price,
+                  price: Number(data.price),
                   postalCode: postalCodeNumber?.postalCode,
                 }
               }
