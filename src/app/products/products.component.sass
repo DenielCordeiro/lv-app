@@ -26,7 +26,8 @@
     text-align: end
 
   .menu
-    margin-bottom: 5vh
+    padding-bottom: 5vh
+    background-color: colors.$black
 
   button
     font-size: 12px
@@ -41,23 +42,15 @@
   background-color: colors.$black
 
   .products
-    justify-content: center
-
     .buttons-crud
       text-align: end
 
     .product
-      width: 400px
+      background-color: colors.$blue
+      width: 30vw
 
       @include display.mobile
-        width: 47vw
-
-      .card
-        background-color: colors.$white
-
-        @include display.mobile
-          margin-top: 1vh
-          min-height: 40vh
+        width: 50vw
 
       .icon
         color: colors.$white
@@ -66,16 +59,25 @@
       .icon-selected
         color: colors.$pourple
 
-      img
-        width: 376px
-        height: 35vh
-        margin-top: -1px
-        margin-left: -1px
-        border-top-left-radius: 5px
-        border-top-right-radius: 5px
+      .card
+        background-color: colors.$white
 
         @include display.mobile
-          height: 20vh
+          margin-top: 1vh
+          width: 44vw
+          height: 30vh
+
+        img
+          width: 376px
+          height: 35vh
+          margin-top: -1px
+          margin-left: -1px
+          border-top-left-radius: 5px
+          border-top-right-radius: 5px
+
+          @include display.mobile
+            width: 44vw
+            height: 18vh
 
       .change-product
         padding: 0px 1vw
