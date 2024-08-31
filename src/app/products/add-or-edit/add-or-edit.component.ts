@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ProductModel } from 'src/app/models/product.model';
 import { ProductsService } from 'src/app/services/products/products.service';
 import { UserService } from 'src/app/services/user/user.service';
 
@@ -12,15 +13,16 @@ import { UserService } from 'src/app/services/user/user.service';
 export class AddOrEditComponent implements OnInit {
   form!: FormGroup;
   files!: Set<File>;
+  product!: ProductModel;
   categories: string[] = ['Colares', 'Pulseiras', 'Gargatilhas', 'Braceletes', 'Aneis'];
   groups: string[] = ['Verão', 'Outono', 'Inverno', 'Primavera'];
   newOrExistCategory: string = 'Nova';
   newOrExistGroups: string = 'Nova';
 
   constructor(
-    @Inject(MAT_DIALOG_DATA)
-    public dialogRef: MatDialogRef<AddOrEditComponent>,
+    @Inject(MAT_DIALOG_DATA) public updateData: ProductModel[],
     public dialog: MatDialog,
+    public dialogAddOrEdit: MatDialogRef<AddOrEditComponent>,
     private formBuilder: FormBuilder,
     public productService: ProductsService,
     public userService: UserService,
@@ -31,8 +33,19 @@ export class AddOrEditComponent implements OnInit {
   }
 
   buildingForm(): void {
-    if(this.dialogRef !== null) {
-      this.form.patchValue(this.dialogRef)
+    if(this.updateData !== null) {
+      this.updateData.forEach(product => {
+        this.form = this.formBuilder.group({
+          "id": product._id,
+          "name": product.name,
+          "description": product.description,
+          "valor": product.valor,
+          "type": product.type,
+          "groups": product.groups,
+          "file": product.file
+        });
+      });
+
     } else {
       this.form = this.formBuilder.group({
         "name": [null],
@@ -42,7 +55,7 @@ export class AddOrEditComponent implements OnInit {
         "groups": [null],
         "file": [null]
       });
-    }
+    };
   }
 
   onChangeFile(event: any): void {
@@ -63,10 +76,10 @@ export class AddOrEditComponent implements OnInit {
       });
 
       this.form.get('file')?.updateValueAndValidity();
-    }
+    };
   }
 
-  addProduct(): void {
+  buildFormData(): FormData {
     const formData = new FormData();
 
     formData.append('type', this.form.value.type)
@@ -76,17 +89,40 @@ export class AddOrEditComponent implements OnInit {
     formData.append('groups', this.form.value.groups)
     formData.append('file', this.form.value.file)
 
-    this.productService.createProduct(formData)
-      .then(data => {
-        console.log('Resultado: ', data);
-        this.dialog.closeAll();
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        console.log('finalizou');
-      })
+    return formData;
+  }
+
+  addOrEditProduct(): void {
+    const formData = this.buildFormData();
+
+    if (this.updateData !== null) {
+      this.productService.updateProduct(formData, this.form.value.id)
+        .then(data => {
+          this.dialogAddOrEdit.close(data);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          this.dialogAddOrEdit.afterClosed().subscribe(result => {
+            console.log('Finalizou, resultado: ', result);
+          });
+        });
+
+    } else {
+      this.productService.createProduct(formData)
+        .then(data => {
+          this.dialogAddOrEdit.close(data);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          this.dialogAddOrEdit.afterClosed().subscribe(result => {
+            console.log('Finalizou, resultado: ', result);
+          });
+        });
+    };
   }
 
   changeOptionCategories(): boolean {

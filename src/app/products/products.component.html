@@ -70,9 +70,13 @@
 
         <div class="row change-product my-2">
           <div class="col update-product">
-            <div (click)="modalCreate(item._id)">Editar</div>
+            <span (click)="modalCreate(item._id)">Editar</span>
+            <i class="bi bi-pencil-fill" (click)="modalCreate(item._id)"></i>
           </div>
-          <div class="col delete-product">Excluir</div>
+          <div class="col delete-product">
+            <span (click)="modalDelete(item?._id)">Excluir</span>
+            <i class="bi bi-trash3-fill" (click)="modalDelete(item?._id)"></i>
+          </div>
         </div>
 
         <a routerLink="/product/{{ item._id }}">

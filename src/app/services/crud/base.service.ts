@@ -6,8 +6,8 @@ import { environment } from "src/environments/environment";
 
 interface LvApi<T extends BaseModel> {
   success: boolean,
-  data: T | T[] | boolean | File
-}
+  data: T | T[] | boolean | FormData
+};
 
 export abstract class BaseService<T extends BaseModel> {
   http!: HttpClient;
@@ -47,7 +47,7 @@ export abstract class BaseService<T extends BaseModel> {
       });
   }
 
-  public createProduct(model: any): Promise<T> {
+  public createProduct(model: FormData): Promise<T> {
     const header = this.buildHeader();
 
     return lastValueFrom(this.http.post<LvApi<T>>(this.route, model, { headers: header }))
@@ -56,19 +56,23 @@ export abstract class BaseService<T extends BaseModel> {
     });
   }
 
-  public updateProduct(model: BaseModel, id: number): Promise<T> {
-    let header = this.buildHeader();
+  public updateProduct(model: FormData, productId: number | undefined): Promise<T> {
+    const header = this.buildHeader();
 
-    return lastValueFrom(this.http.put<LvApi<T>>(`${this.route}/${id}`, model, { headers: header }))
+    return lastValueFrom(this.http.put<LvApi<T>>(`${this.route}/${productId}`, model, { headers: header }))
       .then((result) => {
+
         return this.handleResponse(result) as T;
-      });
+      })
+      .catch (error => {
+        return this.handleResponse(error) as T;
+      })
   }
 
-  public delete(id: number): Promise<boolean> {
+  public deleteProduct(productId: number): Promise<boolean> {
     let header = this.buildHeader();
 
-    return lastValueFrom(this.http.delete<LvApi<T>>(`${this.route}/${id}`, { headers: header }))
+    return lastValueFrom(this.http.delete<LvApi<T>>(`${this.route}/${productId}`, { headers: header }))
       .then((result) => {
         return this.handleResponse(result) as true;
       });
@@ -76,6 +80,10 @@ export abstract class BaseService<T extends BaseModel> {
 
   public handleResponse(response: LvApi<T>) {
     if(response) {
+
+      console.log('response: ', response);
+
+
       return response.data;
     } else {
       throw new Error("Api 200, mas success falso!");

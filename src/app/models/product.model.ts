@@ -1,6 +1,7 @@
 export class ProductModel {
 
   constructor(
+    public _id?: number,
     public id?: number,
     public user?: number,
     public saleUser?: string,
