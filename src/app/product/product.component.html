@@ -1,11 +1,11 @@
 <section id="desktop">
-  <div class="product" *ngFor="let item of products">
+  <div class="card-product" *ngFor="let item of products">
     <div class="icons-edit-or-delete">
-      <i class="bi bi-pencil-fill" (click)="updateModal(item?.id)"></i>
-      <i class="bi bi-trash3-fill" (click)="deleteModal(item?.id)"></i>
+      <i class="bi bi-pencil-fill" (click)="updateModal(item?._id)"></i>
+      <i class="bi bi-trash3-fill" (click)="deleteModal(item?._id)"></i>
     </div>
 
-    <div class="card-product row">
+    <div class="row">
       <div class="product col-7">
         <div class="titles">
           <h1>{{ item?.name }}</h1>
@@ -86,14 +86,22 @@
       </div>
     </div>
   </div>
+
+  <div class="return">
+    <div class="button-return" routerLink="/products">
+      <span>voltar para produtos</span>
+      <i class="bi bi-arrow-return-left"></i>
+      <i class="bi bi-arrow-left"></i>
+    </div>
+  </div>
 </section>
 
 <section id="mobile">
   <div class="product-mobile" *ngFor="let item of products">
     <div class="valor-and-options">
       <div class="icons-edit-or-delete my-3">
-        <i class="bi bi-pencil-fill" (click)="updateModal(item?.id)"></i>
-        <i class="bi bi-trash3-fill" (click)="deleteModal(item?.id)"></i>
+        <i class="bi bi-pencil-fill" (click)="updateModal(item?._id)"></i>
+        <i class="bi bi-trash3-fill" (click)="deleteModal(item?._id)"></i>
       </div>
 
       <div class="titles">
@@ -182,13 +190,14 @@
       </div>
     </div>
   </div>
+
+  <div class="return">
+    <div class="button-return" routerLink="/products">
+      <i class="bi bi-arrow-left"></i>
+      <span>voltar para produtos</span>
+    </div>
+  </div>
 </section>
 
 
-<div class="return">
-  <div class="button-return" routerLink="/products">
-    <span>voltar para produtos</span>
-    <i class="bi bi-arrow-return-left"></i>
-    <i class="bi bi-arrow-left"></i>
-  </div>
-</div>
+

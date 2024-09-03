@@ -1,6 +1,6 @@
 export abstract class BaseModel {
 
   constructor(
-    public id?: number
+    public _id?: number
   ) {}
 }
