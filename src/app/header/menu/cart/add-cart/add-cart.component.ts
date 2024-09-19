@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ProductModel } from 'src/app/models/product.model';
-import { ProductsService } from 'src/app/services/products/products.service';
 
 @Component({
   selector: 'app-add-cart',
@@ -8,28 +8,41 @@ import { ProductsService } from 'src/app/services/products/products.service';
   styleUrls: ['./add-cart.component.sass']
 })
 export class AddCartComponent {
-  product!: ProductModel;
-  id: number | undefined = 0;
+  @Input() product!: ProductModel;
+  inOrOutOfTheCart: boolean = false;
+  currentCountValue: number = 0;
 
-  constructor(private productService: ProductsService) {}
+  constructor( public route: ActivatedRoute ) {
+    console.log('valor da contagem: ', this.currentCountValue);
+  }
 
-  addToCart(): void {
-    if (this.product.user != undefined)
-    {
-      this.id = this.product.user;
-      // this.productService.updateProduct(this.product, this.id)
-      //   .then(result => {
-      //     console.log(result);
+  addingToCart(): void {
+    const products = [];
 
-      //   })
-      //   .catch(error => {
-      //     console.log(error);
+    this.inOrOutOfTheCart = true;
 
-      //   })
-      //   .finally(() => {
-      //     console.log('Produto adicionado ao Carrinho');
-
-      //   })
+    if(this.product !== null) {
+      products.push(this.product);
     }
+    this.currentCountValue = this.countControl(this.inOrOutOfTheCart, this.currentCountValue);
+
+    console.log('valor da contagem: ',  this.currentCountValue);
+  }
+
+  removingProductFromCart(): void {
+    console.log('removeu do carrinho');
+    this.inOrOutOfTheCart = false;
+    this.currentCountValue = this.countControl(this.inOrOutOfTheCart, this.currentCountValue);
+    console.log('valor da contagem: ',  this.currentCountValue);
+  }
+
+  countControl(addOrRemove: boolean, currentValue: number): number {
+    if (addOrRemove == true) {
+      currentValue += 1;
+    } else {
+      currentValue -= 1;
+    }
+
+    return currentValue;
   }
 }

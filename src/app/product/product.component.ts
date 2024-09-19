@@ -24,7 +24,7 @@ export class ProductComponent implements OnInit {
     private formBuilder: FormBuilder,
     public productsService: ProductsService,
     public melhorEnvio: MelhorEnvioService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.routeId = this.route.snapshot.params["product_id"];
