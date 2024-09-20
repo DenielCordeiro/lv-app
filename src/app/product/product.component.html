@@ -1,11 +1,11 @@
 <section id="desktop">
-  <div class="product" *ngFor="let item of products">
+  <div class="card-product" *ngFor="let item of products">
     <div class="icons-edit-or-delete">
-      <i class="bi bi-pencil-fill" (click)="updateModal(item?.id)"></i>
-      <i class="bi bi-trash3-fill" (click)="deleteModal(item?.id)"></i>
+      <i class="bi bi-pencil-fill" (click)="updateModal(item?._id)"></i>
+      <i class="bi bi-trash3-fill" (click)="deleteModal(item?._id)"></i>
     </div>
 
-    <div class="card-product row">
+    <div class="row">
       <div class="product col-7">
         <div class="titles">
           <h1>{{ item?.name }}</h1>
@@ -75,7 +75,7 @@
         <div class="purchaseModal my-5" *ngIf="postalCode != ''">
           <div class="row">
             <div class="col-6">
-              <app-add-cart></app-add-cart>
+              <app-add-cart *ngFor="let shipping of shippings"></app-add-cart>
             </div>
             <div class="col-6">
               <app-buy></app-buy>
@@ -86,14 +86,22 @@
       </div>
     </div>
   </div>
+
+  <div class="return">
+    <div class="button-return" routerLink="/products">
+      <span>voltar para produtos</span>
+      <i class="bi bi-arrow-return-left"></i>
+      <i class="bi bi-arrow-left"></i>
+    </div>
+  </div>
 </section>
 
 <section id="mobile">
   <div class="product-mobile" *ngFor="let item of products">
     <div class="valor-and-options">
       <div class="icons-edit-or-delete my-3">
-        <i class="bi bi-pencil-fill" (click)="updateModal(item?.id)"></i>
-        <i class="bi bi-trash3-fill" (click)="deleteModal(item?.id)"></i>
+        <i class="bi bi-pencil-fill" (click)="updateModal(item?._id)"></i>
+        <i class="bi bi-trash3-fill" (click)="deleteModal(item?._id)"></i>
       </div>
 
       <div class="titles">
@@ -118,9 +126,12 @@
       </div>
 
       <div class="text-description modal fade" id="descriptionModal" tabindex="-1" aria-labelledby="descriptionModalLabel" aria-hidden="true">
-
         <div class="modal-dialog row">
           <div class="card-description">
+            <div class="header-card">
+              <h1 class="product-name">{{ item?.name }}</h1>
+            </div>
+
             <h4>{{ item?.description }}</h4>
             <h4>{{ item?.groups }}</h4>
 
@@ -132,9 +143,12 @@
               <div>Espessura: 4cm</div>
               <div>Peso: 2kg</div>
             </div>
+
+            <div class="footer-card">
+              <div class="close-button" data-bs-dismiss="modal">Fechar</div>
+            </div>
           </div>
         </div>
-
       </div>
     </div>
 
@@ -173,7 +187,7 @@
 
       <div class="purchaseModal">
         <div class="cart">
-          <app-add-cart></app-add-cart>
+          <app-add-cart [product]="item"></app-add-cart>
         </div>
 
         <div class="buy">
@@ -182,13 +196,14 @@
       </div>
     </div>
   </div>
+
+  <div class="return">
+    <div class="button-return" routerLink="/products">
+      <i class="bi bi-arrow-left"></i>
+      <span>voltar para produtos</span>
+    </div>
+  </div>
 </section>
 
 
-<div class="return">
-  <div class="button-return" routerLink="/products">
-    <span>voltar para produtos</span>
-    <i class="bi bi-arrow-return-left"></i>
-    <i class="bi bi-arrow-left"></i>
-  </div>
-</div>
+

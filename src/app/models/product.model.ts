@@ -2,7 +2,6 @@ export class ProductModel {
 
   constructor(
     public _id?: number,
-    public id?: number,
     public user?: number,
     public saleUser?: string,
     public name?: string,
@@ -25,6 +24,10 @@ export class ProductModel {
       name?: string,
       price?: number,
       postalCode?: number,
-    }
+    },
+    public sale?: {
+      sold: boolean,
+      userId: number,
+    },
   ) {}
 }
