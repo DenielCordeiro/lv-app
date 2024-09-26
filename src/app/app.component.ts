@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { LoginService } from './services/login/login.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +8,7 @@ import { LoginService } from './services/login/login.service';
 export class AppComponent {
   title = 'Luz Violeta Macrãme';
 
-  constructor(private loginService: LoginService) {}
+  constructor() {}
 
 
 }

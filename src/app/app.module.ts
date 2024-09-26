@@ -12,7 +12,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 
 import { AppRoutingModule } from './app-routing.module';
-import { LoginService } from './services/login/login.service';
 import { AuthGuard } from './guards/auth-guards';
 
 import { AppComponent } from './app.component';
@@ -85,7 +84,6 @@ import { AddCartComponent } from './header/menu/cart/add-cart/add-cart.component
     NgxWebstorageModule.forRoot(),
   ],
   providers: [
-    LoginService,
     AuthGuard
   ],
   bootstrap: [AppComponent]

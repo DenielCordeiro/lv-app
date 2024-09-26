@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { LoginService } from 'src/app/services/login/login.service';
-import { ResidenceModel } from 'src/app/models/residence.model';
+import { Address } from 'src/app/interfaces/residence.interface';
+import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
   selector: 'app-register',
@@ -14,11 +14,11 @@ export class RegisterComponent implements OnInit {
   convertedAddress: string | undefined;
   groupInfosAddress: string[] = [];
   nextForm: boolean = false;
-  residenceData!: ResidenceModel;
+  addressData!: Address;
 
   constructor(
     private formBuilder: FormBuilder,
-    private registerService: LoginService,
+    private usersService: UsersService,
     public route: ActivatedRoute,
   ) {}
 
@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
     this.getResidence();
 
     if(this.registerForm.valid) {
-      this.registerService.createUser(this.registerForm.value);
+      this.usersService.createUser(this.registerForm.value);
       this.registerForm.reset();
     } else {
       console.log(this.registerForm);
@@ -64,21 +64,18 @@ export class RegisterComponent implements OnInit {
     let logradouro = document.querySelector('#street') as HTMLInputElement;
 
     if (postalCode != null) {
-      this.registerService.searchPostalCode(postalCodeNumber)
+      this.usersService.searchPostalCode(postalCodeNumber)
         .then(result => {
-          this.residenceData = result;
+          this.addressData = result;
+          this.registerForm.value.state = this.addressData.uf;
+          this.registerForm.value.city = this.addressData.localidade;
+          this.registerForm.value.neighborhood = this.addressData.bairro;
+          this.registerForm.value.street = this.addressData.logradouro;
 
-
-
-          this.registerForm.value.state = this.residenceData.uf;
-          this.registerForm.value.city = this.residenceData.localidade;
-          this.registerForm.value.neighborhood = this.residenceData.bairro;
-          this.registerForm.value.street = this.residenceData.logradouro;
-
-          state.value = this.residenceData.uf ? this.residenceData.uf : '';
-          city.value = this.residenceData.localidade ? this.residenceData.localidade : '';
-          bairro.value = this.residenceData.bairro ? this.residenceData.bairro : '';
-          logradouro.value = this.residenceData.logradouro ? this.residenceData.logradouro : '';
+          state.value = this.addressData.uf ? this.addressData.uf : '';
+          city.value = this.addressData.localidade ? this.addressData.localidade : '';
+          bairro.value = this.addressData.bairro ? this.addressData.bairro : '';
+          logradouro.value = this.addressData.logradouro ? this.addressData.logradouro : '';
         })
     } else {
       alert('Você não insiriu nenhum número de CEP.')
