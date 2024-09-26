@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductsService } from '../services/products/products.service';
-import { ProductModel } from '../models/product.model';
+import { Product } from '../interfaces/product.interface';
 import { AddOrEditComponent } from './add-or-edit/add-or-edit.component';
 import { DeleteComponent } from './delete/delete.component';
 
@@ -14,7 +14,7 @@ export class ProductsComponent implements OnInit {
   modalOpen: boolean = false;
   productId: number | undefined;
   title: string = 'Trabalhos disponíveis';
-  products: ProductModel[] = [];
+  products: Product[] = [];
   product: any;
 
   constructor(

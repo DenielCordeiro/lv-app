@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { AuthService } from 'src/app/services/login/auth.service';
 import { MenuComponent } from '../menu.component';
 import { Router } from '@angular/router';
+import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
   selector: 'app-desktop-menu',
@@ -15,7 +15,7 @@ export class DesktopMenuComponent {
   userId: number = 0;
 
   constructor(
-    private loginService: AuthService,
+    private userService: UsersService,
     public menu: MenuComponent,
     public route: Router,
   ) {
@@ -39,7 +39,7 @@ export class DesktopMenuComponent {
       console.log('Necessário fazer login');
     }
 
-    this.administrator = this.loginService.isAdministrator();
+    this.administrator = this.userService.isAdministrator();
   }
 
   modalLogoutIsOpen(): void {
@@ -53,7 +53,7 @@ export class DesktopMenuComponent {
   isLogout(): void {
     const noAction: string = 'noAction';
 
-    this.loginService.logout();
+    this.userService.logout();
     this.closeMenu(noAction);
   }
 

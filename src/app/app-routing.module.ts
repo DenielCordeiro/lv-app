@@ -7,7 +7,6 @@ import { ProductsComponent } from './products/products.component';
 import { ProductComponent } from './product/product.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UsersComponent } from './users/users.component';
-import { MenuComponent } from './header/menu/menu.component';
 
 const routes: Routes = [
   {

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Router, RouterStateSnapshot } from '@angular/router';
-import { AuthService } from 'src/app/services/login/auth.service';
+import { Router } from '@angular/router';
 import { MenuComponent } from '../menu.component';
+import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
   selector: 'app-mobile-menu',
@@ -15,7 +15,7 @@ export class MobileMenuComponent {
   userId: string | null = '';
 
   constructor(
-    private loginService: AuthService,
+    private userService: UsersService,
     public menu: MenuComponent,
     public route: Router,
   ) {
@@ -32,7 +32,7 @@ export class MobileMenuComponent {
 
   getLogin(): void {
     this.userId = localStorage.getItem('user_id');
-    this.administrator = this.loginService.isAdministrator();
+    this.administrator = this.userService.isAdministrator();
   }
 
   modalLogoutIsOpen(): void {
@@ -46,7 +46,7 @@ export class MobileMenuComponent {
   isLogout(): void {
     const noAction: string = 'noAction';
 
-    this.loginService.logout();
+    this.userService.logout();
     this.closeMenu(noAction);
   }
 

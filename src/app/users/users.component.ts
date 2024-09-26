@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { UserModel } from '../models/user.model';
-import { ProductModel } from '../models/product.model';
-import { ProductsService } from '../services/products/products.service';
-import { UserService } from '../services/user/user.service';
+import { UsersService } from '../services/users/users.service';
+import { User } from '../interfaces/user.interface';
+import { Product } from '../interfaces/product.interface';
 
 @Component({
   selector: 'app-users',
@@ -10,13 +9,13 @@ import { UserService } from '../services/user/user.service';
   styleUrls: ['./users.component.sass']
 })
 export class UsersComponent {
-  products: ProductModel[] = [];
-  myProducts: ProductModel[] = [];
-  myProfile: UserModel[] = [];
+  products: Product[] = [];
+  myProducts: Product[] = [];
+  myProfile: User[] = [];
   userId: number = 0;
 
   constructor(
-    public userProfile: UserService
+    public userProfile: UsersService
   ) {
     this.getMyUser();
 

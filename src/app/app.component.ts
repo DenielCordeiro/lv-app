@@ -1,19 +1,14 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { AuthService } from './services/login/auth.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.sass']
 })
-export class AppComponent implements OnInit {
-  title = 'lv-app';
+export class AppComponent {
+  title = 'Luz Violeta Macrãme';
 
-  constructor(private authService: AuthService) {}
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
-  // showProductHeaderMenu(): void { }
 
 }

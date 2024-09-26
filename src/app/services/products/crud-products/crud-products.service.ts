@@ -1,15 +1,11 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { LocalStorageService } from "ngx-webstorage";
 import { lastValueFrom } from "rxjs";
-import { BaseModel } from "src/app/models/base-model";
+import { BaseAPI } from "src/app/interfaces/base-api.interface";
+import { BaseCrud } from "src/app/interfaces/base-crud.interface";
 import { environment } from "src/environments/environment";
 
-interface LvApi<T extends BaseModel> {
-  success: boolean,
-  data: T | T[] | boolean | FormData
-};
-
-export abstract class BaseService<T extends BaseModel> {
+export abstract class CrudProductsService<T extends BaseCrud> {
   http!: HttpClient;
   localStorage!: LocalStorageService;
   route!: string;
@@ -35,28 +31,28 @@ export abstract class BaseService<T extends BaseModel> {
   }
 
   public getProduct(id: number): Promise<T>{
-    return lastValueFrom(this.http.get<LvApi<T>>(`${this.route}/${id}`))
+    return lastValueFrom(this.http.get<BaseAPI<T>>(`${this.route}/${id}`))
       .then(result => {
         return this.handleResponse(result) as T;
       });
   }
 
   public getProducts(): Promise<T>{
-    return lastValueFrom(this.http.get<LvApi<T>>(this.route))
+    return lastValueFrom(this.http.get<BaseAPI<T>>(this.route))
       .then(result => {
         return this.handleResponse(result) as T;
       });
   }
 
   public createProduct(model: FormData): Promise<T> {
-    return lastValueFrom(this.http.post<LvApi<T>>(this.route, model, { headers: this.header }))
-     .then(result => {
+    return lastValueFrom(this.http.post<BaseAPI<T>>(this.route, model, { headers: this.header }))
+      .then(result => {
       return this.handleResponse(result) as T;
     });
   }
 
   public updateProduct(model: FormData, productId: number | undefined): Promise<T> {
-    return lastValueFrom(this.http.put<LvApi<T>>(`${this.route}/${productId}`, model, { headers: this.header }))
+    return lastValueFrom(this.http.put<BaseAPI<T>>(`${this.route}/${productId}`, model, { headers: this.header }))
       .then(result => {
 
         return this.handleResponse(result) as T;
@@ -67,14 +63,14 @@ export abstract class BaseService<T extends BaseModel> {
   }
 
   public deleteProduct(productId: number): Promise<boolean> {
-    return lastValueFrom(this.http.delete<LvApi<T>>(`${this.route}/${productId}`, { headers: this.header }))
+    return lastValueFrom(this.http.delete<BaseAPI<T>>(`${this.route}/${productId}`, { headers: this.header }))
       .then(result => {
         return this.handleResponse(result) as true;
       });
   }
 
   public saveCart(product: FormData): Promise<T> {
-    return lastValueFrom(this.http.put<LvApi<T>>(`${this.route}/save_cart`, product, { headers: this.header }))
+    return lastValueFrom(this.http.put<BaseAPI<T>>(`${this.route}/save_cart`, product, { headers: this.header }))
       .then(result => {
         return this.handleResponse(result) as T;
       })
@@ -85,7 +81,7 @@ export abstract class BaseService<T extends BaseModel> {
 
 
   public clearCart(userId: number): Promise<T> {
-    return lastValueFrom(this.http.put<LvApi<T>>(`${this.route}/clear_cart`, { user_id: userId }, { headers: this.header }))
+    return lastValueFrom(this.http.put<BaseAPI<T>>(`${this.route}/clear_cart`, { user_id: userId }, { headers: this.header }))
       .then(result => {
         return this.handleResponse(result) as T;
       })
@@ -98,12 +94,8 @@ export abstract class BaseService<T extends BaseModel> {
     return 'comprou';
   }
 
-  public handleResponse(response: LvApi<T>) {
+  public handleResponse(response: BaseAPI<T>) {
     if(response) {
-
-      console.log('response: ', response);
-
-
       return response.data;
     } else {
       throw new Error("Api 200, mas success falso!");

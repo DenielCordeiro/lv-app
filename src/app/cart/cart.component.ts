@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ProductModel } from 'src/app/models/product.model';
+import { Product } from 'src/app/interfaces/product.interface';
 import { ProductsService } from 'src/app/services/products/products.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { ProductsService } from 'src/app/services/products/products.service';
 })
 export class CartComponent implements OnInit {
   form!: FormGroup;
-  product!: ProductModel;
+  product!: Product;
 
   constructor(
     private formBuilder: FormBuilder,
