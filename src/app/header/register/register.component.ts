@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Address } from 'src/app/interfaces/residence.interface';
+import { Address } from 'src/app/interfaces/address.interface';
 import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({

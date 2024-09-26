@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { ProductModel } from 'src/app/models/product.model';
 import { ProductsService } from 'src/app/services/products/products.service';
+import { Product } from 'src/app/interfaces/product.interface';
 
 @Component({
   selector: 'app-add-or-edit',
@@ -12,14 +12,14 @@ import { ProductsService } from 'src/app/services/products/products.service';
 export class AddOrEditComponent implements OnInit {
   form!: FormGroup;
   files!: Set<File>;
-  product!: ProductModel;
+  product!: Product;
   categories: string[] = ['Colares', 'Pulseiras', 'Gargatilhas', 'Braceletes', 'Aneis'];
   groups: string[] = ['Verão', 'Outono', 'Inverno', 'Primavera'];
   newOrExistCategory: string = 'Nova';
   newOrExistGroups: string = 'Nova';
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public updateData: ProductModel[],
+    @Inject(MAT_DIALOG_DATA) public updateData: Product[],
     public dialog: MatDialog,
     public dialogAddOrEdit: MatDialogRef<AddOrEditComponent>,
     private formBuilder: FormBuilder,

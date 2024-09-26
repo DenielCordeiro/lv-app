@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { ProductModel } from '../models/product.model';
 import { UsersService } from '../services/users/users.service';
 import { User } from '../interfaces/user.interface';
+import { Product } from '../interfaces/product.interface';
 
 @Component({
   selector: 'app-users',
@@ -9,8 +9,8 @@ import { User } from '../interfaces/user.interface';
   styleUrls: ['./users.component.sass']
 })
 export class UsersComponent {
-  products: ProductModel[] = [];
-  myProducts: ProductModel[] = [];
+  products: Product[] = [];
+  myProducts: Product[] = [];
   myProfile: User[] = [];
   userId: number = 0;
 

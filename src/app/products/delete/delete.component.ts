@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { ProductModel } from 'src/app/models/product.model';
 import { ProductsService } from 'src/app/services/products/products.service';
+import { Product } from 'src/app/interfaces/product.interface';
 
 @Component({
   selector: 'app-delete',
@@ -10,7 +10,7 @@ import { ProductsService } from 'src/app/services/products/products.service';
 })
 export class DeleteComponent {
   constructor(
-    @Inject(MAT_DIALOG_DATA) public loadedProduct: ProductModel[],
+    @Inject(MAT_DIALOG_DATA) public loadedProduct: Product[],
     public dialog: MatDialog,
     private productsService: ProductsService
   ) {}

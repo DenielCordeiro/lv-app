@@ -4,12 +4,12 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { LocalStorageService } from "ngx-webstorage";
 import { lastValueFrom } from "rxjs";
 import { BaseAPI } from "src/app/interfaces/base-api.interface";
-import { Address } from "src/app/interfaces/residence.interface";
+import { BaseCrud } from "src/app/interfaces/base-crud.interface";
+import { Address } from "src/app/interfaces/address.interface";
 import { User } from "src/app/interfaces/user.interface";
-import { BaseModel } from "src/app/models/base-model";
 import { environment } from "src/environments/environment";
 
-export abstract class CrudUsersService<T extends BaseModel> {
+export abstract class CrudUsersService<T extends BaseCrud> {
   modalService!: NgbModal;
   http!: HttpClient;
   localStorage!: LocalStorageService;

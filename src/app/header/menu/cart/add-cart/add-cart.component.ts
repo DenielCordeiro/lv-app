@@ -1,6 +1,6 @@
 import { Component, Input} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ProductModel } from 'src/app/models/product.model';
+import { Product } from 'src/app/interfaces/product.interface';
 
 @Component({
   selector: 'app-add-cart',
@@ -8,7 +8,7 @@ import { ProductModel } from 'src/app/models/product.model';
   styleUrls: ['./add-cart.component.sass']
 })
 export class AddCartComponent {
-  @Input() product!: ProductModel;
+  @Input() product!: Product;
   inOrOutOfTheCart: boolean = false;
   currentCountValue: number = 0;
 

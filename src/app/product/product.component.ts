@@ -1,10 +1,10 @@
-import { Shipping } from './../models/shipping.interface';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ProductsService } from './../services/products/products.service';
-import { ProductModel } from '../models/product.model';
 import { MelhorEnvioService } from '../services/melhor-envio/melhor-envio.service';
+import { Product } from '../interfaces/product.interface';
+import { Shipping } from '../interfaces/shipping.interface';
 
 @Component({
   selector: 'app-product',
@@ -13,9 +13,9 @@ import { MelhorEnvioService } from '../services/melhor-envio/melhor-envio.servic
 })
 export class ProductComponent implements OnInit {
   searchForm!: FormGroup;
-  products: ProductModel[] = [];
+  products: Product[] = [];
   shippings: Shipping[] = [];
-  product!: ProductModel;
+  product!: Product;
   routeId: number | undefined = undefined;
   postalCode: string = '';
 
