@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Router, RouterStateSnapshot } from '@angular/router';
-import { AuthService } from 'src/app/services/login/auth.service';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login/login.service';
 import { MenuComponent } from '../menu.component';
 
 @Component({
@@ -15,7 +15,7 @@ export class MobileMenuComponent {
   userId: string | null = '';
 
   constructor(
-    private loginService: AuthService,
+    private loginService: LoginService,
     public menu: MenuComponent,
     public route: Router,
   ) {

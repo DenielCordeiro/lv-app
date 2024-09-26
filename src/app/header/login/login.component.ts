@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService } from '../../services/login/auth.service';
+import { LoginService } from '../../services/login/login.service';
 import { MenuComponent } from '../menu/menu.component';
 
 @Component({
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private loginService: AuthService,
+    private loginService: LoginService,
     private modalService: NgbModal,
     public config: NgbModalConfig,
     public route: ActivatedRoute,

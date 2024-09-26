@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from 'src/app/services/login/auth.service';
+import { LoginService } from 'src/app/services/login/login.service';
 import { MenuComponent } from '../menu.component';
 import { Router } from '@angular/router';
 
@@ -15,7 +15,7 @@ export class DesktopMenuComponent {
   userId: number = 0;
 
   constructor(
-    private loginService: AuthService,
+    private loginService: LoginService,
     public menu: MenuComponent,
     public route: Router,
   ) {

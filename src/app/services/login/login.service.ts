@@ -3,14 +3,14 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { lastValueFrom } from "rxjs";
-import { UserModel } from 'src/app/models/user.model';
+import { User } from 'src/app/interfaces/user.interface';
 import { ResidenceModel } from 'src/app/models/residence.model';
 import { environment } from "src/environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class LoginService {
   public authedUser: boolean = false;
 
   constructor(
@@ -31,16 +31,18 @@ export class AuthService {
   }
 
 
-  authUser(user: UserModel): Promise<UserModel> {
+  authUser(user: User): Promise<User> {
     let administrator;
     let userId;
 
-    return lastValueFrom(this.http.get<UserModel>(`${environment.api}/session/${user.email}/${user.password}`))
+    return lastValueFrom(this.http.get<User>(`${environment.api}/session/${user.email}/${user.password}`))
       .then(result => {
         administrator = JSON.stringify(result.administrator);
         userId = JSON.stringify(result.user_id);
 
-        localStorage.setItem('session', result.token);
+        const token = String(result.token);
+
+        localStorage.setItem('session', token);
         localStorage.setItem('administrator', administrator);
         localStorage.setItem('user_id', userId);
 
@@ -54,8 +56,8 @@ export class AuthService {
       })
   }
 
-  createUser(user: UserModel): Promise<UserModel> {
-    return lastValueFrom(this.http.post<UserModel>(`${environment.api}/profile`, user))
+  createUser(user: User): Promise<User> {
+    return lastValueFrom(this.http.post<User>(`${environment.api}/profile`, user))
       .then(result => {
         this.route.navigateByUrl('/newsletter')
 
@@ -63,10 +65,10 @@ export class AuthService {
       });
   }
 
-  getProfile(id: number): Promise<UserModel> {
+  getProfile(id: number): Promise<User> {
     let header = this.buildHeader();
 
-    return lastValueFrom(this.http.get<UserModel>(`${environment.api}/profile/${id}`, { headers: header }))
+    return lastValueFrom(this.http.get<User>(`${environment.api}/profile/${id}`, { headers: header }))
       .then(result => {
         return result;
       })

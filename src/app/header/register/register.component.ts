@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { AuthService } from 'src/app/services/login/auth.service';
+import { LoginService } from 'src/app/services/login/login.service';
 import { ResidenceModel } from 'src/app/models/residence.model';
-import { UserModel } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +18,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private registerService: AuthService,
+    private registerService: LoginService,
     public route: ActivatedRoute,
   ) {}
 

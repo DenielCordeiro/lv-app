@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ProductModel } from 'src/app/models/product.model';
 import { ProductsService } from 'src/app/services/products/products.service';
-import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-add-or-edit',
@@ -25,7 +24,6 @@ export class AddOrEditComponent implements OnInit {
     public dialogAddOrEdit: MatDialogRef<AddOrEditComponent>,
     private formBuilder: FormBuilder,
     public productService: ProductsService,
-    public userService: UserService,
   ) {}
 
   ngOnInit(): void {
