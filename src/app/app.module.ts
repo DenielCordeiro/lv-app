@@ -22,7 +22,7 @@ import { RegisterComponent } from './header/register/register.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductComponent } from './product/product.component';
 import { AddOrEditComponent } from './products/add-or-edit/add-or-edit.component';
-import { BuyComponent } from './product/buy/buy.component';
+import { BuyComponent } from './cart/buy/buy.component';
 import { DeleteComponent } from './products/delete/delete.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -39,8 +39,8 @@ import { HeaderComponent } from './header/header.component';
 import { MenuComponent } from './header/menu/menu.component';
 import { DesktopMenuComponent } from './header/menu/desktop-menu/desktop-menu.component';
 import { MobileMenuComponent } from './header/menu/mobile-menu/mobile-menu.component';
-import { CartComponent } from './header/menu/cart/cart.component';
-import { AddCartComponent } from './header/menu/cart/add-cart/add-cart.component';
+import { CartComponent } from './cart/cart.component';
+import { AddCartComponent } from './cart/add-cart/add-cart.component';
 
 
 @NgModule({
