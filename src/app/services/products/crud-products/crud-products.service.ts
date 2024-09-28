@@ -69,31 +69,6 @@ export abstract class CrudProductsService<T extends BaseCrud> {
       });
   }
 
-  public saveCart(product: FormData): Promise<T> {
-    return lastValueFrom(this.http.put<BaseAPI<T>>(`${this.route}/save_cart`, product, { headers: this.header }))
-      .then(result => {
-        return this.handleResponse(result) as T;
-      })
-      .catch(error => {
-        return this.handleResponse(error) as T;
-      })
-  }
-
-
-  public clearCart(userId: number): Promise<T> {
-    return lastValueFrom(this.http.put<BaseAPI<T>>(`${this.route}/clear_cart`, { user_id: userId }, { headers: this.header }))
-      .then(result => {
-        return this.handleResponse(result) as T;
-      })
-      .catch(error => {
-        return this.handleResponse(error) as T;
-      })
-  }
-
-  public buyProduct(): string {
-    return 'comprou';
-  }
-
   public handleResponse(response: BaseAPI<T>) {
     if(response) {
       return response.data;

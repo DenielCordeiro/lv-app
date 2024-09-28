@@ -1,29 +1,21 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { CartService } from '../services/cart/cart.service';
 import { Product } from 'src/app/interfaces/product.interface';
-import { ProductsService } from 'src/app/services/products/products.service';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.sass']
 })
-export class CartComponent implements OnInit {
+export class CartComponent {
   form!: FormGroup;
   product!: Product;
 
   constructor(
     private formBuilder: FormBuilder,
-    private productService: ProductsService,
+    private cartService: CartService,
   ) {}
-
-
-  ngOnInit(): void {
-    // console.log('produtos: ', this.loadedProducts);
-    console.log('inicou o carrinho');
-
-  }
-
 
   buildingForm(): FormGroup {
     this.form = this.formBuilder.group({
@@ -49,7 +41,7 @@ export class CartComponent implements OnInit {
   clearningCart(): void {
     const product = this.buildingForm().value;
 
-    this.productService.clearCart(product._id)
+    this.cartService.clearCart(product._id)
       .then(result => {
         console.log(result);
 

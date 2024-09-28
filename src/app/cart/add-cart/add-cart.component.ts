@@ -1,5 +1,6 @@
 import { Component, Input} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CartService } from './../../services/cart/cart.service';
 import { Product } from 'src/app/interfaces/product.interface';
 
 @Component({
@@ -12,28 +13,29 @@ export class AddCartComponent {
   inOrOutOfTheCart: boolean = false;
   currentCountValue: number = 0;
 
-  constructor( public route: ActivatedRoute ) {
+  constructor(
+    public cartService: CartService,
+    public route: ActivatedRoute,
+  ) {
     console.log('valor da contagem: ', this.currentCountValue);
   }
 
   addingToCart(): void {
-    const products = [];
-
     this.inOrOutOfTheCart = true;
-
-    if(this.product !== null) {
-      products.push(this.product);
-    }
     this.currentCountValue = this.countControl(this.inOrOutOfTheCart, this.currentCountValue);
 
-    console.log('valor da contagem: ',  this.currentCountValue);
+    const productsInCart = this.cartService.addToCart(this.product);
+    console.log('Produtos no carrinho: ', productsInCart);
+
   }
 
   removingProductFromCart(): void {
-    console.log('removeu do carrinho');
     this.inOrOutOfTheCart = false;
     this.currentCountValue = this.countControl(this.inOrOutOfTheCart, this.currentCountValue);
-    console.log('valor da contagem: ',  this.currentCountValue);
+
+    const productsInCart = this.cartService.removeProductFromCart(this.product);
+    console.log('Produtos no carrinho: ', productsInCart);
+
   }
 
   countControl(addOrRemove: boolean, currentValue: number): number {
