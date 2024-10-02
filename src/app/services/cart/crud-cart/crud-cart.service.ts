@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { lastValueFrom } from "rxjs";
+import { lastValueFrom, Observable, Subject } from "rxjs";
 import { BaseAPI } from "src/app/interfaces/base-api.interface";
 import { BaseCrud } from "src/app/interfaces/base-crud.interface";
 import { Product } from "src/app/interfaces/product.interface";
@@ -11,6 +11,8 @@ export abstract class CrudCartService<T extends BaseCrud>{
   header: any = this.buildHeader();
   productsInCart!: Product[];
   products: Product[] = [];
+  buidSubject: Subject<Product[]> = new Subject<Product[]>();
+  gettingProducts: Observable<Product[]> = this.buidSubject.asObservable();
 
   constructor(httpClient: HttpClient) {
     this.http = httpClient;
@@ -24,6 +26,12 @@ export abstract class CrudCartService<T extends BaseCrud>{
     });
 
     return headers;
+  }
+
+  public getProducsInCart(): Observable<Product[]> {
+    this.buidSubject.next(this.productsInCart);
+
+    return this.gettingProducts
   }
 
   public addToCart(product: Product): Product[] | string {
@@ -43,6 +51,8 @@ export abstract class CrudCartService<T extends BaseCrud>{
       }
     }
 
+    this.getProducsInCart();
+
     return this.productsInCart;
   }
 
@@ -58,6 +68,8 @@ export abstract class CrudCartService<T extends BaseCrud>{
         this.productsInCart = this.products;
       }
     }
+
+    this.getProducsInCart();
 
     return this.productsInCart;
   }
