@@ -7,17 +7,17 @@ import { CartService } from '../services/cart/cart.service';
   styleUrls: ['./header.component.sass']
 })
 export class HeaderComponent  implements OnInit {
-  productsQuantity!: number;
+  productsQuantity: number = 0;
+
   constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
-    this.gettingProductsQuantity();
+    this.gettingProductsInCart();
   }
 
-  gettingProductsQuantity(): void {
-    this.cartService.getProducsInCart().subscribe(
+  gettingProductsInCart(): void {
+    this.cartService.getProductsInCart().subscribe(
       result => {
-        console.log('Quantidade de produtos no carrinho: ', result.length);
         this.productsQuantity = result.length;
       });
   }

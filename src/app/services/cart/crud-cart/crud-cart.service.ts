@@ -12,7 +12,7 @@ export abstract class CrudCartService<T extends BaseCrud>{
   productsInCart!: Product[];
   products: Product[] = [];
   buidSubject: Subject<Product[]> = new Subject<Product[]>();
-  gettingProducts: Observable<Product[]> = this.buidSubject.asObservable();
+  gettingProductsInCart: Observable<Product[]> = this.buidSubject.asObservable();
 
   constructor(httpClient: HttpClient) {
     this.http = httpClient;
@@ -28,10 +28,14 @@ export abstract class CrudCartService<T extends BaseCrud>{
     return headers;
   }
 
-  public getProducsInCart(): Observable<Product[]> {
+  public getStaticProductsInCart(): Product[] {
+    return this.productsInCart;
+  }
+
+  public getProductsInCart(): Observable<Product[]> {
     this.buidSubject.next(this.productsInCart);
 
-    return this.gettingProducts
+    return this.gettingProductsInCart;
   }
 
   public addToCart(product: Product): Product[] | string {
@@ -51,27 +55,28 @@ export abstract class CrudCartService<T extends BaseCrud>{
       }
     }
 
-    this.getProducsInCart();
+    this.getProductsInCart();
 
     return this.productsInCart;
   }
 
   public removeProductFromCart(product: Product): Product[] | string {
-    this.products = [];
+    const ids: any[] = [];
 
-    for (let index = 0; index < this.productsInCart.length; index++) {
+    this.productsInCart.forEach(data => {
+      ids.push(data._id);
+    });
 
-      if (this.productsInCart[index]._id != product._id) {
-        this.products.push(this.productsInCart[index]);
-        this.productsInCart = this.products;
-      } else {
-        this.productsInCart = this.products;
-      }
+    const index: number = ids.indexOf(product._id);
+
+    if (index >= 0) {
+      this.productsInCart.splice(index, 1);
+      this.getProductsInCart();
+
+      return this.productsInCart;
+    } else  {
+      return 'Produto não encontrado!';
     }
-
-    this.getProducsInCart();
-
-    return this.productsInCart;
   }
 
   public saveCart(product: FormData): Promise<T> {
