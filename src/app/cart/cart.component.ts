@@ -1,57 +1,60 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { CartService } from '../services/cart/cart.service';
+import { UsersService } from '../services/users/users.service';
 import { Product } from 'src/app/interfaces/product.interface';
+import { User } from '../interfaces/user.interface';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.sass']
 })
-export class CartComponent {
-  form!: FormGroup;
+export class CartComponent implements OnInit {
+  productsInCart: Product[] = [];
   product!: Product;
+  userProfile!: User;
 
   constructor(
-    private formBuilder: FormBuilder,
     private cartService: CartService,
+    private userService: UsersService
   ) {}
 
-  buildingForm(): FormGroup {
-    this.form = this.formBuilder.group({
-      "description": this.product.description,
-      "file": this.product.file,
-      "groups": this.product.groups,
-      "name": this.product.name,
-      "type": this.product.type,
-      "valor": this.product.valor,
-      "_id": this.product._id,
-    });
+  ngOnInit(): void {
+    this.productsInCart = this.gettingProductsInCart();
 
-    this.form.updateValueAndValidity();
+    this.gettingUserProfile();
 
-    return this.form
+    console.log('Produtos no carrinho: ', this.productsInCart);
   }
 
-  saveCart(): void {
-    const product = this.buildingForm().value;
-    console.log('producto: ', product);
+  gettingProductsInCart(): Product[] {
+    const productsInCart = this.cartService.getStaticProductsInCart();
+
+    return productsInCart;
   }
 
-  clearningCart(): void {
-    const product = this.buildingForm().value;
+  gettingUserProfile(): User {
+    const id = localStorage.getItem('user_id');
 
-    this.cartService.clearCart(product._id)
-      .then(result => {
-        console.log(result);
+    if (id !== null) {
+      const userId = JSON.parse(id);
 
-      })
-      .catch(error => {
-        console.log(error);
+      this.userService.getProfile(userId)
+        .then(profile => {
+          const products = profile.productsCart;
 
-      })
-      .finally(() => {
-        console.log('Você removeu este item do carrinho!');
-      });
+          if (products != undefined) {
+            this.productsInCart.push(products);
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+
+    } else {
+      console.log('erro!');
+    }
+
+    return this.userProfile;
   }
 }

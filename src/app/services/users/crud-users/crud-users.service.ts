@@ -19,7 +19,7 @@ export abstract class CrudUsersService<T extends BaseCrud> {
   constructor(
     httpClient: HttpClient,
     localStorage: LocalStorageService,
-    route: String,
+    route: string,
   ) {
     this.http = httpClient;
     this.localStorage = localStorage;
@@ -91,7 +91,7 @@ export abstract class CrudUsersService<T extends BaseCrud> {
   }
 
   public createUser(user: User): Promise<T> {
-    return lastValueFrom(this.http.post<BaseAPI<T>>(`${environment.api}/profile`, user))
+    return lastValueFrom(this.http.post<BaseAPI<T>>(`${this.route}`, user))
       .then(result => {
         return this.handleResponse(result) as T;
       });
@@ -100,7 +100,7 @@ export abstract class CrudUsersService<T extends BaseCrud> {
   public getProfile(user_id: number): Promise<T> {
     let header = this.buildHeader();
 
-    return lastValueFrom(this.http.get<BaseAPI<T>>(`${environment.api}/profile/${user_id}`, { headers: header }))
+    return lastValueFrom(this.http.get<BaseAPI<T>>(`${this.route}/${user_id}`, { headers: header }))
       .then(result => {
         return this.handleResponse(result) as T;
       })

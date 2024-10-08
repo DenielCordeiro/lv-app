@@ -1,0 +1,26 @@
+@use '../../assets/sass/colors'
+@use '../../assets/sass/display'
+
+.display
+  background-color: colors.$green
+  color: colors.$white
+  margin-top: 11vh
+
+  .products-hd, .products-mobile
+    display: none
+
+  @include display.hd
+    .products, .products-mobile
+      display: none
+
+    .products-hd
+      display: inline
+
+  @include display.mobile
+    .products, .products-hd
+      display: none
+
+    .products-mobile
+      display: inline
+
+

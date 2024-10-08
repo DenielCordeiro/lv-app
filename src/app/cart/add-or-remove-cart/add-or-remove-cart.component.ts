@@ -4,7 +4,7 @@ import { CartService } from '../../services/cart/cart.service';
 import { Product } from 'src/app/interfaces/product.interface';
 
 @Component({
-  selector: 'app-add-cart',
+  selector: 'app-add-or-remove-cart',
   templateUrl: './add-or-remove-cart.component.html',
   styleUrls: ['./add-or-remove-cart.component.sass']
 })

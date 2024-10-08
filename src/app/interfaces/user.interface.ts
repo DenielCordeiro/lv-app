@@ -1,3 +1,5 @@
+import { Product } from "./product.interface";
+
 export interface User {
   _id?: number,
   name?: string,
@@ -13,4 +15,5 @@ export interface User {
   user_id?: number,
   token?: string,
   administrator?: boolean,
+  productsCart?: Product
 }
