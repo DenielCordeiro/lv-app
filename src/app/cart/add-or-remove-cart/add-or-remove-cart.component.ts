@@ -11,6 +11,7 @@ import { Product } from 'src/app/interfaces/product.interface';
 export class AddOrRemoveCartComponent implements OnInit {
   @Input() product!: Product;
   inOrOutOfTheCart!: boolean;
+  userId: string | null = localStorage.getItem('user_id');
 
   constructor(
     public cartService: CartService,
@@ -39,12 +40,25 @@ export class AddOrRemoveCartComponent implements OnInit {
   }
 
   addingToCart(): void {
+    this.cartService.getProductsInCart();
     this.inOrOutOfTheCart = true;
-    const productsInCart = this.cartService.addToCart(this.product);
+
+    if (this.userId !== null) {
+      const id: any = JSON.parse(this.userId);
+      const productsInCart = this.cartService.addToCart(this.product, id);
+    } else {
+      console.log('Necessário fazer login!');
+    }
   }
 
   removingProductFromCart(): void {
     this.inOrOutOfTheCart = false;
-    const productsInCart = this.cartService.removeProductFromCart(this.product);
+
+    if (this.userId !== null) {
+      const id: any = JSON.parse(this.userId);
+      const productsInCart = this.cartService.removeProductFromCart(this.product, id);
+    } else {
+      console.log('Necessário fazer login!');
+    }
   }
 }

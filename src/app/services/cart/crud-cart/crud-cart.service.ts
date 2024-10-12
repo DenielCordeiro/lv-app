@@ -38,29 +38,33 @@ export abstract class CrudCartService<T extends BaseCrud>{
     return this.gettingProductsInCart;
   }
 
-  public addToCart(product: Product): Product[] | string {
+  public addToCart(product: Product, userId: any): Product[] | string {
     if (this.productsInCart.length == 0) {
       this.products.push(product);
-
+      this.saveCart(this.productsInCart, userId)
     } else {
-      for (let index = 0; index < this.productsInCart.length; index++) {
+      const ids: any[] = [];
 
-        if (this.productsInCart[index]._id == product._id) {
-          console.log('produto já está no carrinho!');
-        } else if (this.productsInCart[index]._id != product._id) {
-          this.products.push(product);
-        } else {
-          console.log('Erro!');
-        }
+      this.productsInCart.forEach(data => {
+        ids.push(data._id);
+      });
+
+      const index: number = ids.indexOf(product._id);
+
+      if (index == -1) {
+        this.productsInCart.push(product);
+
+        this.saveCart(this.productsInCart, userId)
+
+      } else {
+        console.log('produto já está no carrinho!');
       }
     }
-
-    this.getProductsInCart();
 
     return this.productsInCart;
   }
 
-  public removeProductFromCart(product: Product): Product[] | string {
+  public removeProductFromCart(product: Product, userId: any): Product[] | string {
     const ids: any[] = [];
 
     this.productsInCart.forEach(data => {
@@ -72,6 +76,7 @@ export abstract class CrudCartService<T extends BaseCrud>{
     if (index >= 0) {
       this.productsInCart.splice(index, 1);
       this.getProductsInCart();
+      this.saveCart( this.productsInCart, userId)
 
       return this.productsInCart;
     } else  {
@@ -79,8 +84,8 @@ export abstract class CrudCartService<T extends BaseCrud>{
     }
   }
 
-  public saveCart(product: FormData): Promise<T> {
-    return lastValueFrom(this.http.put<BaseAPI<T>>(`${this.route}/save_cart`, product, { headers: this.header }))
+  public saveCart(productsInCart: Product[], user_id: any): Promise<T> {
+    return lastValueFrom(this.http.put<BaseAPI<T>>(`${this.route}/save_cart/${user_id}`, { products: productsInCart }, { headers: this.header }))
       .then(result => {
         return this.handleResponse(result) as T;
       })
@@ -90,7 +95,7 @@ export abstract class CrudCartService<T extends BaseCrud>{
   }
 
   public clearCart(userId: number): Promise<T> {
-    return lastValueFrom(this.http.put<BaseAPI<T>>(`${this.route}/clear_cart`, { user_id: userId }, { headers: this.header }))
+    return lastValueFrom(this.http.put<BaseAPI<T>>(`${this.route}/clear_cart/`, { user_id: userId }, { headers: this.header }))
       .then(result => {
         return this.handleResponse(result) as T;
       })

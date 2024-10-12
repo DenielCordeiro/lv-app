@@ -2,9 +2,9 @@
 @use '../../assets/sass/display'
 
 .display
-  background-color: colors.$green
-  color: colors.$white
-  margin-top: 11vh
+  background-color: colors.$black
+  padding-top: 14vh
+  margin-bottom: 5vh
 
   .products-hd, .products-mobile
     display: none
@@ -22,5 +22,20 @@
 
     .products-mobile
       display: inline
+      display: flex
+      justify-content: center
 
+      .product
+        background-color: colors.$white
+        width: 65vw
+        margin-bottom: 5vh
+        border-radius: 10px
+        display: flex
+        flex-direction: column
+        align-items: center
+
+        img
+          width: 50vw
+          height: 45vw
+          border-radius: 4%
 
