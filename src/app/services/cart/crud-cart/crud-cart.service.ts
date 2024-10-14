@@ -94,8 +94,8 @@ export abstract class CrudCartService<T extends BaseCrud>{
       })
   }
 
-  public clearCart(userId: number): Promise<T> {
-    return lastValueFrom(this.http.put<BaseAPI<T>>(`${this.route}/clear_cart/`, { user_id: userId }, { headers: this.header }))
+  public clearCart(user_id: any): Promise<T> {
+    return lastValueFrom(this.http.put<BaseAPI<T>>(`${this.route}/clear_cart/${user_id}`, { headers: this.header }))
       .then(result => {
         return this.handleResponse(result) as T;
       })

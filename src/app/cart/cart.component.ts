@@ -49,7 +49,7 @@ export class CartComponent implements OnInit {
               return
             }
           } else {
-            console.log('Perfil de usuário sem produtos no carrinho');
+            console.log('Nenhum produto foi adicionado no carrinho');
           }
         })
         .catch(error => {
