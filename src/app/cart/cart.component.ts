@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { UsersService } from '../services/users/users.service';
+import { CartService } from '../services/cart/cart.service';
+import { User } from '../interfaces/user.interface';
 import { Product } from 'src/app/interfaces/product.interface';
-import { ProductsService } from 'src/app/services/products/products.service';
 
 @Component({
   selector: 'app-cart',
@@ -9,57 +10,76 @@ import { ProductsService } from 'src/app/services/products/products.service';
   styleUrls: ['./cart.component.sass']
 })
 export class CartComponent implements OnInit {
-  form!: FormGroup;
-  product!: Product;
+  productsInCart: Product[] = [];
+  userProfile: User = {};
+  userId: string | null = localStorage.getItem('user_id');
 
   constructor(
-    private formBuilder: FormBuilder,
-    private productService: ProductsService,
+    private userService: UsersService,
+    private cartService: CartService
   ) {}
 
-
   ngOnInit(): void {
-    // console.log('produtos: ', this.loadedProducts);
-    console.log('inicou o carrinho');
-
+    this.gettingProductsInCart();
+    this.cartService.getProductsInCart();
   }
 
-
-  buildingForm(): FormGroup {
-    this.form = this.formBuilder.group({
-      "description": this.product.description,
-      "file": this.product.file,
-      "groups": this.product.groups,
-      "name": this.product.name,
-      "type": this.product.type,
-      "valor": this.product.valor,
-      "_id": this.product._id,
-    });
-
-    this.form.updateValueAndValidity();
-
-    return this.form
+  gettingProductsInCart(): Product[] {
+    this.gettingUserProfile();
+    return this.productsInCart;
   }
 
-  saveCart(): void {
-    const product = this.buildingForm().value;
-    console.log('producto: ', product);
+  gettingUserProfile(): void {
+    if (this.userId !== null) {
+      const id = JSON.parse(this.userId);
+
+      this.userService.getProfile(id)
+        .then( profile => {
+          this.userProfile = profile;
+
+          if (this.userProfile.productsCart !== undefined) {
+            if (this.productsInCart.length < 1) {
+              const data: any[] = [];
+
+              data.push(this.userProfile.productsCart);
+
+              this.productsInCart = Array.from(data[0]);
+              this.cartService.productsInCart = this.productsInCart;
+            } else {
+              return
+            }
+          } else {
+            console.log('Nenhum produto foi adicionado no carrinho');
+          }
+        })
+        .catch(error => {
+          console.log('Perfil de usuário não encontrado', error);
+        });
+
+      this.productsInCart = this.cartService.getStaticProductsInCart();
+
+    } else {
+      console.log('ID: ', this.userId, ' de usuário não encontrado');
+    }
   }
 
-  clearningCart(): void {
-    const product = this.buildingForm().value;
+  cartCleaning(): void {
+    if (this.userId !== null) {
+      const id = JSON.parse(this.userId);
 
-    this.productService.clearCart(product._id)
-      .then(result => {
-        console.log(result);
+      this.cartService.clearCart(id)
+        .then(result => {
+          console.log('carrinho limpo: ', result);
 
-      })
-      .catch(error => {
-        console.log(error);
+        })
+        .catch(error => {
+          console.log('[Erro]: ', error);
 
-      })
-      .finally(() => {
-        console.log('Você removeu este item do carrinho!');
-      });
+        });
+    } else {
+      console.log('Não foi possível limpar o carrinho!');
+      console.log('ID do usuário(a) não encontrado, necessário realizar login :)');
+
+    }
   }
 }

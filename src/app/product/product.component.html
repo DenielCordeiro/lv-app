@@ -75,7 +75,7 @@
         <div class="purchaseModal my-5" *ngIf="postalCode != ''">
           <div class="row">
             <div class="col-6">
-              <app-add-cart *ngFor="let shipping of shippings"></app-add-cart>
+              <app-add-or-remove-cart *ngFor="let shipping of shippings"></app-add-or-remove-cart>
             </div>
             <div class="col-6">
               <app-buy></app-buy>
@@ -187,7 +187,7 @@
 
       <div class="purchaseModal">
         <div class="cart">
-          <app-add-cart [product]="item"></app-add-cart>
+          <app-add-or-remove-cart [product]="item"></app-add-or-remove-cart>
         </div>
 
         <div class="buy">

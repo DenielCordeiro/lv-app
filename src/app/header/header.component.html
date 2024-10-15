@@ -10,7 +10,13 @@
       </div>
 
       <div class="col-4">
-        <div class="cart"><i class="bi bi-cart4"></i></div>
+        <div class="cart" (click)="openCart()">
+          <i class="bi bi-cart4"></i>
+
+          <div class="productsQuantity" *ngIf="this.productsQuantity != 0">
+            <span>{{ this.productsQuantity }}</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>

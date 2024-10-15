@@ -1,1 +1,39 @@
-<h1>bem vindo ao carrinho</h1>
+<section id="products">
+
+  <div class="display">
+    <div class="products">
+      <h1>Aqui carrega a lista de Produtos</h1>
+    </div>
+
+    <div class="products-hd">
+      <h1>Aqui carrega a lista de Produtos</h1>
+    </div>
+
+    <div class="products-mobile" *ngFor="let product of this.productsInCart">
+      <div class="product">
+        <h2>{{ product.name }}</h2>
+        <img src="{{ product?.file?.url }}" alt="{{ product?.file?.name }}">
+
+        <div class="button-remove-from-cart my-3">
+          <app-add-or-remove-cart [product]="product"></app-add-or-remove-cart>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer row">
+      <div class="col-6">
+          <div class="clear-cart" (click)="cartCleaning()">
+            <span>Limpar carrinho</span>
+          </div>
+      </div>
+
+      <div class="col-6">
+        <div class="buy-products">
+          <span>Finalizar Carrinho</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+

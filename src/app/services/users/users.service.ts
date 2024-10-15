@@ -13,6 +13,6 @@ export class UsersService extends CrudUsersService<User> {
     public localStorageService: LocalStorageService,
     public httpClient: HttpClient,
   ) {
-    super(httpClient, localStorageService, '/users');
+    super(httpClient, localStorageService, '/profile');
   }
 }
