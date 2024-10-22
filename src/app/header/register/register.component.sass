@@ -1,25 +1,56 @@
 @use '../../../assets/sass/display'
+@use '../../../assets/sass/colors'
 
-.about-form
-  min-height: 14vh
+*
+  margin: 0px
+  padding: 0px
 
-.arrows
-  padding-right: 5vw
+.content
+  background-color: colors.$black
+  width: 100%
+  height: 100vh
+  padding: 11vh 3vw 0px 3vw
 
-  i
-    font-size: 25px
+  .body
+    background-color: colors.$white
+    border-radius: 10px
+    padding-bottom: 2vh
 
-  .form-return
-    text-align: end
+    .about-form
+      background-color: colors.$pourple
+      color: colors.$white
+      border-top-left-radius: 10px
+      border-top-right-radius: 10px
+      margin-left: -0.4vw
+      width: 94.7vw
+      padding: 2vh 3vw 1vh 3vw
 
-  .buttons-arrows
-    background-color: #fff
-    border: none
+    form
+      padding: 2vh 3vw 1vh 3vw
 
-.footer-form
-  padding-right: 2.2vw
-  text-align: end
+    .content-arrows
+      padding: 4vh 0px 4vw 0px
 
-  @include display.mobile
-    margin-top: 6vh
-    padding-right: 7vw
+      button
+        background-color: colors.$white
+        border: none
+
+        i
+          color: colors.$pourple
+
+        &:disabled
+          i
+            color: colors.$pourple-gray
+
+      .button-return
+        text-align: end
+
+    .footer-form
+      padding-left: 10vw
+
+      .button-close
+        padding: 0.6vh 2vw
+        border-radius: 50px
+
+      .button-one
+        padding: 2vh 2vw
