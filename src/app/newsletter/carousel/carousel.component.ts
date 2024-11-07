@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Product } from 'src/app/interfaces/product.interface';
 
 @Component({
   selector: 'app-carousel',
@@ -6,6 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./carousel.component.sass']
 })
 export class CarouselComponent {
+  @Input() dataProducts: Product[] = [];
   currentItem: number = 0;
 
   constructor() {}

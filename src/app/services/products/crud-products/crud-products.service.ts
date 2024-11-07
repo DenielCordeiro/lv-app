@@ -37,10 +37,10 @@ export abstract class CrudProductsService<T extends BaseCrud> {
       });
   }
 
-  public getProducts(): Promise<T>{
+  public getProducts(): Promise<T[]>{
     return lastValueFrom(this.http.get<BaseAPI<T>>(this.route))
       .then(result => {
-        return this.handleResponse(result) as T;
+        return this.handleResponse(result) as T[];
       });
   }
 
