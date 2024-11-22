@@ -18,51 +18,47 @@
     display: inline
 
 .content
-  padding-top: 10vh
-  width: 100%
-  margin: 0 auto
+  max-width: 100%
+  height: 70vh
+  background-color: colors.$green
 
-  .carousel-images::-webkit-scrollbar
-    display: none
-
-  .carousel-images
-    overflow-x: auto
-    -ms-overflow-style: none
-    scrollbar-width: none
-    max-width: 50vw
-
-    .images
-      display: flex
-      flex-flow: row nowrap
-      gap: 15px
-
-      .item
-        width: 22vw
-        height: 50vh
-        flex-shrink: 0
-        opacity: 0.6
-        border-radius: 40px
-        transition: all 600ms ease-in-out
-
-      .current-item
-        opacity: 1
+  @include display.mobile
+    height: 50vh
 
   .arrow-left, .arrow-right
+    background-color: colors.$white
+
     cursor: pointer
     opacity: 0.2
     font-size: 60px
     transition: all 600ms ease-in-out
     border: none
-    padding-top: 25vh
+    display: flex
+    align-items: center
+    justify-content: center
 
     &:hover
       opacity: 1
 
-  .arrow-left
-    text-align: end
+.carousel-images::-webkit-scrollbar
+  display: none
 
-  .button-left
-    margin-right: 2vw
+.carousel-images
+  overflow-x: auto
+  max-width: 50vw
 
-  .button-right
-    margin-left: 2vw
+  .images
+    display: flex
+    flex-flow: row nowrap
+    gap: 15px
+
+    .item
+      width: 100%
+      height: 25vh
+      flex-shrink: 0
+      opacity: 0.6
+      border-radius: 40px
+      transition: all 600ms ease-in-out
+
+    .current-item
+      opacity: 1

@@ -2,35 +2,36 @@
 @use '../../../assets/sass/display'
 
 .news-card
-  width: 50vw
-  height: 45vh
+  width: 48vw
+  height: 43vh
   position: absolute
   left: 21vw
-  margin-top: 12vh
+  margin-top: 15vh
   border-radius: 10px
 
   @include display.mobile
     width: 60vw
     height: 25vh
     left: 15vw
+    margin-top: 12vh
 
 .card-front
   background-color: colors.$white
   color: colors.$black
   z-index: 1
 
-  &:hover
-    z-index: 3
-
 .card-behind
   background-color: colors.$pourple
   color: colors.$white
   z-index: 0
   margin-left: 6vw
-  margin-top: 17vh
+  margin-top: 20vh
 
   @include display.mobile
     margin-left: 10vw
+    margin-top: 17vh
 
-  &:hover
+  &:active, &:hover
     z-index: 2
+
+

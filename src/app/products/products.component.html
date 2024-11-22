@@ -66,25 +66,25 @@
 <section id="cards">
   <div class="container text-center">
     <div class="row products">
-      <div class="col-6 mb-3 product" *ngFor="let item of product">
+      <div class="col-6 mb-3 product" *ngFor="let product of products">
 
         <div class="row change-product my-2">
           <div class="col update-product">
-            <span (click)="modalCreate(item._id)">Editar</span>
-            <i class="bi bi-pencil-fill" (click)="modalCreate(item._id)"></i>
+            <!-- <span (click)="modalCreate(product?._id)">Editar</span>
+            <i class="bi bi-pencil-fill" (click)="modalCreate(product?._id)"></i> -->
           </div>
           <div class="col delete-product">
-            <span (click)="modalDelete(item?._id)">Excluir</span>
-            <i class="bi bi-trash3-fill" (click)="modalDelete(item?._id)"></i>
+            <!-- <span (click)="modalDelete(product?._id)">Excluir</span>
+            <i class="bi bi-trash3-fill" (click)="modalDelete(product?._id)"></i> -->
           </div>
         </div>
 
-        <a routerLink="/product/{{ item._id }}">
+        <a routerLink="/product/{{ product._id }}">
           <div class="card">
-            <img src="{{ item?.file?.url }}" alt="...">
+            <img src="{{ product?.file?.url }}" alt="...">
             <div class="card-body">
-              <h5 class="itemTitle">{{ item?.name }}</h5>
-              <p class="itemValor">{{ item?.valor }} R$</p>
+              <h5 class="itemTitle">{{ product?.name }}</h5>
+              <p class="itemValor">{{ product?.valor }} R$</p>
             </div>
           </div>
         </a>
