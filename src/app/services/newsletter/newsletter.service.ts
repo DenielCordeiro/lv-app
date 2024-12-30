@@ -1,18 +1,14 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { CrudNewsletterService } from './crud-newsletter/crud-newsletter.service';
+import { News } from 'src/app/interfaces/news.interface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class NewsletterService {
+export class NewsletterService extends CrudNewsletterService<News> {
 
-  constructor() { }
-
-  public getImages(): void {
-    console.log('Buscando Imagens para newsletter');
-
-  }
-
-  public updateImageNews(newsData: Object) {
-    console.log('Objeto news', newsData);
+  constructor( public httpClient: HttpClient ) {
+    super(httpClient, '/newsletter');
   }
 }

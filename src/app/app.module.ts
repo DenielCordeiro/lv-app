@@ -41,6 +41,8 @@ import { DesktopMenuComponent } from './header/menu/desktop-menu/desktop-menu.co
 import { MobileMenuComponent } from './header/menu/mobile-menu/mobile-menu.component';
 import { CartComponent } from './cart/cart.component';
 import { AddOrRemoveCartComponent } from './cart/add-or-remove-cart/add-or-remove-cart.component';
+import { InterfacesComponent } from './interfaces/interfaces/interfaces.component';
+import { AddOrEditImageComponent } from './newsletter/add-or-edit-image/add-or-edit-image.component';
 
 
 @NgModule({
@@ -67,7 +69,9 @@ import { AddOrRemoveCartComponent } from './cart/add-or-remove-cart/add-or-remov
     DesktopMenuComponent,
     MobileMenuComponent,
     CartComponent,
-    AddOrRemoveCartComponent
+    AddOrRemoveCartComponent,
+    InterfacesComponent,
+    AddOrEditImageComponent
 
   ],
   imports: [

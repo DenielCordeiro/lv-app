@@ -1,93 +1,11 @@
-<section id="cards">
-  <div class="news-card card-front">
-    <div class="buttons-card-front row">
-      <div class="col-6">
-        <i type="button" class="bi bi-plus-circle-dotted" data-bs-toggle="modal" data-bs-target="#modalCardFront"></i>
-      </div>
-
-      <div class="col-6">
-        <i class="bi bi-trash3-fill"></i>
-      </div>
-    </div>
-
-    <div class="content row">
-      <div class="col-6"></div>
-      <div class="col-6"></div>
-    </div>
+<section id="topNews">
+  <div class="button-add-or-edit-image">
+    <app-add-or-edit-image></app-add-or-edit-image>
   </div>
 
-  <div class="news-card card-behind">
-    <div class="buttons-card-behind row">
-      <div class="col-6">
-        <i class="bi bi-plus-circle-dotted" data-bs-toggle="modal" data-bs-target="#modalCardBehind"></i>
-      </div>
-
-      <div class="col-6">
-        <i class="bi bi-trash3-fill"></i>
-      </div>
-    </div>
-
-    <div class="content row">
-      <div class="col-6"></div>
-      <div class="col-6"></div>
-    </div>
-
-    <div class="content-mobile">
-      <img src="" alt="">
-    </div>
+  <div class="card-image">
+    <img src="https://images2.alphacoders.com/135/1354021.png" alt="imagem">
   </div>
+
+  <div class="text-abaut"></div>
 </section>
-
-
-<div class="modal fade" id="modalCardBehind" tabindex="-1" aria-labelledby="cardBehind" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="cardBehind">Adicionar Produto ao NewsCard 1</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-
-      <div class="modal-body">
-        <div class="products row" *ngFor="let product of dataProducts">
-          <div class="col-6 product">
-            <img src="{{ product?.file?.url }}">
-          </div>
-        </div>
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-
-<div class="modal fade" id="modalCardFront" tabindex="-1" aria-labelledby="cardFront" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="cardFront">Adicionar Produto ao NewsCard 1</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-
-      <div class="modal-body">
-        <div class="products row" *ngFor="let product of dataProducts">
-          <div class="col-6 product">
-            <img src="{{ product?.file?.url }}">
-          </div>
-        </div>
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-
-    </div>
-  </div>
-</div>

@@ -1,6 +1,6 @@
+import { NewsletterService } from './../services/newsletter/newsletter.service';
 import { Component, OnInit } from '@angular/core';
-import { ProductsService } from '../services/products/products.service';
-import { Product } from '../interfaces/product.interface';
+import { News } from '../interfaces/news.interface';
 
 @Component({
   selector: 'app-newsletter',
@@ -8,32 +8,31 @@ import { Product } from '../interfaces/product.interface';
   styleUrls: ['./newsletter.component.sass']
 })
 export class NewsletterComponent implements OnInit {
-  products: Product[] = [];
+  images: News[] = [];
 
-  constructor(private productsService: ProductsService) {}
+  constructor(private newsletterService: NewsletterService) {}
 
   ngOnInit(): void {
-    this.getingProducts();
   }
 
-  getingProducts(): Product[] {
-    this.productsService.getProducts()
+  getingImages(): News[] {
+    this.newsletterService.getImages()
       .then(data => {
 
         if(data == null || data == undefined) {
           alert("[Atenção]: Não existe nenhum produto a venda!")
         } else {
 
-          data.forEach(product => {
-            this.products.push(product);
+          data.forEach(images => {
+            this.images.push(images);
           });
         }
       })
       .catch(error => {
-        alert('ERRO: não conseguiu trazer os produtos');
+        alert('ERRO: Não foi possível carregar as imagens');
         console.log(error);
       });
 
-    return this.products;
+    return this.images;
   }
 }
