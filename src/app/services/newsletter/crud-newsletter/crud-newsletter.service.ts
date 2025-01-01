@@ -31,11 +31,11 @@ export abstract class CrudNewsletterService<T extends BaseCrud> {
     console.log('criando News', news);
   }
 
-  public updateImage(news: FormData) {
+  public updateImage(news: FormData, news_id: number) {
     console.log('Objeto news', news);
   }
 
-  public deleteImage(news_id: Object) {
+  public deleteImage(news_id: number) {
     console.log('Objeto news', news_id);
   }
 

@@ -43,7 +43,6 @@ export class AddOrEditComponent implements OnInit {
           "file": product.file
         });
       });
-
     } else {
       this.form = this.formBuilder.group({
         "name": [null],
@@ -106,7 +105,6 @@ export class AddOrEditComponent implements OnInit {
             console.log('Finalizou, resultado: ', result);
           });
         });
-
     } else {
       this.productService.createProduct(formData)
         .then(data => {
