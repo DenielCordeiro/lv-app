@@ -1,6 +1,6 @@
 <section id="topNews">
   <div class="button-add-or-edit-image">
-    <i type="button" class="bi bi-plus-circle-dotted" (click)="addOrUpdateImage(dataNews._id || null)"></i>
+    <i type="button" class="bi bi-plus-circle-dotted" (click)="addOrUpdateImage(dataNews?._id || undefined)"></i>
   </div>
 
   <div class="card-image">

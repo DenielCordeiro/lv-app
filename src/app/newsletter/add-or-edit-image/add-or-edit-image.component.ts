@@ -1,35 +1,32 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { News } from 'src/app/interfaces/news.interface';
 import { NewsletterService } from 'src/app/services/newsletter/newsletter.service';
+import { News } from 'src/app/interfaces/news.interface';
 
 @Component({
   selector: 'app-add-or-edit-image',
   templateUrl: './add-or-edit-image.component.html',
   styleUrls: ['./add-or-edit-image.component.sass']
 })
-export class AddOrEditImageComponent {
+export class AddOrEditImageComponent implements OnInit {
   form!: FormGroup;
   files!: Set<File>;
-  image!: News;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public updateData: News,
+    public dialogAddOrEdit: MatDialogRef<AddOrEditImageComponent>,
+    public dialog: MatDialog,
     private formBuilder: FormBuilder,
     private newsletterService: NewsletterService,
-    public dialog: MatDialog,
-    public dialogAddOrEdit: MatDialogRef<AddOrEditImageComponent>,
   ) {}
 
   ngOnInit(): void {
-    console.log(this.updateData);
-
     this.buildingForm();
   }
 
   buildingForm(): void {
-    if(this.updateData._id !== null) {
+    if(this.updateData._id !== undefined) {
       this.form = this.formBuilder.group({
         "id": this.updateData._id,
         "type": this.updateData.type,
@@ -47,7 +44,7 @@ export class AddOrEditImageComponent {
 
   onChangeFile(event: any): void {
     if (event.target.files && event.target.files[0]) {
-      const selectFiles = <FileList>event.srcElement.files
+      const selectFiles = <FileList>event.srcElement.files;
       const fileNames = [];
       this.files = new Set();
 
@@ -73,13 +70,15 @@ export class AddOrEditImageComponent {
     formData.append('linkProduct', this.form.value.name);
     formData.append('file', this.form.value.file);
 
+    console.log("formData: ", formData);
+
     return formData;
   }
 
-  addOrEditProduct(): void {
+  addOrEditImage(): void {
     const formData = this.buildFormData();
 
-    if (this.updateData._id !== null) {
+    if (this.updateData._id !== undefined) {
       this.newsletterService.updateImage(formData, this.form.value.id);
         // .then(data => {
         //   this.dialogAddOrEdit.close(data);

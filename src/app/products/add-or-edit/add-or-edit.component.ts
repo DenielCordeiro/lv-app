@@ -57,7 +57,7 @@ export class AddOrEditComponent implements OnInit {
 
   onChangeFile(event: any): void {
     if (event.target.files && event.target.files[0]) {
-      const selectFiles = <FileList>event.srcElement.files
+      const selectFiles = <FileList>event.srcElement.files;
       const fileNames = [];
       this.files = new Set();
 
@@ -79,12 +79,12 @@ export class AddOrEditComponent implements OnInit {
   buildFormData(): FormData {
     const formData = new FormData();
 
-    formData.append('type', this.form.value.type)
-    formData.append('valor', this.form.value.valor)
-    formData.append('name', this.form.value.name)
-    formData.append('description', this.form.value.description)
-    formData.append('groups', this.form.value.groups)
-    formData.append('file', this.form.value.file)
+    formData.append('type', this.form.value.type);
+    formData.append('valor', this.form.value.valor);
+    formData.append('name', this.form.value.name);
+    formData.append('description', this.form.value.description);
+    formData.append('groups', this.form.value.groups);
+    formData.append('file', this.form.value.file);
 
     return formData;
   }

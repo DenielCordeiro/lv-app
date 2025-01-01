@@ -1,26 +1,54 @@
-
-<div class="modal fade" id="modalCardFront" aria-labelledby="cardFront" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="cardFront">Adicionar Produto ao NewsCard 1</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div class="container content-form">
+  <div class="content-header">
+    <div class="row">
+      <div class="col-11">
+        <h2 *ngIf="this.updateData._id == undefined">Criar nova imagem</h2>
+        <h2 *ngIf="this.updateData._id !== undefined">Atualizar imagem</h2>
       </div>
 
-      <div class="modal-body">
-        <div class="products row">
-          <div class="col-6 product">
-            <img src="">
+      <div class="col-1">
+        <div class="button-close" type="button" (click)="closeModal()">
+          <span>X</span>
+        </div>
+      </div>
+    </div>
+
+    <hr class="mx-2">
+  </div>
+
+  <form [formGroup]="form">
+    <div class="content-inputs">
+      <div class="content-link-product">
+        <label for="linkProduct">Digite o link do Produto:</label>
+        <input type="text" formControlName="linkProduct" class="form-control" id="linkProduct">
+      </div>
+
+      <div class="content-file-image">
+        <label for="file">Adicione a Imagem: </label>
+        <input type="file" class="form-control" id="file" (change)="onChangeFile($event)">
+      </div>
+    </div>
+
+    <hr class="mx-2">
+
+    <div class="content-footer">
+      <div class="row">
+        <div class="col-1">
+          <div class="button-close" type="button" (click)="closeModal()">
+            <span>Fechar</span>
+          </div>
+        </div>
+
+        <div class="col-1">
+          <div *ngIf="this.updateData._id == undefined" type="button" class="button-send" (click)="addOrEditImage()">
+            <span>Criar</span>
+          </div>
+
+          <div *ngIf="this.updateData._id !== undefined" type="button" class="button-send">
+            <span>Atualizar</span>
           </div>
         </div>
       </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-
     </div>
-  </div>
+  </form>
 </div>

@@ -10,14 +10,14 @@ import { AddOrEditImageComponent } from '../add-or-edit-image/add-or-edit-image.
 })
 export class NewsComponent {
   @Input() dataNews!: News;
+  news: News = {
+    type: "News",
+  };
 
-  constructor(public dialog: MatDialog) {
-    console.log("dataNews: ", this.dataNews);
+  constructor(public dialog: MatDialog) {}
 
-  }
-
-  addOrUpdateImage(idSelected: number | null): void {
-    if(idSelected !== null) {
+  addOrUpdateImage(idSelected: number | undefined): void {
+    if(idSelected !== undefined) {
       this.dialog.open<AddOrEditImageComponent>(AddOrEditImageComponent, {
         width: '70%',
         data: this.dataNews
@@ -25,7 +25,7 @@ export class NewsComponent {
     } else {
       this.dialog.open<AddOrEditImageComponent>(AddOrEditImageComponent, {
         width: '70%',
-        data: this.dataNews.type = "News",
+        data: this.news,
       });
     }
   }
