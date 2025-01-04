@@ -34,8 +34,11 @@ export abstract class CrudNewsletterService<T extends BaseCrud> {
       });
   }
 
-  public updateImage(news: FormData, news_id: number) {
-    console.log('Objeto news', news);
+  public updateImage(news: FormData, news_id: number): Promise<T[]> {
+    return lastValueFrom(this.http.put<BaseAPI<T>>(`${this.route}/${news_id}`, news))
+      .then(result => {
+        return this.handleResponse(result) as T[];
+      })
   }
 
   public deleteImage(news_id: number) {

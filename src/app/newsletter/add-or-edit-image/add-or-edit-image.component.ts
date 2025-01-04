@@ -15,7 +15,7 @@ export class AddOrEditImageComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public updateData: News,
-    public dialogAddOrEdit: MatDialogRef<AddOrEditImageComponent>,
+    public dialogAddOrEditImage: MatDialogRef<AddOrEditImageComponent>,
     public dialog: MatDialog,
     private formBuilder: FormBuilder,
     private newsletterService: NewsletterService,
@@ -68,6 +68,8 @@ export class AddOrEditImageComponent implements OnInit {
 
     formData.append('type', this.form.value.type);
     formData.append('linkProduct', this.form.value.linkProduct);
+    console.log(this.form.value.file);
+
     formData.append('file', this.form.value.file);
 
     return formData;
@@ -77,30 +79,29 @@ export class AddOrEditImageComponent implements OnInit {
     const formData = this.buildFormData();
 
     if (this.updateData._id !== undefined) {
-      // this.newsletterService.updateImage(formData, this.form.value.id);
-      //   .then(data => {
-      //     this.dialogAddOrEdit.close(data);
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   })
-      //   .finally(() => {
-      //     this.dialogAddOrEdit.afterClosed().subscribe(result => {
-      //       console.log('Finalizou, resultado: ', result);
-      //     });
-      //   });
-
-    } else {
-      this.newsletterService.createImage(formData)
+      this.newsletterService.updateImage(formData, this.form.value.id)
         .then(data => {
-          this.dialogAddOrEdit.close(data);
+          this.dialogAddOrEditImage.close(data);
         })
         .catch((error) => {
           console.log(error);
         })
         .finally(() => {
-          this.dialogAddOrEdit.afterClosed().subscribe(result => {
-            console.log('Finalizou, resultado: ', result);
+          this.dialogAddOrEditImage.beforeClosed().subscribe(() => {
+            console.log('Imagem atualizada com sucesso! ');
+          });
+        });
+    } else {
+      this.newsletterService.createImage(formData)
+        .then(data => {
+          this.dialogAddOrEditImage.close(data);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          this.dialogAddOrEditImage.beforeClosed().subscribe(() => {
+            console.log('Imagem adicionada com sucesso! ');
           });
         });
     }

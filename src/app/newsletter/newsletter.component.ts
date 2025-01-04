@@ -9,24 +9,24 @@ import { News } from '../interfaces/news.interface';
 })
 export class NewsletterComponent implements OnInit {
   images: News[] = [];
+  news!: News;
+  collection: News[] = [];
+  carousel: News[] = [];
 
   constructor(private newsletterService: NewsletterService) {}
 
   ngOnInit(): void {
+    this.gettingImages();
   }
 
-  getingImages(): News[] {
+  gettingImages(): News[] {
     this.newsletterService.getImages()
       .then(data => {
+        data.forEach(images => {
+          this.images.push(images);
+        });
 
-        if(data == null || data == undefined) {
-          alert("[Atenção]: Não existe nenhum produto a venda!")
-        } else {
-
-          data.forEach(images => {
-            this.images.push(images);
-          });
-        }
+        this.filterImages(this.images);
       })
       .catch(error => {
         alert('ERRO: Não foi possível carregar as imagens');
@@ -34,5 +34,21 @@ export class NewsletterComponent implements OnInit {
       });
 
     return this.images;
+  }
+
+  filterImages(images: News[]): void {
+    images.forEach(image => {
+      if (image.type == "News") {
+        this.news = image;
+      }
+
+      if (image.type == "Carousel") {
+        this.carousel.push(image);
+      }
+
+      if (image.type == "Collection") {
+        this.carousel.push(image);
+      }
+    });
   }
 }

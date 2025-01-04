@@ -44,7 +44,7 @@
             <span>Criar</span>
           </div>
 
-          <div *ngIf="this.updateData._id !== undefined" type="button" class="button-send">
+          <div *ngIf="this.updateData._id !== undefined" type="button" class="button-send" (click)="addOrEditImage()">
             <span>Atualizar</span>
           </div>
         </div>

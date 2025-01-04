@@ -1,10 +1,13 @@
 <section id="topNews">
   <div class="button-add-or-edit-image">
-    <i type="button" class="bi bi-plus-circle-dotted" (click)="addOrUpdateImage(dataNews || undefined)"></i>
+    <i *ngIf="dataNews == undefined" type="button" class="bi bi-plus-circle-dotted" (click)="addOrUpdateImage()"></i>
+    <i *ngIf="dataNews !== undefined" type="button" class="bi bi-pencil-square" (click)="addOrUpdateImage()"></i>
+    <i *ngIf="dataNews !== undefined" type="button" class="bi bi-trash3-fill" (click)="deleteImage()"></i>
+
   </div>
 
   <div class="card-image">
-    <img src="https://images2.alphacoders.com/135/1354021.png" alt="imagem">
+    <img src="{{ this.imageUrl }}" alt="imagem">
   </div>
 
   <div class="text-abaut"></div>
