@@ -16,8 +16,8 @@ export class NewsComponent {
 
   constructor(public dialog: MatDialog) {}
 
-  addOrUpdateImage(idSelected: number | undefined): void {
-    if(idSelected !== undefined) {
+  addOrUpdateImage(data: News | undefined): void {
+    if(data !== undefined) {
       this.dialog.open<AddOrEditImageComponent>(AddOrEditImageComponent, {
         width: '70%',
         data: this.dataNews

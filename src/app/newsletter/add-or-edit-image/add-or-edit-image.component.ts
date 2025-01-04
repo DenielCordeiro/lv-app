@@ -67,10 +67,8 @@ export class AddOrEditImageComponent implements OnInit {
     const formData = new FormData();
 
     formData.append('type', this.form.value.type);
-    formData.append('linkProduct', this.form.value.name);
+    formData.append('linkProduct', this.form.value.linkProduct);
     formData.append('file', this.form.value.file);
-
-    console.log("formData: ", formData);
 
     return formData;
   }
@@ -79,32 +77,32 @@ export class AddOrEditImageComponent implements OnInit {
     const formData = this.buildFormData();
 
     if (this.updateData._id !== undefined) {
-      this.newsletterService.updateImage(formData, this.form.value.id);
-        // .then(data => {
-        //   this.dialogAddOrEdit.close(data);
-        // })
-        // .catch((error) => {
-        //   console.log(error);
-        // })
-        // .finally(() => {
-        //   this.dialogAddOrEdit.afterClosed().subscribe(result => {
-        //     console.log('Finalizou, resultado: ', result);
-        //   });
-        // });
+      // this.newsletterService.updateImage(formData, this.form.value.id);
+      //   .then(data => {
+      //     this.dialogAddOrEdit.close(data);
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //   })
+      //   .finally(() => {
+      //     this.dialogAddOrEdit.afterClosed().subscribe(result => {
+      //       console.log('Finalizou, resultado: ', result);
+      //     });
+      //   });
 
     } else {
       this.newsletterService.createImage(formData)
-        // .then(data => {
-        //   this.dialogAddOrEdit.close(data);
-        // })
-        // .catch((error) => {
-        //   console.log(error);
-        // })
-        // .finally(() => {
-        //   this.dialogAddOrEdit.afterClosed().subscribe(result => {
-        //     console.log('Finalizou, resultado: ', result);
-        //   });
-        // });
+        .then(data => {
+          this.dialogAddOrEdit.close(data);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          this.dialogAddOrEdit.afterClosed().subscribe(result => {
+            console.log('Finalizou, resultado: ', result);
+          });
+        });
     }
   }
 

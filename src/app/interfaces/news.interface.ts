@@ -3,13 +3,12 @@ export interface News {
   type?: String,
   linkProduct?: String,
   file?: {
-    name?: String,
-    size?: Number,
-    key?: String,
-    url?: String,
+    name?: string,
+    size?: number,
+    url?: string,
     createdAt?: {
       type?: Date,
-      default?: Date,
-    },
+      default?: Date
+    }
   },
 }

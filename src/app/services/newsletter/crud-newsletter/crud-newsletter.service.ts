@@ -27,8 +27,11 @@ export abstract class CrudNewsletterService<T extends BaseCrud> {
       });
   }
 
-  public createImage(news: FormData): void {
-    console.log('criando News', news);
+  public createImage(news: FormData): Promise<T[]> {
+    return lastValueFrom(this.http.post<BaseAPI<T>>(this.route, news))
+      .then(result => {
+        return this.handleResponse(result) as T[];
+      });
   }
 
   public updateImage(news: FormData, news_id: number) {
