@@ -1,7 +1,7 @@
 export interface News {
   _id?: number,
-  type?: String,
-  linkProduct?: String,
+  type?: string,
+  linkProduct?: string,
   file?: {
     name?: string,
     size?: number,

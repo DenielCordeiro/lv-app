@@ -19,12 +19,22 @@
   <form [formGroup]="form">
     <div class="content-inputs">
       <div class="content-link-product">
-        <label for="linkProduct">Digite o link do Produto:</label>
+        <label for="linkProduct">Digite o link do produto:</label>
         <input type="text" formControlName="linkProduct" class="form-control" id="linkProduct">
       </div>
 
       <div class="content-file-image">
-        <label for="file">Adicione a Imagem: </label>
+        <label for="file">Adicionar imagem: </label>
+        <input type="file" class="form-control" (change)="onChangeFile($event)">
+      </div>
+
+      <div class="content-file-image">
+
+        <div class="current-image">
+          <img src="{{this.updateData.file?.url}}">
+        </div>
+
+        <label for="file">Trocar imagem: </label>
         <input type="file" class="form-control" (change)="onChangeFile($event)">
       </div>
     </div>
@@ -33,18 +43,18 @@
 
     <div class="content-footer">
       <div class="row">
-        <div class="col-1">
-          <div class="button-close" type="button" (click)="closeModal()">
+        <div class="col-6">
+          <div type="button" class="btn btn-dark button-close" (click)="closeModal()">
             <span>Fechar</span>
           </div>
         </div>
 
-        <div class="col-1">
-          <div *ngIf="this.updateData._id == undefined" type="button" class="button-send" (click)="addOrEditImage()">
+        <div class="col-6">
+          <div *ngIf="this.updateData._id == undefined" type="button" class="button-one button-send" (click)="addOrEditImage()">
             <span>Criar</span>
           </div>
 
-          <div *ngIf="this.updateData._id !== undefined" type="button" class="button-send" (click)="addOrEditImage()">
+          <div *ngIf="this.updateData._id !== undefined" type="button" class="button-one button-send" (click)="addOrEditImage()">
             <span>Atualizar</span>
           </div>
         </div>

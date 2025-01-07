@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { News } from 'src/app/interfaces/news.interface';
 import { AddOrEditImageComponent } from '../add-or-edit-image/add-or-edit-image.component';
+import { DeleteImageComponent } from '../delete-image/delete-image.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-news',
@@ -14,48 +16,49 @@ export class NewsComponent implements OnInit {
     type: "News",
   };
   loading: boolean = true;
-  imageUrl!: string | undefined;
+  imageUrl: string | undefined = undefined;
+  linkProduct: string | undefined = undefined;
 
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public router: Router,
   ) {}
 
   ngOnInit(): void {
     setTimeout(() => {
-      this.loading = false;
       try {
         this.imageUrl = this.dataNews.file?.url;
+        this.linkProduct = this.dataNews.linkProduct;
+        this.loading = false;
       } catch (error) {
-        console.log("Não foi possível encontrar nenhuma imagem, ", error);
+        console.log("Não foi possível salvar dados da imagem em variáveis, ", error);
+        console.log("Dados da imagem carregada: ", this.dataNews);
       }
-    }, 5000);
+    }, 3000);
   }
 
   addOrUpdateImage():void {
     if(this.dataNews !== undefined) {
-      let dialogCreated = this.dialog.open<AddOrEditImageComponent>(AddOrEditImageComponent, {
+      this.dialog.open<AddOrEditImageComponent>(AddOrEditImageComponent, {
         width: '70%',
         data: this.dataNews
-      })
-
-      dialogCreated.afterClosed().subscribe(image => {
-        console.log("imagem: ", image);
-      })
-
+      });
     } else {
-      let dialogUpdated = this.dialog.open<AddOrEditImageComponent>(AddOrEditImageComponent, {
+      this.dialog.open<AddOrEditImageComponent>(AddOrEditImageComponent, {
         width: '70%',
         data: this.news,
       });
-
-      dialogUpdated.afterClosed().subscribe(image => {
-        console.log("imagem: ", image);
-      })
     }
   }
 
   deleteImage() {
-    console.log('função excluir imagem!');
-
+    try {
+      this.dialog.open<DeleteImageComponent>(DeleteImageComponent, {
+        width: '70%',
+        data: this.dataNews,
+      });
+    } catch (error) {
+      console.log("[ERRO!], não foi possível abrir carregar dialog de excluir imagem, erro:", error);
+    }
   }
 }

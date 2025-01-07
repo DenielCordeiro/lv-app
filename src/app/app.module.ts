@@ -43,6 +43,7 @@ import { CartComponent } from './cart/cart.component';
 import { AddOrRemoveCartComponent } from './cart/add-or-remove-cart/add-or-remove-cart.component';
 import { InterfacesComponent } from './interfaces/interfaces/interfaces.component';
 import { AddOrEditImageComponent } from './newsletter/add-or-edit-image/add-or-edit-image.component';
+import { DeleteImageComponent } from './newsletter/delete-image/delete-image.component';
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import { AddOrEditImageComponent } from './newsletter/add-or-edit-image/add-or-e
     CartComponent,
     AddOrRemoveCartComponent,
     InterfacesComponent,
-    AddOrEditImageComponent
+    AddOrEditImageComponent,
+    DeleteImageComponent
 
   ],
   imports: [

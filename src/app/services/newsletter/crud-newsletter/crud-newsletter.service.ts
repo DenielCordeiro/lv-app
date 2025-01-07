@@ -41,8 +41,11 @@ export abstract class CrudNewsletterService<T extends BaseCrud> {
       })
   }
 
-  public deleteImage(news_id: number) {
-    console.log('Objeto news', news_id);
+  public deleteImage(news_id: number): Promise<T> {
+    return lastValueFrom(this.http.delete<BaseAPI<T>>(`${this.route}/${news_id}`))
+      .then(result => {
+        return this.handleResponse(result) as T;
+      })
   }
 
   public handleResponse(response: BaseAPI<T>) {
