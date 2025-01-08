@@ -23,42 +23,6 @@
       font-weight: 600
       font-size: 25px
 
-.button-one
-  display: flex
-  align-items: center
-  justify-content: center
-  cursor: pointer
-  height: 37px
-  min-width: 80px
-  color: colors.$white
-  background-color: colors.$pourple
-  font-size: 18px
-  border: 1px solid colors.$pourple
-  border-radius: 6px
-
-  &:hover
-    background-color: colors.$white
-    color: colors.$pourple
-
-  &:disabled
-    color: colors.$pourple-gray
-    border-color: colors.$pourple-gray
-
-  @include display.mobile
-    height: 35px
-    min-width: 70px
-    background-color: colors.$white
-    color: colors.$pourple
-
-.input-lv
-  border: 0.5px solid colors.$black
-  border-radius: 5px
-
-  &:active, &:focus
-    border: 1px solid colors.$pourple
-    outline: colors.$pourple
-    border-color: colors.$pourple
-
 .desktop
   display: inline
 
@@ -70,3 +34,83 @@
 
   @include display.mobile
     display: inline
+
+//------------------------------------------Buttons--------------------------------------------
+
+.button-x
+  font-size: 16px
+  font-weight: 500
+  padding-top: 1vh
+
+  &:hover
+    color: colors.$pourple
+
+.buttons
+  display: flex
+  align-items: center
+  justify-content: center
+  cursor: pointer
+  height: 37px
+  min-width: 80px
+  font-size: 18px
+  border-radius: 6px
+
+  @include display.mobile
+    height: 35px
+    min-width: 70px
+
+.button-send
+  color: colors.$white
+  background-color: colors.$pourple
+  border: 1px solid colors.$pourple
+
+  &:hover
+    background-color: rgba(153, 50, 204, 0.8)
+    border-color: rgba(153, 50, 204, 0.8)
+
+  &:disabled
+    color: colors.$pourple-gray
+    border-color: colors.$pourple-gray
+
+  @include display.mobile
+    background-color: colors.$white
+    color: colors.$pourple
+
+.button-close
+  color: colors.$white
+  background-color: colors.$black
+  border: 1px solid colors.$black
+
+  &:hover
+    background-color: rgba(0, 0, 0, 0.8)
+    border-color: rgba(0, 0, 0, 0.8)
+
+  @include display.mobile
+    background-color: colors.$white
+    color: colors.$black
+
+.button-red
+  color: colors.$white
+  background-color: colors.$red
+  border: 1px solid colors.$red
+
+  &:hover
+    background-color: rgba(255, 0, 0, 0.8)
+    border-color: rgba(255, 0, 0, 0.8)
+
+  @include display.mobile
+    background-color: colors.$white
+    color: colors.$black
+
+//------------------------------------------Inputs--------------------------------------------
+
+.input-lv
+  border: 0.5px solid colors.$black
+  border-radius: 5px
+
+  &:active, &:focus
+    border: 1px solid colors.$pourple
+    outline: colors.$pourple
+    border-color: colors.$pourple
+    box-shadow: 2px 2px rgba(153, 50, 204, 0.8)
+

@@ -1,10 +1,40 @@
-<h1>Deseja excluir está imagem: </h1>
-<img src="{{this.imageUrl}}">
+<section id="dialogDelete">
+  <div class="container contents">
+    <div class="content-header py-2 row">
+      <div class="col-11">
+        <h2>Excluir imagem</h2>
+      </div>
 
-<div type="button" class="closeDelete btn btn-dark" (click)="closeModal()">
-  <span>Não</span>
-</div>
+      <div class="col-1">
+        <div class="button-x" type="button" (click)="closeModal()">
+          <span>X</span>
+        </div>
+      </div>
+    </div>
 
-<div type="button" class="delete button-one" (click)="delettingImage()">
-  <span>Sim</span>
-</div>
+    <hr class="mx-2">
+
+    <p class="mx-1">Imagem a ser excluída:</p>
+    <div class="content-image">
+      <img src="{{this.imageUrl}}">
+    </div>
+
+    <hr class="mx-2">
+
+    <div class="content-footer my-3 row">
+      <div class="col">
+        <div type="button" class="buttons button-close" (click)="closeModal()">
+          <span>Fechar</span>
+        </div>
+      </div>
+
+      <div class="col">
+        <div type="button" class="buttons button-red" (click)="delettingImage()">
+          <span>Excluir</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+

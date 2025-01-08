@@ -8,15 +8,31 @@
   display: flex
   justify-content: center
 
-  .button-add-or-edit-image
+  .icons
     position: absolute
-    top: 20vh
-    left: 2vw
+    top: 15vh
+    font-size: 30px
+    color: colors.$black
+    right: 2vw
 
-    i
-      font-size: 30px
-      background-color: rgba(220,220,220, 0)
-      color: colors.$black
+    @include display.mobile
+      font-size: 25px
+      right: 3vw
+
+    i:hover
+      color: colors.$pourple
+
+  .icon-trash
+    right: 4vw
+
+    i:hover
+      color: colors.$red
+
+    @include display.hd
+      right: 5.5vw
+
+    @include display.mobile
+      right: 9vw
 
   .card-image
     width: 100%
