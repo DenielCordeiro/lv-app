@@ -8,11 +8,14 @@
   display: flex
   justify-content: center
 
+  @include display.mobile
+    height: 50vh
+
   .icons
     position: absolute
     top: 15vh
     font-size: 30px
-    color: colors.$black
+    color: rgba(0, 0, 0, 0.6)
     right: 2vw
 
     @include display.mobile
@@ -42,5 +45,8 @@
     img
       width: 100%
       height: 70vh
+
+      @include display.mobile
+        height: 45vh
 
 

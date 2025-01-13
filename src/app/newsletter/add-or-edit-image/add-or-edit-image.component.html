@@ -1,14 +1,12 @@
 <div class="container content-form">
   <div class="content-header py-2 row">
-    <div class="col-11">
+    <div class="title col-8">
       <h2 *ngIf="this.updateData._id == undefined">Criar nova imagem</h2>
       <h2 *ngIf="this.updateData._id !== undefined">Atualizar imagem</h2>
     </div>
 
-    <div class="col-1">
-      <div class="button-x" type="button" (click)="closeModal()">
-        <span>X</span>
-      </div>
+    <div class="button-x col-4 py-2" type="button" (click)="closeModal()">
+      <span>X</span>
     </div>
   </div>
 
