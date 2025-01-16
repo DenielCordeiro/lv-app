@@ -38,16 +38,20 @@ export class NewsComponent implements OnInit {
   }
 
   addOrUpdateImage():void {
-    if(this.dataNews !== undefined) {
-      this.dialog.open<AddOrEditImageComponent>(AddOrEditImageComponent, {
-        width: '70%',
-        data: this.dataNews
-      });
-    } else {
-      this.dialog.open<AddOrEditImageComponent>(AddOrEditImageComponent, {
-        width: '70%',
-        data: this.news,
-      });
+    try {
+      if(this.dataNews !== undefined) {
+        this.dialog.open<AddOrEditImageComponent>(AddOrEditImageComponent, {
+          width: '70%',
+          data: this.dataNews
+        });
+      } else {
+        this.dialog.open<AddOrEditImageComponent>(AddOrEditImageComponent, {
+          width: '70%',
+          data: this.news,
+        });
+      }
+    } catch (error) {
+      console.log("[ERRO!], não foi possível abrir dialog de atualizar imagem, erro:", error);
     }
   }
 
@@ -58,7 +62,7 @@ export class NewsComponent implements OnInit {
         data: this.dataNews,
       });
     } catch (error) {
-      console.log("[ERRO!], não foi possível abrir carregar dialog de excluir imagem, erro:", error);
+      console.log("[ERRO!], não foi possível abrir dialog de excluir imagem, erro:", error);
     }
   }
 }

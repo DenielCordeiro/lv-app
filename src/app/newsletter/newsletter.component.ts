@@ -47,7 +47,7 @@ export class NewsletterComponent implements OnInit {
       }
 
       if (image.type == "Collection") {
-        this.carousel.push(image);
+        this.collection.push(image);
       }
     });
   }

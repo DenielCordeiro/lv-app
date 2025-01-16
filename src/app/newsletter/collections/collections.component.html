@@ -1,30 +1,34 @@
-<div class="content">
-  <div>
-    <div class="content card-desktop">
-      <img src="http://source.unsplash.com/random/250x250/?street" alt="street">
-      <span>Legenda test</span>
-      <h2>Coleção test</h2>
+<div class="contents">
+
+  <div class="card-create py-2" (click)="addOrUpdateImage(undefined)">
+    <div class="icons add-card">
+      <i type="button" class="bi bi-plus-circle-dotted"></i>
     </div>
-  </div>
-  <div>
-    <div class="content card-desktop">
-      <img src="http://source.unsplash.com/random/250x250/?animal" alt="animal">
-      <span>Legenda test</span>
-      <h2>Coleção test</h2>
-    </div>
-  </div>
-  <div>
+
     <div class="content">
-      <img src="http://source.unsplash.com/random/250x250/?plants" alt="plants">
-      <span>Legenda test</span>
-      <h2>Coleção test</h2>
+      <h4>Adicionar imagem</h4>
     </div>
   </div>
-  <div>
-    <div class="content">
-      <img src="http://source.unsplash.com/random/250x250/?car" alt="car">
-      <span>Legenda test</span>
-      <h2>Coleção test</h2>
+
+  <div class="cards" *ngFor="let image of imagesCollections">
+    <img src="{{ image.file?.url }}">
+
+
+    <div class="content card-desktop">
+      <img src="{{ image.file?.url }}">
+
+      <div class="icons row py-4">
+        <div class="icon-update col">
+          <i *ngIf="image._id !== undefined" type="button" class="bi bi-pencil-square" (click)="addOrUpdateImage(image._id)"></i>
+        </div>
+
+        <div class="icon-trash col">
+          <i *ngIf="image._id !== undefined" type="button" class="bi bi-trash3-fill mx-2" (click)="deleteImage(image._id)"></i>
+        </div>
+      </div>
+
+      <span>subtitulo</span>
+      <h2>titulo</h2>
     </div>
   </div>
 </div>
