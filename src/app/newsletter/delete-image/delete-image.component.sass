@@ -19,9 +19,13 @@
     justify-content: center
 
     img
-      width: 50vw
-      heigth: 40vh
+      width: 30vw
+      heigth: 20vh
       border-radius: 5px
+
+      @include display.hd
+        width: 50vw
+        heigth: 40vh
 
       @include display.mobile
         width: 60vw

@@ -18,17 +18,18 @@
       <img src="{{ image.file?.url }}">
 
       <div class="icons row py-4">
-        <div class="icon-update col">
-          <i *ngIf="image._id !== undefined" type="button" class="bi bi-pencil-square" (click)="addOrUpdateImage(image._id)"></i>
-        </div>
-
         <div class="icon-trash col">
           <i *ngIf="image._id !== undefined" type="button" class="bi bi-trash3-fill mx-2" (click)="deleteImage(image._id)"></i>
         </div>
+
+        <div class="icon-update col">
+          <i *ngIf="image._id !== undefined" type="button" class="bi bi-pencil-square" (click)="addOrUpdateImage(image._id)"></i>
+        </div>
       </div>
 
-      <span>subtitulo</span>
-      <h2>titulo</h2>
+      <div class="text-footer">
+        <a href="{{ image.linkProduct }}">Ver mais</a>
+      </div>
     </div>
   </div>
 </div>
