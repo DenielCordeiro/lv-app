@@ -1,7 +1,12 @@
 <section id="carousel-desktop">
+  <div class="content-add-image">
+    <div type="button" class="button-add-image" (click)="addOrUpdateImage(null)">
+      <span>Adicionar imagem</span>
+      <i class="bi bi-plus-circle-dotted"></i>
+    </div>
+  </div>
 
-  <div class="content row">
-
+  <div class="content-carousel row">
     <div class="col-2 arrow-left">
       <a type="button" class="button-left" (click)="moveImage(false)"><i class="bi bi-caret-left-fill"></i></a>
     </div>
@@ -25,9 +30,9 @@
 
 </section>
 
-<section id="carousel-mobile">
+<!-- <section id="carousel-mobile">
 
-  <div class="content row">
+  <div class="content-carousel row">
 
     <div class="col-2 arrow-left">
       <a type="button" class="button-left" (click)="moveImage(false)"><i class="bi bi-caret-left-fill"></i></a>
@@ -48,4 +53,4 @@
 
   </div>
 
-</section>
+</section> -->

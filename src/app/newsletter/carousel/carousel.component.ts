@@ -63,7 +63,7 @@ export class CarouselComponent implements OnInit {
     items[this.currentItem].classList.add('current-item');
   }
 
-  addOrUpdateImage(imageId: number):void {
+  addOrUpdateImage(imageId: number | null):void {
     if (imageId == undefined) {
       try {
         this.dialog.open<AddOrEditImageComponent>(AddOrEditImageComponent, {
