@@ -41,12 +41,10 @@ export class NewsComponent implements OnInit {
     try {
       if(this.dataNews !== undefined) {
         this.dialog.open<AddOrEditImageComponent>(AddOrEditImageComponent, {
-          width: '70%',
           data: this.dataNews
         });
       } else {
         this.dialog.open<AddOrEditImageComponent>(AddOrEditImageComponent, {
-          width: '70%',
           data: this.news,
         });
       }
@@ -58,7 +56,6 @@ export class NewsComponent implements OnInit {
   deleteImage() {
     try {
       this.dialog.open<DeleteImageComponent>(DeleteImageComponent, {
-        width: '70%',
         data: this.dataNews,
       });
     } catch (error) {

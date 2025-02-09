@@ -41,9 +41,6 @@ export class DeleteImageComponent {
         });
       });
     }
-
-
-
   }
 
   closeModal(): void {

@@ -35,7 +35,6 @@ export class CollectionsComponent implements OnInit {
     if (imageId == undefined) {
       try {
         this.dialog.open<AddOrEditImageComponent>(AddOrEditImageComponent, {
-          width: '70%',
           data: this.news,
         });
       } catch(error) {
@@ -52,7 +51,6 @@ export class CollectionsComponent implements OnInit {
 
       try {
         this.dialog.open<AddOrEditImageComponent>(AddOrEditImageComponent, {
-          width: '70%',
           data: image
         });
       } catch(error) {
@@ -72,7 +70,6 @@ export class CollectionsComponent implements OnInit {
 
     try {
       this.dialog.open<DeleteImageComponent>(DeleteImageComponent, {
-        width: '70%',
         data: image,
       });
     } catch (error) {

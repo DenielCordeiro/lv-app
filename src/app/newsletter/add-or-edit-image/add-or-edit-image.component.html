@@ -24,13 +24,13 @@
         <input type="file" class="form-control input-lv" (change)="onChangeFile($event)">
       </div>
 
-      <div *ngIf="this.updateData._id !== undefined">
+      <div *ngIf="this.updateData._id !== undefined" class="my-3">
         <p>Imagem atual:</p>
         <div class="current-image my-2">
           <img src="{{this.updateData.file?.url}}">
         </div>
 
-        <div class="content-file-image my-2">
+        <div class="content-file-image my-3">
           <label for="file">Trocar imagem: </label>
           <input type="file" class="form-control input-lv" (change)="onChangeFile($event)">
         </div>
@@ -47,11 +47,11 @@
       </div>
 
       <div class="col">
-        <div *ngIf="this.updateData._id == undefined" type="button" class="buttons button-send" (click)="addOrEditImage()">
+        <div *ngIf="this.updateData._id == undefined" type="button" class="buttons button-send mx-2" (click)="addOrEditImage()">
           <span>Criar</span>
         </div>
 
-        <div *ngIf="this.updateData._id !== undefined" type="button" class="buttons button-send" (click)="addOrEditImage()">
+        <div *ngIf="this.updateData._id !== undefined" type="button" class="buttons button-send mx-2" (click)="addOrEditImage()">
           <span>Atualizar</span>
         </div>
       </div>
