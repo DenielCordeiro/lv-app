@@ -15,7 +15,6 @@ export class ProductsComponent implements OnInit {
   productId: number | undefined;
   title: string = 'Trabalhos disponíveis';
   products: Product[] = [];
-  product: any;
 
   constructor(
     public productsService: ProductsService,
@@ -24,31 +23,35 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getingProducts();
+    console.log(this.products);
+
   }
 
   getingProducts() {
     this.productsService.getProducts()
-    .then(allProducts => {
-      if(allProducts == null || undefined) {
+    .then(data => {
+      if(data == null || data == undefined) {
         alert("[Atenção]: Não existe nenhum produto a venda!")
       } else {
-        this.products.push(allProducts);
-        this.product = this.products[0];
+
+        data.forEach(product => {
+          this.products.push(product);
+        });
       }
     })
-    .catch(Error => {
+    .catch(error => {
       alert('ERRO: não conseguiu trazer os produtos');
-      console.log(Error);
+      console.log(error);
     })
   }
 
   searchProduct(idSelected: number): any[] {
     const product = [];
 
-    for (let i = 0; i < this.product.length; i++) {
+    for (let i = 0; i < this.products.length; i++) {
 
-      if (this.product[i]._id == idSelected) {
-        product.push(this.product[i]);
+      if (this.products[i]._id == idSelected) {
+        product.push(this.products[i]);
       }
     }
 

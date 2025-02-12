@@ -1,28 +1,44 @@
-<section id="carousel-desktop">
-  <div class="content">
-    <div class="row desktop">
-      <div class="col-3 arrow-left">
-        <a type="button" class="button-left" (click)="moveImage(false)"><i class="bi bi-caret-left-fill"></i></a>
-      </div>
+<section id="carousel" class="display-desktop">
+  <div class="content-add-image">
+    <div type="button" class="button-add-image" (click)="addOrUpdateImage(null)">
+      <i class="bi bi-plus-circle-dotted"></i>
+    </div>
+  </div>
 
-      <div class="col-6">
-        <div class="carousel-images">
-          <div class="images" id="images">
-            <img class="item current-item" src="http://source.unsplash.com/random/250x250/?street" alt="street">
-            <img class="item" src="http://source.unsplash.com/random/250x250/?animal" alt="animal">
-            <img class="item" src="http://source.unsplash.com/random/250x250/?poker" alt="poker">
-            <img class="item" src="http://source.unsplash.com/random/250x250/?skate" alt="skate">
-          </div>
-        </div>
-      </div>
+  <div class="content-carousel">
+    <div class="arrow-left">
+      <a type="button" class="button-left" (click)="moveImage(false)"><i class="bi bi-caret-left-fill"></i></a>
+    </div>
 
-      <div class="col-3 arrow-right">
-        <a type="button" class="button-right" (click)="moveImage(true)"><i class="bi bi-caret-right-fill"></i></a>
+    <div class="carousel-images">
+      <div class="images" id="images">
+        <img src="#" alt="">
       </div>
+    </div>
+
+    <div class="arrow-right">
+      <a type="button" class="button-right" (click)="moveImage(true)"><i class="bi bi-caret-right-fill"></i></a>
     </div>
   </div>
 </section>
 
-<section id="carousel-mobile">
-  <h1>teste</h1>
+<section id="carousel" class="display-mobile">
+  <div class="content-carousel row">
+    <div class="col-2 arrow-left">
+      <a type="button" class="button-left" (click)="moveImage(false)"><i class="bi bi-caret-left-fill"></i></a>
+    </div>
+
+    <div class="col-8">
+      <div class="carousel-images">
+        <div class="images" id="images">
+          <img class="item current-item" src="https://firebasestorage.googleapis.com/v0/b/luz-violeta-186d5.appspot.com/o/1727446284419.png?alt=media&token=1f2a08a5-6fc2-4810-b215-12e57e8316d9" alt="colar">
+          <img class="item" src="https://firebasestorage.googleapis.com/v0/b/luz-violeta-186d5.appspot.com/o/1724501983869.png?alt=media&token=daccd63a-dfdf-4580-a2b2-0686b50ff509" alt="pulseira">
+        </div>
+      </div>
+    </div>
+
+    <div class="col-2 arrow-right">
+      <a type="button" class="button-right" (click)="moveImage(true)"><i class="bi bi-caret-right-fill"></i></a>
+    </div>
+  </div>
 </section>

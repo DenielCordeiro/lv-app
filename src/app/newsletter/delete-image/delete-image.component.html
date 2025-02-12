@@ -1,0 +1,38 @@
+<section id="dialogDelete">
+  <div class="container contents">
+    <div class="content-header py-2 row">
+      <div class="title col-8">
+        <h2>Excluir imagem</h2>
+      </div>
+
+      <div class="button-x col-4 py-2" type="button" (click)="closeModal()">
+        <span>X</span>
+      </div>
+    </div>
+
+    <hr class="mx-2">
+
+    <p class="mx-1">Imagem a ser excluída:</p>
+    <div class="content-image">
+      <img src="{{ this.imageUrl }}">
+    </div>
+
+    <hr class="mx-2">
+
+    <div class="content-footer my-3 row">
+      <div class="col">
+        <div type="button" class="buttons button-close mx-2" (click)="closeModal()">
+          <span>Fechar</span>
+        </div>
+      </div>
+
+      <div class="col">
+        <div type="button" class="buttons button-red mx-2" (click)="delettingImage()">
+          <span>Excluir</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+

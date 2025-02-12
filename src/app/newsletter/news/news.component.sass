@@ -1,36 +1,52 @@
 @use '../../../assets/sass/colors'
 @use '../../../assets/sass/display'
 
-.news-card
-  width: 50vw
-  height: 45vh
-  position: absolute
-  left: 21vw
-  margin-top: 12vh
-  border-radius: 10px
+#topNews
+  padding-top: 5vh
+  width: 100%
+  height: 60vh
+  display: flex
+  justify-content: center
 
   @include display.mobile
-    width: 60vw
-    height: 25vh
-    left: 15vw
+    height: 50vh
 
-.card-front
-  background-color: colors.$white
-  color: colors.$black
-  z-index: 1
+  .icons
+    position: absolute
+    top: 15vh
+    font-size: 30px
+    color: rgba(0, 0, 0, 0.6)
+    right: 2vw
 
-  &:hover
-    z-index: 3
+    @include display.mobile
+      font-size: 25px
+      right: 3vw
 
-.card-behind
-  background-color: colors.$pourple
-  color: colors.$white
-  z-index: 0
-  margin-left: 6vw
-  margin-top: 17vh
+    i:hover
+      color: colors.$pourple
 
-  @include display.mobile
-    margin-left: 10vw
+  .icon-trash
+    right: 4vw
 
-  &:hover
-    z-index: 2
+    i:hover
+      color: colors.$red
+
+    @include display.hd
+      right: 5.5vw
+
+    @include display.mobile
+      right: 9vw
+
+  .card-image
+    width: 100%
+    border-radius: 6px
+    background-color: colors.$white
+
+    // img
+    //   width: 100%
+    //   height: 70vh
+
+    //   @include display.mobile
+    //     height: 45vh
+
+

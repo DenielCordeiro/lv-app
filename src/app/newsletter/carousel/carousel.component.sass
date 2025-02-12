@@ -5,30 +5,52 @@
   margin: 0px
   padding: 0px
 
-#carousel-desktop
-  display: inline
-
-  @include display.mobile
-    display: none
-
-#carousel-mobile
-  display: none
-
-  @include display.mobile
-    display: inline
-
-.content
-  padding-top: 10vh
+#carousel
   width: 100%
-  margin: 0 auto
+  padding-top: 4vh
+
+  .content-add-image
+    display: flex
+    justify-content: end
+    padding-right: 2vw
+
+    i
+      font-size: 30px
+      color: rgba(0, 0, 0, 0.6)
+
+      &:hover
+        color: colors.$pourple
+
+  .content-carousel
+    display: flex
+    justify-content: space-around
+    width: 100%
+    height: 70vh
+    background-color: colors.$green
+
+
+    @include display.mobile
+      height: 50vh
+
+    .arrow-left, .arrow-right
+      display: flex
+      align-items: center
+      justify-content: center
+      background-color: colors.$white
+      cursor: pointer
+      opacity: 0.2
+      font-size: 60px
+      transition: all 600ms ease-in-out
+      border: none
+
+      &:hover
+        opacity: 1
 
   .carousel-images::-webkit-scrollbar
     display: none
 
   .carousel-images
     overflow-x: auto
-    -ms-overflow-style: none
-    scrollbar-width: none
     max-width: 50vw
 
     .images
@@ -37,8 +59,8 @@
       gap: 15px
 
       .item
-        width: 22vw
-        height: 50vh
+        width: 100%
+        height: 25vh
         flex-shrink: 0
         opacity: 0.6
         border-radius: 40px
@@ -46,23 +68,3 @@
 
       .current-item
         opacity: 1
-
-  .arrow-left, .arrow-right
-    cursor: pointer
-    opacity: 0.2
-    font-size: 60px
-    transition: all 600ms ease-in-out
-    border: none
-    padding-top: 25vh
-
-    &:hover
-      opacity: 1
-
-  .arrow-left
-    text-align: end
-
-  .button-left
-    margin-right: 2vw
-
-  .button-right
-    margin-left: 2vw
