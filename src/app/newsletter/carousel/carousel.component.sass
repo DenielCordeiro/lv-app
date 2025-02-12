@@ -5,60 +5,66 @@
   margin: 0px
   padding: 0px
 
-#carousel-desktop
-  display: inline
+#carousel
+  width: 100%
+  padding-top: 4vh
 
-  @include display.mobile
+  .content-add-image
+    display: flex
+    justify-content: end
+    padding-right: 2vw
+
+    i
+      font-size: 30px
+      color: rgba(0, 0, 0, 0.6)
+
+      &:hover
+        color: colors.$pourple
+
+  .content-carousel
+    display: flex
+    justify-content: space-around
+    width: 100%
+    height: 70vh
+    background-color: colors.$green
+
+
+    @include display.mobile
+      height: 50vh
+
+    .arrow-left, .arrow-right
+      display: flex
+      align-items: center
+      justify-content: center
+      background-color: colors.$white
+      cursor: pointer
+      opacity: 0.2
+      font-size: 60px
+      transition: all 600ms ease-in-out
+      border: none
+
+      &:hover
+        opacity: 1
+
+  .carousel-images::-webkit-scrollbar
     display: none
 
-#carousel-mobile
-  display: none
+  .carousel-images
+    overflow-x: auto
+    max-width: 50vw
 
-  @include display.mobile
-    display: inline
+    .images
+      display: flex
+      flex-flow: row nowrap
+      gap: 15px
 
-.content
-  max-width: 100%
-  height: 70vh
-  background-color: colors.$green
+      .item
+        width: 100%
+        height: 25vh
+        flex-shrink: 0
+        opacity: 0.6
+        border-radius: 40px
+        transition: all 600ms ease-in-out
 
-  @include display.mobile
-    height: 50vh
-
-  .arrow-left, .arrow-right
-    background-color: colors.$white
-
-    cursor: pointer
-    opacity: 0.2
-    font-size: 60px
-    transition: all 600ms ease-in-out
-    border: none
-    display: flex
-    align-items: center
-    justify-content: center
-
-    &:hover
-      opacity: 1
-
-.carousel-images::-webkit-scrollbar
-  display: none
-
-.carousel-images
-  overflow-x: auto
-  max-width: 50vw
-
-  .images
-    display: flex
-    flex-flow: row nowrap
-    gap: 15px
-
-    .item
-      width: 100%
-      height: 25vh
-      flex-shrink: 0
-      opacity: 0.6
-      border-radius: 40px
-      transition: all 600ms ease-in-out
-
-    .current-item
-      opacity: 1
+      .current-item
+        opacity: 1
