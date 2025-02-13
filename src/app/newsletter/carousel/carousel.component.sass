@@ -6,13 +6,12 @@
   padding: 0px
 
 #carousel
-  width: 100%
-  padding-top: 4vh
-
   .content-add-image
+    background-color: colors.$blue-pourple
     display: flex
-    justify-content: end
-    padding-right: 2vw
+    justify-content: right
+    padding: 5vh 2vw 0 0
+    margin-top: 4vh
 
     i
       font-size: 30px
@@ -22,12 +21,11 @@
         color: colors.$pourple
 
   .content-carousel
+    background-color: colors.$blue-pourple
     display: flex
     justify-content: space-around
     width: 100%
     height: 70vh
-    background-color: colors.$green
-
 
     @include display.mobile
       height: 50vh
@@ -36,7 +34,6 @@
       display: flex
       align-items: center
       justify-content: center
-      background-color: colors.$white
       cursor: pointer
       opacity: 0.2
       font-size: 60px
@@ -46,24 +43,32 @@
       &:hover
         opacity: 1
 
+      i
+        color: colors.$pourple-light
+
+
   .carousel-images::-webkit-scrollbar
     display: none
 
   .carousel-images
     overflow-x: auto
-    max-width: 50vw
+    width: 40vw
+    padding-top: 8vh
 
     .images
       display: flex
       flex-flow: row nowrap
       gap: 15px
+      border-radius: 20px
+
+      img
+        width: 40vw
+        height: 55vh
+        border-radius: 20px
 
       .item
-        width: 100%
-        height: 25vh
         flex-shrink: 0
         opacity: 0.6
-        border-radius: 40px
         transition: all 600ms ease-in-out
 
       .current-item
