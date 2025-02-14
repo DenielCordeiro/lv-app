@@ -5,71 +5,92 @@
   margin: 0px
   padding: 0px
 
-#carousel
-  .content-add-image
-    background-color: colors.$blue-pourple
-    display: flex
-    justify-content: right
-    padding: 5vh 2vw 0 0
-    margin-top: 4vh
+.content-add-image
+  z-index: 1
+  background-color: colors.$blue-pourple
+  position: absolute
+  right: 2vw
+  padding-top: 7vh
 
-    i
-      font-size: 30px
-      color: rgba(0, 0, 0, 0.6)
+  @include display.mobile
+    background: none
 
-      &:hover
-        color: colors.$pourple
-
-  .content-carousel
-    background-color: colors.$blue-pourple
-    display: flex
-    justify-content: space-around
-    width: 100%
-    height: 70vh
+  i
+    font-size: 30px
+    color: rgba(0, 0, 0, 0.6)
 
     @include display.mobile
-      height: 50vh
+      color: colors.$black
+      font-size: 35px
 
-    .arrow-left, .arrow-right
-      display: flex
-      align-items: center
-      justify-content: center
-      cursor: pointer
-      opacity: 0.2
+    &:hover
+      color: colors.$pourple
+
+.content-carousel
+  background-color: colors.$blue-pourple
+  display: flex
+  justify-content: space-around
+  width: 100%
+  height: 70vh
+  padding: 0px 11vw 0px 11vw
+
+  @include display.mobile
+    padding: 0px
+
+  .arrow-left, .arrow-right
+    display: flex
+    align-items: center
+    justify-content: center
+    cursor: pointer
+    opacity: 0.2
+    font-size: 100px
+    transition: all 600ms ease-in-out
+    border: none
+
+    @include display.mobile
       font-size: 60px
-      transition: all 600ms ease-in-out
-      border: none
+      opacity: 1
+      transition: all 10ms
+      z-index: 1
 
-      &:hover
-        opacity: 1
+    &:hover
+      opacity: 1
 
-      i
-        color: colors.$pourple-light
+    i
+      color: colors.$pourple-light
 
+.carousel-images::-webkit-scrollbar
+  display: none
 
-  .carousel-images::-webkit-scrollbar
-    display: none
+.carousel-images
+  overflow-x: auto
+  width: 32vw
+  padding-top: 8vh
 
-  .carousel-images
-    overflow-x: auto
-    width: 40vw
-    padding-top: 8vh
+  @include display.mobile
+    padding-top: 0px
+    position: absolute
+    width: 100vw
 
-    .images
-      display: flex
-      flex-flow: row nowrap
-      gap: 15px
+  .images
+    display: flex
+    flex-flow: row nowrap
+    gap: 15px
+    border-radius: 20px
+
+    img
+      width: 31.5vw
+      height: 60vh
       border-radius: 20px
 
-      img
-        width: 40vw
-        height: 55vh
-        border-radius: 20px
+      @include display.mobile
+        width: 100vw
+        border-radius: 0px
 
-      .item
-        flex-shrink: 0
-        opacity: 0.6
-        transition: all 600ms ease-in-out
+    .item
+      flex-shrink: 0
+      opacity: 0.6
+      transition: all 600ms ease-in-out
 
-      .current-item
-        opacity: 1
+    .current-item
+      opacity: 1

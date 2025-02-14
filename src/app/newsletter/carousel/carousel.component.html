@@ -12,8 +12,7 @@
 
     <div class="carousel-images">
       <div class="images" id="images">
-          <img class="item current-item" src="../../../assets/images/macrame.png" alt="imagem fake">
-          <img class="item" src="../../../assets/images/macrame-vaso.png" alt="imagem fake">
+          <img class="item current-item" *ngFor="let image of imagesCarousel" src="{{ image.file?.url }}" alt="imagem fake">
       </div>
     </div>
 
@@ -24,6 +23,12 @@
 </section>
 
 <section id="carousel" class="display-mobile">
+  <div class="content-add-image">
+    <div type="button" class="button-add-image" (click)="addOrUpdateImage(null)">
+      <i class="bi bi-plus-circle-dotted"></i>
+    </div>
+  </div>
+
   <div class="content-carousel">
     <div class="arrow-left">
       <a type="button" class="button-left" (click)="moveImage(false)"><i class="bi bi-caret-left-fill"></i></a>
@@ -31,8 +36,7 @@
 
     <div class="carousel-images">
       <div class="images" id="images">
-          <img class="item current-item" src="#" alt="imagem fake">
-          <img class="item" src="#" alt="imagem fake">
+          <img class="item current-item" *ngFor="let image of imagesCarousel" src="{{ image.file?.url }}" alt="imagem fake">
       </div>
     </div>
 
