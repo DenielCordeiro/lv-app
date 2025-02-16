@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { News } from 'src/app/interfaces/news.interface';
-import { Product } from 'src/app/interfaces/product.interface';
-import { AddOrEditImageComponent } from '../add-or-edit-image/add-or-edit-image.component';
 import { MatDialog } from '@angular/material/dialog';
+import { News } from 'src/app/interfaces/news.interface';
+import { AddOrEditImageComponent } from '../add-or-edit-image/add-or-edit-image.component';
 import { DeleteImageComponent } from '../delete-image/delete-image.component';
 
 @Component({
@@ -11,7 +10,7 @@ import { DeleteImageComponent } from '../delete-image/delete-image.component';
   styleUrls: ['./carousel.component.sass']
 })
 export class CarouselComponent implements OnInit {
-  @Input() imagesCarousel: Product[] = [];
+  @Input() imagesCarousel: News[] = [];
   news: News = {
     type: "Carousel",
   };
@@ -102,7 +101,6 @@ export class CarouselComponent implements OnInit {
 
     try {
       this.dialog.open<DeleteImageComponent>(DeleteImageComponent, {
-        width: '70%',
         data: image,
       });
     } catch (error) {

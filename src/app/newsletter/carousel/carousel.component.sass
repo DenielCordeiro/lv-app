@@ -72,6 +72,20 @@
     position: absolute
     width: 100vw
 
+  .image
+    .icons
+      font-size: 25px
+      display: flex
+      justify-content: right
+      padding-right: 2vw
+      padding-bottom: 1vh
+
+      .icon-trash:hover
+        color: colors.$red
+
+      .icon-update:hover
+        color: colors.$pourple
+
   .images
     display: flex
     flex-flow: row nowrap
@@ -80,7 +94,7 @@
 
     img
       width: 31.5vw
-      height: 60vh
+      height: 55vh
       border-radius: 20px
 
       @include display.mobile

@@ -12,7 +12,23 @@
 
     <div class="carousel-images">
       <div class="images" id="images">
-          <img class="item current-item" *ngFor="let image of imagesCarousel" src="{{ image.file?.url }}" alt="imagem fake">
+        <div *ngFor="let image of imagesCarousel">
+          <div class="image">
+            <div class="icons">
+              <div class="icon-trash">
+                <i *ngIf="image._id !== undefined" type="button" class="bi bi-trash3-fill mx-2" (click)="deleteImage(image._id)"></i>
+              </div>
+
+              <div class="icon-update">
+                <i *ngIf="image._id !== undefined" type="button" class="bi bi-pencil-square" (click)="addOrUpdateImage(image._id)"></i>
+              </div>
+            </div>
+
+            <a href="{{ image.linkProduct }}">
+              <img class="item current-item" src="{{ image.file?.url }}" alt="imagem fake">
+            </a>
+          </div>
+        </div>
       </div>
     </div>
 
