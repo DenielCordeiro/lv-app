@@ -54,7 +54,6 @@ export abstract class CrudProductsService<T extends BaseCrud> {
   public updateProduct(model: FormData, productId: number | undefined): Promise<T> {
     return lastValueFrom(this.http.put<BaseAPI<T>>(`${this.route}/${productId}`, model, { headers: this.header }))
       .then(result => {
-
         return this.handleResponse(result) as T;
       })
       .catch (error => {
