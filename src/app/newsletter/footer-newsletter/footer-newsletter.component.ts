@@ -8,12 +8,12 @@ import { Review } from 'src/app/interfaces/review.interface';
   styleUrls: ['./footer-newsletter.component.sass']
 })
 export class FooterNewsletterComponent implements OnInit {
-  test: Review[] = [{
+  avaliations: Review[] = [{
     userName: "Teste",
     review: "Eu amei a Luz Violeta Macrâme",
     date: Date.now(),
-    stars: 1,
-    filledStars: 4,
+    stars: 3,
+    filledStars: 2,
   }];
 
   reviews!: Review[];

@@ -2,9 +2,46 @@
   <div class="reviews">
     <h2>avaliações</h2>
 
-    <p>
-      <i class="bi bi-star"></i>
-      <i class="bi bi-star-fill"></i>
+    <p *ngFor="let avaliation of avaliations">
+      <span class="filled-stars" *ngIf="avaliation.filledStars == 1">
+        <i class='bi bi-star-fill'></i>
+      </span>
+
+      <span class="filled-stars" *ngIf="avaliation.filledStars == 2">
+        <i class='bi bi-star-fill'></i> <i class='bi bi-star-fill'></i>
+      </span>
+
+      <span class="filled-stars" *ngIf="avaliation.filledStars == 3">
+        <i class='bi bi-star-fill'></i> <i class='bi bi-star-fill'></i> <i class='bi bi-star-fill'></i>
+      </span>
+
+      <span class="filled-stars" *ngIf="avaliation.filledStars == 4">
+        <i class='bi bi-star-fill'></i> <i class='bi bi-star-fill'></i> <i class='bi bi-star-fill'></i> <i class='bi bi-star-fill'></i>
+      </span>
+
+      <span class="filled-stars" *ngIf="avaliation.filledStars == 5">
+        <i class='bi bi-star-fill'></i> <i class='bi bi-star-fill'></i> <i class='bi bi-star-fill'></i> <i class='bi bi-star-fill'></i> <i class='bi bi-star-fill'></i>
+      </span>
+
+      <span class="stars" *ngIf="avaliation.stars == 1">
+        <i class="bi bi-star"></i>
+      </span>
+
+      <span class="stars" *ngIf="avaliation.stars == 2">
+        <i class="bi bi-star"></i> <i class="bi bi-star"></i>
+      </span>
+
+      <span class="stars" *ngIf="avaliation.stars == 3">
+        <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
+      </span>
+
+      <span class="stars" *ngIf="avaliation.stars == 4">
+        <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
+      </span>
+
+      <span class="stars" *ngIf="avaliation.stars == 5">
+        <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i> <i class="bi bi-star"></i>
+      </span>
     </p>
   </div>
 
