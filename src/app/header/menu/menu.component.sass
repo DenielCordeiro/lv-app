@@ -13,6 +13,10 @@
     background-color: colors.$white
     margin: 0px 0px 6px 0px
 
+    @include display.hd
+      width: 20px
+      height: 2px
+
     @include display.mobile
       width: 35px
       height: 7px
@@ -63,39 +67,37 @@
 
 .menu
   position: fixed
-  background-color: colors.$white
-  width: 0px
+  transition: all 500ms
+  width: 0vw
+  height: 100%
   top: 8vh
-  right: 0px
-  border: 0px
-  transition: all 400ms
+  left: 0vw
+  border: 1px solid colors.$black
+  padding-bottom: 1.5vh
+
+  @include display.hd
+    top: 11.5vh
 
   @include display.mobile
-    transition: all 400ms
+    transition: all 500ms
     width: 0px
     top: 10vh
     right: 0px
 
 .menu-open
+  transition: all 400ms
   top: 8vh
-  right: 0px
+  left: 0vw
   padding-bottom: 1.5vh
   z-index: 2
-  transition: all 400ms
   width: 25%
   height: 100%
-  border: 2px solid colors.$black
-  border-top-left-radius: 10px
-  border-bottom-left-radius: 10px
-  border-top-right-radius: 0px
-  border-bottom-right-radius: 0px
+  border: 1px solid colors.$black
+
+  @include display.hd
+    top: 11.5vh
 
   @include display.mobile
     top: 10vh
-    right: 0px
     width: 43%
     height: auto
-    border-top-left-radius: 10px
-    border-bottom-left-radius: 10px
-    border-top-right-radius: 0px
-    border-bottom-right-radius: 0px
