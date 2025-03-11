@@ -1,0 +1,32 @@
+@use '../../../assets/sass/display'
+
+*
+  margin: 0px
+  padding: 0px
+
+.contents
+  padding: 0px 2vw 0px 2vw
+
+  .content-header
+    width: 100%
+
+    .button-x
+      display: flex
+      justify-content: flex-end
+
+  .content-image
+    display: flex
+    justify-content: center
+
+    img
+      width: 15vw
+      height: 25vh
+      border-radius: 5px
+
+      @include display.hd
+        width: 50vw
+        height: 40vh
+
+      @include display.mobile
+        width: 60vw
+        height: 20vh

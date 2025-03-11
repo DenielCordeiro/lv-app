@@ -7,63 +7,62 @@
   margin: 0
   padding: 0
 
-.content
+.contents
   width: 100%
   display: flex
   justify-content: center
-  height: 60vh
+  height: 482px
   gap: 13px
-  padding-top: 10vh
+  margin-bottom: 4vh
 
   @include display.mobile
-    padding-top: 4vh
+    margin-top: -9vh
     height: 46vh
     gap: 15px
 
+  .add-card
+    width: 100%
+    display: flex
+    justify-content: center
+    margin-bottom: 50px
+    padding-top: 4vh
+
+    i
+      font-size: 40px
+      color: colors.$black
+
   > div
-    flex: 0 0 13vw
+    flex: 0 0 15vw
     border-radius: 0.5rem
     transition: 0.5s ease-in-out
     cursor: pointer
     box-shadow: 1px 5px 15px #1e0e3e
-    background-color: colors.$pourple
     overflow: hidden
 
     @include display.mobile
       flex: 0 0 40vw
 
-    &:nth-of-type(1)
-      // background: url(collections.$image1)
-      // background-size: 100% 100%
-
-    &:nth-of-type(2)
-      // background: url(collections.$image2)
-      // background-size: 100% 100%
-
-    &:nth-of-type(3)
-      // background: url(collections.$image3)
-      // background-size: 100% 100%
-      display: inline
+    img
+      position: absolute
+      z-index: 0
+      width: 15vw
+      height: 482px
+      border-radius: 10px
 
       @include display.mobile
-        display: none
-
-    &:nth-of-type(4)
-      // background: url(collections.$image4)
-      // background-size: 100% 100%
-      display: inline
-
-      @include display.mobile
-        display: none
+        width: 40vw
+        height: 46.1vh
 
     .content
+      z-index: 2
+      height: 100%
+      padding-top: 2vh
       font-size: 1.5rem
-      color: #fff
+      color: colors.$black
       display: flex
       align-items: center
       opacity: 0
       flex-direction: column-reverse
-      height: 100%
       justify-content: flex-end
       background: rgb(2, 2, 100)
       background: linear-gradient(0deg,rgba(2, 2, 46, 0.6755077030812324) 0%,rgba(255, 255, 255, 0) 100% )
@@ -72,7 +71,8 @@
       visibility: hidden
 
       img
-        max-width: 11vw
+        max-width: 10vw
+        height: 200px
         border-radius: 10px
 
         @include display.mobile
@@ -82,8 +82,21 @@
         display: block
         font-size: 1.2rem
 
+      .icons
+        position: absolute
+
+        .icon-trash:hover
+          color: colors.$red
+
+        .icon-update:hover
+          color: colors.$pourple
+
+      .text-footer
+        position: absolute
+        top: 35vh
+
     &:hover
-      flex: 0 0 13vw
+      flex: 0 0 15vw
       box-shadow: 1px 3px 15px #7645d8
       transform: translatey(-20px)
 

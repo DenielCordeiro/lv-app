@@ -1,21 +1,8 @@
-<section id="news">
-  <div class="news contents">
-    <app-news [dataProducts]="products"></app-news>
+<section id="contents">
+  <div class="content">
+    <app-news [dataNews]="this.news"></app-news>
+    <app-collections [imagesCollections]="this.collection"></app-collections>
+    <app-carousel [imagesCarousel]="this.carousel"></app-carousel>
+    <app-footer-newsletter></app-footer-newsletter>
   </div>
-</section>
-
-<section id="carousel">
-  <div class="carousel contents">
-    <app-carousel [dataProducts]="products"></app-carousel>
-  </div>
-</section>
-
-<section id="collections">
-  <div class="collections contents">
-    <app-collections [dataProducts]="products"></app-collections>
-  </div>
-</section>
-
-<section id="comments">
-  <app-body-newsletter></app-body-newsletter>
 </section>

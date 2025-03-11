@@ -9,7 +9,6 @@ export interface Product {
   groups?: string,
   selection?: boolean,
   file?: {
-    file?: File,
     name?: string,
     size?: number,
     url?: string,

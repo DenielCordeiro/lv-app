@@ -1,16 +1,35 @@
-import { Component, Input } from '@angular/core';
-import { Product } from 'src/app/interfaces/product.interface';
+import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { News } from 'src/app/interfaces/news.interface';
+import { AddOrEditImageComponent } from '../add-or-edit-image/add-or-edit-image.component';
+import { DeleteImageComponent } from '../delete-image/delete-image.component';
 
 @Component({
   selector: 'app-carousel',
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.sass']
 })
-export class CarouselComponent {
-  @Input() dataProducts: Product[] = [];
+export class CarouselComponent implements OnInit {
+  @Input() imagesCarousel: News[] = [];
+  news: News = {
+    type: "Carousel",
+  };
   currentItem: number = 0;
 
-  constructor() {}
+  constructor( public dialog: MatDialog) {}
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      try {
+        console.log("imagens do Carrosel: ", this.imagesCarousel);
+
+      } catch (error) {
+        console.log("Não foi possível salvar dados da imagem em variáveis, ", error);
+        console.log("Dados da imagem carregada: ", this.imagesCarousel);
+      }
+    }, 3000);
+
+  }
 
   moveImage(movement: boolean) {
     const items = document.querySelectorAll('.item');
@@ -41,5 +60,51 @@ export class CarouselComponent {
     });
 
     items[this.currentItem].classList.add('current-item');
+  }
+
+  addOrUpdateImage(imageId: number | null):void {
+    if (imageId == undefined) {
+      try {
+        this.dialog.open<AddOrEditImageComponent>(AddOrEditImageComponent, {
+          data: this.news,
+        });
+      } catch(error) {
+        console.log("[ERRO!], não foi possível abrir dialog de criar imagem, erro:", error);
+      }
+    } else {
+      let image!: News;
+
+      for (let index: number = 0; index < this.imagesCarousel.length; index++) {
+        if(this.imagesCarousel[index]._id == imageId) {
+          image = this.imagesCarousel[index];
+        }
+      }
+
+      try {
+        this.dialog.open<AddOrEditImageComponent>(AddOrEditImageComponent, {
+          data: image
+        });
+      } catch(error) {
+        console.log("[ERRO!], não foi possível abrir dialog de atualizar imagem, erro:", error);
+      }
+    }
+  }
+
+  deleteImage(imageId: number) {
+    let image!: News;
+
+    for (let index: number = 0; index < this.imagesCarousel.length; index++) {
+      if(this.imagesCarousel[index]._id == imageId) {
+        image = this.imagesCarousel[index];
+      }
+    }
+
+    try {
+      this.dialog.open<DeleteImageComponent>(DeleteImageComponent, {
+        data: image,
+      });
+    } catch (error) {
+      console.log("[ERRO!], não foi possível abrir dialog de excluir imagem, erro:", error);
+    }
   }
 }

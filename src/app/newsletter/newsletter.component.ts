@@ -1,6 +1,6 @@
+import { NewsletterService } from './../services/newsletter/newsletter.service';
 import { Component, OnInit } from '@angular/core';
-import { ProductsService } from '../services/products/products.service';
-import { Product } from '../interfaces/product.interface';
+import { News } from '../interfaces/news.interface';
 
 @Component({
   selector: 'app-newsletter',
@@ -8,32 +8,47 @@ import { Product } from '../interfaces/product.interface';
   styleUrls: ['./newsletter.component.sass']
 })
 export class NewsletterComponent implements OnInit {
-  products: Product[] = [];
+  images: News[] = [];
+  news!: News;
+  collection: News[] = [];
+  carousel: News[] = [];
 
-  constructor(private productsService: ProductsService) {}
+  constructor(private newsletterService: NewsletterService) {}
 
   ngOnInit(): void {
-    this.getingProducts();
+    this.gettingImages();
   }
 
-  getingProducts(): Product[] {
-    this.productsService.getProducts()
+  gettingImages(): News[] {
+    this.newsletterService.getImages()
       .then(data => {
+        data.forEach(images => {
+          this.images.push(images);
+        });
 
-        if(data == null || data == undefined) {
-          alert("[Atenção]: Não existe nenhum produto a venda!")
-        } else {
-
-          data.forEach(product => {
-            this.products.push(product);
-          });
-        }
+        this.filterImages(this.images);
       })
       .catch(error => {
-        alert('ERRO: não conseguiu trazer os produtos');
+        alert('ERRO: Não foi possível carregar as imagens');
         console.log(error);
       });
 
-    return this.products;
+    return this.images;
+  }
+
+  filterImages(images: News[]): void {
+    images.forEach(image => {
+      if (image.type == "News") {
+        this.news = image;
+      }
+
+      if (image.type == "Carousel") {
+        this.carousel.push(image);
+      }
+
+      if (image.type == "Collection") {
+        this.collection.push(image);
+      }
+    });
   }
 }
