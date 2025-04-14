@@ -18,7 +18,6 @@ import { AppComponent } from './app.component';
 
 import { HeaderComponent } from './header/header.component';
 import { DesktopMenuComponent } from './header/menu/desktop-menu/desktop-menu.component';
-import { MobileMenuComponent } from './header/menu/mobile-menu/mobile-menu.component';
 import { LoginComponent } from './header/login/login.component';
 import { MenuComponent } from './header/menu/menu.component';
 
@@ -52,7 +51,6 @@ import { AddOrRemoveCartComponent } from './cart/add-or-remove-cart/add-or-remov
     AppComponent,
     HeaderComponent,
     DesktopMenuComponent,
-    MobileMenuComponent,
     LoginComponent,
     NewsletterComponent,
     RegisterComponent,

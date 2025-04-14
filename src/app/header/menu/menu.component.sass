@@ -28,17 +28,17 @@
 
   .line-one
     transform: rotate(0deg)
-    transition: all 1000ms
+    transition: all 700ms
 
   .line-two
      transition: all 600ms
 
   .line-three
     transform: rotate(-0deg)
-    transition: all 300ms
+    transition: all 700ms
 
 .selected
-  padding-top: 1.8vh
+  padding-top: 1vh
 
   @include display.mobile
     padding-top: 1.8vh
@@ -47,9 +47,8 @@
     background-color: colors.$white
 
   .line-one
-    position: absolute
     transform: rotate(40deg)
-    transition: all 400ms
+    transition: all 700ms
 
     @include display.mobile
       height: 6px
@@ -58,15 +57,16 @@
     display: none
 
   .line-three
-    position: absolute
+    position: fixed
     transform: rotate(-40deg)
-    transition: all 400ms
+    top: 2.6vh
+    transition: all 700ms
 
     @include display.mobile
       height: 6px
 
 .menu
-  position: fixed
+  position: absolute
   transition: all 500ms
   width: 0vw
   height: 100%
