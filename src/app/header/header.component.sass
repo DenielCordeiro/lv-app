@@ -6,20 +6,24 @@
     z-index: 4
     position: fixed
     width: 100vw
-    height: 40px
+    height: 2.8vw
     padding-top: 1.5vh
     display: flex
     justify-content: space-around
-    background-color:  colors.$black
-    color: colors.$white
+    background-color: rgba(255, 255, 255, 0.7  )
+    box-shadow: 0px 0px 2px 0px colors.$pourple-light
 
     .cart
-      color: colors.$white
+      color: colors.$black
       cursor: pointer
       font-size: 30px
 
       &:hover
         color: colors.$pourple
+
+      i
+        position: absolute
+        top: 1vh
 
       .productsQuantity
         position: absolute
