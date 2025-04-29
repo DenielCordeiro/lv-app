@@ -1,7 +1,11 @@
 @use '../../../../assets/sass/colors'
+@use '../../../../assets/sass/display'
 
 #menu-desktop
-  font-size: 18px
+  font-size: 21px
+
+  @include display.hd
+    font-size: 17px
 
   .login
     padding: 2vh 3vw
@@ -9,7 +13,7 @@
     cursor: pointer
 
   .item
-    padding-top: 2vh
+    padding-top: 3.5vh
     cursor: pointer
 
     &:hover
@@ -26,7 +30,7 @@
     margin-top: 2vh
 
   .menu-products
-    padding-top: 1.5vh
+    padding-top: 2.5vh
     cursor: pointer
 
     &:hover
