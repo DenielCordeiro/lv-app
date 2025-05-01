@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductsService } from '../services/products/products.service';
 import { Product } from '../interfaces/product.interface';
-import { AddOrEditComponent } from './add-or-edit/add-or-edit.component';
-import { DeleteComponent } from './delete/delete.component';
+import { AddOrEditProductComponent } from './add-or-edit-product/add-or-edit-product.component';
+import { DeleteProductComponent } from './delete-product/delete-product.component';
 
 @Component({
   selector: 'app-products',
@@ -62,13 +62,13 @@ export class ProductsComponent implements OnInit {
     if(idSelected !== null) {
       const product = this.searchProduct(idSelected);
 
-      this.dialog.open<AddOrEditComponent>(AddOrEditComponent, {
+      this.dialog.open<AddOrEditProductComponent>(AddOrEditProductComponent, {
         width: '70%',
         data: product
       });
 
     } else {
-      this.dialog.open<AddOrEditComponent>(AddOrEditComponent, {
+      this.dialog.open<AddOrEditProductComponent>(AddOrEditProductComponent, {
         width: '70%',
       });
     }
@@ -78,7 +78,7 @@ export class ProductsComponent implements OnInit {
     if (idSelected !== null) {
       const product = this.searchProduct(idSelected);
 
-      this.dialog.open<DeleteComponent>(DeleteComponent, {
+      this.dialog.open<DeleteProductComponent>(DeleteProductComponent, {
         width: '70%',
         data: product
       });

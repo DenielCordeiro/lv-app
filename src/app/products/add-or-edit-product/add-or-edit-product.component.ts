@@ -5,11 +5,11 @@ import { ProductsService } from 'src/app/services/products/products.service';
 import { Product } from 'src/app/interfaces/product.interface';
 
 @Component({
-  selector: 'app-add-or-edit',
-  templateUrl: './add-or-edit.component.html',
-  styleUrls: ['./add-or-edit.component.sass']
+  selector: 'app-add-or-edit-product',
+  templateUrl: './add-or-edit-product.component.html',
+  styleUrls: ['./add-or-edit-product.component.sass']
 })
-export class AddOrEditComponent implements OnInit {
+export class AddOrEditProductComponent implements OnInit {
   form!: FormGroup;
   files!: Set<File>;
   product!: Product;
@@ -21,7 +21,7 @@ export class AddOrEditComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public updateData: Product[],
     public dialog: MatDialog,
-    public dialogAddOrEdit: MatDialogRef<AddOrEditComponent>,
+    public dialogAddOrEdit: MatDialogRef<AddOrEditProductComponent>,
     private formBuilder: FormBuilder,
     public productService: ProductsService,
   ) {}
