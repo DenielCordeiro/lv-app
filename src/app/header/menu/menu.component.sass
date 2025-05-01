@@ -19,9 +19,9 @@
       margin: 0px 0px 5px 0px
 
     @include display.mobile
-      width: 35px
-      height: 7px
-      margin-bottom: 3px
+      width: 28px
+      height: 3px
+      margin-bottom: 4px
 
   &:hover
     .line
@@ -45,7 +45,7 @@
     padding-top: 1.1vh
 
   @include display.mobile
-    padding-top: 1.8vh
+    padding-top: 1.1vh
 
   .line
     background-color: colors.$black
@@ -53,9 +53,6 @@
   .line-one
     transform: rotate(40deg)
     transition: all 700ms
-
-    @include display.mobile
-      height: 6px
 
   .line-two
     display: none
@@ -66,9 +63,6 @@
     top: 2.6vh
     transition: all 700ms
 
-    @include display.mobile
-      height: 6px
-
 .menu
   position: fixed
   width: 0%
@@ -77,17 +71,14 @@
   left: -8vw
   transition: width 800ms ease, left 800ms ease
   display: flex
-  justify-content: center
+  justify-content: flex-end
   background-color: colors.$white
 
   @include display.hd
     top: 6.8vh
 
   @include display.mobile
-    transition: all 700ms
-    width: 0px
-    top: 10vh
-    right: 0px
+    top: 45px
 
 .menu-open
   z-index: 2
@@ -104,6 +95,5 @@
     width: 18vw
 
   @include display.mobile
-    top: 10vh
-    width: 43%
-    height: auto
+    top: 46.5px
+    width: 40vw
