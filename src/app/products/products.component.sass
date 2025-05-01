@@ -1,6 +1,10 @@
 @use '../../assets/sass/display'
 @use '../../assets/sass/colors'
 
+*
+  margin: 0
+  padding: 0
+
 #top-menu
   display: inline
 
@@ -8,8 +12,8 @@
     display: none
 
   .menu
+    padding-top: 100px
     height: 12vh
-    background-color: colors.$black
 
   .button-filter-desktop, .filters-buttons
     padding-left: 4.7%
@@ -27,7 +31,6 @@
 
   .menu
     padding-bottom: 5vh
-    background-color: colors.$black
 
   button
     font-size: 12px
@@ -37,16 +40,18 @@
     border-radius: none
 
 
-.container
-  max-width: 100%
-  background-color: colors.$black
+.content
+  width: 100vw
 
   .products
+    background-color: colors.$red
+    display: flex
+    justify-content: space-around
+
     .buttons-crud
       text-align: end
 
     .product
-      background-color: colors.$blue
       width: 30vw
 
       @include display.mobile
@@ -61,6 +66,7 @@
 
       .card
         background-color: colors.$white
+        width: 100%
 
         @include display.mobile
           margin-top: 1vh
@@ -68,19 +74,19 @@
           height: 30vh
 
         img
-          width: 376px
+          width: 80%
           height: 35vh
-          margin-top: -1px
-          margin-left: -1px
-          border-top-left-radius: 5px
-          border-top-right-radius: 5px
+          // margin-top: -1px
+          // margin-left: -1px
+          // border-top-left-radius: 5px
+          // border-top-right-radius: 5px
+
 
           @include display.mobile
             width: 44vw
             height: 18vh
 
       .change-product
-        padding: 0px 1vw
         color: colors.$white
 
         .update-product

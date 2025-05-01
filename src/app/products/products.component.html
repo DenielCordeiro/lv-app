@@ -1,10 +1,6 @@
-<section id="pageTitle">
-  <span class="titles">{{ title }}</span>
-</section>
-
 <section id="top-menu">
   <div class="menu">
-    <div class="container">
+    <div class="content">
       <div class="row">
         <div class="col-6 button-filter-desktop">
           <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#filter" aria-expanded="false" aria-controls="filter">
@@ -13,7 +9,11 @@
         </div>
 
         <div class="col-6 button-add">
-          <button (click)="modalCreate(null)">Adicionar</button>
+          <a (click)="modalCreate(null)">
+            <span class="mx-2">Adicionar</span>
+            <i class="bi bi-plus"></i>
+            <i class="bi bi-plus-circle-dotted"></i>
+          </a>
         </div>
       </div>
     </div>
@@ -64,10 +64,9 @@
 </section>
 
 <section id="cards">
-  <div class="container text-center">
+  <div class="content text-center">
     <div class="row products">
       <div class="col-6 mb-3 product" *ngFor="let product of products">
-
         <div class="row change-product my-2">
           <div class="col update-product">
             <!-- <span (click)="modalCreate(product?._id)">Editar</span>
@@ -79,15 +78,11 @@
           </div>
         </div>
 
-        <a routerLink="/product/{{ product._id }}">
-          <div class="card">
-            <img src="{{ product?.file?.url }}" alt="...">
-            <div class="card-body">
-              <h5 class="itemTitle">{{ product?.name }}</h5>
-              <p class="itemValor">{{ product?.valor }} R$</p>
-            </div>
-          </div>
-        </a>
+        <div class="card" routerLink="/product/{{ product._id }}">
+          <img src="{{ product?.file?.url}}" alt="...">
+          <p class="itemTitle">{{ product?.name }}</p>
+          <p class="itemValor">{{ product?.valor }} R$</p>
+        </div>
       </div>
     </div>
   </div>
