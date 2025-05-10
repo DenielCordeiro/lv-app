@@ -5,47 +5,12 @@
   margin: 0
   padding: 0
 
-#top-menu
-  display: inline
-
-  @include display.mobile
-    display: none
-
-  .menu
-    padding-top: 100px
-    height: 12vh
-
-  .button-filter-desktop, .filters-buttons
-    padding-left: 4.7%
-
-  .button-add
-    padding-right: 5vw
-    text-align: end
-
-#side-menu
-  display: none
-
-  @include display.mobile
-    display: inline
-    text-align: end
-
-  .menu
-    padding-bottom: 5vh
-
-  button
-    font-size: 12px
-    margin-right: 22px
-    border: none
-    border-bottom: 1px solid
-    border-radius: none
-
 .content
   width: 100vw
   display: flex
   justify-content: center
 
   .products
-    background-color: colors.$red
     width: 74vw
     height: 43vh
     justify-content: center
@@ -69,9 +34,10 @@
         color: colors.$pourple
 
       .card
-        background-color: colors.$white
         align-items: center
         padding-top: 1vh
+        background-color: colors.$blue-pourple
+
 
         @include display.mobile
           margin-top: 1vh
