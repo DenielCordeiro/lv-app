@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductsService } from '../services/products/products.service';
 import { Product } from '../interfaces/product.interface';
-import { AddOrEditComponent } from './add-or-edit/add-or-edit.component';
-import { DeleteComponent } from './delete/delete.component';
+import { AddOrEditProductComponent } from './add-or-edit-product/add-or-edit-product.component';
+import { DeleteProductComponent } from './delete-product/delete-product.component';
 
 @Component({
   selector: 'app-products',
@@ -45,43 +45,41 @@ export class ProductsComponent implements OnInit {
     })
   }
 
-  searchProduct(idSelected: number): any[] {
-    const product = [];
+  // searchProduct(idSelected: number): any[] {
+  //   const product = [];
 
-    for (let i = 0; i < this.products.length; i++) {
+  //   for (let i = 0; i < this.products.length; i++) {
 
-      if (this.products[i]._id == idSelected) {
-        product.push(this.products[i]);
-      }
-    }
+  //     if (this.products[i]._id == idSelected) {
+  //       product.push(this.products[i]);
+  //     }
+  //   }
 
-    return product
-  }
+  //   return product
+  // }
 
-  modalCreate(idSelected: number | null) {
-    if(idSelected !== null) {
-      const product = this.searchProduct(idSelected);
-
-      this.dialog.open<AddOrEditComponent>(AddOrEditComponent, {
+  modalCreate(product: Product | null) {
+    if(product !== null) {
+      this.dialog.open<AddOrEditProductComponent>(AddOrEditProductComponent, {
         width: '70%',
         data: product
       });
 
     } else {
-      this.dialog.open<AddOrEditComponent>(AddOrEditComponent, {
+      this.dialog.open<AddOrEditProductComponent>(AddOrEditProductComponent, {
         width: '70%',
       });
     }
   }
 
-  modalDelete(idSelected: number | null) {
-    if (idSelected !== null) {
-      const product = this.searchProduct(idSelected);
-
-      this.dialog.open<DeleteComponent>(DeleteComponent, {
+  modalDelete(product: Product | null) {
+    if (product !== null) {
+      this.dialog.open<DeleteProductComponent>(DeleteProductComponent, {
         width: '70%',
         data: product
       });
+    } else {
+      console.log("[Error]: não foi possível encontrar produto selecionado para excluir");
     }
   }
 

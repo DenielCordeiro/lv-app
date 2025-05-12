@@ -31,10 +31,10 @@ import { CarouselComponent } from './newsletter/carousel/carousel.component';
 import { FooterNewsletterComponent } from './newsletter/footer-newsletter/footer-newsletter.component';
 
 import { ProductsComponent } from './products/products.component';
-import { AddOrEditComponent } from './products/add-or-edit/add-or-edit.component';
 import { ProductComponent } from './product/product.component';
+import { AddOrEditProductComponent } from './products/add-or-edit-product/add-or-edit-product.component';
+import { DeleteProductComponent } from './products/delete-product/delete-product.component';
 import { BuyComponent } from './cart/buy/buy.component';
-import { DeleteComponent } from './products/delete/delete.component';
 
 import { UsersComponent } from './users/users.component';
 
@@ -65,8 +65,8 @@ import { AddOrRemoveCartComponent } from './cart/add-or-remove-cart/add-or-remov
     BuyComponent,
     AboutComponent,
     UsersComponent,
-    AddOrEditComponent,
-    DeleteComponent,
+    AddOrEditProductComponent,
+    DeleteProductComponent,
     MenuComponent,
     CartComponent,
     AddOrRemoveCartComponent,

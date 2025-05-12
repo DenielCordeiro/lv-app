@@ -1,9 +1,11 @@
 @use '../../assets/sass/colors'
+@use '../../assets/sass/display'
 
 #header
   .content
     top: 0
     position: fixed
+    z-index: 4
     width: 100vw
     height: 2.8vw
     padding-top: 1.5vh
@@ -11,10 +13,19 @@
     justify-content: space-around
     box-shadow: 0px 0px 2px 0px colors.$pourple-light
 
+    @include display.hd
+      height: 42px
+
+    @include display.mobile
+      height: 45px
+
     .cart
       color: colors.$black
       cursor: pointer
       font-size: 30px
+
+      @include display.hd
+        font-size: 25px
 
       &:hover
         color: colors.$pourple

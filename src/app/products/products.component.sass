@@ -1,53 +1,45 @@
 @use '../../assets/sass/display'
 @use '../../assets/sass/colors'
 
-#top-menu
-  display: inline
+*
+  margin: 0
+  padding: 0
 
-  @include display.mobile
-    display: none
-
-  .menu
-    height: 12vh
-    background-color: colors.$black
-
-  .button-filter-desktop, .filters-buttons
-    padding-left: 4.7%
+#content-header
+  padding-top: 9vh
+  display: flex
+  justify-content: center
 
   .button-add
-    padding-right: 5vw
-    text-align: end
+    width: 150px
 
-#side-menu
-  display: none
+    .bi-plus-circle-dotted
+      display: none
 
-  @include display.mobile
-    display: inline
-    text-align: end
+    &:hover
+      .bi-plus-circle-dotted
+        display: inline
 
-  .menu
-    padding-bottom: 5vh
-    background-color: colors.$black
+      .bi-plus
+        display: none
 
-  button
-    font-size: 12px
-    margin-right: 22px
-    border: none
-    border-bottom: 1px solid
-    border-radius: none
-
-
-.container
-  max-width: 100%
-  background-color: colors.$black
+.content
+  width: 100vw
+  display: flex
+  justify-content: center
 
   .products
+    width: 74vw
+    height: 43vh
+    justify-content: center
+
     .buttons-crud
       text-align: end
 
     .product
-      background-color: colors.$blue
-      width: 30vw
+      width: 16vw
+      margin: 0px 1vw
+      cursor: pointer
 
       @include display.mobile
         width: 50vw
@@ -60,7 +52,10 @@
         color: colors.$pourple
 
       .card
-        background-color: colors.$white
+        align-items: center
+        padding-top: 1vh
+        background-color: colors.$blue-pourple
+
 
         @include display.mobile
           margin-top: 1vh
@@ -68,28 +63,24 @@
           height: 30vh
 
         img
-          width: 376px
-          height: 35vh
-          margin-top: -1px
-          margin-left: -1px
-          border-top-left-radius: 5px
-          border-top-right-radius: 5px
+          width: 90%
+          height: 32vh
+          border-radius: 5px
 
           @include display.mobile
             width: 44vw
             height: 18vh
 
-      .change-product
-        padding: 0px 1vw
-        color: colors.$white
+      // .change-product
+      //   color: colors.$white
 
-        .update-product
-          text-align: start
-          cursor: pointer
+      //   .update-product
+      //     text-align: start
+      //     cursor: pointer
 
-        .delete-product
-          text-align: end
-          cursor: pointer
+      //   .delete-product
+      //     text-align: end
+      //     cursor: pointer
 
-        @include display.mobile
-          display: none
+        // @include display.mobile
+        //   display: none
