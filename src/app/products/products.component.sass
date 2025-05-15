@@ -39,7 +39,6 @@
     .product
       width: 16vw
       margin: 0px 1vw
-      cursor: pointer
 
       @include display.mobile
         width: 50vw
@@ -51,9 +50,38 @@
       .icon-selected
         color: colors.$pourple
 
+      .change-product
+        display: flex
+        justify-content: space-around
+
+        .update-and-delete-buttons
+          cursor: pointer
+          padding: 5px
+          border-bottom: 1px solid colors.$black
+
+          &:hover
+            boder: none
+            border-radius: 4px
+
+          i
+            margin-left: 4px
+
+        .update-product
+          &:hover
+            color: colors.$pourple
+            border-color: colors.$pourple-light
+
+        .delete-product
+          &:hover
+            box-shadow: 10px colors.$green
+            color: colors.$green
+            border-color: colors.$green-light
+
       .card
+        cursor: pointer
         align-items: center
         padding-top: 1vh
+        margin-top: 1vh
         background-color: colors.$blue-pourple
 
 
