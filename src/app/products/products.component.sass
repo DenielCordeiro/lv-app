@@ -24,24 +24,35 @@
         display: none
 
 .content
-  width: 100vw
+  width: 99vw
   display: flex
   justify-content: center
 
   .products
     width: 74vw
-    height: 43vh
+    display: flex
     justify-content: center
+    flex-wrap: wrap
+
+    @include display.hd
+      width: 70vw
+
+    @include display.mobile
+      width: 90vw
 
     .buttons-crud
       text-align: end
 
     .product
       width: 16vw
-      margin: 0px 1vw
+      margin: 2vh 1vw
+
+      @include display.hd
+        width: 18vw
 
       @include display.mobile
-        width: 50vw
+        margin: 1.5vh 3vw
+        width: 35vw
 
       .icon
         color: colors.$white
@@ -84,20 +95,16 @@
         margin-top: 1vh
         background-color: colors.$blue-pourple
 
-
-        @include display.mobile
-          margin-top: 1vh
-          width: 44vw
-          height: 30vh
-
         img
           width: 90%
           height: 32vh
           border-radius: 5px
 
+          @include display.hd
+            height: 22vh
+
           @include display.mobile
-            width: 44vw
-            height: 18vh
+            height: 16vh
 
       // .change-product
       //   color: colors.$white

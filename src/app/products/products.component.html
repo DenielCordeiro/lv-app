@@ -10,8 +10,8 @@
 
 <section id="cards">
   <div class="content">
-    <div class="products" *ngFor="let product of products">
-      <div class="product">
+    <div class="products">
+      <div class="product" *ngFor="let product of products">
         <div class="change-product my-2">
           <div class="update-and-delete-buttons update-product" (click)="modalCreate(product)">
             <span>Editar</span>
