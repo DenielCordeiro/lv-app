@@ -10,22 +10,22 @@
 
 <section id="cards">
   <div class="content">
-    <div class="products" *ngFor="let product of products">
-      <div class="product" routerLink="/product/{{ product._id }}">
-        <div class="row change-product my-2">
-          <div class="col update-product" (click)="modalCreate(product)">
+    <div class="products">
+      <div class="product" *ngFor="let product of products">
+        <div class="change-product my-2">
+          <div class="update-and-delete-buttons update-product" (click)="modalCreate(product)">
             <span>Editar</span>
             <i class="bi bi-pencil-fill"></i>
           </div>
 
-          <div class="col delete-product" (click)="modalDelete(product)">
+          <div class="update-and-delete-buttons delete-product" (click)="modalDelete(product)">
             <span>Excluir</span>
             <i class="bi bi-trash3-fill"></i>
           </div>
         </div>
 
-        <div class="card">
-          <img src="{{ product?.file?.url}}" alt="...">
+        <div class="card" routerLink="/product/{{ product._id }}">
+          <img src="{{ product?.file?.url }}" alt="...">
           <p class="itemTitle">{{ product?.name }}</p>
           <p class="itemValor">{{ product?.valor }} R$</p>
         </div>
