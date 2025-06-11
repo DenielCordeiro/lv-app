@@ -45,6 +45,7 @@ import { VerticalChartComponent } from './dashboard/charts/vertical-chart/vertic
 
 import { CartComponent } from './cart/cart.component';
 import { AddOrRemoveCartComponent } from './cart/add-or-remove-cart/add-or-remove-cart.component';
+import { PixComponent } from './cart/buy/pix/pix.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { AddOrRemoveCartComponent } from './cart/add-or-remove-cart/add-or-remov
     AddOrRemoveCartComponent,
     DashboardComponent,
     VerticalChartComponent,
+    PixComponent,
   ],
   imports: [
     BrowserModule,

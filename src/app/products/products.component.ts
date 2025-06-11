@@ -11,7 +11,6 @@ import { DeleteProductComponent } from './delete-product/delete-product.componen
   styleUrls: ['./products.component.sass']
 })
 export class ProductsComponent implements OnInit {
-  modalOpen: boolean = false;
   productId: number | undefined;
   title: string = 'Trabalhos disponíveis';
   products: Product[] = [];
@@ -44,19 +43,6 @@ export class ProductsComponent implements OnInit {
       console.log(error);
     })
   }
-
-  // searchProduct(idSelected: number): any[] {
-  //   const product = [];
-
-  //   for (let i = 0; i < this.products.length; i++) {
-
-  //     if (this.products[i]._id == idSelected) {
-  //       product.push(this.products[i]);
-  //     }
-  //   }
-
-  //   return product
-  // }
 
   modalCreate(product: Product | null) {
     if(product !== null) {
