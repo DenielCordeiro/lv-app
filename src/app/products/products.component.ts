@@ -43,9 +43,13 @@ export class ProductsComponent implements OnInit {
   };
 
   modalCreate(product: Product | null) {
+    const products: Product[] = [];
+
     if(product !== null) {
+      products.push(product);
+
       this.dialog.open<AddOrEditProductComponent>(AddOrEditProductComponent, {
-        data: product
+        data: products
       });
     } else {
       this.dialog.open<AddOrEditProductComponent>(AddOrEditProductComponent);
