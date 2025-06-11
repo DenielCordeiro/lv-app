@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ProductsService } from './../services/products/products.service';
 import { MelhorEnvioService } from '../services/melhor-envio/melhor-envio.service';
 import { Product } from '../interfaces/product.interface';
 import { Shipping } from '../interfaces/shipping.interface';
+import { PaymentsComponent } from './payments/payments.component';
 
 @Component({
   selector: 'app-product',
@@ -22,9 +24,10 @@ export class ProductComponent implements OnInit {
   constructor(
     public route: ActivatedRoute,
     private formBuilder: FormBuilder,
+    public dialog: MatDialog,
     public productsService: ProductsService,
     public melhorEnvio: MelhorEnvioService
-  ) { }
+  ) { };
 
   ngOnInit(): void {
     this.routeId = this.route.snapshot.params["product_id"];
@@ -33,10 +36,10 @@ export class ProductComponent implements OnInit {
       this.getProductSelected(this.routeId);
     } else {
       alert("seguinte chefia, deu erro! não trouxe id pela rota");
-    }
+    };
 
     this.buildingForm();
-  }
+  };
 
   getProductSelected(id: number): void {
     this.productsService.getProduct(id)
@@ -52,16 +55,16 @@ export class ProductComponent implements OnInit {
         alert('ERRO: não conseguiu trazer os produtos');
         console.log(Error);
       })
-  }
+  };
 
   buildingForm(): void {
     this.searchForm = this.formBuilder.group({
       "postalCode": [null],
     });
-  }
+  };
 
-  updateModal(id: number | undefined): void {}
-  deleteModal(id: number | undefined): void {}
+  updateModal(id: number | undefined): void {};
+  deleteModal(id: number | undefined): void {};
 
   searchShipping(): void {
     const postalCodeNumber = this.searchForm?.value;
@@ -97,12 +100,16 @@ export class ProductComponent implements OnInit {
             }
           });
 
-          console.log('prosuto: ', this.product);
-
         })
         .catch(error => {
           console.log(error);
         })
-    }
-  }
+    };
+  };
+
+  getPayments(): void {
+    this.dialog.open<PaymentsComponent>(PaymentsComponent, {
+      data: this.product
+    });
+  };
 }

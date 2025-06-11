@@ -90,8 +90,6 @@ export class AddOrEditProductComponent implements OnInit {
   }
 
   addOrEditProduct(): void {
-    console.log("chegou aqui");
-
     const formData = this.buildFormData();
 
     if (this.updateData !== null) {

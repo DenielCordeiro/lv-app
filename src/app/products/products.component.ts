@@ -18,13 +18,11 @@ export class ProductsComponent implements OnInit {
   constructor(
     public productsService: ProductsService,
     public dialog: MatDialog,
-  ) {}
+  ) {};
 
   ngOnInit(): void {
     this.getingProducts();
-    console.log(this.products);
-
-  }
+  };
 
   getingProducts() {
     this.productsService.getProducts()
@@ -42,34 +40,33 @@ export class ProductsComponent implements OnInit {
       alert('ERRO: não conseguiu trazer os produtos');
       console.log(error);
     })
-  }
+  };
 
   modalCreate(product: Product | null) {
     if(product !== null) {
       this.dialog.open<AddOrEditProductComponent>(AddOrEditProductComponent, {
-        width: '70%',
         data: product
       });
-
     } else {
-      this.dialog.open<AddOrEditProductComponent>(AddOrEditProductComponent, {
-        width: '70%',
-      });
-    }
-  }
+      this.dialog.open<AddOrEditProductComponent>(AddOrEditProductComponent);
+    };
+  };
 
   modalDelete(product: Product | null) {
+    const products: Product[] = [];
+
     if (product !== null) {
+      products.push(product);
+
       this.dialog.open<DeleteProductComponent>(DeleteProductComponent, {
-        width: '70%',
-        data: product
+        data: products,
       });
     } else {
       console.log("[Error]: não foi possível encontrar produto selecionado para excluir");
-    }
+    };
   }
 
   filter(newTitle: string): void {
     this.title = newTitle;
-  }
+  };
 }
