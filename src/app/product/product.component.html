@@ -78,7 +78,9 @@
               <app-add-or-remove-cart *ngFor="let shipping of shippings"></app-add-or-remove-cart>
             </div>
             <div class="col-6">
-              <app-buy></app-buy>
+              <div class="buy-product" (click)="getPayments()">
+                Comprar
+              </div>
             </div>
           </div>
         </div>
@@ -190,8 +192,8 @@
           <app-add-or-remove-cart [product]="item"></app-add-or-remove-cart>
         </div>
 
-        <div class="buy">
-          <app-buy></app-buy>
+        <div class="payments" (click)="getPayments()">
+          Comprar
         </div>
       </div>
     </div>

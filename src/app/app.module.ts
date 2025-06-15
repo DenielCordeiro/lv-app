@@ -34,7 +34,6 @@ import { ProductsComponent } from './products/products.component';
 import { ProductComponent } from './product/product.component';
 import { AddOrEditProductComponent } from './products/add-or-edit-product/add-or-edit-product.component';
 import { DeleteProductComponent } from './products/delete-product/delete-product.component';
-import { BuyComponent } from './cart/buy/buy.component';
 
 import { UsersComponent } from './users/users.component';
 
@@ -45,7 +44,8 @@ import { VerticalChartComponent } from './dashboard/charts/vertical-chart/vertic
 
 import { CartComponent } from './cart/cart.component';
 import { AddOrRemoveCartComponent } from './cart/add-or-remove-cart/add-or-remove-cart.component';
-import { PixComponent } from './cart/buy/pix/pix.component';
+import { PixComponent } from './product/payments/pix/pix.component';
+import { PaymentsComponent } from './product/payments/payments.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +63,6 @@ import { PixComponent } from './cart/buy/pix/pix.component';
     FooterNewsletterComponent,
     ProductsComponent,
     ProductComponent,
-    BuyComponent,
     AboutComponent,
     UsersComponent,
     AddOrEditProductComponent,
@@ -74,6 +73,7 @@ import { PixComponent } from './cart/buy/pix/pix.component';
     DashboardComponent,
     VerticalChartComponent,
     PixComponent,
+    PaymentsComponent,
   ],
   imports: [
     BrowserModule,
