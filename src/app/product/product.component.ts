@@ -30,13 +30,13 @@ export class ProductComponent implements OnInit {
   ) { };
 
   ngOnInit(): void {
-    this.routeId = this.route.snapshot.params["product_id"];
+    // this.routeId = this.route.snapshot.params["product_id"];
 
-    if (this.routeId !== undefined) {
-      this.getProductSelected(this.routeId);
-    } else {
-      alert("seguinte chefia, deu erro! não trouxe id pela rota");
-    };
+    // if (this.routeId !== undefined) {
+    //   this.getProductSelected(this.routeId);
+    // } else {
+    //   alert("seguinte chefia, deu erro! não trouxe id pela rota");
+    // };
 
     this.buildingForm();
   };
