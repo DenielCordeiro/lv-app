@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { filter } from 'rxjs/operators';
 import { ProductsService } from '../services/products/products.service';
 import { Product } from '../interfaces/product.interface';
 import { AddOrEditProductComponent } from './add-or-edit-product/add-or-edit-product.component';
@@ -40,19 +42,38 @@ export class ProductsComponent implements OnInit {
     },
     sale: {
       sold: false,
-      userId: 1,
+      userId: 0,
     },
   };
 
   constructor(
-    public productsService: ProductsService,
+    private router: Router,
     public dialog: MatDialog,
-  ) {};
+    public productsService: ProductsService,
+  ) {}
 
   ngOnInit(): void {
     // this.gettingProducts();
+    this.clearProductsInLocalStorage();
     this.gettingFakeProduct();
-  };
+  }
+
+
+  clearProductsInLocalStorage(): void {
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(event => {
+        const currentUrl = (event as NavigationEnd).url;
+
+        if (currentUrl == '/products') {
+          localStorage.removeItem('products');
+        }
+      });
+  }
+
+  sendProduct(product: Product): void {
+    this.productsService.addProduct(product);
+  }
 
   gettingFakeProduct(): void {
     this.products.push(this.fakeProduct);
@@ -74,7 +95,7 @@ export class ProductsComponent implements OnInit {
       alert('ERRO: não conseguiu trazer os produtos');
       console.log(error);
     })
-  };
+  }
 
   modalCreate(product: Product | null): void {
     const products: Product[] = [];
@@ -88,7 +109,7 @@ export class ProductsComponent implements OnInit {
     } else {
       this.dialog.open<AddOrEditProductComponent>(AddOrEditProductComponent);
     };
-  };
+  }
 
   modalDelete(product: Product | null): void {
     const products: Product[] = [];
@@ -106,5 +127,5 @@ export class ProductsComponent implements OnInit {
 
   filter(newTitle: string): void {
     this.title = newTitle;
-  };
+  }
 }
