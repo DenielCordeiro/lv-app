@@ -66,13 +66,13 @@ export class ProductsComponent implements OnInit {
         const currentUrl = (event as NavigationEnd).url;
 
         if (currentUrl == '/products') {
-          localStorage.removeItem('products');
+          this.productsService.removeProductLocalStorage('selectedProduct')
         }
       });
   }
 
   sendProduct(product: Product): void {
-    this.productsService.addProduct(product);
+    this.productsService.addProductLocalStorage(product);
   }
 
   gettingFakeProduct(): void {

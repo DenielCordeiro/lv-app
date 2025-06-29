@@ -32,23 +32,28 @@ export abstract class CrudProductsService<T extends BaseCrud> {
     return headers;
   }
 
-  public addProduct(product: Product): void {
-    this.products.push(product);
-    localStorage.setItem('products', JSON.stringify(this.products));
-  }
-
-  public getProduct(): Product {
-    const data = localStorage.getItem('products');
-    this.products = data ? JSON.parse(data) : [];
-
-    return this.products[0];
-  }
-
   public getProducts(): Promise<T[]>{
     return lastValueFrom(this.http.get<BaseAPI<T>>(this.route))
       .then(result => {
         return this.handleResponse(result) as T[];
       });
+  }
+
+  public addProductLocalStorage(product: Product): void {
+    this.products.push(product);
+    localStorage.setItem('selectedProduct', JSON.stringify(this.products));
+  }
+
+  public getProduct(): Product {
+    const data = localStorage.getItem('selectedProduct');
+    this.products = data ? JSON.parse(data) : [];
+
+    return this.products[0];
+  }
+
+  public removeProductLocalStorage(productName: string): void {
+    this.products.pop();
+    localStorage.removeItem(productName);
   }
 
   public createProduct(model: FormData): Promise<T> {
