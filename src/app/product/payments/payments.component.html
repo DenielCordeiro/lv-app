@@ -3,22 +3,7 @@
 </div>
 
 <div class="payment-method">
-  <form>
-    <div class="bank-slip">
-      <input class="" type="radio" id="bank-slip">
-      <label class="mx-2" for="bank-slip">Boleto</label>
-    </div>
-
-    <div class="pix">
-      <input class="" type="radio" id="pix">
-      <label class="mx-2" for="pix">PIX estático</label>
-    </div>
-
-    <div class="credit-card">
-      <input class="" type="radio" id="credit-card">
-      <label class="mx-2" for="credit-card">Cartão de Crédito</label>
-    </div>
-
-
-  </form>
+  <div class="bank-slip" (click)="handlePaymentOptionChange('BOLETO')">Boleto</div>
+  <div class="PIX" (click)="handlePaymentOptionChange('PIX')">PIX</div>
+  <div class="credit-card" (click)="handlePaymentOptionChange('CREDITO')">Cartão de Crédito</div>
 </div>

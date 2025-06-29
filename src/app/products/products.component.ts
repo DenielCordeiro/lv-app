@@ -17,7 +17,7 @@ export class ProductsComponent implements OnInit {
   title: string = 'Trabalhos disponíveis';
   products: Product[] = [];
   fakeProduct: Product = {
-    _id: 1,
+    _id: 78893647,
     user: 1,
     saleUser: "",
     name: "Colar Azul",
