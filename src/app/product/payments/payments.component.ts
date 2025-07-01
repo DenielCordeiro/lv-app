@@ -24,8 +24,6 @@ export class PaymentsComponent implements OnInit {
   Payment(): void {
     if (this.selectedPaymentMethod) {
       console.log(`Prosseguir para o pagamento com: ${this.selectedPaymentMethod}`);
-      // Lógica para avançar no fluxo de compra,
-      // como navegar para outra página ou chamar um serviço.
     } else {
       console.warn('Nenhuma forma de pagamento selecionada.');
     }
