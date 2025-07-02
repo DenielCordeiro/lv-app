@@ -7,7 +7,8 @@ import { Product } from 'src/app/interfaces/product.interface';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.sass']
+  styleUrls: ['./cart.component.sass'],
+  standalone: false,
 })
 export class CartComponent implements OnInit {
   productsInCart: Product[] = [];
@@ -49,17 +50,17 @@ export class CartComponent implements OnInit {
               return
             }
           } else {
-            console.log('Nenhum produto foi adicionado no carrinho');
+            throw new Error('Nenhum produto foi adicionado no carrinho');
           }
         })
         .catch(error => {
-          console.log('Perfil de usuário não encontrado', error);
+          throw new Error('Perfil de usuário não encontrado', error);
         });
 
       this.productsInCart = this.cartService.getStaticProductsInCart();
 
     } else {
-      console.log('ID: ', this.userId, ' de usuário não encontrado');
+      throw new Error('ID de usuário não encontrado');
     }
   }
 
@@ -73,13 +74,11 @@ export class CartComponent implements OnInit {
 
         })
         .catch(error => {
-          console.log('[Erro]: ', error);
+          throw new Error('[Erro]: ', error);
 
         });
     } else {
-      console.log('Não foi possível limpar o carrinho!');
-      console.log('ID do usuário(a) não encontrado, necessário realizar login :)');
-
+      throw new Error('Não foi possível limpar o carrinho! ID do usuário(a) não encontrado, necessário realizar login ');
     }
   }
 }

@@ -6,7 +6,8 @@ import { Product } from 'src/app/interfaces/product.interface';
 @Component({
   selector: 'app-delete-product',
   templateUrl: './delete-product.component.html',
-  styleUrls: ['./delete-product.component.sass']
+  styleUrls: ['./delete-product.component.sass'],
+  standalone: false,
 })
 export class DeleteProductComponent {
   constructor(

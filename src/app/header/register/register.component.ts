@@ -7,7 +7,8 @@ import { UsersService } from 'src/app/services/users/users.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.sass']
+  styleUrls: ['./register.component.sass'],
+  standalone: false,
 })
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;

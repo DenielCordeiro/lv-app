@@ -5,7 +5,8 @@ import { Review } from 'src/app/interfaces/review.interface';
 @Component({
   selector: 'app-footer-newsletter',
   templateUrl: './footer-newsletter.component.html',
-  styleUrls: ['./footer-newsletter.component.sass']
+  styleUrls: ['./footer-newsletter.component.sass'],
+  standalone: false,
 })
 export class FooterNewsletterComponent implements OnInit {
   avaliations: Review[] = [{

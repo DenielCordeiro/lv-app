@@ -8,7 +8,8 @@ import { MenuComponent } from '../menu/menu.component';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.sass']
+  styleUrls: ['./login.component.sass'],
+  standalone: false,
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;

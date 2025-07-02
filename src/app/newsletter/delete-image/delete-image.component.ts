@@ -6,7 +6,8 @@ import { NewsletterService } from 'src/app/services/newsletter/newsletter.servic
 @Component({
   selector: 'app-delete-image',
   templateUrl: './delete-image.component.html',
-  styleUrls: ['./delete-image.component.sass']
+  styleUrls: ['./delete-image.component.sass'],
+  standalone: false,
 })
 export class DeleteImageComponent {
   imageUrl: string | undefined = undefined;

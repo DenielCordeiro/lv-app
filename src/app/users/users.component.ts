@@ -6,7 +6,8 @@ import { Product } from '../interfaces/product.interface';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.sass']
+  styleUrls: ['./users.component.sass'],
+  standalone: false,
 })
 export class UsersComponent {
   products: Product[] = [];

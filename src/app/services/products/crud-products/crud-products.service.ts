@@ -4,12 +4,14 @@ import { lastValueFrom } from "rxjs";
 import { BaseAPI } from "src/app/interfaces/base-api.interface";
 import { BaseCrud } from "src/app/interfaces/base-crud.interface";
 import { environment } from "src/environments/environment";
+import { Product } from './../../../interfaces/product.interface';
 
 export abstract class CrudProductsService<T extends BaseCrud> {
   http!: HttpClient;
   localStorage!: LocalStorageService;
   route!: string;
   header: any = this.buildHeader();
+  products: Product[] = [];
 
   constructor(
     http: HttpClient,
@@ -30,18 +32,28 @@ export abstract class CrudProductsService<T extends BaseCrud> {
     return headers;
   }
 
-  public getProduct(id: number): Promise<T>{
-    return lastValueFrom(this.http.get<BaseAPI<T>>(`${this.route}/${id}`))
-      .then(result => {
-        return this.handleResponse(result) as T;
-      });
-  }
-
   public getProducts(): Promise<T[]>{
     return lastValueFrom(this.http.get<BaseAPI<T>>(this.route))
       .then(result => {
         return this.handleResponse(result) as T[];
       });
+  }
+
+  public addProductLocalStorage(product: Product): void {
+    this.products.push(product);
+    localStorage.setItem('selectedProduct', JSON.stringify(this.products));
+  }
+
+  public getProduct(): Product {
+    const data = localStorage.getItem('selectedProduct');
+    this.products = data ? JSON.parse(data) : [];
+
+    return this.products[0];
+  }
+
+  public removeProductLocalStorage(productName: string): void {
+    this.products.pop();
+    localStorage.removeItem(productName);
   }
 
   public createProduct(model: FormData): Promise<T> {

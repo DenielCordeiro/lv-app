@@ -24,10 +24,10 @@
           </div>
         </div>
 
-        <div class="card" routerLink="/product/{{ product._id }}">
+        <div class="card" (click)="sendProduct(product)" routerLink="/product/{{ product._id }}">
           <img src="{{ product?.file?.url }}" alt="...">
           <p class="itemTitle">{{ product?.name }}</p>
-          <p class="itemValor">{{ product?.valor }} R$</p>
+          <p class="itemValor">R$ {{ product?.valor }}</p>
         </div>
       </div>
     </div>

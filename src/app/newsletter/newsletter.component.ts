@@ -5,7 +5,8 @@ import { News } from '../interfaces/news.interface';
 @Component({
   selector: 'app-newsletter',
   templateUrl: './newsletter.component.html',
-  styleUrls: ['./newsletter.component.sass']
+  styleUrls: ['./newsletter.component.sass'],
+  standalone: false,
 })
 export class NewsletterComponent implements OnInit {
   images: News[] = [];

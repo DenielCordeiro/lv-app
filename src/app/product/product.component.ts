@@ -11,13 +11,14 @@ import { PaymentsComponent } from './payments/payments.component';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.sass']
+  styleUrls: ['./product.component.sass'],
+  standalone: false,
 })
 export class ProductComponent implements OnInit {
   searchForm!: FormGroup;
   products: Product[] = [];
   shippings: Shipping[] = [];
-  product!: Product;
+  product: Product = {};
   routeId: number | undefined = undefined;
   postalCode: string = '';
 
@@ -27,44 +28,26 @@ export class ProductComponent implements OnInit {
     public dialog: MatDialog,
     public productsService: ProductsService,
     public melhorEnvio: MelhorEnvioService
-  ) { };
+  ) {}
 
   ngOnInit(): void {
-    this.routeId = this.route.snapshot.params["product_id"];
-
-    if (this.routeId !== undefined) {
-      this.getProductSelected(this.routeId);
-    } else {
-      alert("seguinte chefia, deu erro! não trouxe id pela rota");
-    };
-
     this.buildingForm();
-  };
+    this.getProductSelected();
+  }
 
-  getProductSelected(id: number): void {
-    this.productsService.getProduct(id)
-      .then(data => {
-        if(data == null || undefined) {
-          alert("[Atenção]: Não existe nenhum produto a venda!")
-        } else {
-          this.products.push(data);
-          this.product = this.products[0];
-        }
-      })
-      .catch(Error => {
-        alert('ERRO: não conseguiu trazer os produtos');
-        console.log(Error);
-      })
-  };
+  getProductSelected(): void {
+    this.product = this.productsService.getProduct();
+    this.products.push(this.product);
+  }
 
   buildingForm(): void {
     this.searchForm = this.formBuilder.group({
       "postalCode": [null],
     });
-  };
+  }
 
-  updateModal(id: number | undefined): void {};
-  deleteModal(id: number | undefined): void {};
+  updateModal(id: number | undefined): void {}
+  deleteModal(id: number | undefined): void {}
 
   searchShipping(): void {
     const postalCodeNumber = this.searchForm?.value;
@@ -98,7 +81,7 @@ export class ProductComponent implements OnInit {
                 }
               }
             }
-          });
+          })
 
         })
         .catch(error => {
@@ -111,5 +94,5 @@ export class ProductComponent implements OnInit {
     this.dialog.open<PaymentsComponent>(PaymentsComponent, {
       data: this.product
     });
-  };
+  }
 }

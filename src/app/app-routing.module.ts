@@ -30,7 +30,6 @@ const routes: Routes = [
   {
     path: "profile/:user_id",
     component: UsersComponent,
-    canActivate: [AuthGuard]
   },
   {
     path: "cart/:user_id",
@@ -47,7 +46,6 @@ const routes: Routes = [
   {
     path: "dashboard",
     component: DashboardComponent,
-    canActivate: [AuthGuard]
   },
   {
     path: '**',

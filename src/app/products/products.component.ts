@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { filter } from 'rxjs/operators';
 import { ProductsService } from '../services/products/products.service';
 import { Product } from '../interfaces/product.interface';
 import { AddOrEditProductComponent } from './add-or-edit-product/add-or-edit-product.component';
@@ -8,23 +10,77 @@ import { DeleteProductComponent } from './delete-product/delete-product.componen
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.sass']
+  styleUrls: ['./products.component.sass'],
+  standalone: false,
 })
 export class ProductsComponent implements OnInit {
   productId: number | undefined;
   title: string = 'Trabalhos disponíveis';
   products: Product[] = [];
-
-  constructor(
-    public productsService: ProductsService,
-    public dialog: MatDialog,
-  ) {};
-
-  ngOnInit(): void {
-    this.getingProducts();
+  fakeProduct: Product = {
+    _id: 78893647,
+    user: 1,
+    saleUser: "",
+    name: "Colar Azul",
+    description: "Colar com pedra",
+    valor: 7845.44,
+    type: "Colares",
+    groups: "Inverno",
+    selection: false,
+    file: {
+      name: "imagem do colar",
+      size: 0.80,
+      url: "https://firebasestorage.googleapis.com/v0/b/luz-violeta-186d5.appspot.com/o/1749600340539.png?alt=media&token=dd59ce63-9031-4430-911f-4babcbec0fd1",
+      createdAt: {
+        type: new Date(Date.UTC(2025, 5, 22)),
+        default: new Date(Date.UTC(2025, 5, 22)),
+      },
+    },
+    shipping: {
+      name: "test",
+      price: 54.78,
+      postalCode: 13308197,
+    },
+    sale: {
+      sold: false,
+      userId: 0,
+    },
   };
 
-  getingProducts() {
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    public productsService: ProductsService,
+  ) {}
+
+  ngOnInit(): void {
+    // this.gettingProducts();
+    this.clearProductsInLocalStorage();
+    this.gettingFakeProduct();
+  }
+
+
+  clearProductsInLocalStorage(): void {
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(event => {
+        const currentUrl = (event as NavigationEnd).url;
+
+        if (currentUrl == '/products') {
+          this.productsService.removeProductLocalStorage('selectedProduct')
+        }
+      });
+  }
+
+  sendProduct(product: Product): void {
+    this.productsService.addProductLocalStorage(product);
+  }
+
+  gettingFakeProduct(): void {
+    this.products.push(this.fakeProduct);
+  }
+
+  gettingProducts(): void {
     this.productsService.getProducts()
     .then(data => {
       if(data == null || data == undefined) {
@@ -40,9 +96,9 @@ export class ProductsComponent implements OnInit {
       alert('ERRO: não conseguiu trazer os produtos');
       console.log(error);
     })
-  };
+  }
 
-  modalCreate(product: Product | null) {
+  modalCreate(product: Product | null): void {
     const products: Product[] = [];
 
     if(product !== null) {
@@ -54,9 +110,9 @@ export class ProductsComponent implements OnInit {
     } else {
       this.dialog.open<AddOrEditProductComponent>(AddOrEditProductComponent);
     };
-  };
+  }
 
-  modalDelete(product: Product | null) {
+  modalDelete(product: Product | null): void {
     const products: Product[] = [];
 
     if (product !== null) {
@@ -72,5 +128,5 @@ export class ProductsComponent implements OnInit {
 
   filter(newTitle: string): void {
     this.title = newTitle;
-  };
+  }
 }
