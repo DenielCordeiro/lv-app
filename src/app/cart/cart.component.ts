@@ -7,7 +7,8 @@ import { Product } from 'src/app/interfaces/product.interface';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.sass']
+  styleUrls: ['./cart.component.sass'],
+  standalone: false,
 })
 export class CartComponent implements OnInit {
   productsInCart: Product[] = [];

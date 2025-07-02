@@ -6,7 +6,8 @@ import { UsersService } from 'src/app/services/users/users.service';
 @Component({
   selector: 'app-desktop-menu',
   templateUrl: './desktop-menu.component.html',
-  styleUrls: ['./desktop-menu.component.sass']
+  styleUrls: ['./desktop-menu.component.sass'],
+  standalone: false,
 })
 export class DesktopMenuComponent {
   isOpen: boolean = false;

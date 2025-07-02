@@ -7,7 +7,8 @@ import { News } from 'src/app/interfaces/news.interface';
 @Component({
   selector: 'app-add-or-edit-image',
   templateUrl: './add-or-edit-image.component.html',
-  styleUrls: ['./add-or-edit-image.component.sass']
+  styleUrls: ['./add-or-edit-image.component.sass'],
+  standalone: false,
 })
 export class AddOrEditImageComponent implements OnInit {
   form!: FormGroup;

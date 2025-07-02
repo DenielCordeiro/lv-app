@@ -6,13 +6,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { NgxWebstorageModule } from "ngx-webstorage";
 
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AuthGuard } from './guards/auth-guards';
+
+import { LocalStorageService } from 'ngx-webstorage';
 
 import { AppComponent } from './app.component';
 
@@ -85,11 +86,11 @@ import { PaymentsComponent } from './product/payments/payments.component';
     NgbModule,
     NgxChartsModule,
     MatDialogModule,
-    MatSelectModule,
-    NgxWebstorageModule.forRoot(),
+    MatSelectModule
   ],
   providers: [
-    AuthGuard
+    AuthGuard,
+    LocalStorageService
   ],
   bootstrap: [AppComponent]
 })

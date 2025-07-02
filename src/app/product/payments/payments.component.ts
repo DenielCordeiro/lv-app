@@ -5,7 +5,8 @@ import { Product } from 'src/app/interfaces/product.interface';
 @Component({
   selector: 'app-payments',
   templateUrl: './payments.component.html',
-  styleUrls: ['./payments.component.sass']
+  styleUrls: ['./payments.component.sass'],
+  standalone: false,
 })
 export class PaymentsComponent implements OnInit {
   selectedPaymentMethod: string | null = null;

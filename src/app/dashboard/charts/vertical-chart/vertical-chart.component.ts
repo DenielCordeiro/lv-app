@@ -4,7 +4,8 @@ import { ChartsService } from 'src/app/services/dashboard/charts.service';
 @Component({
   selector: 'app-vertical-chart',
   templateUrl: './vertical-chart.component.html',
-  styleUrls: ['./vertical-chart.component.sass']
+  styleUrls: ['./vertical-chart.component.sass'],
+  standalone: false,
 })
 export class VerticalChartComponent {
   view: [number, number] = [700, 400];

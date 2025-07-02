@@ -11,7 +11,8 @@ import { PaymentsComponent } from './payments/payments.component';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.sass']
+  styleUrls: ['./product.component.sass'],
+  standalone: false,
 })
 export class ProductComponent implements OnInit {
   searchForm!: FormGroup;

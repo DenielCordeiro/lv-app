@@ -10,7 +10,8 @@ import { DeleteProductComponent } from './delete-product/delete-product.componen
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.sass']
+  styleUrls: ['./products.component.sass'],
+  standalone: false,
 })
 export class ProductsComponent implements OnInit {
   productId: number | undefined;

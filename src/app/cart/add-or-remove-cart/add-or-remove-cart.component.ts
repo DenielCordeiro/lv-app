@@ -6,7 +6,8 @@ import { Product } from 'src/app/interfaces/product.interface';
 @Component({
   selector: 'app-add-or-remove-cart',
   templateUrl: './add-or-remove-cart.component.html',
-  styleUrls: ['./add-or-remove-cart.component.sass']
+  styleUrls: ['./add-or-remove-cart.component.sass'],
+  standalone: false,
 })
 export class AddOrRemoveCartComponent implements OnInit {
   @Input() product!: Product;

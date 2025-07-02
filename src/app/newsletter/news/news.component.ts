@@ -8,7 +8,8 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
-  styleUrls: ['./news.component.sass']
+  styleUrls: ['./news.component.sass'],
+  standalone: false,
 })
 export class NewsComponent implements OnInit {
   @Input() dataNews!: News;

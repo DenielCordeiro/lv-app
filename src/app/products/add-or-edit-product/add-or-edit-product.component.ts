@@ -7,7 +7,8 @@ import { Product } from 'src/app/interfaces/product.interface';
 @Component({
   selector: 'app-add-or-edit-product',
   templateUrl: './add-or-edit-product.component.html',
-  styleUrls: ['./add-or-edit-product.component.sass']
+  styleUrls: ['./add-or-edit-product.component.sass'],
+  standalone: false,
 })
 export class AddOrEditProductComponent implements OnInit {
   form!: FormGroup;

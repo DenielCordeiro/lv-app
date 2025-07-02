@@ -5,7 +5,8 @@ import { CartService } from '../services/cart/cart.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.sass']
+  styleUrls: ['./header.component.sass'],
+  standalone: false,
 })
 export class HeaderComponent  implements OnInit {
   productsQuantity: number = 0;
