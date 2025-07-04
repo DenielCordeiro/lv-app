@@ -1,9 +1,33 @@
-<div class="profile">
+<section id="profile">
   <div class="profile-name"></div>
-</div>
+</section>
 
-<div class="payment-method">
-  <div class="bank-slip" (click)="handlePaymentOptionChange('BOLETO')">Boleto</div>
-  <div class="PIX" (click)="handlePaymentOptionChange('PIX')">PIX</div>
-  <div class="credit-card" (click)="handlePaymentOptionChange('CREDITO')">Cartão de Crédito</div>
-</div>
+<section id="payment-content">
+  <div class="title">
+    <span>Selecione a forma de pagamento desejada</span>
+  </div>
+
+  <div class="subtitle">
+    <span>Você pode pagar com Boleto, PIX ou Cartão de Crédito</span>
+  </div>
+
+  <div class="payment-options">
+    <div class="bank-slip" (click)="togglePaymentOption('BOLETO')">
+      <i *ngIf="bankSlip == true" class="bi bi-patch-check-fill"></i>
+      <i *ngIf="bankSlip == false" class="bi bi-patch-check"></i>
+      <span>Boleto</span>
+    </div>
+
+    <div class="PIX" (click)="togglePaymentOption('PIX')">
+      <i *ngIf="pix == true" class="bi bi-patch-check-fill"></i>
+      <i *ngIf="pix == false" class="bi bi-patch-check"></i>
+      <span>PIX</span>
+    </div>
+
+    <div class="credit-card" (click)="togglePaymentOption('CREDITO')">
+      <i *ngIf="creditCard == true" class="bi bi-patch-check-fill"></i>
+      <i *ngIf="creditCard == false" class="bi bi-patch-check"></i>
+      <span>Cartão de Crédito</span>
+    </div>
+  </div>
+</section>
