@@ -10,6 +10,7 @@ import { Product } from 'src/app/interfaces/product.interface';
 })
 export class PaymentsComponent implements OnInit {
   selectedPaymentMethod: string | null = null;
+  toggleContent: boolean = false;
   bankSlip: boolean = false;
   creditCard: boolean = false;
   pix: boolean = false;
@@ -40,15 +41,21 @@ export class PaymentsComponent implements OnInit {
     } else {
       throw new Error('Método de pagamento desconhecido:' + paymentOptionName);
     }
+  }
 
-    console.log(`Método de pagamento selecionado: ${this.selectedPaymentMethod}`);
+  proceedToPayment() {
+    if (this.selectedPaymentMethod) {
+      this.toggleContent = true;
+    } else {
+      throw new Error('Nenhum método de pagamento selecionado.');
+    }
   }
 
   Payment(): void {
-    if (this.selectedPaymentMethod) {
-      console.log(`Prosseguir para o pagamento com: ${this.selectedPaymentMethod}`);
-    } else {
-      console.warn('Nenhuma forma de pagamento selecionada.');
+    try {
+    } catch (error) {
+      console.error('Erro ao processar o pagamento:', error);
+      // Aqui você pode adicionar lógica para lidar com erros, como exibir uma mensagem ao usuário.
     }
   }
 }
