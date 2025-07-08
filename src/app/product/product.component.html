@@ -72,11 +72,21 @@
           </div>
         </div>
 
+        <div class="productsQuantity">
+          <i class="bi bi-caret-left-fill"></i>
+          <i class="bi bi-caret-left"></i>
+          <span class="quantity">{{productsQuantity}}</span>
+          <i class="bi bi-caret-right"></i>
+          <i class="bi bi-caret-right-fill"></i>
+        </div>
+
         <div class="purchaseModal my-5" *ngIf="postalCode != ''">
           <div class="row">
             <div class="col-6">
               <app-add-or-remove-cart *ngFor="let shipping of shippings"></app-add-or-remove-cart>
             </div>
+
+
             <div class="col-6">
               <div class="buy-product" (click)="getPayments()">
                 Comprar

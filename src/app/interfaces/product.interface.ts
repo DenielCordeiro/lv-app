@@ -24,6 +24,8 @@ export interface Product {
   },
   sale?: {
     sold: boolean,
+    productsQuantity?: number,
     userId: number,
+    finalValue?: number,
   },
 }

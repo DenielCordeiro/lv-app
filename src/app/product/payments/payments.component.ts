@@ -20,7 +20,10 @@ export class PaymentsComponent implements OnInit {
     public dialog: MatDialog,
   ) {};
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('Dados do produto:', this.product);
+
+  }
 
   togglePaymentOption(paymentOptionName: string): void {
     if (paymentOptionName === 'BOLETO') {

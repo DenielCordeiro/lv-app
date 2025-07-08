@@ -21,6 +21,7 @@ export class ProductComponent implements OnInit {
   product: Product = {};
   routeId: number | undefined = undefined;
   postalCode: string = '';
+  productsQuantity: number = 1;
 
   constructor(
     public route: ActivatedRoute,
@@ -91,8 +92,21 @@ export class ProductComponent implements OnInit {
   };
 
   getPayments(): void {
-    this.dialog.open<PaymentsComponent>(PaymentsComponent, {
-      data: this.product
-    });
+    if (this.product.valor != null && this.product.shipping?.price != null) {
+      const buildFinalValue = (this.product.valor + this.product.shipping?.price) * this.productsQuantity;
+
+      this.product.sale = {
+        sold: false,
+        userId: 0,
+        productsQuantity: this.productsQuantity,
+        finalValue: buildFinalValue,
+      };
+
+      this.dialog.open<PaymentsComponent>(PaymentsComponent, {
+        data: this.product
+      });
+    } else {
+      alert("[Atenção]: O produto não possui valor ou o frete não foi calculado corretamente.");
+    };
   }
 }
