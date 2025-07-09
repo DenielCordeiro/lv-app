@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { PaymentsService } from 'src/app/services/payments/payments.service';
 import { Product } from 'src/app/interfaces/product.interface';
 
 @Component({
@@ -18,12 +19,10 @@ export class PaymentsComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public product: Product,
     public dialog: MatDialog,
+    private paymentsService: PaymentsService,
   ) {};
 
-  ngOnInit(): void {
-    console.log('Dados do produto:', this.product);
-
-  }
+  ngOnInit(): void {}
 
   togglePaymentOption(paymentOptionName: string): void {
     if (paymentOptionName === 'BOLETO') {
@@ -55,10 +54,33 @@ export class PaymentsComponent implements OnInit {
   }
 
   Payment(): void {
-    try {
-    } catch (error) {
-      console.error('Erro ao processar o pagamento:', error);
-      // Aqui você pode adicionar lógica para lidar com erros, como exibir uma mensagem ao usuário.
+    if (this.selectedPaymentMethod === 'PIX') {
+      this.paymentsService.createPaymentPIX(this.product)
+        .then(() => {
+          this.dialog.closeAll();
+        })
+        .catch((error) => {
+          console.error('Erro ao processar pagamento PIX:', error);
+        });
+
+    } else if (this.selectedPaymentMethod === 'BOLETO') {
+      this.paymentsService.createPaymentBankSlip(this.product)
+        .then(() => {
+          this.dialog.closeAll();
+        })
+        .catch((error) => {
+          console.error('Erro ao processar pagamento PIX:', error);
+        });
+
+    } else if (this.selectedPaymentMethod === 'CREDITO') {
+      this.paymentsService.createPaymentCreditCard(this.product)
+        .then(() => {
+          this.dialog.closeAll();
+        })
+        .catch((error) => {
+          console.error('Erro ao processar pagamento PIX:', error);
+        });
+
     }
   }
 }
