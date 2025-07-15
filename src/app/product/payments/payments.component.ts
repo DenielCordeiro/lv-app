@@ -55,14 +55,18 @@ export class PaymentsComponent implements OnInit {
 
   Payment(): void {
     if (this.selectedPaymentMethod === 'PIX') {
-      this.paymentsService.createPaymentPIX(this.product)
-        .then(() => {
-          this.dialog.closeAll();
-        })
-        .catch((error) => {
-          console.error('Erro ao processar pagamento PIX:', error);
-        });
 
+      console.log(this.product);
+
+      // this.paymentsService.createPaymentPIX(this.product)
+      //   .then((qrCode) => {
+
+      //     console.log('QR Code:', qrCode);
+      //     this.dialog.closeAll();
+      //   })
+      //   .catch((error) => {
+      //     console.error('Erro ao processar pagamento PIX:', error);
+      //   });
     } else if (this.selectedPaymentMethod === 'BOLETO') {
       this.paymentsService.createPaymentBankSlip(this.product)
         .then(() => {

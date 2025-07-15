@@ -29,7 +29,7 @@ export abstract class CrudPaymentsService<T extends BaseCrud> {
   }
 
   public createPaymentPIX(payment: Product): Promise<T> {
-    return lastValueFrom(this.http.post<BaseAPI<T>>(`${this.baseUrl}/PIX`, payment, { headers: this.header }))
+    return lastValueFrom(this.http.post<BaseAPI<T>>(`${this.baseUrl}/pix`, payment, { headers: this.header }))
       .then(result => {
       return this.handleResponse(result) as T;
     });

@@ -19,8 +19,6 @@ export class ProductsComponent implements OnInit {
   products: Product[] = [];
   fakeProduct: Product = {
     _id: 78893647,
-    user: 1,
-    saleUser: "",
     name: "Colar Azul",
     description: "Colar com pedra",
     valor: 7845.44,
@@ -44,6 +42,13 @@ export class ProductsComponent implements OnInit {
     sale: {
       sold: false,
       userId: 0,
+      user: {
+        _id: 2,
+        key: "43.488.029/0001-77",
+        name: "Daniel",
+        email: "test@test.com",
+        cellphone: "11999999999",
+      },
     },
   };
 

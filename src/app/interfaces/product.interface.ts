@@ -1,7 +1,7 @@
+import { User } from "./user.interface"
+
 export interface Product {
   _id?: number,
-  user?: number,
-  saleUser?: string,
   name?: string,
   description?: string,
   valor?: number,
@@ -27,5 +27,6 @@ export interface Product {
     productsQuantity?: number,
     userId: number,
     finalValue?: number,
+    user?: User,
   },
 }

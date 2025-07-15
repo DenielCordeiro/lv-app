@@ -91,6 +91,15 @@ export class ProductComponent implements OnInit {
     };
   };
 
+  changeQuantity(action: string): number {
+    if (action === 'add') {
+      this.productsQuantity++;
+    } else if (action === 'reduce' && this.productsQuantity > 1) {
+      this.productsQuantity--;
+    }
+    return this.productsQuantity;
+  }
+
   getPayments(): void {
     if (this.product.valor != null && this.product.shipping?.price != null) {
       const buildFinalValue = (this.product.valor + this.product.shipping?.price) * this.productsQuantity;
