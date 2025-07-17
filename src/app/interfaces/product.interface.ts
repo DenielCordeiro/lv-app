@@ -1,5 +1,3 @@
-import { User } from "./user.interface"
-
 export interface Product {
   _id?: number,
   name?: string,
@@ -16,17 +14,5 @@ export interface Product {
       type?: Date,
       default?: Date
     }
-  },
-  shipping?: {
-    name?: string,
-    price?: number,
-    postalCode?: number,
-  },
-  sale?: {
-    sold: boolean,
-    productsQuantity?: number,
-    userId: number,
-    finalValue?: number,
-    user?: User,
-  },
+  }
 }
