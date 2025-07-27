@@ -17,35 +17,6 @@ export class ProductsComponent implements OnInit {
   productId: number | undefined;
   title: string = 'Trabalhos disponíveis';
   products: Product[] = [];
-  fakeProduct: Product = {
-    _id: 78893647,
-    user: 1,
-    saleUser: "",
-    name: "Colar Azul",
-    description: "Colar com pedra",
-    valor: 7845.44,
-    type: "Colares",
-    groups: "Inverno",
-    selection: false,
-    file: {
-      name: "imagem do colar",
-      size: 0.80,
-      url: "https://firebasestorage.googleapis.com/v0/b/luz-violeta-186d5.appspot.com/o/1749600340539.png?alt=media&token=dd59ce63-9031-4430-911f-4babcbec0fd1",
-      createdAt: {
-        type: new Date(Date.UTC(2025, 5, 22)),
-        default: new Date(Date.UTC(2025, 5, 22)),
-      },
-    },
-    shipping: {
-      name: "test",
-      price: 54.78,
-      postalCode: 13308197,
-    },
-    sale: {
-      sold: false,
-      userId: 0,
-    },
-  };
 
   constructor(
     private router: Router,
@@ -54,9 +25,8 @@ export class ProductsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.gettingProducts();
+    this.gettingProducts();
     this.clearProductsInLocalStorage();
-    this.gettingFakeProduct();
   }
 
 
@@ -74,10 +44,6 @@ export class ProductsComponent implements OnInit {
 
   sendProduct(product: Product): void {
     this.productsService.addProductLocalStorage(product);
-  }
-
-  gettingFakeProduct(): void {
-    this.products.push(this.fakeProduct);
   }
 
   gettingProducts(): void {

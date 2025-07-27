@@ -1,7 +1,5 @@
 export interface Product {
   _id?: number,
-  user?: number,
-  saleUser?: string,
   name?: string,
   description?: string,
   valor?: number,
@@ -16,14 +14,5 @@ export interface Product {
       type?: Date,
       default?: Date
     }
-  },
-  shipping?: {
-    name?: string,
-    price?: number,
-    postalCode?: number,
-  },
-  sale?: {
-    sold: boolean,
-    userId: number,
-  },
+  }
 }

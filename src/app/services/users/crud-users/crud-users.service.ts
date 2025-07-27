@@ -35,25 +35,32 @@ export abstract class CrudUsersService<T extends BaseCrud> {
     return headers;
   }
 
-  public authUser(user: User): Promise<User> {
-    return lastValueFrom(this.http.get<User>(`${environment.api}/session/${user.email}/${user.password}`))
-      .then(result => {
-        const administrator = JSON.stringify(result.administrator);
-        const userId = JSON.stringify(result.user_id);
-        const token = JSON.stringify(result.token);
+  public async authUser(user: User): Promise<User | null> {
+    try {
+      const result = await lastValueFrom(
+        this.http.post<BaseAPI<User>>(`${environment.api}/session/`, user)
+      );
+
+      if (result && result.data && typeof result.data === 'object' && 'administrator' in result.data && 'token' in result.data) {
+        const administrator = JSON.stringify(result.data.administrator);
+        const token = JSON.stringify(result.data.token);
+        const profile = JSON.stringify(result.data);
 
         localStorage.setItem('session', token);
         localStorage.setItem('administrator', administrator);
-        localStorage.setItem('user_id', userId);
+        localStorage.setItem('profile', profile);
 
         this.closeModal();
 
-        return result;
-      })
-      .catch(error => {
-        alert('[ERRO!]: Não foi possível fazer login!' + " " + 'Lembre-se de Fazer cadastro, antes de fazer login!')
-        return error;
-      })
+        return this.handleResponse(result as BaseAPI<User>) as User;
+      } else {
+        alert('[ERRO!]: Dados de usuário inválidos recebidos!');
+        return null;
+      }
+    } catch (error) {
+      alert('[ERRO!]: Não foi possível fazer login! Lembre-se de Fazer cadastro, antes de fazer login!');
+      return null;
+    }
   }
 
   public authedUserWithSuccess(): boolean {
@@ -121,7 +128,7 @@ export abstract class CrudUsersService<T extends BaseCrud> {
       })
   }
 
-  public handleResponse(response: BaseAPI<T>) {
+  public handleResponse(response: BaseAPI<User>) {
     if(response) {
       return response.data;
     } else {

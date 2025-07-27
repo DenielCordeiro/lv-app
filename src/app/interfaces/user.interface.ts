@@ -2,6 +2,7 @@ import { Product } from "./product.interface";
 
 export interface User {
   _id?: number,
+  key?: string,
   name?: string,
   email?: string,
   cellphone?: string,

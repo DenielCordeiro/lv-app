@@ -6,6 +6,7 @@ import { ProductsService } from './../services/products/products.service';
 import { MelhorEnvioService } from '../services/melhor-envio/melhor-envio.service';
 import { Product } from '../interfaces/product.interface';
 import { Shipping } from '../interfaces/shipping.interface';
+import { Sale } from '../interfaces/sale.interface';
 import { PaymentsComponent } from './payments/payments.component';
 
 @Component({
@@ -19,8 +20,10 @@ export class ProductComponent implements OnInit {
   products: Product[] = [];
   shippings: Shipping[] = [];
   product: Product = {};
+  sale: Sale = {};
   routeId: number | undefined = undefined;
   postalCode: string = '';
+  productsQuantity: number = 1;
 
   constructor(
     public route: ActivatedRoute,
@@ -74,7 +77,7 @@ export class ProductComponent implements OnInit {
                 this.shippings.pop();
                 this.shippings.push(data);
 
-                this.product.shipping = {
+                this.sale.shipping = {
                   name: data.name,
                   price: Number(data.price),
                   postalCode: postalCodeNumber?.postalCode,
@@ -90,9 +93,30 @@ export class ProductComponent implements OnInit {
     };
   };
 
+  changeQuantity(action: string): number {
+    if (action === 'add') {
+      this.productsQuantity++;
+    } else if (action === 'reduce' && this.productsQuantity > 1) {
+      this.productsQuantity--;
+    }
+    return this.productsQuantity;
+  }
+
   getPayments(): void {
-    this.dialog.open<PaymentsComponent>(PaymentsComponent, {
-      data: this.product
-    });
+    if (this.product.valor != null && this.sale.shipping?.price != null) {
+      const buildFinalValue = (this.product.valor + this.sale.shipping?.price) * this.productsQuantity;
+
+      this.sale = {
+        products: this.products,
+        productsQuantity: this.productsQuantity,
+        finalValue: buildFinalValue
+      };
+
+      this.dialog.open<PaymentsComponent>(PaymentsComponent, {
+        data: this.sale
+      });
+    } else {
+      alert("[Atenção]: O produto não possui valor ou o frete não foi calculado corretamente.");
+    };
   }
 }
