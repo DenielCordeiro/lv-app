@@ -42,8 +42,7 @@ export class LoginComponent implements OnInit {
       if (this.loginForm.valid) {
         await
           this.userService.authUser(this.loginForm.value)
-          this.loginForm.reset();
-          this.menu.changeIconBurguer();
+          this.closeModal();
       }
     } catch (error) {
       console.error(error);
@@ -54,8 +53,9 @@ export class LoginComponent implements OnInit {
 		this.modalService.open(loginModal);
 	}
 
-  closeModal(loginModal: any): void {
+  closeModal(): void {
     this.menu.changeIconBurguer();
-    this.modalService.dismissAll(loginModal);
+    this.loginForm.reset();
+    this.modalService.dismissAll();
   }
 }

@@ -36,21 +36,22 @@ export abstract class CrudUsersService<T extends BaseCrud> {
   }
 
   public async authUser(user: User): Promise<User | null> {
+    let result: BaseAPI<User>;
+
     try {
-      const result = await lastValueFrom(
+      result = await lastValueFrom(
         this.http.post<BaseAPI<User>>(`${environment.api}/session/`, user)
       );
+    } catch (error) {
+      console.error('[ERRO HTTP]:', error);
+      alert('[ERRO!]: Não foi possível fazer login! Verifique seu usuário e senha!');
+      return null;
+    }
 
+    try {
       if (result && result.data && typeof result.data === 'object' && 'administrator' in result.data && 'token' in result.data) {
-        const administrator = JSON.stringify(result.data.administrator);
-        const token = JSON.stringify(result.data.token);
         const profile = JSON.stringify(result.data);
-
-        localStorage.setItem('session', token);
-        localStorage.setItem('administrator', administrator);
         localStorage.setItem('profile', profile);
-
-        this.closeModal();
 
         return this.handleResponse(result as BaseAPI<User>) as User;
       } else {
@@ -58,7 +59,8 @@ export abstract class CrudUsersService<T extends BaseCrud> {
         return null;
       }
     } catch (error) {
-      alert('[ERRO!]: Não foi possível fazer login! Lembre-se de Fazer cadastro, antes de fazer login!');
+      console.error('[ERRO DE PROCESSAMENTO]:', error);
+      alert('[ERRO!]: Algo deu errado ao processar os dados!');
       return null;
     }
   }
@@ -72,17 +74,18 @@ export abstract class CrudUsersService<T extends BaseCrud> {
   }
 
   public isAdministrator(): boolean {
-    let administrartor: string | null = localStorage.getItem('administrator');
+    let administrartor: string | null = localStorage.getItem('user');
+    let profile: User | null = JSON.parse(administrartor || 'null');
+
     let isAdm: boolean = false;
 
-    if (administrartor !== null) {
+    if (profile?.administrator !== null) {
 
-      if (administrartor == 'true') {
+      if (profile?.administrator === true) {
         isAdm = true;
       } else {
         isAdm = false;
       }
-
     } else {
       isAdm = false;
     }
@@ -134,9 +137,5 @@ export abstract class CrudUsersService<T extends BaseCrud> {
     } else {
       throw new Error("Api 200, mas success falso!");
     }
-  }
-
-  public closeModal(): void {
-    this.modalService.dismissAll();
   }
 }
