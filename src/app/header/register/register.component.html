@@ -2,9 +2,9 @@
   <div class="content">
     <div class="body">
       <div class="about-form">
-        <h4>Preencha seus dados com cuidado.</h4>
-        <h4 [hidden]="this.nextForm">Seu e-mail é salvo para comunicação após a compra de qualquer produto!</h4>
-        <h4 [hidden]="!this.nextForm">Solicitamos seu endereço para envio dos produtos! <i class="bi bi-emoji-smile"></i></h4>
+        <span>Preencha seus dados com cuidado.</span> <br>
+        <span [hidden]="this.nextForm">Seu e-mail é salvo para comunicação após a compra de qualquer produto!</span>
+        <span [hidden]="!this.nextForm">Solicitamos seu endereço para envio dos produtos! <i class="bi bi-emoji-smile"></i></span>
       </div>
 
       <form [formGroup]="registerForm">
