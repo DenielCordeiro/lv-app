@@ -6,6 +6,7 @@ import { ProductsService } from '../services/products/products.service';
 import { Product } from '../interfaces/product.interface';
 import { AddOrEditProductComponent } from './add-or-edit-product/add-or-edit-product.component';
 import { DeleteProductComponent } from './delete-product/delete-product.component';
+import  FalseProduct  from '../falseData/product';
 
 @Component({
   selector: 'app-products',
@@ -25,10 +26,10 @@ export class ProductsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.gettingProducts();
+    // this.gettingProducts();
+    this.gettingFalseProducts();
     this.clearProductsInLocalStorage();
   }
-
 
   clearProductsInLocalStorage(): void {
     this.router.events
@@ -44,6 +45,11 @@ export class ProductsComponent implements OnInit {
 
   sendProduct(product: Product): void {
     this.productsService.addProductLocalStorage(product);
+  }
+
+  gettingFalseProducts(): void {
+    const falseProduct: Product = FalseProduct
+    this.products.push(falseProduct);
   }
 
   gettingProducts(): void {

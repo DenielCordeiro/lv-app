@@ -1,15 +1,12 @@
 import { Product } from 'src/app/interfaces/product.interface';
 import { User } from './user.interface';
+import { Shipping } from './shipping.interface';
 
 export interface Sale {
-  shipping?: {
-    name?: string;
-    price?: number;
-    postalCode?: number;
-  }
+  products?: Product[];
+  user?: User;
+  shipping?: Shipping;
   sold?: boolean;
   productsQuantity?: number;
   finalValue?: number;
-  user?: User;
-  products?: Product[];
 }

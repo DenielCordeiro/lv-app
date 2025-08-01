@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { PaymentsService } from 'src/app/services/payments/payments.service';
 import { Product } from 'src/app/interfaces/product.interface';
+import { Sale } from 'src/app/interfaces/sale.interface';
 
 @Component({
   selector: 'app-payments',
@@ -10,11 +11,13 @@ import { Product } from 'src/app/interfaces/product.interface';
   standalone: false,
 })
 export class PaymentsComponent implements OnInit {
-  selectedPaymentMethod: string | null = null;
-  toggleContent: boolean = false;
-  bankSlip: boolean = false;
-  creditCard: boolean = false;
-  pix: boolean = false;
+  public paymentData!: Sale;
+  public paymentMethods: string[] = ['BOLETO', 'CREDITO', 'PIX'];
+  public selectedPaymentMethod: string | null = null;
+  public toggleContent: boolean = false;
+  public bankSlip: boolean = false;
+  public creditCard: boolean = false;
+  public pix: boolean = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public product: Product,
@@ -25,23 +28,30 @@ export class PaymentsComponent implements OnInit {
   ngOnInit(): void {}
 
   togglePaymentOption(paymentOptionName: string): void {
-    if (paymentOptionName === 'BOLETO') {
-      this.creditCard = false;
-      this.pix = false;
-      this.bankSlip = !this.bankSlip;
-      this.selectedPaymentMethod = this.bankSlip ? 'BOLETO' : null;
-    } else if (paymentOptionName === 'CREDITO') {
-      this.pix = false;
-      this.bankSlip = false;
-      this.creditCard = !this.creditCard;
-      this.selectedPaymentMethod = this.creditCard ? 'CREDITO' : null;
-    } else if (paymentOptionName === 'PIX') {
-      this.bankSlip = false;
-      this.creditCard = false;
-      this.pix = !this.pix;
-      this.selectedPaymentMethod = this.pix ? 'PIX' : null;
-    } else {
-      throw new Error('Método de pagamento desconhecido:' + paymentOptionName);
+    switch (paymentOptionName) {
+      case 'BOLETO':
+        this.creditCard = false;
+        this.pix = false;
+        this.bankSlip = !this.bankSlip;
+        this.selectedPaymentMethod = this.bankSlip ? 'BOLETO' : null;
+        break;
+
+      case 'CREDITO':
+        this.pix = false;
+        this.bankSlip = false;
+        this.creditCard = !this.creditCard;
+        this.selectedPaymentMethod = this.creditCard ? 'CREDITO' : null;
+        break;
+
+      case 'PIX':
+        this.bankSlip = false;
+        this.creditCard = false;
+        this.pix = !this.pix;
+        this.selectedPaymentMethod = this.pix ? 'PIX' : null;
+        break;
+
+      default:
+        throw new Error('Método de pagamento desconhecido: ' + paymentOptionName);
     }
   }
 
@@ -56,7 +66,7 @@ export class PaymentsComponent implements OnInit {
   Payment(): void {
     if (this.selectedPaymentMethod === 'PIX') {
 
-      console.log(this.product);
+      console.log();
 
       // this.paymentsService.createPaymentPIX(this.product)
       //   .then((qrCode) => {

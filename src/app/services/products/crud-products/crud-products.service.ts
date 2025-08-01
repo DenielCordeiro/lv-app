@@ -40,8 +40,14 @@ export abstract class CrudProductsService<T extends BaseCrud> {
   }
 
   public addProductLocalStorage(product: Product): void {
-    this.products.push(product);
-    localStorage.setItem('selectedProduct', JSON.stringify(this.products));
+    const productInLocalStorage = localStorage.getItem('selectedProduct');
+
+    if (productInLocalStorage) {
+      this.products = JSON.parse(productInLocalStorage);
+    } else {
+      this.products.push(product);
+      localStorage.setItem('selectedProduct', JSON.stringify(this.products));
+    }
   }
 
   public getProduct(): Product {

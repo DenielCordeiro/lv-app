@@ -16,5 +16,5 @@ export interface User {
   user_id?: number,
   token?: string,
   administrator?: boolean,
-  productsCart?: Product
-}
+  productsCart?: Product[],
+};

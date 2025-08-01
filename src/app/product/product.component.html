@@ -80,17 +80,8 @@
         </div>
 
         <div class="purchaseModal my-5" *ngIf="postalCode != ''">
-          <div class="row">
-            <div class="col-6">
-              <app-add-or-remove-cart *ngFor="let shipping of shippings"></app-add-or-remove-cart>
-            </div>
-
-
-            <div class="col-6">
-              <div class="buy-product" (click)="getPayments()">
-                Comprar
-              </div>
-            </div>
+          <div class="add-to-cart">
+            <app-add-or-remove-cart *ngFor="let shipping of shippings"></app-add-or-remove-cart>
           </div>
         </div>
 
@@ -199,10 +190,6 @@
       <div class="purchaseModal">
         <div class="cart">
           <app-add-or-remove-cart [product]="item"></app-add-or-remove-cart>
-        </div>
-
-        <div class="payments" (click)="getPayments()">
-          Comprar
         </div>
       </div>
     </div>

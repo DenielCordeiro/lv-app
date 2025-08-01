@@ -45,8 +45,8 @@ import { VerticalChartComponent } from './dashboard/charts/vertical-chart/vertic
 
 import { CartComponent } from './cart/cart.component';
 import { AddOrRemoveCartComponent } from './cart/add-or-remove-cart/add-or-remove-cart.component';
-import { PixComponent } from './product/payments/pix/pix.component';
-import { PaymentsComponent } from './product/payments/payments.component';
+import { PixComponent } from './services/cart/payments/pix/pix.component';
+import { PaymentsComponent } from './services/cart/payments/payments.component';
 
 @NgModule({
   declarations: [

@@ -7,7 +7,7 @@ import { MelhorEnvioService } from '../services/melhor-envio/melhor-envio.servic
 import { Product } from '../interfaces/product.interface';
 import { Shipping } from '../interfaces/shipping.interface';
 import { Sale } from '../interfaces/sale.interface';
-import { PaymentsComponent } from './payments/payments.component';
+import { PaymentsComponent } from '../services/cart/payments/payments.component';
 
 @Component({
   selector: 'app-product',
@@ -63,11 +63,11 @@ export class ProductComponent implements OnInit {
     } else {
       this.melhorEnvio.getShipping(this.postalCode)
         .then(result => {
-          const shippings = result?.data;
+          const shippings = result;
           const prices: number[] = [];
           let smallPrice!: number;
 
-          shippings.forEach((data: Shipping) => {
+          shippings.forEach((data: any) => {
 
             if (data.price != null && (data.company.name == "Jadlog" || data.company.name == "Correios")) {
               prices.push(data.price)
@@ -100,23 +100,5 @@ export class ProductComponent implements OnInit {
       this.productsQuantity--;
     }
     return this.productsQuantity;
-  }
-
-  getPayments(): void {
-    if (this.product.valor != null && this.sale.shipping?.price != null) {
-      const buildFinalValue = (this.product.valor + this.sale.shipping?.price) * this.productsQuantity;
-
-      this.sale = {
-        products: this.products,
-        productsQuantity: this.productsQuantity,
-        finalValue: buildFinalValue
-      };
-
-      this.dialog.open<PaymentsComponent>(PaymentsComponent, {
-        data: this.sale
-      });
-    } else {
-      alert("[Atenção]: O produto não possui valor ou o frete não foi calculado corretamente.");
-    };
   }
 }
