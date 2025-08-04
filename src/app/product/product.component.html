@@ -6,24 +6,24 @@
     </div>
 
     <div class="row">
-      <div class="product col-7">
-        <div class="titles">
-          <h1>{{ item?.name }}</h1>
-          <h4>{{ item?.description }}</h4>
-        </div>
-
-        <h4 *ngIf="item.groups !== ''">Novidade da coleção {{ item?.groups }}</h4>
+      <div class="product col-6">
         <div class="carousel">
           <img src="{{ item?.file?.url }}" class="image my-2" alt="#">
         </div>
       </div>
 
-      <div class="payment col-5 px-3">
-        <div class="price-product mx-3">
+      <div class="payment col-6">
+        <div class="product-titleS">
+          <span class="product-name">{{ item?.name }}</span> <br>
+          <span class="product-description">{{ item?.description }}</span> <br>
+          <span class="product-groups">{{ item?.groups }}</span>
+        </div>
+
+        <div class="price-product">
           R$ {{ item?.valor }}
         </div>
 
-        <div class="description my-5">
+        <div class="description my-3">
           <p>Este produto da luz violeta possui as seguintes medidas:</p>
 
           <div class="list-description">
@@ -80,9 +80,10 @@
         </div>
 
         <div class="purchaseModal my-5" *ngIf="postalCode != ''">
-          <div class="add-to-cart">
-            <app-add-or-remove-cart *ngFor="let shipping of shippings"></app-add-or-remove-cart>
-          </div>
+
+        </div>
+        <div class="add-to-cart">
+          <app-add-or-remove-cart *ngFor="let shipping of shippings"></app-add-or-remove-cart>
         </div>
 
       </div>

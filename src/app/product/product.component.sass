@@ -47,20 +47,26 @@
   @include display.mobile
     display: none
 
-  .card-products
+  .card-product
     height: 100vh
     width: 100%
     padding: 13vh 8vw 0px 8vw
 
+    @include display.hd
+      padding: 12vh 18vw 0px 15vw
+
   .product
-    background-color: colors.$pourple
+    background-color: colors.$pourple-gray
     height: 75vh
     border: 1px solid colors.$white
-    border-right-color: colors.$black
+    border-right-color: colors.$pourple-gray
     border-right-style: dotted
     border-top-left-radius:  10px
     border-bottom-left-radius:  10px
     padding-top: 3vh
+
+    @include display.hd
+      padding-top: 2vh
 
     h1, h4
       text-align: center
@@ -76,15 +82,20 @@
         border-radius: 20px
 
         @include display.hd
-          width: 30vw
-          height: 36vh
+          width: 28vw
+          height: 67vh
+          border-radius: 5px
 
   .payment
     background-color: colors.$white
     height: 75vh
     border-top-right-radius:  10px
     border-bottom-right-radius:  10px
-    padding-top: 3vh
+    border: 1px solid colors.$pourple-light
+    padding: 3vh 0px 0pc 2vw
+
+    @include display.hd
+      padding-top: 2vh
 
     .price-product
       font-size: 25px
