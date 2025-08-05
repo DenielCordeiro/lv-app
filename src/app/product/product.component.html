@@ -74,18 +74,14 @@
 
         <div class="productsQuantity">
           <span>Quantidade: </span>
-          <i class="bi bi-dash-lg" (click)="changeQuantity('reduce')"></i>
-          <span class="quantity">{{productsQuantity}}</span>
-          <i class="bi bi-plus-lg" (click)="changeQuantity('add')"></i>
+          <i class="bi bi-dash-lg cart-button" (click)="changeQuantity('reduce')"></i>
+          <span class="quantity mx-2">{{productsQuantity}}</span>
+          <i class="bi bi-plus-lg cart-button" (click)="changeQuantity('add')"></i>
         </div>
 
-        <div class="purchaseModal my-5" *ngIf="postalCode != ''">
-
-        </div>
         <div class="add-to-cart">
+          <app-add-or-remove-cart></app-add-or-remove-cart>
         </div>
-
-        <app-add-or-remove-cart *ngFor="let shipping of shippings"></app-add-or-remove-cart>
       </div>
     </div>
   </div>

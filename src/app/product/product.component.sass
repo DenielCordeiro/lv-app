@@ -144,6 +144,51 @@
         @include display.hd
           font-size: 16px
 
+    .productsQuantity
+      display: flex
+      font-size: 20px
+
+      .cart-button
+        cursor: pointer
+        color: colors.$pourple-light
+        font-size: 20px
+        margin: 0px 1vw
+
+        &:hover
+          color: colors.$green-light
+
+      @include display.hd
+        font-size: 16px
+
+      .quantity
+        width: 5vw
+        height: 3vh
+        text-align: center
+        border-radius: 5px
+        border: 1px solid colors.$pourple-light
+
+        @include display.hd
+          width: 4vw
+
+      i
+        cursor: pointer
+
+        &:hover
+          color: colors.$green-light
+
+    .add-to-cart
+      display: flex
+      flex-direction: column
+      align-items: center
+      justify-content: space-around
+      background-color: #777
+      width: 40vw
+      margin-top: 2vh
+
+      @include display.hd
+        margin-top: 1vh
+
+
 
 #mobile
   display: none
@@ -197,11 +242,6 @@
         font-size: 18px
         border-bottom: 1px solid colors.$blue
 
-      .input-lv
-        border: none
-        border-bottom: 1px solid colors.$blue
-        margin: 15px 5px 15px 5px
-
       .search
         border: none
         background-color: colors.$white
@@ -214,8 +254,7 @@
             height: 6vh
 
 .return
-  background-color: colors.$black
-  color: colors.$white
+  color: colors.$pourple-light
   width: 100%
   padding: 2vh 2vw
   font-size: 20px

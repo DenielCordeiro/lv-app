@@ -19,9 +19,7 @@ export class AddOrRemoveCartComponent implements OnInit {
     public route: ActivatedRoute,
   ) {}
 
-  ngOnInit(): void {
-    this.gettingProductsInCart(this.product);
-  }
+  ngOnInit(): void {}
 
   gettingProductsInCart(product: Product): boolean {
     const products: Product[] = this.cartService.getStaticProductsInCart();
@@ -41,12 +39,13 @@ export class AddOrRemoveCartComponent implements OnInit {
   }
 
   addingToCart(): void {
-    this.cartService.getProductsInCart();
+    const profile = localStorage.getItem('profile');
+    const userProfile = JSON.parse(profile || '{}');
+
     this.inOrOutOfTheCart = true;
 
-    if (this.userId !== null) {
-      const id: any = JSON.parse(this.userId);
-      const productsInCart = this.cartService.addToCart(this.product, id);
+    if (userProfile._id !== null) {
+      this.cartService.addToCart(this.product, userProfile._id);
     } else {
       console.log('Necessário fazer login!');
     }

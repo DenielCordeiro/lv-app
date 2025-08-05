@@ -1,11 +1,10 @@
-<div class="button-cart py-2" *ngIf="inOrOutOfTheCart == false" (click)="addingToCart()">
+<div class="button-cart py-2" (click)="addingToCart()">
   <span class="text-cart">Adicionar ao Carrinho</span>
   <i class="bi bi-cart4"></i>
-
 </div>
 
 
-<div class="button-cart remove py-2" *ngIf="inOrOutOfTheCart == true" (click)="removingProductFromCart()">
+<div class="button-cart remove py-2" (click)="removingProductFromCart()">
   <span class="text-cart">Remover do Carrinho</span>
   <i class="bi bi-cart4"></i>
 </div>
