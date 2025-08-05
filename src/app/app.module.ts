@@ -44,7 +44,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { VerticalChartComponent } from './dashboard/charts/vertical-chart/vertical-chart.component';
 
 import { CartComponent } from './cart/cart.component';
-import { AddOrRemoveCartComponent } from './cart/add-or-remove-cart/add-or-remove-cart.component';
 import { PixComponent } from './services/cart/payments/pix/pix.component';
 import { PaymentsComponent } from './services/cart/payments/payments.component';
 
@@ -70,7 +69,6 @@ import { PaymentsComponent } from './services/cart/payments/payments.component';
     DeleteProductComponent,
     MenuComponent,
     CartComponent,
-    AddOrRemoveCartComponent,
     DashboardComponent,
     VerticalChartComponent,
     PixComponent,

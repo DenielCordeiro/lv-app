@@ -80,7 +80,15 @@
         </div>
 
         <div class="add-to-cart">
-          <app-add-or-remove-cart></app-add-or-remove-cart>
+          <div class="button-cart py-2" (click)="addingToCart()">
+            <span class="text-cart">Adicionar ao Carrinho</span>
+            <i class="bi bi-cart4"></i>
+          </div>
+
+          <div class="button-cart remove py-2" (click)="removingProductFromCart()">
+            <span class="text-cart">Remover do Carrinho</span>
+            <i class="bi bi-cart4"></i>
+          </div>
         </div>
       </div>
     </div>
@@ -186,7 +194,6 @@
 
       <div class="purchaseModal">
         <div class="cart">
-          <app-add-or-remove-cart [product]="item"></app-add-or-remove-cart>
         </div>
       </div>
     </div>

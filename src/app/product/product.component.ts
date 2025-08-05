@@ -4,10 +4,11 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductsService } from './../services/products/products.service';
 import { MelhorEnvioService } from '../services/melhor-envio/melhor-envio.service';
+import { CartService } from '../services/cart/cart.service';
 import { Product } from '../interfaces/product.interface';
 import { Shipping } from '../interfaces/shipping.interface';
 import { Sale } from '../interfaces/sale.interface';
-import { PaymentsComponent } from '../services/cart/payments/payments.component';
+import { User } from '../interfaces/user.interface';
 
 @Component({
   selector: 'app-product',
@@ -17,10 +18,11 @@ import { PaymentsComponent } from '../services/cart/payments/payments.component'
 })
 export class ProductComponent implements OnInit {
   searchForm!: FormGroup;
-  products: Product[] = [];
   shippings: Shipping[] = [];
+  products: Product[] = [];
   product: Product = {};
   sale: Sale = {};
+  userProfile: User = {};
   routeId: number | undefined = undefined;
   postalCode: string = '';
   productsQuantity: number = 1;
@@ -30,8 +32,12 @@ export class ProductComponent implements OnInit {
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
     public productsService: ProductsService,
-    public melhorEnvio: MelhorEnvioService
-  ) {}
+    public melhorEnvio: MelhorEnvioService,
+    public cartService: CartService
+  ) {
+    const profile = localStorage.getItem('profile');
+    this.userProfile = JSON.parse(profile || '{}');
+  }
 
   ngOnInit(): void {
     this.buildingForm();
@@ -100,5 +106,25 @@ export class ProductComponent implements OnInit {
       this.productsQuantity--;
     }
     return this.productsQuantity;
+  }
+
+  addingToCart(): void {
+    const userId: number = Number(this.userProfile._id);
+
+    if (userId !== null) {
+      this.cartService.addToCart(this.product, userId);
+    } else {
+      console.log('Necessário fazer login!');
+    }
+  }
+
+  removingProductFromCart(): void {
+    const userId: number = Number(this.userProfile._id);
+
+    if (userId !== null) {
+      const productsInCart = this.cartService.removeProductFromCart(this.product, userId);
+    } else {
+      console.log('Necessário fazer login!');
+    }
   }
 }
