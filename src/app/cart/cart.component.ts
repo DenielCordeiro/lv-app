@@ -12,8 +12,7 @@ import { Product } from 'src/app/interfaces/product.interface';
 })
 export class CartComponent implements OnInit {
   productsInCart: Product[] = [];
-  userProfile: User = {};
-  userId: string | null = localStorage.getItem('user_id');
+  profile: User = {};
 
   constructor(
     private userService: UsersService,
@@ -31,42 +30,19 @@ export class CartComponent implements OnInit {
   }
 
   gettingUserProfile(): void {
-    if (this.userId !== null) {
-      const id = JSON.parse(this.userId);
+    const user = localStorage.getItem('profile');
+    this.profile = JSON.parse(user!);
 
-      this.userService.getProfile(id)
-        .then( profile => {
-          this.userProfile = profile;
-
-          if (this.userProfile.productsCart !== undefined) {
-            if (this.productsInCart.length < 1) {
-              const data: any[] = [];
-
-              data.push(this.userProfile.productsCart);
-
-              this.productsInCart = Array.from(data[0]);
-              this.cartService.productsInCart = this.productsInCart;
-            } else {
-              return
-            }
-          } else {
-            throw new Error('Nenhum produto foi adicionado no carrinho');
-          }
-        })
-        .catch(error => {
-          throw new Error('Perfil de usuário não encontrado', error);
-        });
-
-      this.productsInCart = this.cartService.getStaticProductsInCart();
-
-    } else {
-      throw new Error('ID de usuário não encontrado');
-    }
+    // this.cartService.productsInCart = this.profile.productsCart || [];
+    // this.productsInCart = this.cartService.getStaticProductsInCart();
   }
 
   cartCleaning(): void {
-    if (this.userId !== null) {
-      const id = JSON.parse(this.userId);
+    const user = localStorage.getItem('profile');
+    this.profile = JSON.parse(user!);
+
+    if (this.profile !== null) {
+      const id = this.profile._id;
 
       this.cartService.clearCart(id)
         .then(result => {

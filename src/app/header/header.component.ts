@@ -22,15 +22,13 @@ export class HeaderComponent  implements OnInit {
   }
 
   getUserId(): string | null {
-    let id: string | null = localStorage.getItem('user_id');
+    const profile = localStorage.getItem('profile');
+    const userProfile = JSON.parse(profile!);
 
-    if (id !== null) {
-      let userId: string = id.replace(/[\"]/g, '');
-
-
-      return userId;
+    if (userProfile._id === null) {
+      return null;
     } else {
-      return null
+      return userProfile._id;
     }
   }
 
