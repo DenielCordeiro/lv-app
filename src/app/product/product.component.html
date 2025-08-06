@@ -1,10 +1,5 @@
 <section id="desktop">
   <div class="card-product" *ngFor="let item of products">
-    <div class="icons-edit-or-delete">
-      <i class="bi bi-pencil-fill" (click)="updateModal(item?._id)"></i>
-      <i class="bi bi-trash3-fill" (click)="deleteModal(item?._id)"></i>
-    </div>
-
     <div class="row">
       <div class="product col-6">
         <div class="carousel">
@@ -13,18 +8,23 @@
       </div>
 
       <div class="payment col-6">
-        <div class="product-titleS">
-          <span class="product-name">{{ item?.name }}</span> <br>
-          <span class="product-description">{{ item?.description }}</span> <br>
-          <span class="product-groups">{{ item?.groups }}</span>
-        </div>
+        <div class="header-payment">
+          <div class="price-product">
+            R$ {{ item?.valor }}
+          </div>
 
-        <div class="price-product">
-          R$ {{ item?.valor }}
+          <div class="icons-edit-or-delete">
+            <i class="bi bi-pencil-fill" (click)="updateModal(item?._id)"></i>
+            <i class="bi bi-trash3-fill icon-trash" (click)="deleteModal(item?._id)"></i>
+          </div>
         </div>
 
         <div class="description my-3">
-          <p>Este produto da luz violeta possui as seguintes medidas:</p>
+          <span class="product-name">{{ item?.name }}</span> <br>
+          <span class="product-description">{{ item?.description }}</span> <br>
+          <span class="product-groups">{{ item?.groups }}</span>
+
+          <p>Este produto possui as seguintes medidas:</p>
 
           <div class="list-description">
             <div>Altura: 1 metro e 70 centimentros</div>
@@ -34,21 +34,21 @@
           </div>
         </div>
 
-        <div class="freight my-4">
+        <hr class="my-3">
+
+        <div class="freight">
           <h4 class="mx-3"> <strong>Calcular Frete</strong> </h4>
 
           <div class="row">
             <div class="col-6">
               <form [formGroup]="searchForm">
-
                 <label for="postalCode">Digite o CEP:</label>
                 <input id="postalCode" type="number" class="input-lv" formControlName="postalCode">
-
               </form>
             </div>
 
             <div class="col-6 button-freight-content">
-              <div class="button-one" (click)="searchShipping()">
+              <div class="buttons button-send" (click)="searchShipping()">
                 <span>Calcular Frete</span>
                 <i class="bi bi-airplane-engines mx-2"></i>
               </div>
@@ -72,21 +72,28 @@
           </div>
         </div>
 
+        <hr class="my-3">
+
         <div class="productsQuantity">
           <span>Quantidade: </span>
           <i class="bi bi-dash-lg cart-button" (click)="changeQuantity('reduce')"></i>
-          <span class="quantity mx-2">{{productsQuantity}}</span>
+          <span class="quantity">{{productsQuantity}}</span>
           <i class="bi bi-plus-lg cart-button" (click)="changeQuantity('add')"></i>
         </div>
 
         <div class="add-to-cart">
-          <div class="button-cart py-2" (click)="addingToCart()">
+          <div class="buttons button-add-to-cart" (click)="addingToCart()">
             <span class="text-cart">Adicionar ao Carrinho</span>
             <i class="bi bi-cart4"></i>
           </div>
 
-          <div class="button-cart remove py-2" (click)="removingProductFromCart()">
+          <div class="buttons button-remove-to-cart" (click)="removingProductFromCart()">
             <span class="text-cart">Remover do Carrinho</span>
+            <i class="bi bi-cart4"></i>
+          </div>
+
+          <div class="buttons go-to-cart">
+            <span class="text-cart">Ir para o Carrinho</span>
             <i class="bi bi-cart4"></i>
           </div>
         </div>

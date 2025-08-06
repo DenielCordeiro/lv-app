@@ -7,18 +7,6 @@
 *
   font-family: Arial, Helvetica, sans-serif !important
 
-.display-desktop
-  display: inline
-
-  @include display.mobile
-    display: none
-
-.display-mobile
-  display: none
-
-  @include display.mobile
-    display: inline
-
 //------------------------------------------Buttons--------------------------------------------
 
 .button-x
@@ -33,23 +21,24 @@
   align-items: center
   justify-content: center
   cursor: pointer
-  height: 37px
-  min-width: 80px
   font-size: 18px
-  border-radius: 6px
+  border-radius: 5px
+
+  @include display.hd
+    font-size: 15px
 
   @include display.mobile
-    height: 35px
-    min-width: 70px
+    font-size: 13px
 
 .button-send
   color: colors.$white
-  background-color: colors.$pourple
-  border: 1px solid colors.$pourple
+  background-color: colors.$green
+  border: 1px solid colors.$green
 
   &:hover
-    background-color: rgba(153, 50, 204, 0.8)
-    border-color: rgba(153, 50, 204, 0.8)
+    // background-color: rgba(153, 50, 204, 0.8)
+    background-color: colors.$green-light
+    border-color: colors.$green-light
 
   &:disabled
     color: colors.$pourple-gray
