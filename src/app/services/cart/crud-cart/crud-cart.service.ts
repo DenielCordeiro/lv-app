@@ -9,7 +9,7 @@ export abstract class CrudCartService<T extends BaseCrud>{
   http!: HttpClient;
   route: string = environment.api;
   header: any = this.buildHeader();
-  productsInCart!: Product[];
+  productsInCart: Product[] = [];
   products: Product[] = [];
   buidSubject: Subject<Product[]> = new Subject<Product[]>();
   gettingProductsInCart: Observable<Product[]> = this.buidSubject.asObservable();
@@ -38,50 +38,28 @@ export abstract class CrudCartService<T extends BaseCrud>{
     return this.gettingProductsInCart;
   }
 
-  public addToCart(product: Product, userId: any): Product[] | string {
-    if (this.productsInCart.length == 0) {
-      this.products.push(product);
-      this.saveCart(this.productsInCart, userId)
+  public addToCart(product: Product): Product[] | string {
+    if (this.productsInCart.length === 0) {
+      this.productsInCart.push(product);
+      localStorage.setItem('cart', JSON.stringify(this.productsInCart));
     } else {
-      const ids: any[] = [];
+      this.productsInCart.forEach(productInCart => {
 
-      this.productsInCart.forEach(data => {
-        ids.push(data._id);
+        if (productInCart._id === product._id) {
+          console.log('Produto já está no carrinho!');
+        } else {
+          console.log('Produto não encontrado no carrinho, adicionando:', product);
+          this.productsInCart.push(product);
+          localStorage.setItem('cart', JSON.stringify(this.productsInCart));
+        }
       });
-
-      const index: number = ids.indexOf(product._id);
-
-      if (index == -1) {
-        this.productsInCart.push(product);
-
-        this.saveCart(this.productsInCart, userId)
-
-      } else {
-        console.log('produto já está no carrinho!');
-      }
     }
 
     return this.productsInCart;
   }
 
-  public removeProductFromCart(product: Product, userId: any): Product[] | string {
-    const ids: any[] = [];
-
-    this.productsInCart.forEach(data => {
-      ids.push(data._id);
-    });
-
-    const index: number = ids.indexOf(product._id);
-
-    if (index >= 0) {
-      this.productsInCart.splice(index, 1);
-      this.getProductsInCart();
-      this.saveCart( this.productsInCart, userId)
-
-      return this.productsInCart;
-    } else  {
-      return 'Produto não encontrado!';
-    }
+  public removeProductFromCart(product: Product): Product[] | string {
+    return this.productsInCart;
   }
 
   public saveCart(productsInCart: Product[], user_id: any): Promise<T> {

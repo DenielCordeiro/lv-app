@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductsService } from './../services/products/products.service';
@@ -23,12 +23,11 @@ export class ProductComponent implements OnInit {
   product: Product = {};
   sale: Sale = {};
   userProfile: User = {};
-  routeId: number | undefined = undefined;
   postalCode: string = '';
   productsQuantity: number = 1;
 
   constructor(
-    public route: ActivatedRoute,
+    public route: Router,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
     public productsService: ProductsService,
@@ -84,6 +83,7 @@ export class ProductComponent implements OnInit {
                 this.shippings.push(data);
 
                 this.sale.shipping = {
+                  _id: data._id,
                   name: data.name,
                   price: Number(data.price),
                   postalCode: postalCodeNumber?.postalCode,
@@ -109,22 +109,22 @@ export class ProductComponent implements OnInit {
   }
 
   addingToCart(): void {
-    const userId: number = Number(this.userProfile._id);
-
-    if (userId !== null) {
-      this.cartService.addToCart(this.product, userId);
+    if (this.product !== null) {
+      this.cartService.addToCart(this.product);
     } else {
-      console.log('Necessário fazer login!');
+      console.log('Produto inválido!');
     }
   }
 
   removingProductFromCart(): void {
-    const userId: number = Number(this.userProfile._id);
-
-    if (userId !== null) {
-      const productsInCart = this.cartService.removeProductFromCart(this.product, userId);
+    if (this.product !== null) {
+      this.cartService.removeProductFromCart(this.product);
     } else {
-      console.log('Necessário fazer login!');
+      console.log('Produto inválido!');
     }
+  }
+
+  goToCart(): void {
+    this.route.navigate(['/cart']);
   }
 }

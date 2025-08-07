@@ -1,105 +1,106 @@
 <section id="desktop">
-  <div class="card-product" *ngFor="let item of products">
-    <div class="row">
-      <div class="product col-6">
-        <div class="carousel">
-          <img src="{{ item?.file?.url }}" class="image my-2" alt="#">
-        </div>
-      </div>
-
-      <div class="payment col-6">
-        <div class="header-payment">
-          <div class="price-product">
-            R$ {{ item?.valor }}
-          </div>
-
-          <div class="icons-edit-or-delete">
-            <i class="bi bi-pencil-fill" (click)="updateModal(item?._id)"></i>
-            <i class="bi bi-trash3-fill icon-trash" (click)="deleteModal(item?._id)"></i>
+  @for (product of products; track product._id) {
+    <div class="card-product">
+      <div class="row">
+        <div class="product col-6">
+          <div class="carousel">
+            <img src="{{ product?.file?.url }}" class="image my-2" alt="#">
           </div>
         </div>
 
-        <div class="description my-3">
-          <span class="product-name">{{ item?.name }}</span> <br>
-          <span class="product-description">{{ item?.description }}</span> <br>
-          <span class="product-groups">{{ item?.groups }}</span>
-
-          <p>Este produto possui as seguintes medidas:</p>
-
-          <div class="list-description">
-            <div>Altura: 1 metro e 70 centimentros</div>
-            <div>Largura: 70 centimentro</div>
-            <div>Espessura: 4cm</div>
-            <div>Peso: 2kg</div>
-          </div>
-        </div>
-
-        <hr class="my-3">
-
-        <div class="freight">
-          <h4 class="mx-3"> <strong>Calcular Frete</strong> </h4>
-
-          <div class="row">
-            <div class="col-6">
-              <form [formGroup]="searchForm">
-                <label for="postalCode">Digite o CEP:</label>
-                <input id="postalCode" type="number" class="input-lv" formControlName="postalCode">
-              </form>
+        <div class="payment col-6">
+          <div class="header-payment">
+            <div class="price-product">
+              R$ {{ product?.valor }}
             </div>
 
-            <div class="col-6 button-freight-content">
-              <div class="buttons button-send" (click)="searchShipping()">
-                <span>Calcular Frete</span>
-                <i class="bi bi-airplane-engines mx-2"></i>
-              </div>
+            <div class="icons-edit-or-delete">
+              <i class="bi bi-pencil-fill" (click)="updateModal(product?._id)"></i>
+              <i class="bi bi-trash3-fill icon-trash" (click)="deleteModal(product?._id)"></i>
             </div>
           </div>
 
-          <div class="cards-shippings" *ngFor="let shipping of shippings">
-            <hr class="mt-5 mb-2">
+          <div class="description my-3">
+            <span class="product-name">{{ product?.name }}</span> <br>
+            <span class="product-description">{{ product?.description }}</span> <br>
+            <span class="product-groups">{{ product?.groups }}</span>
 
-            <div class="shipping row">
-              <div class="col-6 image-shipping">
-                <img src="{{ shipping?.company?.picture }}" alt="">
+            <p>Este produto possui as seguintes medidas:</p>
+
+            <div class="list-description">
+              <div>Altura: 1 metro e 70 centimentros</div>
+              <div>Largura: 70 centimentro</div>
+              <div>Espessura: 4cm</div>
+              <div>Peso: 2kg</div>
+            </div>
+          </div>
+
+          <hr class="my-3">
+
+          <div class="freight">
+            <h4 class="mx-3"><strong>Calcular Frete</strong></h4>
+
+            <div class="row">
+              <div class="col-6">
+                <form [formGroup]="searchForm">
+                  <label for="postalCode">Digite o CEP:</label>
+                  <input id="postalCode" type="number" class="input-lv" formControlName="postalCode">
+                </form>
               </div>
 
-              <div class="col-6 price-shipping">
-                <span>R$ {{ shipping?.price }}</span>
+              <div class="col-6 button-freight-content">
+                <div class="buttons button-send" (click)="searchShipping()">
+                  <span>Calcular Frete</span>
+                  <i class="bi bi-airplane-engines mx-2"></i>
+                </div>
               </div>
             </div>
 
-            <hr class="my-3">
-          </div>
-        </div>
-
-        <hr class="my-3">
-
-        <div class="productsQuantity">
-          <span>Quantidade: </span>
-          <i class="bi bi-dash-lg cart-button" (click)="changeQuantity('reduce')"></i>
-          <span class="quantity">{{productsQuantity}}</span>
-          <i class="bi bi-plus-lg cart-button" (click)="changeQuantity('add')"></i>
-        </div>
-
-        <div class="add-to-cart">
-          <div class="buttons button-add-to-cart" (click)="addingToCart()">
-            <span class="text-cart">Adicionar ao Carrinho</span>
-            <i class="bi bi-cart4"></i>
+            @for (shipping of shippings; track shipping._id) {
+              <div class="cards-shippings">
+                <hr class="mt-5 mb-2">
+                <div class="shipping row">
+                  <div class="col-6 image-shipping">
+                    <img src="{{ shipping?.company?.picture }}" alt="">
+                  </div>
+                  <div class="col-6 price-shipping">
+                    <span>R$ {{ shipping?.price }}</span>
+                  </div>
+                </div>
+                <hr class="my-3">
+              </div>
+            }
           </div>
 
-          <div class="buttons button-remove-to-cart" (click)="removingProductFromCart()">
-            <span class="text-cart">Remover do Carrinho</span>
-            <i class="bi bi-cart4"></i>
+          <hr class="my-3">
+
+          <div class="productsQuantity">
+            <span>Quantidade: </span>
+            <i class="bi bi-dash-lg cart-button" (click)="changeQuantity('reduce')"></i>
+            <span class="quantity">{{ productsQuantity }}</span>
+            <i class="bi bi-plus-lg cart-button" (click)="changeQuantity('add')"></i>
           </div>
 
-          <div class="buttons go-to-cart">
-            <span class="text-cart">Ir para o Carrinho</span>
-            <i class="bi bi-cart4"></i>
+          <div class="add-to-cart">
+            <div class="buttons button-add-to-cart" (click)="addingToCart()">
+              <span class="text-cart">Adicionar ao Carrinho</span>
+              <i class="bi bi-cart4"></i>
+            </div>
+
+            <div class="buttons button-remove-to-cart" (click)="removingProductFromCart()">
+              <span class="text-cart">Remover do Carrinho</span>
+              <i class="bi bi-cart4"></i>
+            </div>
+
+            <div class="buttons go-to-cart" (click)="goToCart()">
+              <span class="text-cart">Ir para o Carrinho</span>
+              <i class="bi bi-cart4"></i>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  }
 
   <div class="return">
     <div class="button-return" routerLink="/products">
@@ -111,100 +112,9 @@
 </section>
 
 <section id="mobile">
-  <div class="product-mobile" *ngFor="let item of products">
-    <div class="valor-and-options">
-      <div class="icons-edit-or-delete my-3">
-        <i class="bi bi-pencil-fill" (click)="updateModal(item?._id)"></i>
-        <i class="bi bi-trash3-fill" (click)="deleteModal(item?._id)"></i>
-      </div>
-
-      <div class="titles">
-        <h2>{{ item?.name }}</h2>
-      </div>
-    </div>
-
-    <div class="card-product-mobile">
-      <div class="price-product">
-        R$ {{ item?.valor }}
-      </div>
-
-      <div class="carousel">
-        <img src="{{ item?.file?.url }}" class="image my-2" alt="#">
-      </div>
-    </div>
-
-    <div class="description mb-4">
-      <div class="button-description"  data-bs-toggle="modal" data-bs-target="#descriptionModal">
-        <span>Ver Descrição</span>
-        <i class="bi bi-arrow-right"></i>
-      </div>
-
-      <div class="text-description modal fade" id="descriptionModal" tabindex="-1" aria-labelledby="descriptionModalLabel" aria-hidden="true">
-        <div class="modal-dialog row">
-          <div class="card-description">
-            <div class="header-card">
-              <h1 class="product-name">{{ item?.name }}</h1>
-            </div>
-
-            <h4>{{ item?.description }}</h4>
-            <h4>{{ item?.groups }}</h4>
-
-            <p>Este produto da luz violeta possui as seguintes medidas:</p>
-
-            <div class="list-description">
-              <div>Altura: 1 metro e 70 centimentros</div>
-              <div>Largura: 70 centimentro</div>
-              <div>Espessura: 4cm</div>
-              <div>Peso: 2kg</div>
-            </div>
-
-            <div class="footer-card">
-              <div class="close-button" data-bs-dismiss="modal">Fechar</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="payment">
-      <div class="freight">
-        <form [formGroup]="searchForm">
-          <div class="button-freight py-2" data-bs-toggle="collapse" href="#postalCoderInput" aria-expanded="false" aria-controls="postalCoderInput">
-            <span>Calcular Frete</span>
-            <i class="bi bi-truck mx-3"></i>
-          </div>
-
-          <div class="collapse postalCoderInput" id="postalCoderInput">
-            <label for="postalCode">Digite o CEP:</label>
-            <input id="postalCode" type="number" class="input-lv" formControlName="postalCode">
-
-            <button class="search" type="submit" (click)="searchShipping()">Buscar</button>
-
-            <div class="cards-shippings" *ngFor="let shipping of shippings">
-              <hr class="mt-2 mb-2">
-
-              <div class="shipping row">
-                <div class="col-6 image-shipping">
-                  <img src="{{ shipping?.company?.picture }}" alt="">
-                </div>
-
-                <div class="col-6 price-shipping">
-                  <span>R$ {{ shipping?.price }}</span>
-                </div>
-              </div>
-
-              <hr class="my-2">
-            </div>
-          </div>
-        </form>
-      </div>
-
-      <div class="purchaseModal">
-        <div class="cart">
-        </div>
-      </div>
-    </div>
-  </div>
+  @for (product of products; track product._id) {
+    <div class="content-product"></div>
+  }
 
   <div class="return">
     <div class="button-return" routerLink="/products">
