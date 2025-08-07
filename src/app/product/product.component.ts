@@ -112,7 +112,7 @@ export class ProductComponent implements OnInit {
     if (this.product !== null) {
       this.cartService.addToCart(this.product);
     } else {
-      console.log('Produto inválido!');
+      console.log('Não foi possível encontrar os dados do produto!');
     }
   }
 
@@ -120,7 +120,7 @@ export class ProductComponent implements OnInit {
     if (this.product !== null) {
       this.cartService.removeProductFromCart(this.product);
     } else {
-      console.log('Produto inválido!');
+      console.log('Não foi possível encontrar os dados do produto!');
     }
   }
 

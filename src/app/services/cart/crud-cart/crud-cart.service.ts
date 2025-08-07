@@ -59,6 +59,14 @@ export abstract class CrudCartService<T extends BaseCrud>{
   }
 
   public removeProductFromCart(product: Product): Product[] | string {
+    if (this.productsInCart.length === 0) {
+      console.log('Carrinho vazio, não há produtos para remover!');
+    } else {
+      this.productsInCart = this.productsInCart.filter(item => item._id !== product._id);
+      localStorage.setItem('cart', JSON.stringify(this.productsInCart));
+      console.log('Produto removido do carrinho:', product);
+    }
+
     return this.productsInCart;
   }
 
