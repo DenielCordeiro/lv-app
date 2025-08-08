@@ -49,7 +49,13 @@ export class ProductComponent implements OnInit {
 
   getProductSelected(): void {
     this.product = this.productsService.getProduct();
-    this.products.push(this.product);
+
+    if (!this.product) {
+      console.error('Nenhum produto selecionado!');
+      return;
+    } else {
+      this.products.push(this.product);
+    }
   }
 
   getUserProfile(): void {
@@ -144,20 +150,25 @@ export class ProductComponent implements OnInit {
   }
 
   addingToCart(): void {
-    if (this.product !== null) {
-      this.cartService.addToCart(this.product);
-      this.checkIfProductIsInCart();
-    } else {
-      console.log('Não foi possível encontrar os dados do produto!');
-    }
+    this.cartService.addToCart(this.product)
+      .then(() => {
+        this.getProductsInCart();
+        this.checkIfProductIsInCart();
+      })
+      .catch(error => {
+        console.error('Erro ao adicionar produto ao carrinho:', error);
+      });
   }
 
   removingProductFromCart(): void {
-    if (this.product !== null) {
-      this.cartService.removeProductFromCart(this.product);
-    } else {
-      console.log('Não foi possível encontrar os dados do produto!');
-    }
+    this.cartService.removeProductFromCart(this.product)
+      .then(() => {
+        this.getProductsInCart();
+        this.checkIfProductIsInCart();
+      })
+      .catch(error => {
+        console.error('Erro ao remover produto do carrinho:', error);
+      });
   }
 
   goToCart(): void {

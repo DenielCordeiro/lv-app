@@ -4,6 +4,7 @@ import { BaseAPI } from "src/app/interfaces/base-api.interface";
 import { BaseCrud } from "src/app/interfaces/base-crud.interface";
 import { Product } from "src/app/interfaces/product.interface";
 import { environment } from "src/environments/environment";
+import { StorageService } from "../../storage/storage.service";
 
 export abstract class CrudCartService<T extends BaseCrud>{
   http!: HttpClient;
@@ -14,9 +15,12 @@ export abstract class CrudCartService<T extends BaseCrud>{
   buidSubject: Subject<Product[]> = new Subject<Product[]>();
   gettingProductsInCart: Observable<Product[]> = this.buidSubject.asObservable();
 
-  constructor(httpClient: HttpClient) {
+  constructor(
+    httpClient: HttpClient,
+    storage: StorageService,
+  ) {
     this.http = httpClient;
-    this.productsInCart = this.products;
+    this.productsInCart = storage.get('cart', []);
   }
 
   public buildHeader(): HttpHeaders {
@@ -28,7 +32,7 @@ export abstract class CrudCartService<T extends BaseCrud>{
     return headers;
   }
 
-  public addToCart(product: Product): Product[] | string {
+  public addToCart(product: Product): Promise<Product[]> {
     if (this.productsInCart.length === 0) {
       this.productsInCart.push(product);
       localStorage.setItem('cart', JSON.stringify(this.productsInCart));
@@ -45,10 +49,10 @@ export abstract class CrudCartService<T extends BaseCrud>{
       });
     }
 
-    return this.productsInCart;
+    return Promise.resolve(this.productsInCart);
   }
 
-  public removeProductFromCart(product: Product): Product[] | string {
+  public removeProductFromCart(product: Product): Promise<Product[]> {
     if (this.productsInCart.length === 0) {
       console.log('Carrinho vazio, não há produtos para remover!');
     } else {
@@ -57,7 +61,7 @@ export abstract class CrudCartService<T extends BaseCrud>{
       console.log('Produto removido do carrinho:', product);
     }
 
-    return this.productsInCart;
+    return Promise.resolve(this.productsInCart);
   }
 
   public saveCart(productsInCart: Product[], user_id: any): Promise<T> {
