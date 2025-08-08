@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { StorageService } from '../services/storage/storage.service';
 import { ProductsService } from './../services/products/products.service';
 import { MelhorEnvioService } from '../services/melhor-envio/melhor-envio.service';
 import { CartService } from '../services/cart/cart.service';
@@ -18,6 +19,7 @@ import { User } from '../interfaces/user.interface';
 })
 export class ProductComponent implements OnInit {
   searchForm!: FormGroup;
+  productsInCart: Product[] = [];
   shippings: Shipping[] = [];
   products: Product[] = [];
   product: Product = {};
@@ -25,27 +27,60 @@ export class ProductComponent implements OnInit {
   userProfile: User = {};
   postalCode: string = '';
   productsQuantity: number = 1;
+  productIsInCart: boolean = false;
 
   constructor(
     public route: Router,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
+    public storage: StorageService,
     public productsService: ProductsService,
     public melhorEnvio: MelhorEnvioService,
-    public cartService: CartService
-  ) {
-    const profile = localStorage.getItem('profile');
-    this.userProfile = JSON.parse(profile || '{}');
-  }
+    public cartService: CartService,
+  ) {}
 
   ngOnInit(): void {
     this.buildingForm();
     this.getProductSelected();
+    this.getUserProfile();
+    this.getProductsInCart();
+    this.checkIfProductIsInCart();
   }
 
   getProductSelected(): void {
     this.product = this.productsService.getProduct();
     this.products.push(this.product);
+  }
+
+  getUserProfile(): void {
+    try {
+      this.userProfile = this.storage.get('profile', {});
+    } catch (error) {
+      console.error('Nenhum perfil encontrado:', error);
+    }
+  }
+
+  getProductsInCart(): void {
+    try {
+      this.productsInCart = this.storage.get('cart', []);
+    } catch (error) {
+      console.error('Nenhum produto encontrado no carrinho:', error);
+    }
+  }
+
+  checkIfProductIsInCart(): void {
+    if (this.productsInCart.length > 0) {
+      this.productsInCart.forEach(product => {
+
+        if (product._id === this.product._id) {
+          this.productIsInCart = true;
+        } else {
+          this.productIsInCart = false;
+        }
+      });
+    } else {
+      this.productIsInCart = false;
+    }
   }
 
   buildingForm(): void {
@@ -111,6 +146,7 @@ export class ProductComponent implements OnInit {
   addingToCart(): void {
     if (this.product !== null) {
       this.cartService.addToCart(this.product);
+      this.checkIfProductIsInCart();
     } else {
       console.log('Não foi possível encontrar os dados do produto!');
     }

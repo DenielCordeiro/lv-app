@@ -33,10 +33,6 @@ export class HeaderComponent  implements OnInit {
   }
 
   gettingProductsInCart(): number {
-    this.cartService.getProductsInCart().subscribe(
-      result => {
-        this.productsQuantity = result.length;
-      });
 
     return this.productsQuantity;
   }

@@ -28,16 +28,6 @@ export abstract class CrudCartService<T extends BaseCrud>{
     return headers;
   }
 
-  public getStaticProductsInCart(): Product[] {
-    return this.productsInCart;
-  }
-
-  public getProductsInCart(): Observable<Product[]> {
-    this.buidSubject.next(this.productsInCart);
-
-    return this.gettingProductsInCart;
-  }
-
   public addToCart(product: Product): Product[] | string {
     if (this.productsInCart.length === 0) {
       this.productsInCart.push(product);

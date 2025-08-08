@@ -21,7 +21,6 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.gettingProductsInCart();
-    this.cartService.getProductsInCart();
   }
 
   gettingProductsInCart(): Product[] {
@@ -32,9 +31,6 @@ export class CartComponent implements OnInit {
   gettingUserProfile(): void {
     const user = localStorage.getItem('profile');
     this.profile = JSON.parse(user!);
-
-    // this.cartService.productsInCart = this.profile.productsCart || [];
-    // this.productsInCart = this.cartService.getStaticProductsInCart();
   }
 
   cartCleaning(): void {
