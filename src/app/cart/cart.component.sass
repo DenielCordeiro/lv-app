@@ -5,54 +5,10 @@
   margin: 0px
   padding: 0px
 
-.display
-  background-color: colors.$black
+.cart-content
+  background-color: colors.$pourple-gray
   padding-top: 14vh
   margin-bottom: 3vh
 
-  .products-hd, .products-mobile
-    display: none
-
   @include display.hd
-    .products, .products-mobile
-      display: none
-
-    .products-hd
-      display: inline
-
-  @include display.mobile
-    .products, .products-hd
-      display: none
-
-    .products-mobile
-      display: inline
-      display: flex
-      justify-content: center
-
-      .product
-        background-color: colors.$white
-        width: 65vw
-        margin-bottom: 5vh
-        border-radius: 10px
-        display: flex
-        flex-direction: column
-        align-items: center
-
-        img
-          width: 50vw
-          height: 45vw
-          border-radius: 4%
-
-    .footer
-      background-color: colors.$blue
-      position: fixed
-      bottom: 0px
-      height: 5vh
-      width: 100%
-      font-size: 18px
-
-      .clear-cart
-        background-color: colors.$white
-
-      .buy-products
-        background-color: colors.$white
+    padding-top: 12vh

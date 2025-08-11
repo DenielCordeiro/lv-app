@@ -1,35 +1,34 @@
-<section id="products">
+<section id="cart">
 
-  <div class="display">
+  <div class="cart-content">
     <div class="products">
-      <h1>Aqui carrega a lista de Produtos</h1>
-    </div>
-
-    <div class="products-hd">
-      <h1>Aqui carrega a lista de Produtos</h1>
-    </div>
-
-    <div class="products-mobile" *ngFor="let product of this.productsInCart">
-      <div class="product">
-        <h2>{{ product.name }}</h2>
-        <img src="{{ product?.file?.url }}" alt="{{ product?.file?.name }}">
-
-        <div class="button-remove-from-cart my-3">
+      @for (product of productsInCart; track product._id) {
+        <div class="product">
+          <h2>{{ product.name }}</h2>
+          <img src="{{ product?.file?.url }}" alt="{{ product?.file?.name }}">
         </div>
-      </div>
+      }
     </div>
 
-    <div class="footer row">
-      <div class="col-6">
-          <div class="clear-cart" (click)="cartCleaning()">
-            <span>Limpar carrinho</span>
+    <div class="products-mobile">
+      @for (product of productsInCart; track product._id) {
+        <div class="product">
+          <h2>{{ product.name }}</h2>
+          <img src="{{ product?.file?.url }}" alt="{{ product?.file?.name }}">
+
+          <div class="button-remove-from-cart my-3">
           </div>
+        </div>
+      }
+    </div>
+
+    <div class="footer">
+      <div class="clear-cart" (click)="cartCleaning()">
+        <span>Limpar carrinho</span>
       </div>
 
-      <div class="col-6">
-        <div class="buy-products">
-          <span>Finalizar Carrinho</span>
-        </div>
+      <div class="buy-products">
+        <span>Finalizar Carrinho</span>
       </div>
     </div>
   </div>
