@@ -1,10 +1,13 @@
 <section id="cart">
+  <div class="title">
+      <span>Carrinho de Compras</span>
+  </div>
 
   <div class="cart-content">
     <div class="products">
       @for (product of productsInCart; track product._id) {
         <div class="product">
-          <h2>{{ product.name }}</h2>
+          <span>{{ product.name }}</span>
           <img src="{{ product?.file?.url }}" alt="{{ product?.file?.name }}">
         </div>
       }
@@ -13,7 +16,7 @@
     <div class="products-mobile">
       @for (product of productsInCart; track product._id) {
         <div class="product">
-          <h2>{{ product.name }}</h2>
+          <span>{{ product.name }}</span>
           <img src="{{ product?.file?.url }}" alt="{{ product?.file?.name }}">
 
           <div class="button-remove-from-cart my-3">
@@ -22,13 +25,29 @@
       }
     </div>
 
-    <div class="footer">
-      <div class="clear-cart" (click)="cartCleaning()">
-        <span>Limpar carrinho</span>
+    <div class="sale">
+      <div class="details">
+        <span>Total de produtos: {{ productsInCart.length }}</span>
+
+        <div class="freight">
+          <span>Frete: {{ 2 | currency: 'BRL':'R$ ' }}</span>
+        </div>
+
+        <span>Valor total: {{ 2 | currency: 'BRL':'R$ '}}</span>
       </div>
 
-      <div class="buy-products">
-        <span>Finalizar Carrinho</span>
+      <div class="buttons-container">
+        <div class="button-remove-from-cart">
+          <span>Remover do carrinho</span>
+        </div>
+
+        <div class="clear-cart" (click)="cartCleaning()">
+          <span>Limpar carrinho</span>
+        </div>
+
+        <div class="buy-products">
+          <span>Finalizar Compra</span>
+        </div>
       </div>
     </div>
   </div>

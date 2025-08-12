@@ -5,10 +5,61 @@
   margin: 0px
   padding: 0px
 
-.cart-content
-  background-color: colors.$pourple-gray
+#cart
+  background-color: colors.$black-transparent
+  width: 100vw
+  height: 100vh
   padding-top: 14vh
-  margin-bottom: 3vh
 
   @include display.hd
     padding-top: 12vh
+
+  .cart-content
+    background-color: colors.$red
+    display: flex
+    justify-content: space-around
+    width: 100%
+
+    @include display.mobile
+      display: grid
+
+    .products
+      background-color: colors.$white
+      display: grid
+
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))
+      gap: 1rem
+
+
+      @include display.mobile
+        display: none
+
+      img
+        width: 110px
+        height: 140px
+        border-radius: 4px
+
+    .products-mobile
+      display: none
+
+      @include display.mobile
+        display: grid
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))
+        gap: 1rem
+
+      img
+        width: 110px
+        height: 140px
+        border-radius: 4px
+
+    .sale
+      background-color: colors.$white
+
+      @include display.mobile
+        width: 100%
+        position: fixed
+
+      .buttons-container
+        display: flex
+        justify-content: space-between
+        padding: 1rem
