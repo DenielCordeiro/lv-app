@@ -30,10 +30,10 @@
         <span>Total de produtos: {{ productsInCart.length }}</span>
 
         <div class="freight">
-          <span>Frete: {{ 2 | currency: 'BRL':'R$ ' }}</span>
+          <span>Frete: {{ 0 | currency: 'BRL':'R$ ' }}</span>
         </div>
 
-        <span>Valor total: {{ 2 | currency: 'BRL':'R$ '}}</span>
+        <span>Valor total: {{ this.finalValue | currency: 'BRL':'R$ '}}</span>
       </div>
 
       <div class="buttons-container">

@@ -15,6 +15,7 @@ export class CartComponent implements OnInit {
   productsInCart: Product[] = [];
   products: Product[] = [];
   profile: User = {};
+  finalValue: number = 0;
 
   constructor(
     private cartService: CartService
@@ -22,6 +23,7 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.gettingProductsInCart();
+    this.calculateFinalValue();
   }
 
   gettingProductsInCart(): void {
@@ -62,6 +64,17 @@ export class CartComponent implements OnInit {
     this.products = JSON.parse(localLoadingProducts!);
 
     return this.products;
+  }
+
+  calculateFinalValue(): number {
+    const total = this.productsInCart.reduce((accumulator, product) => {
+      const productPrice = product.valor || 0;
+      return accumulator + productPrice;
+    }, 0);
+
+    this.finalValue = total;
+
+    return this.finalValue;
   }
 
   cartCleaning(): void {
