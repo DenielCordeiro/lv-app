@@ -5,6 +5,7 @@ import { BaseCrud } from "src/app/interfaces/base-crud.interface";
 import { Product } from "src/app/interfaces/product.interface";
 import { environment } from "src/environments/environment";
 import { StorageService } from "../../storage/storage.service";
+import { User } from "src/app/interfaces/user.interface";
 
 export abstract class CrudCartService<T extends BaseCrud>{
   http!: HttpClient;
@@ -12,6 +13,7 @@ export abstract class CrudCartService<T extends BaseCrud>{
   header: any = this.buildHeader();
   productsInCart: Product[] = [];
   products: Product[] = [];
+  profile: User = {};
   buidSubject: Subject<Product[]> = new Subject<Product[]>();
   gettingProductsInCart: Observable<Product[]> = this.buidSubject.asObservable();
 
@@ -62,6 +64,47 @@ export abstract class CrudCartService<T extends BaseCrud>{
     }
 
     return Promise.resolve(this.productsInCart);
+  }
+
+  public getProductsInCart(): Product[] {
+    try {
+      const profileUser = this.getUserProfile();
+      const cartProducts = this.getCartProducts() || [];
+
+      if (profileUser.productsCart && profileUser.productsCart.length > 0) {
+        this.productsInCart = [...profileUser.productsCart];
+      } else {
+        console.warn('Nenhum produto encontrado no perfil de usuário(a).');
+      }
+
+      if (cartProducts && cartProducts.length > 0) {
+        for (let index = 0; index < cartProducts.length; index++) {
+          if (!this.productsInCart.some(product => product._id === cartProducts[index]._id)) {
+            this.productsInCart.push(cartProducts[index]);
+          }
+        }
+      } else {
+        console.warn('Nenhum produto encontrado no carrinho local.');
+      }
+    } catch (error) {
+      console.error('Não foi possível obter os produtos no carrinho:', error);
+    }
+
+    return this.productsInCart;
+  }
+
+  public getUserProfile(): User {
+    const localLoadingUser = localStorage.getItem('profile');
+    this.profile = JSON.parse(localLoadingUser!);
+
+    return this.profile;
+  }
+
+  public getCartProducts(): Product[] {
+    const localLoadingProducts = localStorage.getItem('cart');
+    this.products = JSON.parse(localLoadingProducts!);
+
+    return this.products;
   }
 
   public saveCart(productsInCart: Product[], user_id: any): Promise<T> {

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CartService } from '../services/cart/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -12,33 +11,14 @@ export class HeaderComponent  implements OnInit {
   productsQuantity: number = 0;
   currentRoute: string = '';
 
-  constructor(
-    private cartService: CartService,
-    public route: Router,
-  ) {}
+  constructor(public route: Router) {}
 
-  ngOnInit(): void {
-    this.gettingProductsInCart();
-  }
+  ngOnInit(): void {}
 
-  getUserId(): string | null {
-    const profile = localStorage.getItem('profile');
-    const userProfile = JSON.parse(profile!);
-
-    if (userProfile._id === null) {
-      return null;
-    } else {
-      return userProfile._id;
-    }
-  }
-
-  gettingProductsInCart(): number {
-
-    return this.productsQuantity;
-  }
+  getUserId(): void {}
 
   openCart(): void {
-    const userId: string | null = this.getUserId();
+    const userId: string | null = "";
 
     if (userId == null) {
       alert('[ Atenção ! ]: Necessário fazer login :)');
