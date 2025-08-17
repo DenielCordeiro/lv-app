@@ -23,6 +23,7 @@ export class HeaderComponent  implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.cartService.getProductsInCart();
     this.getProductsInCart();
   }
 

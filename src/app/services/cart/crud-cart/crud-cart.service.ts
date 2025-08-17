@@ -73,14 +73,25 @@ export abstract class CrudCartService<T extends BaseCrud>{
 
     if (profileUser.productsCart && profileUser.productsCart.length > 0) {
       this.products = [...profileUser.productsCart];
+      this.cartSubject.next(this.products);
+    } else {
+      this.products = [];
+      this.cartSubject.next(this.products);
     }
 
     if (cartProducts && cartProducts.length > 0) {
       for (let index = 0; index < cartProducts.length; index++) {
         if (!this.products.some(product => product._id === cartProducts[index]._id)) {
           this.products.push(cartProducts[index]);
+          this.cartSubject.next(this.products);
+        } else {
+          this.products = this.products.filter(product => product._id !== cartProducts[index]._id);
+          this.cartSubject.next(this.products);
         }
       }
+    } else {
+      this.products = [];
+      this.cartSubject.next(this.products);
     }
 
     return this.products;
