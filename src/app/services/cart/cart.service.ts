@@ -11,8 +11,7 @@ export class CartService extends CrudCartService<Product> {
 
   constructor(
     public httpClient: HttpClient,
-    public storage: StorageService,
   ) {
-    super(httpClient, storage);
+    super(httpClient);
    }
 }

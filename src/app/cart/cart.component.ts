@@ -17,7 +17,16 @@ export class CartComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.calculateFinalValue();
+    this.getProductsInCart();
+  }
+
+  getProductsInCart(): Product[] {
+    this.cartService.productsInCart.subscribe(products => {
+      this.productsInCart = products;
+      this.calculateFinalValue();
+    });
+
+    return this.productsInCart;
   }
 
   calculateFinalValue(): number {

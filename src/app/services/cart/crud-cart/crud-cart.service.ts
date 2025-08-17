@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { lastValueFrom, Observable, Subject } from "rxjs";
+import { BehaviorSubject, lastValueFrom } from "rxjs";
 import { BaseAPI } from "src/app/interfaces/base-api.interface";
 import { BaseCrud } from "src/app/interfaces/base-crud.interface";
 import { Product } from "src/app/interfaces/product.interface";
@@ -10,19 +10,16 @@ import { User } from "src/app/interfaces/user.interface";
 export abstract class CrudCartService<T extends BaseCrud>{
   http!: HttpClient;
   route: string = environment.api;
-  header: any = this.buildHeader();
-  productsInCart: Product[] = [];
+  header = this.buildHeader()
+  private cartSubject = new BehaviorSubject<Product[]>([]);;
+  productsInCart = this.cartSubject.asObservable();
   products: Product[] = [];
   profile: User = {};
-  buidSubject: Subject<Product[]> = new Subject<Product[]>();
-  gettingProductsInCart: Observable<Product[]> = this.buidSubject.asObservable();
 
   constructor(
     httpClient: HttpClient,
-    storage: StorageService,
   ) {
     this.http = httpClient;
-    this.productsInCart = storage.get('cart', []);
   }
 
   public buildHeader(): HttpHeaders {
@@ -35,62 +32,58 @@ export abstract class CrudCartService<T extends BaseCrud>{
   }
 
   public addToCart(product: Product): Promise<Product[]> {
-    if (this.productsInCart.length === 0) {
-      this.productsInCart.push(product);
-      localStorage.setItem('cart', JSON.stringify(this.productsInCart));
+    if (!this.products || this.products.length === 0) {
+      this.products.push(product);
+      localStorage.setItem('cart', JSON.stringify(this.products));
+      this.cartSubject.next(this.products);
+
     } else {
-      this.productsInCart.forEach(productInCart => {
+      this.products.forEach(productInCart => {
 
         if (productInCart._id === product._id) {
-          console.log('Produto já está no carrinho!');
+          console.warn('Produto já está no carrinho!');
         } else {
-          console.log('Produto não encontrado no carrinho, adicionando:', product);
-          this.productsInCart.push(product);
-          localStorage.setItem('cart', JSON.stringify(this.productsInCart));
+          this.products.push(product);
+          localStorage.setItem('cart', JSON.stringify(this.products));
+          this.cartSubject.next(this.products);
         }
       });
     }
 
-    return Promise.resolve(this.productsInCart);
+    return Promise.resolve(this.products);
   }
 
   public removeProductFromCart(product: Product): Promise<Product[]> {
-    if (this.productsInCart.length === 0) {
+    const products = this.getProductsInCart();
+
+    if (products.length === 0) {
       console.log('Carrinho vazio, não há produtos para remover!');
     } else {
-      this.productsInCart = this.productsInCart.filter(item => item._id !== product._id);
-      localStorage.setItem('cart', JSON.stringify(this.productsInCart));
-      console.log('Produto removido do carrinho:', product);
+      this.products = products.filter(item => item._id !== product._id);
+      localStorage.setItem('cart', JSON.stringify(this.products));
+      this.cartSubject.next(this.products);
     }
 
-    return Promise.resolve(this.productsInCart);
+    return Promise.resolve(this.products);
   }
 
   public getProductsInCart(): Product[] {
-    try {
-      const profileUser = this.getUserProfile();
-      const cartProducts = this.getCartProducts() || [];
+    const profileUser = this.getUserProfile();
+    const cartProducts = this.getCartProducts() || [];
 
-      if (profileUser.productsCart && profileUser.productsCart.length > 0) {
-        this.productsInCart = [...profileUser.productsCart];
-      } else {
-        console.warn('Nenhum produto encontrado no perfil de usuário(a).');
-      }
-
-      if (cartProducts && cartProducts.length > 0) {
-        for (let index = 0; index < cartProducts.length; index++) {
-          if (!this.productsInCart.some(product => product._id === cartProducts[index]._id)) {
-            this.productsInCart.push(cartProducts[index]);
-          }
-        }
-      } else {
-        console.warn('Nenhum produto encontrado no carrinho local.');
-      }
-    } catch (error) {
-      console.error('Não foi possível obter os produtos no carrinho:', error);
+    if (profileUser.productsCart && profileUser.productsCart.length > 0) {
+      this.products = [...profileUser.productsCart];
     }
 
-    return this.productsInCart;
+    if (cartProducts && cartProducts.length > 0) {
+      for (let index = 0; index < cartProducts.length; index++) {
+        if (!this.products.some(product => product._id === cartProducts[index]._id)) {
+          this.products.push(cartProducts[index]);
+        }
+      }
+    }
+
+    return this.products;
   }
 
   public getUserProfile(): User {
