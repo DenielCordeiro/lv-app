@@ -40,7 +40,15 @@ export class CartComponent implements OnInit {
     return this.finalValue;
   }
 
-  cartCleaning(): void {}
+  removeFromCart(product: Product): void {
+    this.cartService.removeProductFromCart(product);
+  }
+
+  cartCleaning(): void {
+    this.cartService.clearCart();
+  }
 
   savingCart(): void {}
+
+  completePurchase(): void {}
 }

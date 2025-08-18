@@ -4,7 +4,6 @@ import { BaseAPI } from "src/app/interfaces/base-api.interface";
 import { BaseCrud } from "src/app/interfaces/base-crud.interface";
 import { Product } from "src/app/interfaces/product.interface";
 import { environment } from "src/environments/environment";
-import { StorageService } from "../../storage/storage.service";
 import { User } from "src/app/interfaces/user.interface";
 
 export abstract class CrudCartService<T extends BaseCrud>{
@@ -121,8 +120,10 @@ export abstract class CrudCartService<T extends BaseCrud>{
       })
   }
 
-  public clearCart(user_id: any): Promise<T> {
-    return lastValueFrom(this.http.put<BaseAPI<T>>(`${this.route}/clear_cart/${user_id}`, { headers: this.header }))
+  public clearCart(): Promise<T> {
+    this.profile = this.getUserProfile();
+
+    return lastValueFrom(this.http.put<BaseAPI<T>>(`${this.route}/clear_cart/${this.profile._id}`, { headers: this.header }))
       .then(result => {
         return this.handleResponse(result) as T;
       })
