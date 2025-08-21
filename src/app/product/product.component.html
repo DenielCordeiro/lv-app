@@ -1,108 +1,106 @@
 <section id="desktop">
   @for (product of products; track product._id) {
     <div class="card-product">
-      <div class="row">
-        <div class="product col-6">
-          <div class="carousel">
-            <img src="{{ product?.file?.url }}" class="image my-2" alt="#">
+      <div class="product">
+        <div class="carousel">
+          <img src="{{ product?.file?.url }}" class="image my-2" alt="#">
+        </div>
+      </div>
+
+      <div class="payment">
+        <div class="header-payment">
+          <div class="price-product">
+            R$ {{ product?.valor }}
+          </div>
+
+          <div class="icons-edit-or-delete">
+            <i class="bi bi-pencil-fill" (click)="updateModal(product?._id)"></i>
+            <i class="bi bi-trash3-fill icon-trash" (click)="deleteModal(product?._id)"></i>
           </div>
         </div>
 
-        <div class="payment col-6">
-          <div class="header-payment">
-            <div class="price-product">
-              R$ {{ product?.valor }}
-            </div>
+        <div class="description my-3">
+          <span class="product-name">{{ product?.name }}</span> <br>
+          <span class="product-description">{{ product?.description }}</span> <br>
+          <span class="product-groups">{{ product?.groups }}</span>
 
-            <div class="icons-edit-or-delete">
-              <i class="bi bi-pencil-fill" (click)="updateModal(product?._id)"></i>
-              <i class="bi bi-trash3-fill icon-trash" (click)="deleteModal(product?._id)"></i>
-            </div>
+          <p>Este produto possui as seguintes medidas:</p>
+
+          <div class="list-description">
+            <div>Altura: 1 metro e 70 centimentros</div>
+            <div>Largura: 70 centimentro</div>
+            <div>Espessura: 4cm</div>
+            <div>Peso: 2kg</div>
           </div>
+        </div>
 
-          <div class="description my-3">
-            <span class="product-name">{{ product?.name }}</span> <br>
-            <span class="product-description">{{ product?.description }}</span> <br>
-            <span class="product-groups">{{ product?.groups }}</span>
+        <hr class="my-3">
 
-            <p>Este produto possui as seguintes medidas:</p>
+        <div class="freight">
+          <h4 class="mx-3"><strong>Calcular Frete</strong></h4>
 
-            <div class="list-description">
-              <div>Altura: 1 metro e 70 centimentros</div>
-              <div>Largura: 70 centimentro</div>
-              <div>Espessura: 4cm</div>
-              <div>Peso: 2kg</div>
+          <div class="row">
+            <div class="col-6">
+              <form [formGroup]="searchForm">
+                <label for="postalCode">Digite o CEP:</label>
+                <input id="postalCode" type="number" class="input-postalcode" formControlName="postalCode">
+              </form>
             </div>
-          </div>
 
-          <hr class="my-3">
-
-          <div class="freight">
-            <h4 class="mx-3"><strong>Calcular Frete</strong></h4>
-
-            <div class="row">
-              <div class="col-6">
-                <form [formGroup]="searchForm">
-                  <label for="postalCode">Digite o CEP:</label>
-                  <input id="postalCode" type="number" class="input-postalcode" formControlName="postalCode">
-                </form>
+            <div class="col-6 button-freight-content">
+              <div class="buttons button-send" (click)="searchShipping()">
+                <span>Calcular Frete</span>
+                <i class="bi bi-airplane-engines mx-2"></i>
               </div>
+            </div>
+          </div>
 
-              <div class="col-6 button-freight-content">
-                <div class="buttons button-send" (click)="searchShipping()">
-                  <span>Calcular Frete</span>
-                  <i class="bi bi-airplane-engines mx-2"></i>
+          @for (shipping of shippings; track shipping._id) {
+            <div class="cards-shippings">
+              <hr class="mt-5 mb-2">
+              <div class="shipping row">
+                <div class="col-6 image-shipping">
+                  <img src="{{ shipping?.company?.picture }}" alt="">
+                </div>
+                <div class="col-6 price-shipping">
+                  <span>R$ {{ shipping?.price }}</span>
                 </div>
               </div>
+              <hr class="my-3">
             </div>
+          }
+        </div>
 
-            @for (shipping of shippings; track shipping._id) {
-              <div class="cards-shippings">
-                <hr class="mt-5 mb-2">
-                <div class="shipping row">
-                  <div class="col-6 image-shipping">
-                    <img src="{{ shipping?.company?.picture }}" alt="">
-                  </div>
-                  <div class="col-6 price-shipping">
-                    <span>R$ {{ shipping?.price }}</span>
-                  </div>
-                </div>
-                <hr class="my-3">
-              </div>
-            }
-          </div>
+        <hr class="my-3">
 
-          <hr class="my-3">
+        <div class="productsQuantity">
+          <span>Quantidade: </span>
+          <i class="bi bi-dash-lg cart-button" (click)="changeQuantity('reduce')"></i>
+          <span class="quantity">{{ productsQuantity }}</span>
+          <i class="bi bi-plus-lg cart-button" (click)="changeQuantity('add')"></i>
+        </div>
 
-          <div class="productsQuantity">
-            <span>Quantidade: </span>
-            <i class="bi bi-dash-lg cart-button" (click)="changeQuantity('reduce')"></i>
-            <span class="quantity">{{ productsQuantity }}</span>
-            <i class="bi bi-plus-lg cart-button" (click)="changeQuantity('add')"></i>
-          </div>
+        <div class="add-to-cart">
+          @if (productIsInCart === false) {
+            <div class="buttons button-add-to-cart" (click)="addingToCart()">
+              <span class="text-cart">Adicionar ao Carrinho</span>
+              <i class="bi bi-cart4"></i>
+            </div>
+          }
 
-          <div class="add-to-cart">
-            @if (productIsInCart === false) {
-             <div class="buttons button-add-to-cart" (click)="addingToCart()">
-                <span class="text-cart">Adicionar ao Carrinho</span>
-                <i class="bi bi-cart4"></i>
-             </div>
-            }
+          @if (productIsInCart === true) {
+            <div class="buttons button-remove-to-cart" (click)="removingProductFromCart()">
+              <span class="text-cart">Remover do Carrinho</span>
+              <i class="bi bi-cart4"></i>
+            </div>
+          }
 
-            @if (productIsInCart === true) {
-              <div class="buttons button-remove-to-cart" (click)="removingProductFromCart()">
-                <span class="text-cart">Remover do Carrinho</span>
-                <i class="bi bi-cart4"></i>
-              </div>
-            }
-
-            @if (productIsInCart === true) {
-              <div class="buttons go-to-cart" (click)="goToCart()">
-                <span class="text-cart">Ir para o Carrinho</span>
-                <i class="bi bi-cart4"></i>
-              </div>
-            }
-          </div>
+          @if (productIsInCart === true) {
+            <div class="buttons go-to-cart" (click)="goToCart()">
+              <span class="text-cart">Ir para o Carrinho</span>
+              <i class="bi bi-cart4"></i>
+            </div>
+          }
         </div>
       </div>
     </div>

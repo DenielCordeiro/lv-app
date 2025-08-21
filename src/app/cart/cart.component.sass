@@ -18,8 +18,7 @@
     background-color: colors.$red
     display: flex
     justify-content: space-around
-    width: 100%
-    padding: 0px 5vw 0px 5vw
+    width: 100vw
 
     @include display.mobile
       display: grid
@@ -77,3 +76,12 @@
         display: flex
         justify-content: space-between
         padding: 1rem
+
+        .buy-products
+          color: colors.$green-light
+          border: 1px solid colors.$green-light
+          padding: 4px
+
+          &:hover
+            color: colors.$green
+            border-color: colors.$green

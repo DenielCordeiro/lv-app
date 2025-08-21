@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../services/cart/cart.service';
 import { Product } from 'src/app/interfaces/product.interface';
+import { Sale } from '../interfaces/sale.interface';
+import { User } from '../interfaces/user.interface';
 
 @Component({
   selector: 'app-cart',
@@ -10,6 +12,8 @@ import { Product } from 'src/app/interfaces/product.interface';
 })
 export class CartComponent implements OnInit {
   productsInCart: Product[] = [];
+  buildedSale: Sale = {};
+  userProfile: User = {};
   finalValue: number = 0;
 
   constructor(
@@ -50,5 +54,23 @@ export class CartComponent implements OnInit {
 
   savingCart(): void {}
 
-  completePurchase(): void {}
+  completePurchase(): void {
+    this.userProfile = this.cartService.getUserProfile();
+
+    this.buildedSale = {
+      products: [...this.productsInCart],
+      userProfile: {
+        _id: this.userProfile._id,
+        name: this.userProfile.name,
+        email: this.userProfile.email,
+        cellphone: this.userProfile.cellphone
+      },
+      // shipping: [],
+      sold: true,
+      productsQuantity: this.productsInCart.length,
+      finalValue: this.finalValue,
+    }
+
+    this.cartService.buyProduct(this.buildedSale);
+  }
 }

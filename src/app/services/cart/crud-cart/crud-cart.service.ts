@@ -5,6 +5,7 @@ import { BaseCrud } from "src/app/interfaces/base-crud.interface";
 import { Product } from "src/app/interfaces/product.interface";
 import { environment } from "src/environments/environment";
 import { User } from "src/app/interfaces/user.interface";
+import { Sale } from "src/app/interfaces/sale.interface";
 
 export abstract class CrudCartService<T extends BaseCrud>{
   http!: HttpClient;
@@ -132,8 +133,9 @@ export abstract class CrudCartService<T extends BaseCrud>{
       })
   }
 
-  public buyProduct(): string {
-    return 'comprou';
+  public buyProduct(buildedSale: Sale): void {
+    console.log("Vocë comprou: ", buildedSale);
+
   }
 
   public handleResponse(response: BaseAPI<T>) {
