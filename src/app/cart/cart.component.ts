@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { CartService } from '../services/cart/cart.service';
 import { Product } from 'src/app/interfaces/product.interface';
 import { Sale } from '../interfaces/sale.interface';
 import { User } from '../interfaces/user.interface';
+import { PaymentsComponent } from './payments/payments.component';
 
 @Component({
   selector: 'app-cart',
@@ -17,7 +19,8 @@ export class CartComponent implements OnInit {
   finalValue: number = 0;
 
   constructor(
-    private cartService: CartService
+    private cartService: CartService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -71,6 +74,8 @@ export class CartComponent implements OnInit {
       finalValue: this.finalValue,
     }
 
-    this.cartService.buyProduct(this.buildedSale);
+    this.dialog.open<PaymentsComponent>(PaymentsComponent, {
+      data: this.buildedSale
+    });
   }
 }

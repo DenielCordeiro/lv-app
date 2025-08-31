@@ -9,6 +9,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
+import {MatTabsModule} from '@angular/material/tabs';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AuthGuard } from './guards/auth-guards';
@@ -44,8 +45,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { VerticalChartComponent } from './dashboard/charts/vertical-chart/vertical-chart.component';
 
 import { CartComponent } from './cart/cart.component';
-import { PixComponent } from './services/cart/payments/pix/pix.component';
-import { PaymentsComponent } from './services/cart/payments/payments.component';
+import { PaymentsComponent } from './cart/payments/payments.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +71,6 @@ import { PaymentsComponent } from './services/cart/payments/payments.component';
     CartComponent,
     DashboardComponent,
     VerticalChartComponent,
-    PixComponent,
     PaymentsComponent,
   ],
   imports: [
@@ -84,7 +83,8 @@ import { PaymentsComponent } from './services/cart/payments/payments.component';
     NgbModule,
     NgxChartsModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTabsModule
   ],
   providers: [
     AuthGuard,
