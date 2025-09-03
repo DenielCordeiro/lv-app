@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { CartService } from 'src/app/services/cart/cart.service';
 
 enum PaymentMethod {
   credit = "CREDIT",
@@ -14,11 +15,13 @@ enum PaymentMethod {
   styleUrl: './payments.component.sass'
 })
 export class PaymentsComponent implements OnInit {
+  paymentMethods = PaymentMethod;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public cart: void[],
     public dialog: MatDialog,
-    public dialogAddOrEdit: MatDialogRef<PaymentsComponent>
+    public dialogAddOrEdit: MatDialogRef<PaymentsComponent>,
+    private cartService: CartService
   ) {}
 
   ngOnInit() {}
@@ -30,6 +33,7 @@ export class PaymentsComponent implements OnInit {
         break;
       case PaymentMethod.pix:
         console.log("Gerando QR Code para pagamento via Pix...");
+
         break;
       case PaymentMethod.bankSlip:
         console.log("Gerando boleto bancário...");
