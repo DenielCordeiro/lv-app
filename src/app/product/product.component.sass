@@ -5,62 +5,34 @@
   margin: 0
   padding: 0
 
-.icons-edit-or-delete
-  color: colors.$black
-  display: flex
-  justify-content: right
-  font-size: 22px
-
-  @include display.hd
-    font-size: 18px
-
-  .bi-pencil-fill
-    margin-right: 12vw
-
-    &:hover
-      color: colors.$green-light
-
-    @include display.hd
-      margin-right: 14vw
-
-    @include display.mobile
-      margin-right: 18vw
-
-  i
-    cursor: pointer
-    position: absolute
-    margin: 2vh 9vw 0px 0px
-
-    &:hover
-      color: colors.$red
-
-    @include display.hd
-      margin: 2.5vh 10vw 0px 0px
-
-    @include display.mobile
-      margin: 2.5vh 8vw 0px 0px
-
-
+// display desktop
 #desktop
   display: inline
 
   @include display.mobile
     display: none
 
-  .card-products
+  .card-product
+    display: flex
+    flex-direction: column
+    justify-content: center
     height: 100vh
-    width: 100%
-    padding: 13vh 8vw 0px 8vw
+    width: 100vw
+    padding-top: 10vh
+
+    @include display.hd
+      padding: 13vh 0px 8vh 2vw
 
   .product
-    background-color: colors.$pourple
-    height: 75vh
-    border: 1px solid colors.$white
-    border-right-color: colors.$black
-    border-right-style: dotted
+    background-color: colors.$pourple-gray
+    border: 1px solid colors.$pourple-gray
+    width: 34vw
     border-top-left-radius:  10px
     border-bottom-left-radius:  10px
     padding-top: 3vh
+
+    @include display.hd
+      padding-top: 2vh
 
     h1, h4
       text-align: center
@@ -76,29 +48,68 @@
         border-radius: 20px
 
         @include display.hd
-          width: 30vw
-          height: 36vh
+          width: 22vw
+          height: 50vh
+          border-radius: 5px
 
   .payment
     background-color: colors.$white
-    height: 75vh
     border-top-right-radius:  10px
     border-bottom-right-radius:  10px
-    padding-top: 3vh
+    width: 34vw
+    border: 1px solid colors.$pourple-light
+    padding: 3vh 1vw 0px 1vw
 
-    .price-product
-      font-size: 25px
-      color: colors.$red
-      font-weight: 600
+    @include display.hd
+      min-height: 78vh
+      padding-top: 2vh
 
-      @include display.hd
-        font-size: 20px
+    .header-payment
+      display: flex
+      justify-content: space-between
+      align-items: center
+      margin-bottom: 2vh
+
+      .price-product
+        font-size: 25px
+        color: colors.$red
+        font-weight: 600
+
+        @include display.hd
+          font-size: 20px
+
+      .icons-edit-or-delete
+        display: flex
+        align-items: center
+
+        i
+          cursor: pointer
+          margin: 0 5px
+
+          &:hover
+            color: colors.$green-light
+
+        .icon-trash
+          &:hover
+            color: colors.$red
+
+    .description
+      height: 120px
+      width: 100%
+      overflow: auto
+      padding: 6px 7px
+      border: 1px solid colors.$pourple-light
+      border-radius: 5px
 
     .freight
       #postalCode
         width: 12vw
         height: 3vh
         padding-left: 5px
+
+        @include display.hd
+          width: 12vw
+          height: 5vh
 
       .image-shipping
         display: flex
@@ -112,12 +123,11 @@
             width: 10vw
             height: 4vh
 
-
       .button-freight-content
         display: flex
         flex-direction: column-reverse
 
-        .button-one
+        .buttons
           width: 10vw
           font-size: 18px
 
@@ -133,78 +143,83 @@
         @include display.hd
           font-size: 16px
 
-
-#mobile
-  display: none
-
-  @include display.mobile
-    display: inline
-
-  .product-mobile
-    padding-top: 8vh
-
-    .carousel
+    .productsQuantity
       display: flex
-      justify-content: center
+      font-size: 20px
+      margin-bottom: 2vh
 
-      img
-        width: 100%
-        height: 42vh
+      @include display.hd
+        margin-bottom: 5vh
 
-  .description
-    display: flex
-    justify-content: right
-    align-items: center
-    font-size: 15px
+      .cart-button
+        cursor: pointer
+        color: colors.$pourple-light
+        font-size: 20px
+        margin: 0px 1vw
 
-    i
-      font-size: 18px
-      margin: 0px 2vw
+        &:hover
+          color: colors.$green-light
 
-    .text-description
-      .modal-dialog
-        display: flex
-        justify-content: center
+      @include display.hd
+        font-size: 16px
 
-        .card-description
-          height: 45vh
-          width: 95%
-          background-color: colors.$white
-          margin-top: 20vh
-          border-radius: 7px
-
-        .header-card
-          align-items: center
-
-  .payment
-    .freight
-      font-size: 16px
-
-      .button-freight
+      .quantity
+        width: 3vw
         text-align: center
-        color: colors.$blue
-        font-size: 18px
-        border-bottom: 1px solid colors.$blue
-
-      .input-lv
         border: none
-        border-bottom: 1px solid colors.$blue
-        margin: 15px 5px 15px 5px
+        border-bottom: 1px solid colors.$pourple-light
 
-      .search
-        border: none
-        background-color: colors.$white
-        color: colors.$green
+        @include display.hd
+          width: 2vw
 
-      .shipping
-        .image-shipping
-          img
-            width: 40vw
-            height: 6vh
+      i
+        cursor: pointer
 
+        &:hover
+          color: colors.$green-light
+
+    .add-to-cart
+      display: flex
+      flex-direction: row
+      align-items: center
+      justify-content: center
+      width: 100%
+      margin-top: 2vh
+
+      @include display.hd
+        margin-top: 1vh
+
+      i
+        margin-left: 1vw
+        color: colors.$pourple-light
+
+        @include display.hd
+          margin-left: 0.5vw
+
+      .buttons
+        padding: 2vh 1vw
+        border: 1px solid colors.$pourple-light
+
+        @include display.hd
+          padding: 1.3vh 1vw
+
+      .button-add-to-cart
+        &:hover
+          border-color: colors.$pourple
+
+          i
+            color: colors.$pourple
+
+      .button-remove-to-cart
+        &:hover
+          border-color: colors.$red
+
+          i
+            color: colors.$red
+
+// button return to screen products
 .return
-  background-color: colors.$black
-  color: colors.$white
+  color: colors.$pourple-light
   width: 100%
   padding: 2vh 2vw
   font-size: 20px
@@ -224,6 +239,9 @@
     i
       margin: 0px 1.5vw 0px 2vw
 
+      @include display.hd
+        margin: 0px 1.5vw 0px 0.5vw
+
     .bi-arrow-return-left
       display: none
 
@@ -235,3 +253,10 @@
 
       .bi-arrow-left
         display: none
+
+// display mobile
+#mobile
+  display: none
+
+  @include display.mobile
+    display: inline

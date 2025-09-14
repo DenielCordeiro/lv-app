@@ -1,4 +1,5 @@
 export interface Shipping {
+  _id: number,
   company?: {
     id?: number,
     name?: string,

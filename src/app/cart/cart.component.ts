@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from '../services/users/users.service';
+import { MatDialog } from '@angular/material/dialog';
 import { CartService } from '../services/cart/cart.service';
-import { User } from '../interfaces/user.interface';
 import { Product } from 'src/app/interfaces/product.interface';
+import { Sale } from '../interfaces/sale.interface';
+import { User } from '../interfaces/user.interface';
+import { PaymentsComponent } from './payments/payments.component';
 
 @Component({
   selector: 'app-cart',
@@ -12,73 +14,68 @@ import { Product } from 'src/app/interfaces/product.interface';
 })
 export class CartComponent implements OnInit {
   productsInCart: Product[] = [];
+  buildedSale: Sale = {};
   userProfile: User = {};
-  userId: string | null = localStorage.getItem('user_id');
+  finalValue: number = 0;
 
   constructor(
-    private userService: UsersService,
-    private cartService: CartService
+    private cartService: CartService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
-    this.gettingProductsInCart();
-    this.cartService.getProductsInCart();
+    this.getProductsInCart();
   }
 
-  gettingProductsInCart(): Product[] {
-    this.gettingUserProfile();
+  getProductsInCart(): Product[] {
+    this.cartService.productsInCart.subscribe(products => {
+      this.productsInCart = products;
+      this.calculateFinalValue();
+    });
+
     return this.productsInCart;
   }
 
-  gettingUserProfile(): void {
-    if (this.userId !== null) {
-      const id = JSON.parse(this.userId);
+  calculateFinalValue(): number {
+    const total = this.productsInCart.reduce((accumulator, product) => {
+      const productPrice = product.valor || 0;
+      return accumulator + productPrice;
+    }, 0);
 
-      this.userService.getProfile(id)
-        .then( profile => {
-          this.userProfile = profile;
+    this.finalValue = total;
 
-          if (this.userProfile.productsCart !== undefined) {
-            if (this.productsInCart.length < 1) {
-              const data: any[] = [];
+    return this.finalValue;
+  }
 
-              data.push(this.userProfile.productsCart);
-
-              this.productsInCart = Array.from(data[0]);
-              this.cartService.productsInCart = this.productsInCart;
-            } else {
-              return
-            }
-          } else {
-            throw new Error('Nenhum produto foi adicionado no carrinho');
-          }
-        })
-        .catch(error => {
-          throw new Error('Perfil de usuário não encontrado', error);
-        });
-
-      this.productsInCart = this.cartService.getStaticProductsInCart();
-
-    } else {
-      throw new Error('ID de usuário não encontrado');
-    }
+  removeFromCart(product: Product): void {
+    this.cartService.removeProductFromCart(product);
   }
 
   cartCleaning(): void {
-    if (this.userId !== null) {
-      const id = JSON.parse(this.userId);
+    this.cartService.clearCart();
+  }
 
-      this.cartService.clearCart(id)
-        .then(result => {
-          console.log('carrinho limpo: ', result);
+  savingCart(): void {}
 
-        })
-        .catch(error => {
-          throw new Error('[Erro]: ', error);
+  completePurchase(): void {
+    this.userProfile = this.cartService.getUserProfile();
 
-        });
-    } else {
-      throw new Error('Não foi possível limpar o carrinho! ID do usuário(a) não encontrado, necessário realizar login ');
+    this.buildedSale = {
+      products: [...this.productsInCart],
+      userProfile: {
+        _id: this.userProfile._id,
+        name: this.userProfile.name,
+        email: this.userProfile.email,
+        cellphone: this.userProfile.cellphone
+      },
+      // shipping: [],
+      sold: true,
+      productsQuantity: this.productsInCart.length,
+      finalValue: this.finalValue,
     }
+
+    this.dialog.open<PaymentsComponent>(PaymentsComponent, {
+      data: this.buildedSale
+    });
   }
 }

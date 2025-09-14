@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
-import { UsersService } from 'src/app/services/users/users.service';
+import { UsersService } from '../../services/users/users.service';
 import { MenuComponent } from '../menu/menu.component';
+import falseDataProfile from '../../falseData/profile';
 
 @Component({
   selector: 'app-login',
@@ -40,9 +41,11 @@ export class LoginComponent implements OnInit {
   async makeLogin() {
     try{
       if (this.loginForm.valid) {
-        await
-          this.userService.authUser(this.loginForm.value)
-          this.closeModal();
+        // await this.userService.authUser(this.loginForm.value)
+        const falseProfile = JSON.stringify(falseDataProfile);
+        localStorage.setItem('profile', falseProfile);
+
+        this.closeModal();
       }
     } catch (error) {
       console.error(error);

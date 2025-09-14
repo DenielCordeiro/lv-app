@@ -5,54 +5,83 @@
   margin: 0px
   padding: 0px
 
-.display
-  background-color: colors.$black
+#cart
+  background-color: colors.$black-transparent
+  width: 100vw
+  height: 100vh
   padding-top: 14vh
-  margin-bottom: 3vh
-
-  .products-hd, .products-mobile
-    display: none
 
   @include display.hd
-    .products, .products-mobile
-      display: none
+    padding-top: 12vh
 
-    .products-hd
-      display: inline
+  .cart-content
+    background-color: colors.$red
+    display: flex
+    justify-content: space-around
+    width: 100vw
 
-  @include display.mobile
-    .products, .products-hd
-      display: none
+    @include display.mobile
+      display: grid
 
-    .products-mobile
-      display: inline
-      display: flex
-      justify-content: center
+    .products
+      display: grid
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))
+      gap: 1rem
+
+      @include display.mobile
+        display: none
 
       .product
         background-color: colors.$white
-        width: 65vw
-        margin-bottom: 5vh
-        border-radius: 10px
         display: flex
-        flex-direction: column
-        align-items: center
+        width: 40vw
+        height: 30vh
+        border-radius: 4px
+        padding: 2vh 2vw
+
+        @include display.hd
+          padding: 1vh 0.5vw
+          height: 28vh
 
         img
-          width: 50vw
-          height: 45vw
-          border-radius: 4%
+          width: 110px
+          height: 140px
+          border-radius: 4px
 
-    .footer
-      background-color: colors.$blue
-      position: fixed
-      bottom: 0px
-      height: 5vh
-      width: 100%
-      font-size: 18px
+    .products-mobile
+      display: none
 
-      .clear-cart
-        background-color: colors.$white
+      @include display.mobile
+        display: grid
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))
+        gap: 1rem
 
-      .buy-products
-        background-color: colors.$white
+      img
+        width: 110px
+        height: 140px
+        border-radius: 4px
+
+    .sale
+      background-color: colors.$white
+      width: 28vw
+      height: 50vh
+      border-radius: 5px
+      padding: 2vh 2vw
+
+      @include display.mobile
+        width: 100%
+        position: fixed
+
+      .buttons-container
+        display: flex
+        justify-content: space-between
+        padding: 1rem
+
+        .buy-products
+          color: colors.$green-light
+          border: 1px solid colors.$green-light
+          padding: 4px
+
+          &:hover
+            color: colors.$green
+            border-color: colors.$green

@@ -11,9 +11,12 @@
     <div class="cart" (click)="openCart()">
       <i class="bi bi-cart4"></i>
 
-      <div class="productsQuantity" *ngIf="this.productsQuantity != 0">
-        <span>{{ this.productsQuantity }}</span>
-      </div>
+      @if (this.productsQuantity != 0) {
+        <div class="productsQuantity">
+          <span>{{ this.productsQuantity }}</span>
+        </div>
+      }
+
     </div>
   </div>
 </section>

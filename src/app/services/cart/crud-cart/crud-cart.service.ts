@@ -1,22 +1,25 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { lastValueFrom, Observable, Subject } from "rxjs";
+import { BehaviorSubject, lastValueFrom } from "rxjs";
 import { BaseAPI } from "src/app/interfaces/base-api.interface";
 import { BaseCrud } from "src/app/interfaces/base-crud.interface";
 import { Product } from "src/app/interfaces/product.interface";
 import { environment } from "src/environments/environment";
+import { User } from "src/app/interfaces/user.interface";
+import { Sale } from "src/app/interfaces/sale.interface";
 
 export abstract class CrudCartService<T extends BaseCrud>{
   http!: HttpClient;
   route: string = environment.api;
-  header: any = this.buildHeader();
-  productsInCart!: Product[];
+  header = this.buildHeader()
+  private cartSubject = new BehaviorSubject<Product[]>([]);;
+  productsInCart = this.cartSubject.asObservable();
   products: Product[] = [];
-  buidSubject: Subject<Product[]> = new Subject<Product[]>();
-  gettingProductsInCart: Observable<Product[]> = this.buidSubject.asObservable();
+  profile: User = {};
 
-  constructor(httpClient: HttpClient) {
+  constructor(
+    httpClient: HttpClient,
+  ) {
     this.http = httpClient;
-    this.productsInCart = this.products;
   }
 
   public buildHeader(): HttpHeaders {
@@ -28,60 +31,84 @@ export abstract class CrudCartService<T extends BaseCrud>{
     return headers;
   }
 
-  public getStaticProductsInCart(): Product[] {
-    return this.productsInCart;
-  }
-
-  public getProductsInCart(): Observable<Product[]> {
-    this.buidSubject.next(this.productsInCart);
-
-    return this.gettingProductsInCart;
-  }
-
-  public addToCart(product: Product, userId: any): Product[] | string {
-    if (this.productsInCart.length == 0) {
+  public addToCart(product: Product): Promise<Product[]> {
+    if (!this.products || this.products.length === 0) {
       this.products.push(product);
-      this.saveCart(this.productsInCart, userId)
+      localStorage.setItem('cart', JSON.stringify(this.products));
+      this.cartSubject.next(this.products);
+
     } else {
-      const ids: any[] = [];
+      this.products.forEach(productInCart => {
 
-      this.productsInCart.forEach(data => {
-        ids.push(data._id);
+        if (productInCart._id === product._id) {
+          console.warn('Produto já está no carrinho!');
+        } else {
+          this.products.push(product);
+          localStorage.setItem('cart', JSON.stringify(this.products));
+          this.cartSubject.next(this.products);
+        }
       });
-
-      const index: number = ids.indexOf(product._id);
-
-      if (index == -1) {
-        this.productsInCart.push(product);
-
-        this.saveCart(this.productsInCart, userId)
-
-      } else {
-        console.log('produto já está no carrinho!');
-      }
     }
 
-    return this.productsInCart;
+    return Promise.resolve(this.products);
   }
 
-  public removeProductFromCart(product: Product, userId: any): Product[] | string {
-    const ids: any[] = [];
+  public removeProductFromCart(product: Product): Promise<Product[]> {
+    const products = this.getProductsInCart();
 
-    this.productsInCart.forEach(data => {
-      ids.push(data._id);
-    });
-
-    const index: number = ids.indexOf(product._id);
-
-    if (index >= 0) {
-      this.productsInCart.splice(index, 1);
-      this.getProductsInCart();
-      this.saveCart( this.productsInCart, userId)
-
-      return this.productsInCart;
-    } else  {
-      return 'Produto não encontrado!';
+    if (products.length === 0) {
+      console.log('Carrinho vazio, não há produtos para remover!');
+    } else {
+      this.products = products.filter(item => item._id !== product._id);
+      localStorage.setItem('cart', JSON.stringify(this.products));
+      this.cartSubject.next(this.products);
     }
+
+    return Promise.resolve(this.products);
+  }
+
+  public getProductsInCart(): Product[] {
+    const profileUser = this.getUserProfile();
+    const cartProducts = this.getCartProducts() || [];
+
+    if (profileUser.productsCart && profileUser.productsCart.length > 0) {
+      this.products = [...profileUser.productsCart];
+      this.cartSubject.next(this.products);
+    } else {
+      this.products = [];
+      this.cartSubject.next(this.products);
+    }
+
+    if (cartProducts && cartProducts.length > 0) {
+      for (let index = 0; index < cartProducts.length; index++) {
+        if (!this.products.some(product => product._id === cartProducts[index]._id)) {
+          this.products.push(cartProducts[index]);
+          this.cartSubject.next(this.products);
+        } else {
+          this.products = this.products.filter(product => product._id !== cartProducts[index]._id);
+          this.cartSubject.next(this.products);
+        }
+      }
+    } else {
+      this.products = [];
+      this.cartSubject.next(this.products);
+    }
+
+    return this.products;
+  }
+
+  public getUserProfile(): User {
+    const localLoadingUser = localStorage.getItem('profile');
+    this.profile = JSON.parse(localLoadingUser!);
+
+    return this.profile;
+  }
+
+  public getCartProducts(): Product[] {
+    const localLoadingProducts = localStorage.getItem('cart');
+    this.products = JSON.parse(localLoadingProducts!);
+
+    return this.products;
   }
 
   public saveCart(productsInCart: Product[], user_id: any): Promise<T> {
@@ -94,8 +121,10 @@ export abstract class CrudCartService<T extends BaseCrud>{
       })
   }
 
-  public clearCart(user_id: any): Promise<T> {
-    return lastValueFrom(this.http.put<BaseAPI<T>>(`${this.route}/clear_cart/${user_id}`, { headers: this.header }))
+  public clearCart(): Promise<T> {
+    this.profile = this.getUserProfile();
+
+    return lastValueFrom(this.http.put<BaseAPI<T>>(`${this.route}/clear_cart/${this.profile._id}`, { headers: this.header }))
       .then(result => {
         return this.handleResponse(result) as T;
       })
@@ -104,8 +133,9 @@ export abstract class CrudCartService<T extends BaseCrud>{
       })
   }
 
-  public buyProduct(): string {
-    return 'comprou';
+  public buyProduct(buildedSale: Sale): void {
+    console.log("Vocë comprou: ", buildedSale);
+
   }
 
   public handleResponse(response: BaseAPI<T>) {

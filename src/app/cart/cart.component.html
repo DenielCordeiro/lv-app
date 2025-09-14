@@ -1,39 +1,78 @@
-<section id="products">
-
-  <div class="display">
-    <div class="products">
-      <h1>Aqui carrega a lista de Produtos</h1>
+@if (productsInCart.length > 0) {
+  <section id="cart">
+    <div class="title">
+        <span>Carrinho de Compras</span>
     </div>
 
-    <div class="products-hd">
-      <h1>Aqui carrega a lista de Produtos</h1>
-    </div>
+    <div class="cart-content">
+      <div class="products">
+        @for (product of productsInCart; track product._id) {
+          <div class="product">
+            <div class="product-image">
+              <img src="{{ product?.file?.url }}" alt="{{ product?.file?.name }}">
+            </div>
 
-    <div class="products-mobile" *ngFor="let product of this.productsInCart">
-      <div class="product">
-        <h2>{{ product.name }}</h2>
-        <img src="{{ product?.file?.url }}" alt="{{ product?.file?.name }}">
+            <div class="product-info">
+              <p>{{ product.name }}</p>
+              <p>{{ product.description }}</p>
+              <span>{{ product.valor }}</span>
+            </div>
 
-        <div class="button-remove-from-cart my-3">
-          <app-add-or-remove-cart [product]="product"></app-add-or-remove-cart>
-        </div>
+            <div class="button-remove-from-cart" (click)="removeFromCart(product)">
+              <span>Remover do carrinho</span>
+            </div>
+          </div>
+        }
       </div>
-    </div>
 
-    <div class="footer row">
-      <div class="col-6">
+      <div class="products-mobile">
+        @for (product of productsInCart; track product._id) {
+          <div class="product">
+            <div class="product-image">
+              <img src="{{ product?.file?.url }}" alt="{{ product?.file?.name }}">
+            </div>
+
+            <div class="product-info">
+              <span>{{ product.name }}</span>
+            </div>
+
+            <div class="button-remove-from-cart" (click)="removeFromCart(product)">
+              <span>Remover do carrinho</span>
+            </div>
+          </div>
+        }
+      </div>
+
+      <div class="sale">
+        <div class="details">
+          <span>Total de produtos: {{ productsInCart.length }}</span>
+
+          <div class="freight">
+            <span>Frete: {{ 0 | currency: 'BRL':'R$ ' }}</span>
+          </div>
+
+          <span>Valor total: {{ this.finalValue | currency: 'BRL':'R$ '}}</span>
+        </div>
+
+        <div class="buttons-container">
           <div class="clear-cart" (click)="cartCleaning()">
             <span>Limpar carrinho</span>
           </div>
-      </div>
 
-      <div class="col-6">
-        <div class="buy-products">
-          <span>Finalizar Carrinho</span>
+          <div class="buttons buy-products" (click)="completePurchase()">
+            <span>Finalizar Compra</span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
+}
 
-</section>
 
+@if (productsInCart.length === 0) {
+  <section id="empty-cart">
+    <div class="empty-cart-message">
+      <span>Seu carrinho está vazio</span>
+    </div>
+  </section>
+}

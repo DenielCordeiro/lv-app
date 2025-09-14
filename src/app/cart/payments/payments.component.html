@@ -1,0 +1,19 @@
+<mat-tab-group>
+  <mat-tab label="Boleto" class="content-bank-slip">
+    <div class="bank-slip">
+      <div (click)="processPayment(paymentMethods.bankSlip)">Baixar boleto</div>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="PIX" class="content-pix">
+    <div class="pix">
+      <div (click)="processPayment(paymentMethods.pix)">Gerar código pix</div>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Cartão de Crédito" class="content-credit-card">
+    <div class="credit-card">
+      <div (click)="processPayment(paymentMethods.credit)">Pagar com cartão de crédito</div>
+    </div>
+  </mat-tab>
+</mat-tab-group>

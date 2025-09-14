@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Product } from '../interfaces/product.interface';
+import { User } from '../interfaces/user.interface';
 import { CartService } from '../services/cart/cart.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -9,47 +12,49 @@ import { CartService } from '../services/cart/cart.service';
   standalone: false,
 })
 export class HeaderComponent  implements OnInit {
+  cart: Product[] = [];
+  profile: User = {};
   productsQuantity: number = 0;
-  currentRoute: string = '';
+  userId: number = 0;
 
   constructor(
-    private cartService: CartService,
     public route: Router,
+    public cartService: CartService,
   ) {}
 
   ngOnInit(): void {
-    this.gettingProductsInCart();
+    this.cartService.getProductsInCart();
+    this.getProductsInCart();
   }
 
-  getUserId(): string | null {
-    let id: string | null = localStorage.getItem('user_id');
+  getProductsInCart(): Product[] {
+    this.cartService.productsInCart.subscribe(product => {
+      this.cart = product;
+      this.productsQuantity = this.cart.length;
+    });
 
-    if (id !== null) {
-      let userId: string = id.replace(/[\"]/g, '');
-
-
-      return userId;
-    } else {
-      return null
-    }
-  }
-
-  gettingProductsInCart(): number {
-    this.cartService.getProductsInCart().subscribe(
-      result => {
-        this.productsQuantity = result.length;
-      });
-
-    return this.productsQuantity;
+    return this.cart;
   }
 
   openCart(): void {
-    const userId: string | null = this.getUserId();
+    this.getUserId();
 
-    if (userId == null) {
+    if (this.userId == null) {
       alert('[ Atenção ! ]: Necessário fazer login :)');
     } else {
-      this.route.navigateByUrl("cart/" + userId)
+
+      if (this.cart.length > 0) {
+        this.route.navigateByUrl("cart/" + this.userId)
+      } else {
+        alert('[ Atenção ! ]: Carrinho vazio :)');
+      }
     }
+  }
+
+  getUserId(): number {
+    this.profile = JSON.parse(localStorage.getItem('profile') || '{}');
+    this.userId = this.profile._id || 0;
+
+    return this.userId;
   }
 }

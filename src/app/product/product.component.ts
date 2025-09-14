@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { StorageService } from '../services/storage/storage.service';
 import { ProductsService } from './../services/products/products.service';
 import { MelhorEnvioService } from '../services/melhor-envio/melhor-envio.service';
+import { CartService } from '../services/cart/cart.service';
 import { Product } from '../interfaces/product.interface';
 import { Shipping } from '../interfaces/shipping.interface';
 import { Sale } from '../interfaces/sale.interface';
-import { PaymentsComponent } from '../services/cart/payments/payments.component';
+import { User } from '../interfaces/user.interface';
 
 @Component({
   selector: 'app-product',
@@ -17,30 +19,74 @@ import { PaymentsComponent } from '../services/cart/payments/payments.component'
 })
 export class ProductComponent implements OnInit {
   searchForm!: FormGroup;
-  products: Product[] = [];
+  productsInCart: Product[] = [];
   shippings: Shipping[] = [];
+  products: Product[] = [];
   product: Product = {};
   sale: Sale = {};
-  routeId: number | undefined = undefined;
+  userProfile: User = {};
   postalCode: string = '';
   productsQuantity: number = 1;
+  productIsInCart: boolean = false;
 
   constructor(
-    public route: ActivatedRoute,
+    public route: Router,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
+    public storage: StorageService,
     public productsService: ProductsService,
-    public melhorEnvio: MelhorEnvioService
+    public melhorEnvio: MelhorEnvioService,
+    public cartService: CartService,
   ) {}
 
   ngOnInit(): void {
     this.buildingForm();
     this.getProductSelected();
+    this.getUserProfile();
+    this.getProductsInCart();
+    this.checkIfProductIsInCart();
   }
 
   getProductSelected(): void {
     this.product = this.productsService.getProduct();
-    this.products.push(this.product);
+
+    if (!this.product) {
+      console.error('Nenhum produto selecionado!');
+      return;
+    } else {
+      this.products.push(this.product);
+    }
+  }
+
+  getUserProfile(): void {
+    try {
+      this.userProfile = this.storage.get('profile', {});
+    } catch (error) {
+      console.error('Nenhum perfil encontrado:', error);
+    }
+  }
+
+  getProductsInCart(): void {
+    try {
+      this.productsInCart = this.storage.get('cart', []);
+    } catch (error) {
+      console.error('Nenhum produto encontrado no carrinho:', error);
+    }
+  }
+
+  checkIfProductIsInCart(): void {
+    if (this.productsInCart.length > 0) {
+      this.productsInCart.forEach(product => {
+
+        if (product._id === this.product._id) {
+          this.productIsInCart = true;
+        } else {
+          this.productIsInCart = false;
+        }
+      });
+    } else {
+      this.productIsInCart = false;
+    }
   }
 
   buildingForm(): void {
@@ -78,6 +124,7 @@ export class ProductComponent implements OnInit {
                 this.shippings.push(data);
 
                 this.sale.shipping = {
+                  _id: data._id,
                   name: data.name,
                   price: Number(data.price),
                   postalCode: postalCodeNumber?.postalCode,
@@ -100,5 +147,31 @@ export class ProductComponent implements OnInit {
       this.productsQuantity--;
     }
     return this.productsQuantity;
+  }
+
+  addingToCart(): void {
+    this.cartService.addToCart(this.product)
+      .then(() => {
+        this.getProductsInCart();
+        this.checkIfProductIsInCart();
+      })
+      .catch(error => {
+        console.error('Erro ao adicionar produto ao carrinho:', error);
+      });
+  }
+
+  removingProductFromCart(): void {
+    this.cartService.removeProductFromCart(this.product)
+      .then(() => {
+        this.getProductsInCart();
+        this.checkIfProductIsInCart();
+      })
+      .catch(error => {
+        console.error('Erro ao remover produto do carrinho:', error);
+      });
+  }
+
+  goToCart(): void {
+    this.route.navigate(['/cart']);
   }
 }
