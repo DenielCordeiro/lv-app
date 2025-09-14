@@ -133,6 +133,16 @@ export abstract class CrudCartService<T extends BaseCrud>{
       })
   }
 
+  public generatePix(PIXData: { valor: number, cpf: string, name: string }): Promise<T> {
+    return lastValueFrom(this.http.post<BaseAPI<T>>(`${this.route}/payments/pix`, PIXData, { headers: this.header }))
+      .then(result => {
+        return this.handleResponse(result) as T;
+      })
+      .catch(error => {
+        return this.handleResponse(error) as T;
+      });
+  }
+
   public buyProduct(buildedSale: Sale): void {
     console.log("Vocë comprou: ", buildedSale);
 
