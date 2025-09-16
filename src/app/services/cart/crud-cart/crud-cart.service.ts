@@ -133,7 +133,7 @@ export abstract class CrudCartService<T extends BaseCrud>{
       })
   }
 
-  public generatePix(PIXData: { valor: number, cpf: string, name: string }): Promise<T> {
+  public generatePix(PIXData: {}): Promise<T> {
     return lastValueFrom(this.http.post<BaseAPI<T>>(`${this.route}/payments/pix`, PIXData, { headers: this.header }))
       .then(result => {
         return this.handleResponse(result) as T;

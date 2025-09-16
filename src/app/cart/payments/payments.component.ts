@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { User } from 'src/app/interfaces/user.interface';
 import { CartService } from 'src/app/services/cart/cart.service';
 
 enum PaymentMethod {
@@ -18,15 +19,16 @@ export class PaymentsComponent implements OnInit {
   paymentMethods = PaymentMethod;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public cart: void[],
+    @Inject(MAT_DIALOG_DATA) public cart: {
+      finalValue: number,
+      userProfile: User
+    },
     public dialog: MatDialog,
     public dialogAddOrEdit: MatDialogRef<PaymentsComponent>,
     private cartService: CartService
   ) {}
 
-  ngOnInit() {
-    console.log("Dados do carrinho: ", this.cart);
-  }
+  ngOnInit() {}
 
   processPayment(method: PaymentMethod): void {
     switch (method) {
@@ -46,12 +48,11 @@ export class PaymentsComponent implements OnInit {
     }
   }
 
-
   paymentPIX(): void {
     const PIXData = {
-      valor: 100.00,
-      cpf: '12345678909',
-      name: 'Francisco da Silva'
+      valor: this.cart?.finalValue,
+      profileCPF: this.cart.userProfile?.cpf,
+      name: this.cart.userProfile?.name,
     };
 
     this.cartService.generatePix(PIXData)

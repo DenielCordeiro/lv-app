@@ -3,9 +3,10 @@ import { User } from 'src/app/interfaces/user.interface';
 const Profile: User = {
   _id: 0,
   key: "user",
-  name: "Joel",
+  name: "Joel Smith",
   email: "joel@example.com",
   cellphone: "Teste",
+  cpf: "12345678909",
   password: "Teste",
   postalCode: "Teste",
   state: "Teste",
