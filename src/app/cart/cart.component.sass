@@ -6,16 +6,22 @@
   padding: 0px
 
 #cart
-  background-color: colors.$black-transparent
+  // background-color: colors.$black-transparent
+  background-color: colors.$white
   width: 100vw
   height: 100vh
-  padding-top: 14vh
+  padding-top: 10vh
 
   @include display.hd
     padding-top: 12vh
 
+  .title
+    text-align: start
+    font-size: 2rem
+    margin-bottom: 4vh
+    margin-left: 8vw
+
   .cart-content
-    background-color: colors.$red
     display: flex
     justify-content: space-around
     width: 100vw
@@ -35,9 +41,10 @@
         background-color: colors.$white
         display: flex
         width: 40vw
-        height: 30vh
+        height: 19vh
         border-radius: 4px
         padding: 2vh 2vw
+        border: 2px solid colors.$black-transparent
 
         @include display.hd
           padding: 1vh 0.5vw
@@ -63,8 +70,9 @@
 
     .sale
       background-color: colors.$white
+      border: 2px solid colors.$black-transparent
       width: 28vw
-      height: 50vh
+      height: 30vh
       border-radius: 5px
       padding: 2vh 2vw
 
@@ -75,7 +83,7 @@
       .buttons-container
         display: flex
         justify-content: space-between
-        padding: 1rem
+        margin-top: 16vh
 
         .buy-products
           color: colors.$green-light
