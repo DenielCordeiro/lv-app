@@ -6,7 +6,6 @@
   padding: 0px
 
 #cart
-  // background-color: colors.$black-transparent
   background-color: colors.$white
   width: 100vw
   height: 100vh
@@ -30,20 +29,17 @@
       display: grid
 
     .products
-      display: grid
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))
-      gap: 1rem
-
       @include display.mobile
         display: none
 
       .product
         background-color: colors.$white
         display: flex
+        justify-content: space-around
         width: 40vw
         height: 19vh
         border-radius: 4px
-        padding: 2vh 2vw
+        padding: 2vh 0px 2vh 0px
         border: 2px solid colors.$black-transparent
 
         @include display.hd
@@ -54,6 +50,26 @@
           width: 110px
           height: 140px
           border-radius: 4px
+
+        .button-remove-from-cart
+          color: colors.$black
+          cursor: pointer
+          height: 20px
+
+          .bi-cart-dash
+            display: inline
+
+          .bi-cart-dash-fill
+            display: none
+
+          &:hover
+            color: colors.$red
+
+            .bi-cart-dash
+              display: none
+
+            .bi-cart-dash-fill
+              display: inline
 
     .products-mobile
       display: none
@@ -79,6 +95,26 @@
       @include display.mobile
         width: 100%
         position: fixed
+
+      .clear-cart
+        color: colors.$black
+        cursor: pointer
+
+        .bi-cart-x
+          display: inline
+
+        .bi-cart-x-fill
+          display: none
+
+        &:hover
+          color: colors.$red
+          border-color: colors.$red
+
+          .bi-cart-x
+            display: none
+
+          .bi-cart-x-fill
+            display: inline
 
       .buttons-container
         display: flex
