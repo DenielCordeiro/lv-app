@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { User } from 'src/app/interfaces/user.interface';
 import { CartService } from 'src/app/services/cart/cart.service';
+import { User } from 'src/app/interfaces/user.interface';
+import { QRCodePix } from 'src/app/interfaces/qr-code.interface';
 
 enum PaymentMethod {
   credit = "CREDIT",
@@ -18,6 +19,8 @@ enum PaymentMethod {
 export class PaymentsComponent implements OnInit {
   paymentMethods = PaymentMethod;
 
+  QRCodePix: QRCodePix[] = [];
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public cart: {
       finalValue: number,
@@ -28,7 +31,9 @@ export class PaymentsComponent implements OnInit {
     private cartService: CartService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log("Dados do carrinho recebidos no componente de pagamentos: ", this.cart);
+  }
 
   processPayment(method: PaymentMethod): void {
     switch (method) {
@@ -58,6 +63,14 @@ export class PaymentsComponent implements OnInit {
     this.cartService.generatePix(PIXData)
       .then(response => {
         console.log("Resposta do servidor para pagamento via Pix: ", response);
+
+        const pix: QRCodePix = {
+          _id: 0,
+          qrcode: (response as any).qrcode,
+          imagemQrcode: (response as any).imagemQrcode,
+          copyQRCode: (response as any).copyQRCode,
+        };
+        this.QRCodePix.push(pix);
       })
       .catch(error => {
         console.error("Erro ao processar pagamento via Pix: ", error);

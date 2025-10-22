@@ -66,7 +66,8 @@ export class CartComponent implements OnInit {
         _id: this.userProfile._id,
         name: this.userProfile.name,
         email: this.userProfile.email,
-        cellphone: this.userProfile.cellphone
+        cellphone: this.userProfile.cellphone,
+        cpf: this.userProfile.cpf,
       },
       // shipping: [],
       sold: true,

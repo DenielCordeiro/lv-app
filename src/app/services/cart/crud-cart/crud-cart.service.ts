@@ -118,7 +118,7 @@ export abstract class CrudCartService<T extends BaseCrud>{
       })
       .catch(error => {
         return this.handleResponse(error) as T;
-      })
+      });
   }
 
   public clearCart(): Promise<T> {
@@ -130,11 +130,11 @@ export abstract class CrudCartService<T extends BaseCrud>{
       })
       .catch(error => {
         return this.handleResponse(error) as T;
-      })
+      });
   }
 
   public generatePix(PIXData: {}): Promise<T> {
-    return lastValueFrom(this.http.post<BaseAPI<T>>(`${this.route}/payments/pix`, PIXData, { headers: this.header }))
+    return lastValueFrom(this.http.post<BaseAPI<T>>(`${this.route}/payments/pix`, PIXData))
       .then(result => {
         return this.handleResponse(result) as T;
       })
