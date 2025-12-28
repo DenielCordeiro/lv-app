@@ -1,5 +1,6 @@
-import { NewsletterService } from './../services/newsletter/newsletter.service';
 import { Component, OnInit } from '@angular/core';
+import { NewsletterService } from './../services/newsletter/newsletter.service';
+import { ToastsService } from '../services/toasts/toasts.service';
 import { News } from '../interfaces/news.interface';
 
 @Component({
@@ -14,12 +15,15 @@ export class NewsletterComponent implements OnInit {
   collection: News[] = [];
   carousel: News[] = [];
 
-  constructor(private newsletterService: NewsletterService) {}
+  constructor(
+    private newsletterService: NewsletterService,
+    private toatsService: ToastsService,
+  ) {}
 
   ngOnInit(): void {
     this.gettingImages();
   }
-
+  
   gettingImages(): News[] {
     this.newsletterService.getImages()
       .then(data => {
@@ -30,7 +34,7 @@ export class NewsletterComponent implements OnInit {
         this.filterImages(this.images);
       })
       .catch(error => {
-        alert('ERRO: Não foi possível carregar as imagens');
+        this.toatsService.selectedToast('warning')
         console.log(error);
       });
 
