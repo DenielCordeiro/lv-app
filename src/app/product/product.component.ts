@@ -13,9 +13,9 @@ import { User } from '../interfaces/user.interface';
 
 @Component({
   selector: 'app-product',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.sass'],
   standalone: false,
+  templateUrl: './product.component.html',
+  styleUrl: './product.component.sass',
 })
 export class ProductComponent implements OnInit {
   searchForm!: FormGroup;
@@ -28,6 +28,7 @@ export class ProductComponent implements OnInit {
   postalCode: string = '';
   productsQuantity: number = 1;
   productIsInCart: boolean = false;
+  productAddedToCart: boolean = true;
 
   constructor(
     public route: Router,
