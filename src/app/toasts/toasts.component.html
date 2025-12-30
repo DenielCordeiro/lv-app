@@ -1,11 +1,11 @@
 <div class="toast-container">
-  <div class="toast" #toastViewChild [ngClass]="{
-    'toast-success': toastType === 'success',
-    'toast-error': toastType === 'error',
-    'toast-warning text-dark': toastType === 'warning',
-    'toast-info': toastType === 'info'
+  <div #toastElement class="toast" [ngClass]="{
+    'toast-success': toastType === ToastType.SUCCESS,
+    'toast-error': toastType === ToastType.ERROR,
+    'toast-warning': toastType === ToastType.WARNING,
+    'toast-info': toastType === ToastType.INFO,
   }">
     <div class="message">{{ toastMessage }}</div>
-    <div class="close-button">X</div>
+    <div class="close-button" (click)="closeToast()">X</div>
   </div>
 </div>

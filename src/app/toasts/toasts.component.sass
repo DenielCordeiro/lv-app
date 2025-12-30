@@ -11,16 +11,33 @@
 
     .toast
         width: 100%
-        height: 30px
+        height: 4vh
+        padding: 1.5vh 1vw
+        border-radius: 10px
+        color: colors.$white 
+        display: flex
+        flex-direction: row
+        justify-content: space-between
+        align-items: center
 
-        .toast-success
-            background-color: colors.$green
-        
-        .toast-error
-            background-color: colors.$red 
+        .close-button
+            font-size: 18px
+            font-weight: 600
+            padding-left: 1.5vw
+            cursor: pointer
+            color: colors.$gray
 
-        .toast-warning
-            background-color: colors.$yellow 
+            &:hover
+                color: colors.$white
+                
+    .toast-success
+        background-color: colors.$green
+    
+    .toast-error
+        background-color: colors.$red 
 
-        .toast-info
-            background-color: colors.$black-transparent
+    .toast-warning
+        background-color: colors.$yellow 
+
+    .toast-info
+        background-color: colors.$pourple

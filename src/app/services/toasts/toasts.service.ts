@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Subject } from 'rxjs';
+import { ReplaySubject } from 'rxjs';
 import { ToastMessage } from '../../interfaces/toast.interface' 
 import { ToastType } from "src/app/enums/toast-type.enum";
 
@@ -12,7 +12,7 @@ export class ToastsService {
   // Subject é um tipo especial de Observable que permite:
   // 1) emitir valores manualmente (.next())
   // 2) ser escutado por outros lugares (.subscribe())
-  private toastSubject = new Subject<ToastMessage>();
+  private toastSubject = new ReplaySubject<ToastMessage>();
   
   // Expõe apenas a parte "observável" do Subject
   // Quem usa o service pode ESCUTAR os eventos
