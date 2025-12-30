@@ -1,16 +1,11 @@
-<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" #successToast>
-  <!-- <span>{{ textFromToast }}</span> -->
-   
-</div>
-
-<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" #errorToast>
-  <!-- <span>{{ textFromToast }}</span> -->
-</div>
-
-<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" #warningToast>
-  <!-- <span>{{ textFromToast }}</span> -->
-</div>
-
-<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" #infoToast>
-  <!-- <span>{{ textFromToast }}</span> -->
+<div class="toast-container">
+  <div class="toast" #toastViewChild [ngClass]="{
+    'toast-success': toastType === 'success',
+    'toast-error': toastType === 'error',
+    'toast-warning text-dark': toastType === 'warning',
+    'toast-info': toastType === 'info'
+  }">
+    <div class="message">{{ toastMessage }}</div>
+    <div class="close-button">X</div>
+  </div>
 </div>

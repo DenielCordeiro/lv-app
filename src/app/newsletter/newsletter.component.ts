@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NewsletterService } from './../services/newsletter/newsletter.service';
 import { ToastsService } from '../services/toasts/toasts.service';
 import { News } from '../interfaces/news.interface';
+import { ToastType } from '../enums/toast-type.enum';
 
 @Component({
   selector: 'app-newsletter',
@@ -34,8 +35,11 @@ export class NewsletterComponent implements OnInit {
         this.filterImages(this.images);
       })
       .catch(error => {
-        this.toatsService.selectedToast('warning')
-        console.log(error);
+        this.toatsService.show(
+          ToastType.ERROR,
+          'Não foi possível carregar sua Newslleter'
+        )
+        console.error('Erro para carregar os dados: ', error);
       });
 
     return this.images;

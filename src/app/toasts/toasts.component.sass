@@ -1,0 +1,26 @@
+@use '../../assets/sass/colors'
+
+*
+    margin: 0px
+    padding: 0px
+
+.toast-container
+    position: fixed
+    padding-top: 5vh
+    right: 2vw
+
+    .toast
+        width: 100%
+        height: 30px
+
+        .toast-success
+            background-color: colors.$green
+        
+        .toast-error
+            background-color: colors.$red 
+
+        .toast-warning
+            background-color: colors.$yellow 
+
+        .toast-info
+            background-color: colors.$black-transparent
