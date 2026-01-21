@@ -46,6 +46,7 @@ import { VerticalChartComponent } from './dashboard/charts/vertical-chart/vertic
 
 import { CartComponent } from './cart/cart.component';
 import { PaymentsComponent } from './cart/payments/payments.component';
+import { ToastsComponent } from './toasts/toasts.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { PaymentsComponent } from './cart/payments/payments.component';
     DashboardComponent,
     VerticalChartComponent,
     PaymentsComponent,
+    ToastsComponent,
   ],
   imports: [
     BrowserModule,
