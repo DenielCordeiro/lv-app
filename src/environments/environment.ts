@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  api: 'http://localhost:3333',
+  api: 'https://lv-core.onrender.com',
   viaCepAPI: 'https://viacep.com.br/ws'
 }

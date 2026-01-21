@@ -8,17 +8,20 @@
 #cart
   background-color: colors.$white
   width: 100vw
-  height: 100vh
+  height: 100dvh
   padding-top: 10vh
 
-  @include display.hd
-    padding-top: 12vh
+  @include display.mobile
+    padding-top: 9vh
 
   .title
     text-align: start
     font-size: 2rem
-    margin-bottom: 4vh
-    margin-left: 8vw
+    margin: 0px 0px 4vh 8vw
+
+    @include display.mobile
+      margin-left: 0px
+      text-align: center
 
   .cart-content
     display: flex
@@ -26,20 +29,22 @@
     width: 100vw
 
     @include display.mobile
-      display: grid
+      display: block
+      justify-content: center
+      height: 100dvh
 
-    .products
-      @include display.mobile
+      .products
         display: none
 
+    .products
       .product
-        background-color: colors.$white
         display: flex
         justify-content: space-around
         width: 40vw
         height: 19vh
         border-radius: 4px
         padding: 2vh 0px 2vh 0px
+        margin-bottom: 2vh
         border: 2px solid colors.$black-transparent
 
         @include display.hd
@@ -69,20 +74,19 @@
               display: none
 
             .bi-cart-dash-fill
-              display: inline
+              display: flex
 
     .products-mobile
       display: none
 
       @include display.mobile
-        display: grid
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))
-        gap: 1rem
+        display: flex
+        width: 100vw
 
-      img
-        width: 110px
-        height: 140px
-        border-radius: 4px
+        img
+          width: 110px
+          height: 140px
+          border-radius: 4px
 
     .sale
       background-color: colors.$white
@@ -94,6 +98,7 @@
 
       @include display.mobile
         width: 100%
+        bottom: 0px
         position: fixed
 
       .clear-cart
