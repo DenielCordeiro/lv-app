@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ChartsService } from 'src/app/services/dashboard/charts.service';
 
 @Component({
   selector: 'app-vertical-chart',
+  standalone: true,
+  imports: [NgxChartsModule],
   templateUrl: './vertical-chart.component.html',
   styleUrls: ['./vertical-chart.component.sass'],
-  standalone: false,
 })
 export class VerticalChartComponent {
   view: [number, number] = [700, 400];

@@ -6,9 +6,9 @@ import { DeleteImageComponent } from '../delete-image/delete-image.component';
 
 @Component({
   selector: 'app-collections',
+  standalone: true,
   templateUrl: './collections.component.html',
   styleUrls: ['./collections.component.sass'],
-  standalone: false,
 })
 export class CollectionsComponent implements OnInit {
   @Input() imagesCollections: News[] = [];

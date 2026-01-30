@@ -1,45 +1,50 @@
 <div class="container content-form">
-  <div class="content-header py-2 row">
+  <div class="content-header">
     <div class="title col-8">
-      <h2 *ngIf="this.updateData._id == undefined">Criar nova imagem</h2>
-      <h2 *ngIf="this.updateData._id !== undefined">Atualizar imagem</h2>
+      @if (updateData._id == undefined) {
+        <h2>Criar nova imagem</h2>
+      } @else {
+        <h2>Atualizar imagem</h2>
+      }
     </div>
 
-    <div class="button-x col-4 py-2" type="button" (click)="closeModal()">
+    <div class="button-x col-4" type="button" (click)="closeModal()">
       <span>X</span>
     </div>
   </div>
 
-  <hr class="mx-2">
+  <hr>
 
   <form [formGroup]="form">
     <div class="content-inputs">
-      <div class="content-link-product my-2">
+      <div class="content-link-product">
         <label for="linkProduct">Digite o link do produto:</label>
         <input type="text" formControlName="linkProduct" class="form-control input-lv" id="linkProduct">
       </div>
 
-      <div *ngIf="this.updateData._id == undefined" class="content-file-image my-2">
-        <label for="file">Adicionar imagem: </label>
-        <input type="file" class="form-control input-lv" (change)="onChangeFile($event)">
-      </div>
-
-      <div *ngIf="this.updateData._id !== undefined" class="my-3">
-        <p>Imagem atual:</p>
-        <div class="current-image my-2">
-          <img src="{{this.updateData.file?.url}}">
-        </div>
-
-        <div class="content-file-image my-3">
-          <label for="file">Trocar imagem: </label>
+      @if (updateData._id == undefined) {
+        <div class="content-file-image">
+          <label for="file">Adicionar imagem: </label>
           <input type="file" class="form-control input-lv" (change)="onChangeFile($event)">
         </div>
-      </div>
+      } @else {
+        <div>
+          <p>Imagem atual:</p>
+          <div class="current-image">
+            <img src="{{this.updateData.file?.url}}">
+          </div>
+
+          <div class="content-file-image">
+            <label for="file">Trocar imagem: </label>
+            <input type="file" class="form-control input-lv" (change)="onChangeFile($event)">
+          </div>
+        </div>
+      }
     </div>
 
-    <hr class="mx-2">
+    <hr>
 
-    <div class="content-footer my-3 row">
+    <div class="content-footer row">
       <div class="col">
         <div type="button" class="buttons button-close" (click)="closeModal()">
           <span>Fechar</span>
@@ -47,13 +52,15 @@
       </div>
 
       <div class="col">
-        <div *ngIf="this.updateData._id == undefined" type="button" class="buttons button-send mx-2" (click)="addOrEditImage()">
-          <span>Criar</span>
-        </div>
-
-        <div *ngIf="this.updateData._id !== undefined" type="button" class="buttons button-send mx-2" (click)="addOrEditImage()">
-          <span>Atualizar</span>
-        </div>
+        @if (updateData._id == undefined) {
+          <div type="button" class="buttons button-send" (click)="addOrEditImage()">
+            <span>Criar</span>
+          </div>
+        } @else {
+          <div type="button" class="buttons button-send" (click)="addOrEditImage()">
+            <span>Atualizar</span>
+          </div>
+        }
       </div>
     </div>
   </form>

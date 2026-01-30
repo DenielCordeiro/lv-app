@@ -1,4 +1,5 @@
 import { Component, AfterViewInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import * as bootstrap from 'bootstrap';
 import { ToastsService } from '../services/toasts/toasts.service';
@@ -7,7 +8,8 @@ import { ToastType } from '../enums/toast-type.enum';
 
 @Component({
   selector: 'app-toasts',
-  standalone: false,
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './toasts.component.html',
   styleUrl: './toasts.component.sass'
 })

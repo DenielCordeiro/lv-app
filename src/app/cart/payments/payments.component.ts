@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatTabGroup, MatTab } from "@angular/material/tabs";
 import { CartService } from 'src/app/services/cart/cart.service';
 import { User } from 'src/app/interfaces/user.interface';
 import { QRCodePix } from 'src/app/interfaces/qr-code.interface';
@@ -12,7 +13,11 @@ enum PaymentMethod {
 
 @Component({
   selector: 'app-payments',
-  standalone: false,
+  standalone: true,
+  imports: [
+    MatTabGroup,
+    MatTab
+  ],
   templateUrl: './payments.component.html',
   styleUrl: './payments.component.sass'
 })

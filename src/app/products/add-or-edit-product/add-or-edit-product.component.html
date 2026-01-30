@@ -34,10 +34,18 @@
 
         <button class="button-change-select" (click)="changeOptionCategories()">{{ newOrExistCategory }}</button>
 
-        <input type="text" *ngIf="newOrExistCategory == 'Existente'" formControlName="type" class="form-control" id="type">
-        <mat-select formControlName="type" *ngIf="newOrExistCategory == 'Nova'">
-          <mat-option *ngFor="let type of categories" [value]="type">{{ type }}</mat-option>
-        </mat-select>
+        @if (newOrExistCategory == 'Existente') {
+          <input type="text" formControlName="type" class="form-control" id="type">
+        }
+
+        @if (newOrExistCategory == 'Nova') {
+          <mat-select formControlName="type">
+            @for (type of categories; track type) {
+              <mat-option [value]="type">{{ type }}</mat-option>
+            }
+          </mat-select>
+        }
+        
       </div>
 
       <div class="col-4 my-2">

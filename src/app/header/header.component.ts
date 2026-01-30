@@ -3,14 +3,20 @@ import { Router } from '@angular/router';
 import { Product } from '../interfaces/product.interface';
 import { User } from '../interfaces/user.interface';
 import { CartService } from '../services/cart/cart.service';
-import { Observable } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { MenuComponent } from './menu/menu.component';
 
 @Component({
   selector: 'app-header',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MenuComponent
+],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.sass'],
-  standalone: false,
 })
+
 export class HeaderComponent  implements OnInit {
   cart: Product[] = [];
   profile: User = {};

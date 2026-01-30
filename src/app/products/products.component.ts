@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { filter } from 'rxjs/operators';
 import { ProductsService } from '../services/products/products.service';
@@ -7,12 +7,17 @@ import { Product } from '../interfaces/product.interface';
 import { AddOrEditProductComponent } from './add-or-edit-product/add-or-edit-product.component';
 import { DeleteProductComponent } from './delete-product/delete-product.component';
 import  FalseProduct  from '../falseData/product';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-products',
+  standalone: true,
+   imports: [
+    CommonModule,
+    RouterModule
+  ],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.sass'],
-  standalone: false,
 })
 export class ProductsComponent implements OnInit {
   productId: number | undefined;

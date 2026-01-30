@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { StorageService } from '../services/storage/storage.service';
 import { ProductsService } from './../services/products/products.service';
@@ -10,10 +10,15 @@ import { Product } from '../interfaces/product.interface';
 import { Shipping } from '../interfaces/shipping.interface';
 import { Sale } from '../interfaces/sale.interface';
 import { User } from '../interfaces/user.interface';
+import { ToastsComponent } from '../toasts/toasts.component';
 
 @Component({
   selector: 'app-product',
-  standalone: false,
+  standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    ToastsComponent
+  ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.sass',
 })

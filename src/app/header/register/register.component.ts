@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Address } from 'src/app/interfaces/address.interface';
 import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
   selector: 'app-register',
+  standalone: true,
+  imports: [ReactiveFormsModule],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.sass'],
-  standalone: false,
 })
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;

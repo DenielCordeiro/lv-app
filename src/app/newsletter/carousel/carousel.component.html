@@ -12,23 +12,29 @@
 
     <div class="carousel-images">
       <div class="images" id="images">
-        <div *ngFor="let image of imagesCarousel">
-          <div class="image">
-            <div class="icons">
-              <div class="icon-trash">
-                <i *ngIf="image._id !== undefined" type="button" class="bi bi-trash3-fill mx-2" (click)="deleteImage(image._id)"></i>
+        @for (image of imagesCarousel; track image._id) {
+          <div>
+            <div class="image">
+              <div class="icons">
+                <div class="icon-trash">
+                  @if (image._id !== undefined) {
+                    <i type="button" class="bi bi-trash3-fill mx-2" (click)="deleteImage(image._id)"></i>
+                  }
+                </div>
+
+                <div class="icon-update">
+                  @if (image._id !== undefined) {
+                    <i type="button" class="bi bi-pencil-square" (click)="addOrUpdateImage(image._id)"></i>
+                  }
+                </div>
               </div>
 
-              <div class="icon-update">
-                <i *ngIf="image._id !== undefined" type="button" class="bi bi-pencil-square" (click)="addOrUpdateImage(image._id)"></i>
-              </div>
+              <a href="{{ image.linkProduct }}">
+                <img class="item current-item" src="{{ image.file?.url }}" alt="imagem fake">
+              </a>
             </div>
-
-            <a href="{{ image.linkProduct }}">
-              <img class="item current-item" src="{{ image.file?.url }}" alt="imagem fake">
-            </a>
           </div>
-        </div>
+        }
       </div>
     </div>
 
@@ -46,23 +52,29 @@
 
     <div class="carousel-images">
       <div class="images" id="images">
-        <div class="image" *ngFor="let image of imagesCarousel">
-          <div class="icons pt-2">
-            <div class="icon-trash">
-              <i *ngIf="image._id !== undefined" type="button" class="bi bi-trash3-fill" (click)="deleteImage(image._id)"></i>
+        @for (image of imagesCarousel; track image._id) {
+          <div class="image">
+            <div class="icons pt-2">
+              <div class="icon-trash">
+                @if (image._id !== undefined) {
+                  <i type="button" class="bi bi-trash3-fill" (click)="deleteImage(image._id)"></i>
+                }
+              </div>
+
+              <div class="icon-update">
+                @if (image._id !== undefined) {
+                  <i type="button" class="bi bi-pencil-square mx-3" (click)="addOrUpdateImage(image._id)"></i>
+                }
+              </div>
+
+              <div type="button" class="button-add-image" (click)="addOrUpdateImage(null)">
+                <i class="bi bi-plus-circle-dotted"></i>
+              </div>
             </div>
 
-            <div class="icon-update">
-              <i *ngIf="image._id !== undefined" type="button" class="bi bi-pencil-square mx-3" (click)="addOrUpdateImage(image._id)"></i>
-            </div>
-
-            <div type="button" class="button-add-image" (click)="addOrUpdateImage(null)">
-              <i class="bi bi-plus-circle-dotted"></i>
-            </div>
+            <img class="item current-item" src="{{ image.file?.url }}" alt="imagem fake">
           </div>
-
-          <img class="item current-item" src="{{ image.file?.url }}" alt="imagem fake">
-        </div>
+        }
       </div>
     </div>
 

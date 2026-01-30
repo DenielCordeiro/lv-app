@@ -1,7 +1,10 @@
 <section id="menu-desktop">
-  <div *ngIf="this.userId == 0" class="login">
+  @if (this.userId == 0) {
+    <div class="login">
       <app-login></app-login>
-  </div>
+    </div>
+  }
+ 
 
   <div class="default-button newsletter item" routerLink="/newsletter" (click)="closeMenu('/newsletter')">
     <i class="bi bi-newspaper"></i>
@@ -9,37 +12,51 @@
   </div>
 
   <div class="default-button item" (click)="changeMenuProducts()">
-    <i class="bi bi-arrow-bar-down" *ngIf="isOpen == false"></i>
-    <i class="bi bi-arrow-bar-right" *ngIf="isOpen == true"></i>
+    @if (this.isOpen == false) {
+      <i class="bi bi-arrow-bar-down"></i>
+    } @else {
+      <i class="bi bi-arrow-bar-right"></i>
+    }
     <span>Acessórios</span>
   </div>
 
-  <div class="menu-products" *ngIf="this.isOpen == true">
-    <div class="default-button light" routerLink="/products" (click)="closeMenu('/products')">
-      <i class="bi bi-arrow-right-short"></i>
-      <span>Todos</span>
+  @if (this.isOpen == true) {
+    <div class="menu-products">
+      <div class="default-button light" routerLink="/products" (click)="closeMenu('/products')">
+        <i class="bi bi-arrow-right-short"></i>
+        <span>Todos</span>
+      </div>
     </div>
-  </div>
+  }
 
   <div class="default-button about item" routerLink="/about" (click)="closeMenu('/about')">
     <i class="bi bi-person"></i>
     <span>Sobre</span>
   </div>
 
-  <div *ngIf="this.userId !== 0" class="default-button profile item" routerLink="/profile/{{ this.userId }}" (click)="closeMenu('/profile/{{ this.userId }}')">Minha Conta</div>
-
-  <div *ngIf="this.administrator === true" class="default-button dashboard item" routerLink="/dashboard" (click)="closeMenu('/dashboard')">Dashboard</div>
-
-  <div *ngIf="this.userId !== 0" class="content-button-logout">
-    <div class="logout button-one" (click)="modalLogoutIsOpen()">Sair</div>
-  </div>
+  @if (this.userId !== 0) {
+    <div class="default-button profile item" routerLink="/profile/{{ this.userId }}" (click)="closeMenu('/profile/{{ this.userId }}')">Minha Conta</div>
+  }
+  
+  @if (this.administrator == true) {
+    <div class="default-button dashboard item" routerLink="/dashboard" (click)="closeMenu('/dashboard')">Dashboard</div>
+  }
+ 
+  @if (this.userId !== 0) {
+    <div class="content-button-logout">
+      <div class="logout button-one" (click)="modalLogoutIsOpen()">Sair</div>
+    </div>
+  }
 </section>
 
-<div class="modal-logout" *ngIf="this.modalLogout == true">
-  <h2>Deseja sair de sua conta ?</h2>
+@if (this.modalLogout == true) {
+  <div class="modal-logout">
+    <h2>Deseja sair de sua conta ?</h2>
 
-  <div class="row">
-    <div class="close-modal-logout col-7"  (click)="modalLogoutIsOpen()">Não</div>
-    <div class="button-logout col-5" (click)="isLogout()">Sim</div>
+    <div class="row">
+      <div class="close-modal-logout col-7"  (click)="modalLogoutIsOpen()">Não</div>
+      <div class="button-logout col-5" (click)="isLogout()">Sim</div>
+    </div>
   </div>
-</div>
+}
+
