@@ -1,14 +1,20 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatSelect, MatOption } from "@angular/material/select";
 import { ProductsService } from 'src/app/services/products/products.service';
 import { Product } from 'src/app/interfaces/product.interface';
 
 @Component({
   selector: 'app-add-or-edit-product',
+  standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    MatSelect,
+    MatOption
+  ],
   templateUrl: './add-or-edit-product.component.html',
   styleUrls: ['./add-or-edit-product.component.sass'],
-  standalone: false,
 })
 export class AddOrEditProductComponent implements OnInit {
   form!: FormGroup;

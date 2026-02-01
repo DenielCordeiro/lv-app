@@ -1,26 +1,28 @@
 
-<div class="card-Product" *ngFor="let product of loadedProduct;">
-  <div class="title">
-    <h1>{{ product.name }}</h1>
-  </div>
+@for (product of loadedProduct; track product._id) {
+  <div class="card-Product">
+    <div class="title">
+      <h1>{{ product.name }}</h1>
+    </div>
 
-  <div class="image">
-    <img src="{{ product.file?.url }}" alt="image">
-  </div>
+    <div class="image">
+      <img src="{{ product.file?.url }}" alt="image">
+    </div>
 
-  <div class="description">
-    <p class="valor">{{ product.valor }}</p>
-    <p class="valor">{{ product.groups }}</p>
-    <p class="valor">{{ product.type }}</p>
-  </div>
+    <div class="description">
+      <p class="valor">{{ product.valor }}</p>
+      <p class="valor">{{ product.groups }}</p>
+      <p class="valor">{{ product.type }}</p>
+    </div>
 
-  <div class="buttons rows">
-    <div class="col-6"></div>
+    <div class="buttons rows">
+      <div class="col-6"></div>
 
-    <div class="col-6">
-      <div class="delete-product button-one" (click)="deletingProduct(product._id)">
-        <span>Excluir</span>
+      <div class="col-6">
+        <div class="delete-product button-one" (click)="deletingProduct(product._id)">
+          <span>Excluir</span>
+        </div>
       </div>
     </div>
   </div>
-</div>
+}

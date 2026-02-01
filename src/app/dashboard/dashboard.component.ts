@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
+import { VerticalChartComponent } from './charts/vertical-chart/vertical-chart.component';
 
 @Component({
   selector: 'app-dashboard',
+  standalone: true,
+  imports: [VerticalChartComponent],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.sass'],
-  standalone: false,
 })
 export class DashboardComponent {
   sales: number = 20;

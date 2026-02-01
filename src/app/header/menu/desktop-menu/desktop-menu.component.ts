@@ -1,13 +1,18 @@
 import { Component } from '@angular/core';
 import { MenuComponent } from '../menu.component';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { UsersService } from 'src/app/services/users/users.service';
+import { LoginComponent } from '../../login/login.component';
 
 @Component({
   selector: 'app-desktop-menu',
+  standalone: true,
+  imports: [
+    RouterModule,
+    LoginComponent,
+  ],
   templateUrl: './desktop-menu.component.html',
   styleUrls: ['./desktop-menu.component.sass'],
-  standalone: false,
 })
 export class DesktopMenuComponent {
   isOpen: boolean = false;

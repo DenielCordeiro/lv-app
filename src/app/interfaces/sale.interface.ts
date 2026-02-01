@@ -9,6 +9,7 @@ export interface Sale {
     name?: string,
     email?: string,
     cellphone?: string,
+    cpf?: string,
   };
   shipping?: Shipping;
   sold?: boolean;

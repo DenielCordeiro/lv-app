@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { StorageService } from '../services/storage/storage.service';
 import { ProductsService } from './../services/products/products.service';
@@ -13,7 +13,10 @@ import { User } from '../interfaces/user.interface';
 
 @Component({
   selector: 'app-product',
-  standalone: false,
+  standalone: true,
+  imports: [
+    ReactiveFormsModule
+  ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.sass',
 })

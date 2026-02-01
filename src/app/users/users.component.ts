@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
-import { UsersService } from '../services/users/users.service';
 import { User } from '../interfaces/user.interface';
 import { Product } from '../interfaces/product.interface';
 
 @Component({
   selector: 'app-users',
+  standalone: true,
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.sass'],
-  standalone: false,
 })
 export class UsersComponent {
   products: Product[] = [];

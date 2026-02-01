@@ -3,12 +3,22 @@ import { NewsletterService } from './../services/newsletter/newsletter.service';
 import { ToastsService } from '../services/toasts/toasts.service';
 import { News } from '../interfaces/news.interface';
 import { ToastType } from '../enums/toast-type.enum';
+import { NewsComponent } from './news/news.component';
+import { CollectionsComponent } from './collections/collections.component';
+import { CarouselComponent } from './carousel/carousel.component';
+import { FooterNewsletterComponent } from './footer-newsletter/footer-newsletter.component';
 
 @Component({
   selector: 'app-newsletter',
+  standalone: true,
+  imports: [
+    NewsComponent,
+    CollectionsComponent,
+    CarouselComponent,
+    FooterNewsletterComponent
+  ],
   templateUrl: './newsletter.component.html',
   styleUrls: ['./newsletter.component.sass'],
-  standalone: false,
 })
 export class NewsletterComponent implements OnInit {
   images: News[] = [];

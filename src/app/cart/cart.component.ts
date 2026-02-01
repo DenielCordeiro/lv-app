@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { CartService } from '../services/cart/cart.service';
 import { Product } from 'src/app/interfaces/product.interface';
@@ -8,9 +9,10 @@ import { PaymentsComponent } from './payments/payments.component';
 
 @Component({
   selector: 'app-cart',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.sass'],
-  standalone: false,
 })
 export class CartComponent implements OnInit {
   productsInCart: Product[] = [];
@@ -66,7 +68,8 @@ export class CartComponent implements OnInit {
         _id: this.userProfile._id,
         name: this.userProfile.name,
         email: this.userProfile.email,
-        cellphone: this.userProfile.cellphone
+        cellphone: this.userProfile.cellphone,
+        cpf: this.userProfile.cpf,
       },
       // shipping: [],
       sold: true,

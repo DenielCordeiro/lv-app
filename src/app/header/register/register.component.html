@@ -114,8 +114,11 @@
           <button type="button" class="btn btn-secondary button-close" routerLink="/newsletter">Fechar</button>
         </div>
         <div class="col-6">
-          <button class="button-one" disabled *ngIf="registerForm.invalid">Cadastre-se</button>
-          <button type="submit" class="button-one" (click)="makeRegister()" *ngIf="registerForm.valid">Cadastre-se</button>
+          @if (this.registerForm.invalid) {
+            <button class="button-one" disabled>Cadastre-se</button>
+          } @else {
+            <button type="submit" class="button-one" (click)="makeRegister()">Cadastre-se</button>
+          }
         </div>
       </div>
     </div>

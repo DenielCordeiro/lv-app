@@ -1,18 +1,25 @@
 <mat-tab-group>
   <mat-tab label="Boleto" class="content-bank-slip">
     <div class="bank-slip">
+      <i class="bi bi-receipt fs-3 text-primary mb-3"></i>
       <div (click)="processPayment(paymentMethods.bankSlip)">Baixar boleto</div>
     </div>
   </mat-tab>
 
   <mat-tab label="PIX" class="content-pix">
     <div class="pix">
+      <i class="bi bi-qr-code fs-3 text-success mb-3"></i>
       <div (click)="processPayment(paymentMethods.pix)">Gerar código pix</div>
+
+      @for (qrCode of this.QRCodePix; track qrCode._id) {
+        <img [src]="qrCode.imagemQrcode" alt="QRCODE PIX">
+      }
     </div>
   </mat-tab>
 
   <mat-tab label="Cartão de Crédito" class="content-credit-card">
     <div class="credit-card">
+      <i class="bi bi-credit-card fs-3 text-danger mb-3"></i>
       <div (click)="processPayment(paymentMethods.credit)">Pagar com cartão de crédito</div>
     </div>
   </mat-tab>

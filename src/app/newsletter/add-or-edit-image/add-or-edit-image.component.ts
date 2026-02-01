@@ -1,14 +1,15 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { NewsletterService } from 'src/app/services/newsletter/newsletter.service';
 import { News } from 'src/app/interfaces/news.interface';
 
 @Component({
   selector: 'app-add-or-edit-image',
+  standalone: true,
+  imports: [ReactiveFormsModule],
   templateUrl: './add-or-edit-image.component.html',
   styleUrls: ['./add-or-edit-image.component.sass'],
-  standalone: false,
 })
 export class AddOrEditImageComponent implements OnInit {
   form!: FormGroup;

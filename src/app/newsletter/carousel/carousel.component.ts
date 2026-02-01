@@ -6,9 +6,9 @@ import { DeleteImageComponent } from '../delete-image/delete-image.component';
 
 @Component({
   selector: 'app-carousel',
+  standalone: true,
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.sass'],
-  standalone: false,
 })
 export class CarouselComponent implements OnInit {
   @Input() imagesCarousel: News[] = [];
