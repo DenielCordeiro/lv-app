@@ -6,7 +6,6 @@ import { ProductsService } from '../services/products/products.service';
 import { Product } from '../interfaces/product.interface';
 import { AddOrEditProductComponent } from './add-or-edit-product/add-or-edit-product.component';
 import { DeleteProductComponent } from './delete-product/delete-product.component';
-import  FalseProduct  from '../falseData/product';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -14,7 +13,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
    imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
   ],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.sass'],
@@ -31,8 +30,7 @@ export class ProductsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.gettingProducts();
-    this.gettingFalseProducts();
+    this.gettingProducts();
     this.clearProductsInLocalStorage();
   }
 
@@ -50,11 +48,6 @@ export class ProductsComponent implements OnInit {
 
   sendProduct(product: Product): void {
     this.productsService.addProductLocalStorage(product);
-  }
-
-  gettingFalseProducts(): void {
-    const falseProduct: Product = FalseProduct
-    this.products.push(falseProduct);
   }
 
   gettingProducts(): void {

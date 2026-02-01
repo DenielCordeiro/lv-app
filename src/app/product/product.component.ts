@@ -10,14 +10,12 @@ import { Product } from '../interfaces/product.interface';
 import { Shipping } from '../interfaces/shipping.interface';
 import { Sale } from '../interfaces/sale.interface';
 import { User } from '../interfaces/user.interface';
-import { ToastsComponent } from '../toasts/toasts.component';
 
 @Component({
   selector: 'app-product',
   standalone: true,
   imports: [
-    ReactiveFormsModule,
-    ToastsComponent
+    ReactiveFormsModule
   ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.sass',

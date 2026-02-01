@@ -1,6 +1,5 @@
 
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { LocalStorageService } from "ngx-webstorage";
 import { lastValueFrom } from "rxjs";
 import { BaseAPI } from "src/app/interfaces/base-api.interface";
@@ -10,7 +9,6 @@ import { User } from "src/app/interfaces/user.interface";
 import { environment } from "src/environments/environment";
 
 export abstract class CrudUsersService<T extends BaseCrud> {
-  modalService!: NgbModal;
   http!: HttpClient;
   localStorage!: LocalStorageService;
   authedUser: boolean = false;

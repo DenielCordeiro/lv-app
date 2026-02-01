@@ -2,17 +2,20 @@
 
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideHttpClient } from '@angular/common/http';
-import { provideAnimations } from '@angular/platform-browser/animations';
-
-import { AppComponent } from './app/app.component';
-import { appRoutes } from './app.routes';
-
 import { provideRouter } from '@angular/router';
+
+import { provideNgxWebstorage, withLocalStorage, withSessionStorage } from 'ngx-webstorage';
+
+import { appRoutes } from './app.routes';
+import { AppComponent } from './app/app.component';
 
 bootstrapApplication(AppComponent, {
   providers: [
     provideHttpClient(),
-    provideAnimations(),
-    provideRouter(appRoutes)
+    provideRouter(appRoutes),
+    provideNgxWebstorage(
+      withLocalStorage(),
+      withSessionStorage()
+    )
   ]
-}).catch(err => console.error(err));
+}).catch(console.error);

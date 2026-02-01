@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from './header/header.component';
 import { RouterOutlet } from '@angular/router';
-import { ToastsComponent } from './toasts/toasts.component';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +8,6 @@ import { ToastsComponent } from './toasts/toasts.component';
   imports: [
     HeaderComponent,
     RouterOutlet,
-    ToastsComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.sass'],

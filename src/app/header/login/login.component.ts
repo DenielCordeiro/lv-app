@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { FormGroup, FormBuilder, Validators, ReactiveFormsModule,  } from '@angular/forms';
 import { UsersService } from '../../services/users/users.service';
-import { MenuComponent } from '../menu/menu.component';
-import falseDataProfile from '../../falseData/profile';
 
 @Component({
   selector: 'app-login',
@@ -19,14 +16,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UsersService,
-    private modalService: NgbModal,
-    public config: NgbModalConfig,
     public route: ActivatedRoute,
-    public menu: MenuComponent,
-  ) {
-    config.backdrop = 'static';
-		config.keyboard = false;
-  }
+  ) {}
 
   ngOnInit(): void {
     this.buildingForm();
@@ -42,10 +33,7 @@ export class LoginComponent implements OnInit {
   async makeLogin() {
     try{
       if (this.loginForm.valid) {
-        // await this.userService.authUser(this.loginForm.value)
-        const falseProfile = JSON.stringify(falseDataProfile);
-        localStorage.setItem('profile', falseProfile);
-
+        await this.userService.authUser(this.loginForm.value);
         this.closeModal();
       }
     } catch (error) {
@@ -53,13 +41,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  openModal(loginModal: any): void {
-		this.modalService.open(loginModal);
-	}
+  openModal(loginModal: any): void {}
 
-  closeModal(): void {
-    this.menu.changeIconBurguer();
-    this.loginForm.reset();
-    this.modalService.dismissAll();
-  }
+  closeModal(): void {}
 }
