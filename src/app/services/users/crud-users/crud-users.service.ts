@@ -2,6 +2,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { LocalStorageService } from "ngx-webstorage";
 import { lastValueFrom } from "rxjs";
+import { AuthService } from "src/app/guards/auth.service";
 import { BaseAPI } from "src/app/interfaces/base-api.interface";
 import { BaseCrud } from "src/app/interfaces/base-crud.interface";
 import { Address } from "src/app/interfaces/address.interface";
@@ -18,6 +19,7 @@ export abstract class CrudUsersService<T extends BaseCrud> {
     httpClient: HttpClient,
     localStorage: LocalStorageService,
     route: string,
+    private authService: AuthService
   ) {
     this.http = httpClient;
     this.localStorage = localStorage;
@@ -49,7 +51,7 @@ export abstract class CrudUsersService<T extends BaseCrud> {
     try {
       if (result && result.data && typeof result.data === 'object' && 'administrator' in result.data && 'token' in result.data) {
         const profile = JSON.stringify(result.data);
-        localStorage.setItem('profile', profile);
+        this.authService.login(profile);
 
         return this.handleResponse(result as BaseAPI<User>) as User;
       } else {
@@ -61,14 +63,6 @@ export abstract class CrudUsersService<T extends BaseCrud> {
       alert('[ERRO!]: Algo deu errado ao processar os dados!');
       return null;
     }
-  }
-
-  public authedUserWithSuccess(): boolean {
-    if(localStorage.getItem('session')) {
-      this.authedUser = true;
-    }
-
-    return this.authedUser;
   }
 
   public isAdministrator(): boolean {
@@ -91,11 +85,8 @@ export abstract class CrudUsersService<T extends BaseCrud> {
     return isAdm;
   }
 
-  public logout(): boolean {
-    localStorage.clear();
-    console.log('Você saiu de sua conta!');
-
-    return true;
+  public logout(): void {
+    this.authService.logout();
   }
 
   public createUser(user: User): Promise<T> {

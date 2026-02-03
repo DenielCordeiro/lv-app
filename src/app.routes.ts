@@ -1,12 +1,5 @@
 import { Routes } from '@angular/router';
-
-import { DashboardComponent } from './app/dashboard/dashboard.component';
-import { NewsletterComponent } from './app/newsletter/newsletter.component';
-import { RegisterComponent } from './app/header/register/register.component';
-import { UsersComponent } from './app/users/users.component';
-import { CartComponent } from './app/cart/cart.component';
-import { ProductsComponent } from './app/products/products.component';
-import { ProductComponent } from './app/product/product.component';
+import { authGuard } from './app/guards/auth.guard';
 
 export const appRoutes: Routes = [
   {
@@ -15,39 +8,34 @@ export const appRoutes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'navbar',
-    component: DashboardComponent,
+    path: 'dashboard',
+    loadComponent: () => import('./app/dashboard/dashboard.component').then(module => module.DashboardComponent),
+    canActivate: [authGuard],
   },
   {
     path: 'newsletter',
-    component: NewsletterComponent,
+    loadComponent: () => import('./app/newsletter/newsletter.component').then(module => module.NewsletterComponent),
   },
   {
     path: 'register',
-    component: RegisterComponent,
+    loadComponent: () => import('./app/header/register/register.component').then(module => module.RegisterComponent),
   },
   {
     path: 'profile/:user_id',
-    component: UsersComponent,
+    loadComponent: () => import('./app/users/users.component').then(module => module.UsersComponent),
+    canActivate: [authGuard],
   },
   {
     path: 'cart/:user_id',
-    component: CartComponent,
+    loadComponent: () => import('./app/cart/cart.component').then(module => module.CartComponent),
+    canActivate: [authGuard],
   },
   {
     path: 'products',
-    component: ProductsComponent,
+    loadComponent: () => import('./app/products/products.component').then(module => module.ProductsComponent),
   },
   {
     path: 'product/:product_id',
-    component: ProductComponent,
+    loadComponent: () => import('./app/product/product.component').then(module => module.ProductComponent),
   },
-  {
-    path: 'dashboard',
-    component: DashboardComponent,
-  },
-  {
-    path: '**',
-    redirectTo: 'newsletter',
-  }
 ];
