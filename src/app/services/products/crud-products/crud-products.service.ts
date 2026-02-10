@@ -35,7 +35,7 @@ export abstract class CrudProductsService<T extends BaseCrud> {
   public getProducts(): Promise<T[]>{
     return lastValueFrom(this.http.get<BaseAPI<T>>(this.route))
       .then(result => {
-        return this.handleResponse(result) as T[];
+        return this.handleResponse(result) as unknown as T[];
       });
   }
 
@@ -65,30 +65,30 @@ export abstract class CrudProductsService<T extends BaseCrud> {
   public createProduct(model: FormData): Promise<T> {
     return lastValueFrom(this.http.post<BaseAPI<T>>(this.route, model, { headers: this.header }))
       .then(result => {
-      return this.handleResponse(result) as T;
+      return this.handleResponse(result) as unknown as T;
     });
   }
 
   public updateProduct(model: FormData, productId: number | undefined): Promise<T> {
     return lastValueFrom(this.http.put<BaseAPI<T>>(`${this.route}/${productId}`, model, { headers: this.header }))
       .then(result => {
-        return this.handleResponse(result) as T;
+        return this.handleResponse(result) as unknown as T;
       })
       .catch (error => {
-        return this.handleResponse(error) as T;
+        return this.handleResponse(error) as unknown as T;
       })
   }
 
   public deleteProduct(productId: number): Promise<boolean> {
     return lastValueFrom(this.http.delete<BaseAPI<T>>(`${this.route}/${productId}`, { headers: this.header }))
       .then(result => {
-        return this.handleResponse(result) as true;
+        return this.handleResponse(result) as unknown as true;
       });
   }
 
   public handleResponse(response: BaseAPI<T>) {
     if(response) {
-      return response.data;
+      return response;
     } else {
       throw new Error("Api 200, mas success falso!");
     }

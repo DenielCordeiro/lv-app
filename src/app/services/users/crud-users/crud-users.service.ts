@@ -8,8 +8,10 @@ import { BaseCrud } from "src/app/interfaces/base-crud.interface";
 import { Address } from "src/app/interfaces/address.interface";
 import { User } from "src/app/interfaces/user.interface";
 import { environment } from "src/environments/environment";
+import { Inject } from "@angular/core";
 
 export abstract class CrudUsersService<T extends BaseCrud> {
+  authService = Inject(AuthService);
   http!: HttpClient;
   localStorage!: LocalStorageService;
   authedUser: boolean = false;
@@ -19,7 +21,6 @@ export abstract class CrudUsersService<T extends BaseCrud> {
     httpClient: HttpClient,
     localStorage: LocalStorageService,
     route: string,
-    private authService: AuthService
   ) {
     this.http = httpClient;
     this.localStorage = localStorage;
@@ -35,35 +36,35 @@ export abstract class CrudUsersService<T extends BaseCrud> {
     return headers;
   }
 
-  public async authUser(user: User): Promise<User | null> {
-    let result: BaseAPI<User>;
+  // public async authUser(user: User): Promise<User | null> {
+  //   let result: BaseAPI<User>;
 
-    try {
-      result = await lastValueFrom(
-        this.http.post<BaseAPI<User>>(`${environment.api}/session/`, user)
-      );
-    } catch (error) {
-      console.error('[ERRO HTTP]:', error);
-      alert('[ERRO!]: Não foi possível fazer login! Verifique seu usuário e senha!');
-      return null;
-    }
+  //   try {
+  //     result = await lastValueFrom(
+  //       this.http.post<BaseAPI<User>>(`${environment.api}/session/`, user)
+  //     );
+  //   } catch (error) {
+  //     console.error('[ERRO HTTP]:', error);
+  //     alert('[ERRO!]: Não foi possível fazer login! Verifique seu usuário e senha!');
+  //     return null;
+  //   }
 
-    try {
-      if (result && result.data && typeof result.data === 'object' && 'administrator' in result.data && 'token' in result.data) {
-        const profile = JSON.stringify(result.data);
-        this.authService.login(profile);
+  //   try {
+  //     if (result && result.users && typeof result.docs === 'object' && 'administrator' in result.docs && 'token' in result.docs) {
+  //       const profile = JSON.stringify(result.docs);
+  //       this.authService.login(profile);
 
-        return this.handleResponse(result as BaseAPI<User>) as User;
-      } else {
-        alert('[ERRO!]: Dados de usuário inválidos recebidos!');
-        return null;
-      }
-    } catch (error) {
-      console.error('[ERRO DE PROCESSAMENTO]:', error);
-      alert('[ERRO!]: Algo deu errado ao processar os dados!');
-      return null;
-    }
-  }
+  //       return this.handleResponse(result as BaseAPI<User>) as User;
+  //     } else {
+  //       alert('[ERRO!]: Dados de usuário inválidos recebidos!');
+  //       return null;
+  //     }
+  //   } catch (error) {
+  //     console.error('[ERRO DE PROCESSAMENTO]:', error);
+  //     alert('[ERRO!]: Algo deu errado ao processar os dados!');
+  //     return null;
+  //   }
+  // }
 
   public isAdministrator(): boolean {
     let administrartor: string | null = localStorage.getItem('user');
@@ -92,7 +93,7 @@ export abstract class CrudUsersService<T extends BaseCrud> {
   public createUser(user: User): Promise<T> {
     return lastValueFrom(this.http.post<BaseAPI<T>>(`${this.route}`, user))
       .then(result => {
-        return this.handleResponse(result) as T;
+        return this.handleResponse(result) as unknown as T;
       });
   }
 
@@ -101,7 +102,7 @@ export abstract class CrudUsersService<T extends BaseCrud> {
 
     return lastValueFrom(this.http.get<BaseAPI<T>>(`${this.route}/${user_id}`, { headers: header }))
       .then(result => {
-        return this.handleResponse(result) as T;
+        return this.handleResponse(result) as unknown as T;
       })
       .catch( error => {
         alert('Não foi possível retornar dados de seu perfil!')
@@ -122,7 +123,7 @@ export abstract class CrudUsersService<T extends BaseCrud> {
 
   public handleResponse(response: BaseAPI<User>) {
     if(response) {
-      return response.data;
+      return response;
     } else {
       throw new Error("Api 200, mas success falso!");
     }

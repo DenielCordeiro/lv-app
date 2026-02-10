@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
   async makeLogin() {
     try{
       if (this.loginForm.valid) {
-        await this.userService.authUser(this.loginForm.value);
+        // await this.userService.authUser(this.loginForm.value);
         this.closeModal();
       }
     } catch (error) {

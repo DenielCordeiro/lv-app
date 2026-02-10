@@ -16,7 +16,7 @@
     <form [formGroup]="form" class="row">
       <div class="col-6 my-2">
         <label for="name" class="form-label">Nome:</label>
-        <input type="text" formControlName="name" class="form-control" id="name">
+        <input mat-input type="text" formControlName="name" class="form-control" id="name">
       </div>
 
       <div class="col-6 my-2">
@@ -53,10 +53,13 @@
 
         <button class="button-change-select" (click)="changeOptionGroups()">{{ newOrExistGroups }}</button>
 
-        <input type="text" *ngIf="newOrExistGroups == 'Existente'" formControlName="groups" class="form-control" id="groups">
-        <mat-select formControlName="groups" *ngIf="newOrExistGroups == 'Nova'">
-          <mat-option *ngFor="let group of groups" [value]="group" selected>{{ group }}</mat-option>
-        </mat-select>
+        @if (newOrExistGroups == 'Existente') {
+          <input type="text" formControlName="groups" class="form-control" id="groups">
+        } @else if (newOrExistGroups == 'Nova') {
+          <mat-select formControlName="groups">
+            <mat-option *ngFor="let group of groups" [value]="group" selected>{{ group }}</mat-option>
+          </mat-select>
+        }
       </div>
 
       <div class="col-12">
@@ -67,7 +70,6 @@
       <div class="button-add" >
         <button class="btn btn-primary" (click)="addOrEditProduct()">adicionar produto</button>
       </div>
-
     </form>
   </div>
 </section>

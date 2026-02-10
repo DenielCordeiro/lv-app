@@ -114,10 +114,10 @@ export abstract class CrudCartService<T extends BaseCrud>{
   public saveCart(productsInCart: Product[], user_id: any): Promise<T> {
     return lastValueFrom(this.http.put<BaseAPI<T>>(`${this.route}/save_cart/${user_id}`, { products: productsInCart }, { headers: this.header }))
       .then(result => {
-        return this.handleResponse(result) as T;
+        return this.handleResponse(result) as unknown as T;
       })
       .catch(error => {
-        return this.handleResponse(error) as T;
+        return this.handleResponse(error) as unknown as T;
       });
   }
 
@@ -126,20 +126,20 @@ export abstract class CrudCartService<T extends BaseCrud>{
 
     return lastValueFrom(this.http.put<BaseAPI<T>>(`${this.route}/clear_cart/${this.profile._id}`, { headers: this.header }))
       .then(result => {
-        return this.handleResponse(result) as T;
+        return this.handleResponse(result) as unknown as T;
       })
       .catch(error => {
-        return this.handleResponse(error) as T;
+        return this.handleResponse(error) as unknown as T;
       });
   }
 
   public generatePix(PIXData: {}): Promise<T> {
     return lastValueFrom(this.http.post<BaseAPI<T>>(`${this.route}/payments/pix`, PIXData))
       .then(result => {
-        return this.handleResponse(result) as T;
+        return this.handleResponse(result) as unknown as T;
       })
       .catch(error => {
-        return this.handleResponse(error) as T;
+        return this.handleResponse(error) as unknown as T;
       });
   }
 
@@ -150,7 +150,7 @@ export abstract class CrudCartService<T extends BaseCrud>{
 
   public handleResponse(response: BaseAPI<T>) {
     if(response) {
-      return response.data;
+      return response;
     } else {
       throw new Error("Api 200, mas success falso!");
     }

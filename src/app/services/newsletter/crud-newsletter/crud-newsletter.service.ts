@@ -24,62 +24,62 @@ export abstract class CrudNewsletterService<T extends BaseCrud> {
   public getImages(): Promise<T[]> {
     return lastValueFrom(this.http.get<BaseAPI<T>>(this.route))
       .then(result => {
-        return this.handleResponse(result) as T[];
+        return this.handleResponse(result) as unknown as T[];
       });
   }
 
   public createImage(news: FormData): Promise<T[]> {
     return lastValueFrom(this.http.post<BaseAPI<T>>(this.route, news))
       .then(result => {
-        return this.handleResponse(result) as T[];
+        return this.handleResponse(result) as unknown as T[];
       });
   }
 
   public updateImage(news: FormData, news_id: number): Promise<T[]> {
     return lastValueFrom(this.http.put<BaseAPI<T>>(`${this.route}/${news_id}`, news))
       .then(result => {
-        return this.handleResponse(result) as T[];
+        return this.handleResponse(result) as unknown as T[];
       });
   }
 
   public deleteImage(news_id: number): Promise<T> {
     return lastValueFrom(this.http.delete<BaseAPI<T>>(`${this.route}/${news_id}`))
       .then(result => {
-        return this.handleResponse(result) as T;
+        return this.handleResponse(result) as unknown as T;
       });
   }
 
   public getReviews(): Promise<T[]> {
     return lastValueFrom(this.http.get<BaseAPI<T>>(`${this.route}/reviews`))
       .then(result => {
-        return this.handleResponse(result) as T[];
+        return this.handleResponse(result) as unknown as T[];
       });
   }
 
   public createReview(review: Review): Promise<T> {
     return lastValueFrom(this.http.post<BaseAPI<T>>(`${this.route}/reviews`, review))
       .then(result => {
-        return this.handleResponse(result) as T;
+        return this.handleResponse(result) as unknown as T;
       });
   }
 
   public updateReview(review: Review, review_id: number): Promise<T> {
     return lastValueFrom(this.http.put<BaseAPI<T>>(`${this.route}/reviews/${review_id}`, review))
       .then(result => {
-        return this.handleResponse(result) as T;
+        return this.handleResponse(result) as unknown as T;
       });
   }
 
   public deleteReview(review_id: number): Promise<T> {
     return lastValueFrom(this.http.delete<BaseAPI<T>>(`${this.route}/reviews/${review_id}`))
       .then(result => {
-        return this.handleResponse(result) as T;
+        return this.handleResponse(result) as unknown as T;
       });
   }
 
   public handleResponse(response: BaseAPI<T>) {
     if(response) {
-      return response.data;
+      return response;
     } else {
       throw new Error("Api 200, mas success falso!");
     }
