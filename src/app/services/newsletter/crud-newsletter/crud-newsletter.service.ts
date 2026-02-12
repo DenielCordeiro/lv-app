@@ -35,14 +35,14 @@ export abstract class CrudNewsletterService<T extends BaseCrud> {
       });
   }
 
-  public updateImage(news: FormData, news_id: number): Promise<T[]> {
+  public updateImage(news: FormData, news_id: string): Promise<T[]> {
     return lastValueFrom(this.http.put<BaseAPI<T>>(`${this.route}/${news_id}`, news))
       .then(result => {
         return this.handleResponse(result) as unknown as T[];
       });
   }
 
-  public deleteImage(news_id: number): Promise<T> {
+  public deleteImage(news_id: string): Promise<T> {
     return lastValueFrom(this.http.delete<BaseAPI<T>>(`${this.route}/${news_id}`))
       .then(result => {
         return this.handleResponse(result) as unknown as T;
@@ -63,14 +63,14 @@ export abstract class CrudNewsletterService<T extends BaseCrud> {
       });
   }
 
-  public updateReview(review: Review, review_id: number): Promise<T> {
+  public updateReview(review: Review, review_id: string): Promise<T> {
     return lastValueFrom(this.http.put<BaseAPI<T>>(`${this.route}/reviews/${review_id}`, review))
       .then(result => {
         return this.handleResponse(result) as unknown as T;
       });
   }
 
-  public deleteReview(review_id: number): Promise<T> {
+  public deleteReview(review_id: string): Promise<T> {
     return lastValueFrom(this.http.delete<BaseAPI<T>>(`${this.route}/reviews/${review_id}`))
       .then(result => {
         return this.handleResponse(result) as unknown as T;

@@ -99,8 +99,8 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  updateModal(id: number | undefined): void {}
-  deleteModal(id: number | undefined): void {}
+  updateModal(id: string | undefined): void {}
+  deleteModal(id: string | undefined): void {}
 
   searchShipping(): void {
     const postalCodeNumber = this.searchForm?.value;

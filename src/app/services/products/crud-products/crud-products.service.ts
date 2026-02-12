@@ -1,10 +1,10 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { LocalStorageService } from "ngx-webstorage";
 import { lastValueFrom } from "rxjs";
-import { BaseAPI } from "src/app/interfaces/base-api.interface";
 import { BaseCrud } from "src/app/interfaces/base-crud.interface";
 import { environment } from "src/environments/environment";
 import { Product } from './../../../interfaces/product.interface';
+import { BaseProduct } from "./base-products.interface";
 
 export abstract class CrudProductsService<T extends BaseCrud> {
   http!: HttpClient;
@@ -32,10 +32,10 @@ export abstract class CrudProductsService<T extends BaseCrud> {
     return headers;
   }
 
-  public getProducts(): Promise<T[]>{
-    return lastValueFrom(this.http.get<BaseAPI<T>>(this.route))
-      .then(result => {
-        return this.handleResponse(result) as unknown as T[];
+  public getProducts(): Promise<BaseProduct<T>>{
+    return lastValueFrom(this.http.get<BaseProduct<T>>(this.route))
+      .then(products => {
+        return this.handleResponse(products) as unknown as BaseProduct<T>;
       });
   }
 
@@ -63,14 +63,14 @@ export abstract class CrudProductsService<T extends BaseCrud> {
   }
 
   public createProduct(model: FormData): Promise<T> {
-    return lastValueFrom(this.http.post<BaseAPI<T>>(this.route, model, { headers: this.header }))
+    return lastValueFrom(this.http.post<BaseProduct<T>>(this.route, model, { headers: this.header }))
       .then(result => {
       return this.handleResponse(result) as unknown as T;
     });
   }
 
   public updateProduct(model: FormData, productId: number | undefined): Promise<T> {
-    return lastValueFrom(this.http.put<BaseAPI<T>>(`${this.route}/${productId}`, model, { headers: this.header }))
+    return lastValueFrom(this.http.put<BaseProduct<T>>(`${this.route}/${productId}`, model, { headers: this.header }))
       .then(result => {
         return this.handleResponse(result) as unknown as T;
       })
@@ -79,14 +79,14 @@ export abstract class CrudProductsService<T extends BaseCrud> {
       })
   }
 
-  public deleteProduct(productId: number): Promise<boolean> {
-    return lastValueFrom(this.http.delete<BaseAPI<T>>(`${this.route}/${productId}`, { headers: this.header }))
+  public deleteProduct(productId: string): Promise<boolean> {
+    return lastValueFrom(this.http.delete<BaseProduct<T>>(`${this.route}/${productId}`, { headers: this.header }))
       .then(result => {
         return this.handleResponse(result) as unknown as true;
       });
   }
 
-  public handleResponse(response: BaseAPI<T>) {
+  public handleResponse(response: BaseProduct<T>) {
     if(response) {
       return response;
     } else {

@@ -21,7 +21,7 @@ export class HeaderComponent  implements OnInit {
   cart: Product[] = [];
   profile: User = {};
   productsQuantity: number = 0;
-  userId: number = 0;
+  userId: string = "";
 
   constructor(
     public route: Router,
@@ -57,9 +57,9 @@ export class HeaderComponent  implements OnInit {
     }
   }
 
-  getUserId(): number {
+  getUserId(): string {
     this.profile = JSON.parse(localStorage.getItem('profile') || '{}');
-    this.userId = this.profile._id || 0;
+    this.userId = this.profile._id || "";
 
     return this.userId;
   }

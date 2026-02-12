@@ -63,49 +63,49 @@ export class CarouselComponent implements OnInit {
     items[this.currentItem].classList.add('current-item');
   }
 
-  addOrUpdateImage(imageId: number | null):void {
-    if (imageId == undefined) {
-      try {
-        this.dialog.open<AddOrEditImageComponent>(AddOrEditImageComponent, {
-          data: this.news,
-        });
-      } catch(error) {
-        console.log("[ERRO!], não foi possível abrir dialog de criar imagem, erro:", error);
-      }
-    } else {
-      let image!: News;
+  addOrUpdateImage(imageId: string | null):void {
+    // if (imageId == undefined) {
+    //   try {
+    //     this.dialog.open<AddOrEditImageComponent>(AddOrEditImageComponent, {
+    //       data: this.news,
+    //     });
+    //   } catch(error) {
+    //     console.log("[ERRO!], não foi possível abrir dialog de criar imagem, erro:", error);
+    //   }
+    // } else {
+    //   let image!: News;
 
-      for (let index: number = 0; index < this.imagesCarousel.length; index++) {
-        if(this.imagesCarousel[index]._id == imageId) {
-          image = this.imagesCarousel[index];
-        }
-      }
+    //   for (let index: number = 0; index < this.imagesCarousel.length; index++) {
+    //     if(this.imagesCarousel[index]._id == imageId) {
+    //       image = this.imagesCarousel[index];
+    //     }
+    //   }
 
-      try {
-        this.dialog.open<AddOrEditImageComponent>(AddOrEditImageComponent, {
-          data: image
-        });
-      } catch(error) {
-        console.log("[ERRO!], não foi possível abrir dialog de atualizar imagem, erro:", error);
-      }
-    }
+    //   try {
+    //     this.dialog.open<AddOrEditImageComponent>(AddOrEditImageComponent, {
+    //       data: image
+    //     });
+    //   } catch(error) {
+    //     console.log("[ERRO!], não foi possível abrir dialog de atualizar imagem, erro:", error);
+    //   }
+    // }
   }
 
-  deleteImage(imageId: number) {
-    let image!: News;
+  deleteImage(imageId: string) {
+    // let image!: News;
 
-    for (let index: number = 0; index < this.imagesCarousel.length; index++) {
-      if(this.imagesCarousel[index]._id == imageId) {
-        image = this.imagesCarousel[index];
-      }
-    }
+    // for (let index: number = 0; index < this.imagesCarousel.length; index++) {
+    //   if(this.imagesCarousel[index]._id == imageId) {
+    //     image = this.imagesCarousel[index];
+    //   }
+    // }
 
-    try {
-      this.dialog.open<DeleteImageComponent>(DeleteImageComponent, {
-        data: image,
-      });
-    } catch (error) {
-      console.log("[ERRO!], não foi possível abrir dialog de excluir imagem, erro:", error);
-    }
+    // try {
+    //   this.dialog.open<DeleteImageComponent>(DeleteImageComponent, {
+    //     data: image,
+    //   });
+    // } catch (error) {
+    //   console.log("[ERRO!], não foi possível abrir dialog de excluir imagem, erro:", error);
+    // }
   }
 }

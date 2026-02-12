@@ -5,7 +5,7 @@ export interface Sale {
   _id?: number;
   products?: Product[];
   userProfile?: {
-    _id?: number,
+    _id?: string,
     name?: string,
     email?: string,
     cellphone?: string,

@@ -1,5 +1,5 @@
 export interface Review {
-  _id?: number,
+  _id?: string,
   userName?: string,
   review?: string,
   date?: number,

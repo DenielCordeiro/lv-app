@@ -1,5 +1,5 @@
 export interface News {
-  _id?: number,
+  _id?: string,
   type?: string,
   linkProduct?: string,
   file?: {

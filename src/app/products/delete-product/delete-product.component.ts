@@ -16,7 +16,7 @@ export class DeleteProductComponent {
     private productsService: ProductsService
   ) {}
 
-  deletingProduct(productId: number | undefined): void {
+  deletingProduct(productId: string | undefined): void {
     if (productId !== undefined) {
       this.productsService.deleteProduct(productId)
         .then(result => {
