@@ -32,7 +32,7 @@ export class NewsletterComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.gettingImages();
+    // this.gettingImages();
   }
   
   gettingImages(): News[] {

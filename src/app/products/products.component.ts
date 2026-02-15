@@ -1,11 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, NavigationEnd, RouterModule } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { Router, RouterModule } from '@angular/router';
 
 import { MatDialog } from '@angular/material/dialog';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 
 import { ProductsService } from '../services/products/products.service';
@@ -15,23 +12,30 @@ import { Product } from '../interfaces/product.interface';
 import { AddOrEditProductComponent } from './add-or-edit-product/add-or-edit-product.component';
 import { DeleteProductComponent } from './delete-product/delete-product.component';
 
+import { MOCK_PRODUCTS } from './products.mock';
+
 @Component({
   selector: 'app-products',
   standalone: true,
    imports: [
     CommonModule,
     RouterModule,
-    MatTableModule,
-    MatPaginatorModule,
     MatButtonModule
   ],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.sass'],
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild('scrollAnchor') anchor!: ElementRef;
+  observer!: IntersectionObserver;
+
   productId: number | undefined;
   title: string = 'Trabalhos disponíveis';
   products: Product[] = [];
+  currentPage: number = 1;
+  pageSize: number = 5;
+  hasNextPage: boolean = true;
+  isLoading: boolean = false;
 
   constructor(
     private router: Router,
@@ -40,104 +44,62 @@ export class ProductsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.products = [];
+    this.currentPage = 1;
+    this.hasNextPage = true;
     // this.gettingProducts();
-    this.gettingFalseDatas();
-    this.clearProductsInLocalStorage();
+    this.loadProducts();
   }
 
-  gettingFalseDatas(): void {
-    const data = {
-      "products": {
-        "docs": [
-          {
-            "_id": "698b89ce1176560e108b1bb2",
-            "name": "teste",
-            "description": "teste",
-            "groups": "teste",
-            "type": "teste",
-            "valor": 4,
-            "__v": 0,
-            "file": {
-              "createdAt": "2026-02-10T19:41:02.412Z"
-            }
-          },
-          {
-            "_id": "698b8a371176560e108b1bb6",
-            "name": "teste",
-            "description": "teste",
-            "groups": "teste",
-            "type": "teste",
-            "valor": 5,
-            "__v": 0,
-            "file": {
-              "createdAt": "2026-02-10T19:42:47.571Z"
-            }
-          },
-          {
-            "_id": "698a650169ebad3d45e30f95",
-            "name": "teste",
-            "description": "teste",
-            "groups": "teste",
-            "type": "teste",
-            "valor": 2,
-            "__v": 0,
-            "file": {
-              "createdAt": "2026-02-09T22:51:45.669Z"
-            }
-          },
-          {
-            "_id": "698a64713bf9cbd8b71aa4cb",
-            "name": "teste",
-            "description": "teste",
-            "groups": "teste",
-            "type": "teste",
-            "valor": 2,
-            "selection": false,
-            "file": {
-              "name": "string",
-              "size": 2,
-              "url": "string",
-              "createdAt": "2026-02-11T23:16:56.911Z"
-            }
-          },
-          {
-            "_id": "698b89a71176560e108b1bae",
-            "name": "teste",
-            "description": "teste",
-            "groups": "teste",
-            "type": "teste",
-            "valor": 3,
-            "__v": 0,
-            "file": {
-              "createdAt": "2026-02-10T19:40:23.601Z"
-            }
-          }
-        ],
-        "hasNextPage": true,
-        "hasPrevPage": false,
-        "limit": 5,
-        "nextPage": 2,
-        "page": 1,
-        "pagingCounter": 1,
-        "prevPage": null,
-        "totalDocs": 7,
-        "totalPages": 2
+  ngAfterViewInit(): void {
+    this.createObserver();
+  }
+
+  ngOnDestroy(): void {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
+  }
+
+  createObserver() {
+    this.observer = new IntersectionObserver((entries) => {
+
+      const entry = entries[0];
+
+      if (entry.isIntersecting && !this.isLoading && this.hasNextPage) {
+        this.loadProducts(this.currentPage + 1);
       }
-    };
 
-    this.products = data.products.docs as Product[];
+    }, {
+      threshold: 0.1
+    });
+
+    this.observer.observe(this.anchor.nativeElement);
   }
 
-  clearProductsInLocalStorage(): void {
-    this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe(event => {
-        const currentUrl = (event as NavigationEnd).url;
 
-        if (currentUrl == '/products') {
-          this.productsService.removeProductLocalStorage('selectedProduct')
-        }
-      });
+  loadProducts(page: number = 1): void {
+    const allProducts = MOCK_PRODUCTS;
+
+    if (this.isLoading || !this.hasNextPage) return;
+
+    this.isLoading = true;
+
+    const limit = this.pageSize;
+    const startIndex = (page - 1) * limit;
+    const endIndex = startIndex + limit;
+
+    const paginatedDocs = allProducts.slice(startIndex, endIndex);
+
+    this.products = [
+      ...this.products,
+      ...paginatedDocs
+    ];
+
+    this.currentPage = page;
+    this.hasNextPage = endIndex < allProducts.length;
+
+    this.isLoading = false;
   }
 
   sendProduct(product: Product): void {
@@ -159,7 +121,7 @@ export class ProductsComponent implements OnInit {
         alert('ERRO: não conseguiu trazer os produtos');
         console.log(error);
       })
-    }
+  }
 
   modalCreate(product: Product | null): void {
     const products: Product[] = [];

@@ -11,25 +11,36 @@
 <section id="cards">
   <div class="content">
     <div class="products">
-      <div class="product" *ngFor="let product of products">
-        <div class="change-product my-2">
-          <div class="update-and-delete-buttons update-product" (click)="modalCreate(product)">
-            <span>Editar</span>
-            <i class="bi bi-pencil-fill"></i>
+      @for (product of products; track product._id) {
+        <div class="product">
+          <div class="change-product my-2">
+            <div class="update-and-delete-buttons update-product" (click)="modalCreate(product)">
+              <span>Editar</span>
+              <i class="bi bi-pencil-fill"></i>
+            </div>
+  
+            <div class="update-and-delete-buttons delete-product" (click)="modalDelete(product)">
+              <span>Excluir</span>
+              <i class="bi bi-trash3-fill"></i>
+            </div>
           </div>
-
-          <div class="update-and-delete-buttons delete-product" (click)="modalDelete(product)">
-            <span>Excluir</span>
-            <i class="bi bi-trash3-fill"></i>
+  
+          <div class="card" (click)="sendProduct(product)" routerLink="/product/{{ product._id }}">
+            <img src="{{ product?.file?.url }}" alt="...">
+            <p class="itemTitle" >{{ product?.name }}</p>
+            <p class="itemValor">R$ {{ product?.valor }}</p>
           </div>
         </div>
-
-        <div class="card" (click)="sendProduct(product)" routerLink="/product/{{ product._id }}">
-          <img src="{{ product?.file?.url }}" alt="...">
-          <p class="itemTitle">{{ product?.name }}</p>
-          <p class="itemValor">R$ {{ product?.valor }}</p>
-        </div>
-      </div>
+      }
     </div>
+    
+    <div #scrollAnchor></div>
+
+    @if (isLoading) {
+      <p>Carregando...</p>
+    }
   </div>
 </section>
+
+
+
