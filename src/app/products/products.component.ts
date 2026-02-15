@@ -4,6 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 
 import { MatDialog } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { ProductsService } from '../services/products/products.service';
 
@@ -20,7 +21,8 @@ import { MOCK_PRODUCTS } from './products.mock';
    imports: [
     CommonModule,
     RouterModule,
-    MatButtonModule
+    MatButtonModule,
+    MatProgressBarModule
   ],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.sass'],
@@ -33,7 +35,7 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy {
   title: string = 'Trabalhos disponíveis';
   products: Product[] = [];
   currentPage: number = 1;
-  pageSize: number = 5;
+  pageSize: number = 9;
   hasNextPage: boolean = true;
   isLoading: boolean = false;
 
@@ -44,15 +46,30 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.products = [];
-    this.currentPage = 1;
-    this.hasNextPage = true;
     // this.gettingProducts();
+    this.setPageSize();
     this.loadProducts();
   }
 
   ngAfterViewInit(): void {
+    window.addEventListener('resize', () => {
+      const oldPageSize = this.pageSize;
+
+      this.setPageSize();
+
+      if (oldPageSize !== this.pageSize) {
+        this.resetAndReload();
+      }
+    });
+
     this.createObserver();
+  }
+
+  resetAndReload(): void {
+    this.products = [];
+    this.currentPage = 1;
+    this.hasNextPage = true;
+    this.loadProducts();
   }
 
   ngOnDestroy(): void {
@@ -63,47 +80,62 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   createObserver() {
     this.observer = new IntersectionObserver((entries) => {
-
       const entry = entries[0];
 
       if (entry.isIntersecting && !this.isLoading && this.hasNextPage) {
-        this.loadProducts(this.currentPage + 1);
-      }
 
+        this.observer.unobserve(this.anchor.nativeElement);
+
+        this.loadProducts(this.currentPage + 1);
+
+        setTimeout(() => {
+          this.observer.observe(this.anchor.nativeElement);
+        }, 3000);
+      }
     }, {
-      threshold: 0.1
+      root: null,
+      threshold: 0
     });
 
     this.observer.observe(this.anchor.nativeElement);
   }
 
-
   loadProducts(page: number = 1): void {
-    const allProducts = MOCK_PRODUCTS;
-
     if (this.isLoading || !this.hasNextPage) return;
 
     this.isLoading = true;
 
-    const limit = this.pageSize;
-    const startIndex = (page - 1) * limit;
-    const endIndex = startIndex + limit;
+    setTimeout(() => {
+      const allProducts = MOCK_PRODUCTS;
 
-    const paginatedDocs = allProducts.slice(startIndex, endIndex);
+      const limit = this.pageSize;
+      const startIndex = (page - 1) * limit;
+      const endIndex = startIndex + limit;
 
-    this.products = [
-      ...this.products,
-      ...paginatedDocs
-    ];
+      const paginatedDocs = allProducts.slice(startIndex, endIndex);
 
-    this.currentPage = page;
-    this.hasNextPage = endIndex < allProducts.length;
+      this.products = [
+        ...this.products,
+        ...paginatedDocs
+      ];
 
-    this.isLoading = false;
+      this.currentPage = page;
+      this.hasNextPage = endIndex < allProducts.length;
+
+      this.isLoading = false;
+    }, 3000);
   }
 
-  sendProduct(product: Product): void {
-    this.productsService.addProductLocalStorage(product);
+  setPageSize(): void {
+    const width = window.innerWidth;
+
+    if (width <= 768) {
+      this.pageSize = 6;   // Mobile
+    } else if (width <= 1024) {
+      this.pageSize = 9;   // Tablet (opcional)
+    } else {
+      this.pageSize = 12;   // Desktop
+    }
   }
 
   gettingProducts(): void {
@@ -121,6 +153,10 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy {
         alert('ERRO: não conseguiu trazer os produtos');
         console.log(error);
       })
+  }
+
+  sendProduct(product: Product): void {
+    this.productsService.addProductLocalStorage(product);
   }
 
   modalCreate(product: Product | null): void {

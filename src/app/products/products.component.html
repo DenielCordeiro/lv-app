@@ -6,8 +6,6 @@
   </div>
 </section>
 
-<hr class="my-3">
-
 <section id="cards">
   <div class="content">
     <div class="products">
@@ -32,14 +30,16 @@
           </div>
         </div>
       }
-    </div>
-    
-    <div #scrollAnchor></div>
-
-    @if (isLoading) {
-      <p>Carregando...</p>
-    }
+    </div>    
   </div>
+
+  @if (isLoading) {
+    <div class="loading">
+       <mat-progress-bar class="google-loading" mode="indeterminate" [style.opacity]="isLoading ? 1 : 0">  </mat-progress-bar>
+    </div>
+  }
+
+  <div #scrollAnchor></div>
 </section>
 
 
