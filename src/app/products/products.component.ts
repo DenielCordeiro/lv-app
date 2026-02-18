@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { ProductsService } from '../services/products/products.service';
+import { ToastService } from '../services/toasts/toasts.service';
 
 import { Product } from '../interfaces/product.interface';
 
@@ -42,6 +43,7 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     public dialog: MatDialog,
     public productsService: ProductsService,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -49,6 +51,8 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.setPageSize();
     this.loadProducts();
     this.clearProductLocalStorage();
+
+    this.toastService.showSuccess('Produtos carregados com sucesso!');
   }
 
   ngAfterViewInit(): void {
