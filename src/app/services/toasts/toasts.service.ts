@@ -17,11 +17,11 @@ export class ToastService {
   }
 
   showError(message: string) {
-      this.snackBar.open(message, 'Fechar', {
-        duration: 5000,
-        panelClass: ['toast-error'],
-        horizontalPosition: 'right',
-        verticalPosition: 'top'
+    this.snackBar.open(message, 'Fechar', {
+      duration: 5000,
+      panelClass: ['toast-error'],
+      horizontalPosition: 'right',
+      verticalPosition: 'top'
     });
   }
 }

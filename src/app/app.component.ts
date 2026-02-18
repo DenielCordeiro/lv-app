@@ -15,8 +15,4 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'Luz Violeta Macrãme';
-
-  constructor() {}
-
-
 }
