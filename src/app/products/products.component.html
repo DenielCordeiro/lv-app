@@ -23,7 +23,7 @@
             </div>
           </div>
   
-          <div class="card" (click)="sendProduct(product)" routerLink="/product/{{ product._id }}">
+          <div class="card" (click)="setProductInLocalStorage(product)" routerLink="/product/{{ product._id }}">
             <img src="{{ product?.file?.url }}" alt="...">
             <p class="itemTitle" >{{ product?.name }}</p>
             <p class="itemValor">R$ {{ product?.valor }}</p>

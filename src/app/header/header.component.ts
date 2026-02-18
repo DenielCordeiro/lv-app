@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 import { MatIconModule } from '@angular/material/icon';
 
@@ -14,8 +14,8 @@ import { MenuComponent } from './menu/menu.component';
   standalone: true,
   imports: [
     CommonModule,
-    MenuComponent,
-    MatIconModule
+    MatIconModule,
+    MenuComponent
 ],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.sass'],
@@ -53,8 +53,11 @@ export class HeaderComponent  implements OnInit {
       alert('[ Atenção ! ]: Necessário fazer login :)');
     } else {
 
+      console.log(this.cart.length);
+      
+
       if (this.cart.length > 0) {
-        this.route.navigateByUrl("cart/" + this.userId)
+        this.route.navigateByUrl("/cart/" + this.userId)
       } else {
         alert('[ Atenção ! ]: Carrinho vazio :)');
       }

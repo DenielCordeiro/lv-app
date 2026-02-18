@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 import { MatDialog } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -40,7 +40,6 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy {
   isLoading: boolean = false;
 
   constructor(
-    private router: Router,
     public dialog: MatDialog,
     public productsService: ProductsService,
   ) {}
@@ -49,6 +48,7 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy {
     // this.gettingProducts();
     this.setPageSize();
     this.loadProducts();
+    this.clearProductLocalStorage();
   }
 
   ngAfterViewInit(): void {
@@ -126,6 +126,10 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy {
     }, 3000);
   }
 
+  clearProductLocalStorage(): void {
+    this.productsService.removeProductSelected();
+  }
+
   setPageSize(): void {
     const width = window.innerWidth;
 
@@ -140,9 +144,7 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   gettingProducts(): void {
     this.productsService.getProducts()
-      .then(loadedProducts => {
-        console.log("Produtos: ", loadedProducts);
-        
+      .then(loadedProducts => {        
         if(loadedProducts == null || loadedProducts == undefined) {
           alert("[Atenção]: Não existe nenhum produto a venda!")
         } else {
@@ -155,7 +157,7 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy {
       })
   }
 
-  sendProduct(product: Product): void {
+  setProductInLocalStorage(product: Product): void {
     this.productsService.addProductLocalStorage(product);
   }
 

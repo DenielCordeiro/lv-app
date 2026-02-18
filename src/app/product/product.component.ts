@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -20,7 +20,7 @@ import { User } from '../interfaces/user.interface';
   templateUrl: './product.component.html',
   styleUrl: './product.component.sass',
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent implements OnInit, OnDestroy {
   searchForm!: FormGroup;
   productsInCart: Product[] = [];
   shippings: Shipping[] = [];
@@ -41,18 +41,19 @@ export class ProductComponent implements OnInit {
     public productsService: ProductsService,
     public melhorEnvio: MelhorEnvioService,
     public cartService: CartService,
-  ) {}
+  ) {
+    // this.getProductSelected();
+  }
 
   ngOnInit(): void {
-    this.buildingForm();
     this.getProductSelected();
+    this.buildingForm();
     this.getUserProfile();
-    this.getProductsInCart();
     this.checkIfProductIsInCart();
   }
 
   getProductSelected(): void {
-    this.product = this.productsService.getProduct();
+    this.product = this.productsService.getProductSelected();
 
     if (!this.product) {
       console.error('Nenhum produto selecionado!');
@@ -70,28 +71,6 @@ export class ProductComponent implements OnInit {
     }
   }
 
-  getProductsInCart(): void {
-    try {
-      this.productsInCart = this.storage.get('cart', []);
-    } catch (error) {
-      console.error('Nenhum produto encontrado no carrinho:', error);
-    }
-  }
-
-  checkIfProductIsInCart(): void {
-    if (this.productsInCart.length > 0) {
-      this.productsInCart.forEach(product => {
-
-        if (product._id === this.product._id) {
-          this.productIsInCart = true;
-        } else {
-          this.productIsInCart = false;
-        }
-      });
-    } else {
-      this.productIsInCart = false;
-    }
-  }
 
   buildingForm(): void {
     this.searchForm = this.formBuilder.group({
@@ -156,7 +135,6 @@ export class ProductComponent implements OnInit {
   addingToCart(): void {
     this.cartService.addToCart(this.product)
       .then(() => {
-        this.getProductsInCart();
         this.checkIfProductIsInCart();
       })
       .catch(error => {
@@ -167,7 +145,6 @@ export class ProductComponent implements OnInit {
   removingProductFromCart(): void {
     this.cartService.removeProductFromCart(this.product)
       .then(() => {
-        this.getProductsInCart();
         this.checkIfProductIsInCart();
       })
       .catch(error => {
@@ -175,7 +152,31 @@ export class ProductComponent implements OnInit {
       });
   }
 
+  checkIfProductIsInCart(): void {
+    const loadProductsInCart = this.cartService.productsInCart;
+
+    loadProductsInCart.subscribe(products => {
+      this.productsInCart = products;
+    })
+
+    if (this.productsInCart.length > 0) {
+      this.productsInCart.forEach(product => {        
+        if (product._id === this.product._id) {
+          this.productIsInCart = true;
+        } else {
+          this.productIsInCart = false;
+        }
+      });
+    } else {
+      this.productIsInCart = false;
+    }
+  }
+
   goToCart(): void {
-    this.route.navigate(['/cart']);
+    this.route.navigate(['/cart/', this.userProfile._id]);
+  }
+
+  ngOnDestroy(): void {
+    this.productsService.removeProductSelected();
   }
 }

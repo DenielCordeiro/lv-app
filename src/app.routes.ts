@@ -10,7 +10,6 @@ export const appRoutes: Routes = [
   {
     path: 'dashboard',
     loadComponent: () => import('./app/dashboard/dashboard.component').then(module => module.DashboardComponent),
-    canActivate: [authGuard],
   },
   {
     path: 'newsletter',
@@ -28,7 +27,6 @@ export const appRoutes: Routes = [
   {
     path: 'cart/:user_id',
     loadComponent: () => import('./app/cart/cart.component').then(module => module.CartComponent),
-    canActivate: [authGuard],
   },
   {
     path: 'products',

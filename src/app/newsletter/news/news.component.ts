@@ -1,15 +1,18 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router, RouterModule } from '@angular/router';
+
 import { News } from 'src/app/interfaces/news.interface';
+
 import { AddOrEditImageComponent } from '../add-or-edit-image/add-or-edit-image.component';
 import { DeleteImageComponent } from '../delete-image/delete-image.component';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-news',
+  standalone: true,
+  imports: [ RouterModule ],
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.sass'],
-  standalone: true,
 })
 export class NewsComponent implements OnInit {
   @Input() dataNews!: News;
