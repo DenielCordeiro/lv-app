@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+
+import { MatIconModule } from '@angular/material/icon';
+
 import { Product } from '../interfaces/product.interface';
 import { User } from '../interfaces/user.interface';
 import { CartService } from '../services/cart/cart.service';
-import { CommonModule } from '@angular/common';
 import { MenuComponent } from './menu/menu.component';
 
 @Component({
@@ -11,7 +14,8 @@ import { MenuComponent } from './menu/menu.component';
   standalone: true,
   imports: [
     CommonModule,
-    MenuComponent
+    MenuComponent,
+    MatIconModule
 ],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.sass'],

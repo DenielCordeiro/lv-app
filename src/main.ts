@@ -8,6 +8,8 @@ import { provideNgxWebstorage, withLocalStorage, withSessionStorage } from 'ngx-
 
 import { appRoutes } from './app.routes';
 import { AppComponent } from './app/app.component';
+import { isDevMode } from '@angular/core';
+import { provideServiceWorker } from '@angular/service-worker';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -16,6 +18,9 @@ bootstrapApplication(AppComponent, {
     provideNgxWebstorage(
       withLocalStorage(),
       withSessionStorage()
-    )
+    ), provideServiceWorker('ngsw-worker.js', {
+            enabled: !isDevMode(),
+            registrationStrategy: 'registerWhenStable:30000'
+          })
   ]
 }).catch(console.error);

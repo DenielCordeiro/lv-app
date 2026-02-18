@@ -9,14 +9,13 @@
     </div>
 
     <div class="cart" (click)="openCart()">
-      <i class="bi bi-cart4"></i>
+      <mat-icon class="material-symbols-outlined">shopping_cart</mat-icon>
 
       @if (this.productsQuantity != 0) {
         <div class="productsQuantity">
           <span>{{ this.productsQuantity }}</span>
         </div>
       }
-
     </div>
   </div>
 </section>
