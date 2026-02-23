@@ -36,4 +36,8 @@ export const appRoutes: Routes = [
     path: 'product/:product_id',
     loadComponent: () => import('./app/product/product.component').then(module => module.ProductComponent),
   },
+  {
+    path: 'about',
+    loadComponent: () => import('./app/about/about.component').then(module => module.AboutComponent),
+  }
 ];
