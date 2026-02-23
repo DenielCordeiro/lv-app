@@ -1,25 +1,27 @@
-import { Injectable } from "@angular/core";
-import { ReplaySubject } from 'rxjs';
-import { ToastMessage } from '../../interfaces/toast.interface' 
-import { ToastType } from "src/app/enums/toast-type.enum";
+import { inject, Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
-export class ToastsService {
-  // Cria um "canal de comunicação" interno
-  // Neste caso um emissor de eventos que vai disparar objetos do tipo ToastMessage
-  // Subject é um tipo especial de Observable que permite:
-  // 1) emitir valores manualmente (.next())
-  // 2) ser escutado por outros lugares (.subscribe())
-  private toastSubject = new ReplaySubject<ToastMessage>();
-  
-  // Expõe apenas a parte "observável" do Subject
-  // Quem usa o service pode ESCUTAR os eventos
-  // mas NÃO pode emitir novos eventos (.next())
-  toasts = this.toastSubject.asObservable();
+export class ToastService {
+  private snackBar = inject(MatSnackBar);
 
-  show(type: ToastType, message: string): void {
-    this.toastSubject.next({ type, message });
+  showSuccess(message: string) {
+    this.snackBar.open(message, 'Fechar', {
+      duration: 3000,
+      panelClass: ['toast-success'],
+      horizontalPosition: 'right',
+      verticalPosition: 'top'
+    });
+  }
+
+  showError(message: string) {
+    this.snackBar.open(message, 'Fechar', {
+      duration: 5000,
+      panelClass: ['toast-error'],
+      horizontalPosition: 'right',
+      verticalPosition: 'top'
+    });
   }
 }
