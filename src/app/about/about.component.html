@@ -2,19 +2,25 @@
     <mat-tab-group>
         <mat-tab label="Sobre a Luz Violeta Macrame">
             <div class="tab-content">
-                <title>{{ about.company.title }}</title>
-                <p>
-                    <span>paragrafo 1</span>
-                </p>
+                <h2>{{ this.about.company.title }}</h2>
+
+                @for (companyParagraph of companyParagraphs; track companyParagraph._id) {
+                    <p>
+                        <span>{{ companyParagraph.phrases }}</span>
+                    </p>
+                }
             </div>
         </mat-tab>
 
         <mat-tab label="Tragetória de Camila Ribeiro">
             <div class="tab-content">
-                <title>{{ about.businesswoman.title }}</title>
-                <p>
-                    <span>paragrafo 2</span>
-                </p>
+                <h2>{{ about.businesswoman.title }}</h2>
+
+                @for(businesswomanParagraph of businesswomanParagraphs; track businesswomanParagraph._id) {
+                    <p>
+                        <span>{{ businesswomanParagraph.phrases }}</span>
+                    </p>
+                }
             </div>
         </mat-tab>
     </mat-tab-group>

@@ -9,7 +9,7 @@ interface Section {
   paragraph: Paragraph[];
 }
 
-interface Paragraph {
+export interface Paragraph {
   _id: number;
   phrases: string;
 }

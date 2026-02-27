@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 
 import { MatTab, MatTabGroup } from '@angular/material/tabs';
 
-import { About } from '../interfaces/about.interface';
+import { About, Paragraph } from '../interfaces/about.interface';
+import { ABOUT_MOCK } from './about.mock';
 
 @Component({
   selector: 'app-about',
@@ -15,8 +16,24 @@ import { About } from '../interfaces/about.interface';
   styleUrls: ['./about.component.sass'],
 })
 export class AboutComponent {
-  public about!: About;
+  public about: About = ABOUT_MOCK;
+  public companyParagraphs: Paragraph[] = [];
+  public businesswomanParagraphs: Paragraph[] = [];
 
-  constructor() {
+  constructor() { 
+    console.log("Dados da tela sobre: ", this.about);
+    this.loadAbout();
+  }
+
+  loadAbout(): void {
+    this.loadParagraphs(this.about);
+  }
+
+  loadParagraphs(dataAbout: About): void {
+    this.companyParagraphs = dataAbout.company.paragraph;
+    this.businesswomanParagraphs = dataAbout.businesswoman.paragraph;
+    
+    console.log("Paragrafos da empresa: ", this.companyParagraphs);
+    console.log("Paragrafos  da empreemdedora: ", this.businesswomanParagraphs);
   }
 }
