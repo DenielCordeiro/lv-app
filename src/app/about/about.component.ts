@@ -19,7 +19,4 @@ export class AboutComponent {
 
   constructor() {
   }
-
-
-
 }

@@ -1,21 +1,15 @@
 export interface About {
-    _id: string,
-    company: { 
-        title: string,
-        paragraph: [
-            {
-                _id: number,
-                phrases: string,
-            }
-        ],
-    },
-    businesswoman: {
-        title: string,
-        paragraph: [
-            {
-                _id: number,
-                phrases: string,
-            }
-        ],
-    }
+  _id: string;
+  company: Section;
+  businesswoman: Section;
+}
+
+interface Section {
+  title: string;
+  paragraph: Paragraph[];
+}
+
+interface Paragraph {
+  _id: number;
+  phrases: string;
 }
