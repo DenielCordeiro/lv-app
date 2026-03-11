@@ -41,9 +41,7 @@ export class ProductComponent implements OnInit, OnDestroy {
     public productsService: ProductsService,
     public melhorEnvio: MelhorEnvioService,
     public cartService: CartService,
-  ) {
-    // this.getProductSelected();
-  }
+  ) {}
 
   ngOnInit(): void {
     this.getProductSelected();
@@ -53,7 +51,14 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
 
   getProductSelected(): void {
-    this.product = this.productsService.getProductSelected();
+    try {
+      this.product = this.productsService.getProductSelected();
+    } catch (error) {
+      console.error({
+        "message:": "Não foi possível buscar o produto do serviço.",
+        "fail: ": error,
+      })
+    }
 
     if (!this.product) {
       console.error('Nenhum produto selecionado!');
@@ -157,7 +162,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 
     loadProductsInCart.subscribe(products => {
       this.productsInCart = products;
-    })
+    });
 
     if (this.productsInCart.length > 0) {
       this.productsInCart.forEach(product => {        

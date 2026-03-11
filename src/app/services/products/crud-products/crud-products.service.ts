@@ -50,7 +50,7 @@ export abstract class CrudProductsService<T extends BaseCrud> {
       const product = JSON.parse(productInLocalStorage)
       this.products.push(product)
     } else {
-      console.error("[ERRO!]: Produto não está sendo carregado do LocalStorage")
+      console.error({ "message": "[ERRO!] Produto não está sendo carregado do LocalStorage" })
     }
 
     return this.products[0];
