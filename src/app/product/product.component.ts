@@ -46,7 +46,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getProductSelected();
     this.buildingForm();
-    this.getUserProfile();
+    // this.getUserProfile();
     this.checkIfProductIsInCart();
   }
 

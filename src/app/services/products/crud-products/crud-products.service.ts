@@ -46,6 +46,9 @@ export abstract class CrudProductsService<T extends BaseCrud> {
   public getProductSelected(): Product {
     const productInLocalStorage = localStorage.getItem('selectedProduct');
 
+    console.log('Produto selecionado: ', productInLocalStorage);
+    
+
     if (productInLocalStorage !== null) {
       const product = JSON.parse(productInLocalStorage)
       this.products.push(product)
